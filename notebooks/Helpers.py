@@ -11,7 +11,7 @@ import matplotlib.cm as cm
 import seaborn as sns
 
 
-import statsmodels.api as sm
+#import statsmodels.api as sm
 
 def circleOfCorrelations(components, explained_variance, cols):
     plt.figure(figsize=(10,10))
@@ -41,10 +41,10 @@ def columnToMonth(txt):
     month = int((weekNumber*7)/30 + 1)
     return month
 
-def GetMostCorrelatedTo(X_embedded,component,n=5,absl = True ):
+def GetMostCorrelatedTo(X_embedded,component,index,n=5,absl = True ):
     lx = X_embedded.shape[0]+1
     ly = X_embedded.shape[1]+1
-    df_Xpca = pd.DataFrame(X_embedded,index=np.arange(1,lx),columns = np.arange(1,ly))
+    df_Xpca = pd.DataFrame(X_embedded,index=index,columns = np.arange(1,ly))
     return df_Xpca.abs().nlargest(n,component) if absl else df_Xpca.nlargest(n,component)
 
 def Clusters_plot(X,labels, inertia = 0,info=["","",""]):

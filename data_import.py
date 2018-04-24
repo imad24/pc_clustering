@@ -45,8 +45,6 @@ df_histo_p2c4 = pd.read_csv(data_path + "data_histo_bnd_ita_p2c4.csv", sep = ";"
 df_client = pd.read_csv(data_path + "data_client_bnd_ita.csv", sep = ";", encoding = 'iso8859_2', header = 0)
 
 
-
-
 def get_list_client_lvl1(str_ClientPromo, df_AllClient):
     
 
@@ -54,7 +52,7 @@ def get_list_client_lvl1(str_ClientPromo, df_AllClient):
     
     for index, row in df_client.iterrows():
        
-        if (row['Key_lvl1'] == str_ClientPromo 
+        if (row['Key_lvl1'] == "1" 
 		or row['Key_lvl2'] == str_ClientPromo 
 		or row['Key_lvl3'] == str_ClientPromo 
 		or row['Key_lvl4'] == str_ClientPromo 
@@ -166,5 +164,6 @@ for index, row in df_HistPerProduct_p2c1.iterrows():
 #df_HistPerProduct_p2c4.fillna(value = -1, inplace = True)
 #
 #testeq = df_HistPerProduct_p2c1 == df_HistPerProduct_p2c4
+
 
 
