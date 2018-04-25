@@ -76,7 +76,12 @@ target/
 .ipynb_checkpoints/
 
 # exclude data from source control by default
-/data/
+/data/raw/
+/data/interim/
+
+#exclude notebook images
+/notebooks/*.png
+/notebooks/*.tex
 
 # Mac OS-specific storage files
 .DS_Store
