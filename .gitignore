@@ -82,6 +82,7 @@ target/
 #exclude notebook images
 /notebooks/*.png
 /notebooks/*.tex
+/notebooks/notebook.*
 
 # Mac OS-specific storage files
 .DS_Store
