@@ -5,6 +5,8 @@ import numpy as np
 import pandas as pd
 import numpy as np
 
+from sklearn import metrics
+
 import matplotlib.pyplot as plt
 import copy as cp
 import matplotlib.cm as cm
@@ -90,9 +92,13 @@ def decorate_plot(cols,tick_frequency = 3, rotation = 70,color='lightblue'):
 def getSSE(samples,centroids):
     return np.sum( (samples-centroids)**2)
 
+def getSilouhaite(samples,labels):
+    return metrics.silhouette_score(samples,labels)
 
 
-def Cluster_series_plot(data_df,cluster_df):
+from ast import literal_eval as make_tuple
+
+def Cluster_series_plot(data_df,cluster_df,centroid_only= False,headers = None):
     
     list_it = list(range(len(data_df.columns)))
     tick_frequency = 3
@@ -103,25 +109,44 @@ def Cluster_series_plot(data_df,cluster_df):
     clusters_array = []
     
     plt.figure(figsize=(15,nc*4))
-    for i,c in enumerate(clusters):
-        plt.subplot(nc,1,i+1)
-        cluster = list(cluster_df[cluster_df['Cluster']==c].iloc[:,0])
-        medoid  = cluster_df[cluster_df['Cluster']==c].index[0]
-        plt.title("Cluster %d (%d)): %d product"%(i+1,medoid,len(cluster)))
-        mask = (data_df['Product'].isin(cluster))
-        df  = data_df[mask]
-        for index, row in df.iterrows():
-            plt.plot(list(row)[1:],label = index)
-        plt.xticks(list_it[1::tick_frequency], list(data_df.columns)[1::tick_frequency], rotation = 70)
-        clusters_array += [[i,cluster]]
-        #plt.legend(loc=0)
+
+    if headers:
+        nh = len(headers)+2
+        #Joinc clustering results with the series
+        merged_df = pd.merge(cluster_df,data_df ,  how='left', left_on=headers, right_on = headers)
+        for i,c in enumerate(clusters):
+            plt.subplot(nc,1,i+1)
+            #get only series within the cluster
+            df = merged_df[merged_df['Cluster']==c]
+            #get the medoid from the first occurence
+            medoid  = make_tuple(df["Centroid"].iloc[0])
+
+            plt.title("Cluster %d (%s)): %d product"%(c,medoid,df.shape[0]))
+            for index, row in df.iterrows():
+                key = (row["Product"],row["Client"])
+                if centroid_only and key!= medoid: continue
+                plt.plot(list(row)[nh:],label = index)
+            plt.xticks(list_it[nh::tick_frequency], list(data_df.columns)[nh::tick_frequency], rotation = 70)
+            clusters_array += [[i,key]]
+            #plt.legend(loc=0)
+    else:
+        for i,c in enumerate(clusters):
+            plt.subplot(nc,1,i+1)
+            product_keys = list(cluster_df[cluster_df['Cluster']==c].iloc[:,0])
+            medoid  = cluster_df[cluster_df['Cluster']==c].iloc[0,2]
+            plt.title("Cluster %d (%s)): %d product"%(c,medoid,len(product_keys)))
+            mask = (data_df['Product'].isin(product_keys))
+            df  = data_df[mask]
+            for index, row in df.iterrows():
+                if centroid_only and row["Product"]!= medoid: continue
+                plt.plot(list(row)[1:],label = index)
+            plt.xticks(list_it[1::tick_frequency], list(data_df.columns)[1::tick_frequency], rotation = 70)
+            clusters_array += [[i,product_keys]]
+            #plt.legend(loc=0)
 
     plt.tight_layout()
     #plt.show()
     return clusters_array
-
-
-
 
 
 
