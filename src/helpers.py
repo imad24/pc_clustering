@@ -142,7 +142,7 @@ def Cluster_series_plot(data_df,cluster_df,centroid_only= False,headers = None):
                 plt.plot(list(row)[1:],label = index)
             plt.xticks(list_it[1::tick_frequency], list(data_df.columns)[1::tick_frequency], rotation = 70)
             clusters_array += [[i,product_keys]]
-            #plt.legend(loc=0)
+            plt.legend(loc=0)
 
     plt.tight_layout()
     #plt.show()
