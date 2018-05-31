@@ -52,6 +52,19 @@ def RMSE(params, *args):
 			b.append(beta * (a[i + 1] - a[i]) + (1 - beta) * b[i])
 			y.append(a[i + 1] + b[i + 1])
 
+	elif type == 'exp_trend':
+
+		alpha, beta = params
+		a = [Y[0]]
+		b = [Y[1] - Y[0]]
+		y = [a[0] * b[0]]
+
+		for i in range(len(Y)):
+
+			a.append(alpha * Y[i] + (1 - alpha) * (a[i] * b[i]))
+			b.append(beta * (a[i + 1] / a[i]) + (1 - beta) * b[i])
+			y.append(a[i + 1] * b[i + 1])
+
 	else:
 
 		alpha, beta, gamma = params
@@ -117,6 +130,38 @@ def linear(x, fc, alpha = None, beta = None):
 		a.append(alpha * Y[i] + (1 - alpha) * (a[i] + b[i]))
 		b.append(beta * (a[i + 1] - a[i]) + (1 - beta) * b[i])
 		y.append(a[i + 1] + b[i + 1])
+
+	rmse = sqrt(sum([(m - n) ** 2 for m, n in zip(Y[:-fc], y[:-fc - 1])]) / len(Y[:-fc]))
+
+	return Y[-fc:], alpha, beta, rmse
+
+
+def exp_trend(x, fc, alpha = None, beta = None):
+
+	Y = x[:]
+
+	if (alpha == None or beta == None):
+
+		initial_values = array([0.3, 0.1])
+		boundaries = [(0, 1), (0, 1)]
+		type = 'exp_trend'
+
+		parameters = fmin_l_bfgs_b(RMSE, x0 = initial_values, args = (Y, type), bounds = boundaries, approx_grad = True)
+		alpha, beta = parameters[0]
+
+	a = [Y[0]]
+	b = [Y[1] - Y[0]]
+	y = [a[0] * b[0]]
+	rmse = 0
+
+	for i in range(len(Y) + fc):
+
+		if i == len(Y):
+			Y.append(a[-1] + b[-1])
+
+		a.append(alpha * Y[i] + (1 - alpha) * (a[i] * b[i]))
+		b.append(beta * (a[i + 1] / a[i]) + (1 - beta) * b[i])
+		y.append(a[i + 1] * b[i + 1])
 
 	rmse = sqrt(sum([(m - n) ** 2 for m, n in zip(Y[:-fc], y[:-fc - 1])]) / len(Y[:-fc]))
 
@@ -189,17 +234,18 @@ def multiplicative(x, m, fc, alpha = None, beta = None, gamma = None):
 	return Y[-fc:], alpha, beta, gamma, rmse
 
 
-def MAPE(actual, estimate):
-    '''Given two lists, one of actual values and one of estimated values, 
-        computes the Mean Absolute Percentage Error'''
-        
-    if len(actual) != len(estimate):
-        print("ERROR: Lists not the same length.")
-        return []
-        
-    pcterrors = []
-    
-    for i in range(len(estimate)):
-        pcterrors.append(abs(estimate[i]-actual[i])/actual[i])
-    
-    return sum(pcterrors)/len(pcterrors)
+
+import numpy as np
+def MASE(training_series, testing_series, prediction_series,m=1):
+
+    T = training_series.shape[0]
+    diff=[]
+    for i in range(m, T):
+        value = training_series[i] - training_series[i - m]
+        diff.append(value)
+    d = np.abs(diff).sum()/(T-m)
+
+    errors = np.abs(testing_series - prediction_series )
+    return errors.mean()/d
+
+#d = np.abs(  np.diff( training_series,m) ).sum()/(T-m)
