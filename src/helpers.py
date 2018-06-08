@@ -12,6 +12,7 @@ import copy as cp
 import matplotlib.cm as cm
 import seaborn as sns
 
+from math import sqrt
 
 #import statsmodels.api as sm
 
@@ -123,7 +124,8 @@ def Cluster_series_plot(data_df,cluster_df,centroid_only= False,headers = None):
 
             plt.title("Cluster %d (%s)): %d product"%(c,medoid,df.shape[0]))
             for index, row in df.iterrows():
-                key = (row["Product"],row["Client"])
+                #key = (row["Product"],row["Client"])
+                key = (row[headers])
                 if centroid_only and key!= medoid: continue
                 plt.plot(list(row)[nh:],label = index)
             plt.xticks(list_it[nh::tick_frequency], list(data_df.columns)[nh::tick_frequency], rotation = 70)
@@ -149,7 +151,22 @@ def Cluster_series_plot(data_df,cluster_df,centroid_only= False,headers = None):
     return clusters_array
 
 
-
+def DTWDistance(s1, s2,w):
+    DTW={}
+    
+    w = max(w, abs(len(s1)-len(s2)))
+    
+    for i in range(-1,len(s1)):
+        for j in range(-1,len(s2)):
+            DTW[(i, j)] = float('inf')
+    DTW[(-1, -1)] = 0
+  
+    for i in range(len(s1)):
+        for j in range(max(0, i-w), min(len(s2), i+w)):
+            dist= (s1[i]-s2[j])**2
+            DTW[(i, j)] = dist + min(DTW[(i-1, j)],DTW[(i, j-1)], DTW[(i-1, j-1)])
+		
+    return sqrt(DTW[len(s1)-1, len(s2)-1])
 
 
 
