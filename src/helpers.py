@@ -99,10 +99,10 @@ def getSilouhaite(samples,labels):
 
 from ast import literal_eval as make_tuple
 
-def Cluster_series_plot(data_df,cluster_df,centroid_only= False,headers = None):
+def Cluster_series_plot(data_df,cluster_df,centroid_only= False,headers = None,tick_frequency = 3):
     
     list_it = list(range(len(data_df.columns)))
-    tick_frequency = 3
+    
     
     clusters = list(set(cluster_df['Cluster']))
     nc = len(clusters)
@@ -140,7 +140,7 @@ def Cluster_series_plot(data_df,cluster_df,centroid_only= False,headers = None):
             mask = (data_df['Product'].isin(product_keys))
             df  = data_df[mask]
             for index, row in df.iterrows():
-                if centroid_only and row["Product"]!= medoid: continue
+                # if centroid_only and row["Product"]!= medoid: continue
                 plt.plot(list(row)[1:],label = index)
             plt.xticks(list_it[1::tick_frequency], list(data_df.columns)[1::tick_frequency], rotation = 70)
             clusters_array += [[i,product_keys]]

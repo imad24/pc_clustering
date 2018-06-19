@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import click
-import logging
+# import logging
 from dotenv import find_dotenv, load_dotenv
 import sys
 
@@ -13,20 +13,13 @@ from datetime import datetime
 import numpy as np
 import pandas as pd
 
-import matplotlib.style
-import matplotlib as mpl
-import matplotlib.pyplot as plt
-import seaborn as sns
 
-from sklearn.decomposition import PCA
-from sklearn.cluster import KMeans,Birch,AgglomerativeClustering
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
-from sklearn.manifold import TSNE
-from sklearn import preprocessing
 
-from scipy.cluster import hierarchy
+
 from scipy import stats
 from scipy.stats import mstats
+from IPython.display import display as dp
 
 
 src_dir = os.path.join(os.getcwd(), os.pardir,os.pardir, 'src')
@@ -35,15 +28,14 @@ if src_dir not in sys.path: sys.path.append(src_dir)
 
 import helpers as hlp
 from external import kMedoids
-from IPython.display import display
 
 load_dotenv(find_dotenv())
 
 root_dir = os.path.join(os.getcwd(), os.pardir,os.pardir)
 # add the 'src' directory as one where we can import modules
 
-logger = logging.getLogger(__name__)
-logger.info('making final data set from raw data')
+# logger = logging.getLogger(__name__)
+# logger.info('making final data set from raw data')
 
 subfolder = os.getenv("SUBFOLDER")
 PREFIX = os.getenv("PREFIX")
@@ -65,7 +57,7 @@ def main():
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    logging.basicConfig(level=logging.INFO, format=log_fmt)
+    # logging.basicConfig(level=logging.INFO, format=log_fmt)
 
     # not used in this stub but often useful for finding various files
     project_dir = os.path.join(os.path.dirname(__file__), os.pardir, os.pardir)
@@ -123,7 +115,7 @@ def range_from_origin(data,range_):
 
     return centered_df
 
-def remove_tailed(data,t = 15):
+def remove_tails(data,t = 15):
     mask = (data.iloc[:,-t:]==0).all(axis=1)
     df  =  data[~mask]
     print("Series With %d trailing zeros are removed"%t)
@@ -153,7 +145,8 @@ def load_file(filename,type_="I",version=1):
     folder  = {
         "R" : raw_path,
         "I" : interim_path,
-        "P" : processed_path
+        "P" : processed_path,
+        "M" : models_path
     }.get(type_,interim_path)
     fullname = "%s_%s_v%d.csv"%(PREFIX,filename,version)
     return pd.read_csv(folder+fullname,sep=";",encoding="utf-8")
@@ -186,6 +179,21 @@ def get_full_data(series,data,raw_df):
         product_df_full.insert(0,label,column)
     return product_df_full
 
-def summary(data,head=5):
+def display(data,head=5):
     print(data.shape)
-    display(data.head(head))
+    if head>0:
+        dp(data.head(head))
+    else:
+        dp(data)
+
+def translate_df(df,columns):
+    try:
+        tdf = df.copy()
+        dico = np.load(raw_path+'dictionnary.npy').item()
+        tans = df[columns].applymap(lambda x:dico[x])
+        for index,col in tans.iteritems():
+            if index in df.columns: tdf[index] = col
+        return tdf
+    except Exception as ex:
+        print("Error when translating: ",ex)
+        return df
