@@ -1,0 +1,1290 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Report}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{1- Data Preparation}\label{data-preparation}
+
+    \subsection{The Data}\label{the-data}
+
+On dispose des données de vente journalière de chez Bonduelle.
+L'extraction contient l'historique de ventes entre le premier trimestre
+2016 jusqu'à la 3 semaine de janvier 2018.
+
+Les ventes sont groupées au niveau P2 où tous les produits sont pris en
+compte séparément et en incluant les ventes promotionnelles. Le
+groupement des ventes par client est fait au niveau C4 où les résultats
+sont sommés par distributeur.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{product\PYZus{}raw\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:}           Product  Client  04/01/2016  05/01/2016  06/01/2016  07/01/2016  \textbackslash{}
+         0  GBA001AUC180FS  68L041        0.00        2.00        0.00        2.00   
+         1  GBA001AUC180FS  68L042        0.00        1.00        2.00        1.00   
+         2  GBA001BND060FS  68C011        0.00        0.00        0.00        0.00   
+         3  GBA001BND060FS  68C120        0.00        0.00        0.00        0.00   
+         4  GBA001BND060FS  68C123        0.00        0.00        0.00        0.00   
+         
+            08/01/2016  09/01/2016  10/01/2016  11/01/2016     {\ldots}      14/01/2018  \textbackslash{}
+         0        0.00        3.00        0.00        0.00     {\ldots}            0.00   
+         1        0.00        2.00        0.00        1.00     {\ldots}            0.00   
+         2        0.00        0.00        0.00        0.00     {\ldots}            0.00   
+         3        0.00        0.00        0.00        0.00     {\ldots}            0.00   
+         4        0.00        0.00        0.00        0.00     {\ldots}            0.00   
+         
+            15/01/2018  16/01/2018  17/01/2018  18/01/2018  19/01/2018  20/01/2018  \textbackslash{}
+         0        0.00        0.00        0.00        0.00        0.00        0.00   
+         1        0.00        0.00        0.00        0.00        0.00        0.00   
+         2        0.00        0.00        0.00        0.00        0.00        0.00   
+         3        0.00        0.00        0.00        0.00        0.00        0.00   
+         4        0.00        0.00        0.00        0.00        0.00        0.00   
+         
+            21/01/2018  22/01/2018  23/01/2018  
+         0        0.00        0.00        0.00  
+         1        0.00        0.00        0.00  
+         2        0.00        0.00        0.00  
+         3        0.00        0.00        0.00  
+         4        0.00        0.00        0.00  
+         
+         [5 rows x 753 columns]
+\end{Verbatim}
+            
+    \subsubsection{Week Resampling}\label{week-resampling}
+
+La fluctuation des ventes journalières de certains produits étant très
+importantes, nous allons considérer les ventes sur la base des
+historiques hebdomadaires.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{weekly\PYZus{}product\PYZus{}df} \PY{o}{=} \PY{n}{product\PYZus{}df}\PY{o}{.}\PY{n}{resample}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{W}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{product\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:}    2016-01-10  2016-01-17  2016-01-24  2016-01-31  2016-02-07  2016-02-14  \textbackslash{}
+         0        1.00        1.14        1.29        1.00        0.71        1.43   
+         1        0.86        1.43        1.57        1.57        1.71        1.29   
+         2        0.00        0.00        0.00        0.00        0.00        0.00   
+         3        0.00        0.00        0.00        0.00        0.00        0.00   
+         4        0.00        0.00        0.00        0.00        0.00        0.00   
+         
+            2016-02-21  2016-02-28  2016-03-06  2016-03-13     {\ldots}      2017-11-26  \textbackslash{}
+         0        1.86        1.57        1.00        1.57     {\ldots}            0.00   
+         1        1.71        1.29        1.00        0.57     {\ldots}            0.00   
+         2        0.00        0.00        0.00        0.00     {\ldots}            0.00   
+         3        0.00        0.00        0.00        0.00     {\ldots}            2.29   
+         4        0.00        0.00        0.00        0.00     {\ldots}            0.00   
+         
+            2017-12-03  2017-12-10  2017-12-17  2017-12-24  2017-12-31  2018-01-07  \textbackslash{}
+         0        0.00        0.00        0.00        0.00        0.00        0.00   
+         1        0.00        0.00        0.00        0.00        0.00        0.00   
+         2        0.00        0.00        0.00        0.00        0.00        0.00   
+         3        1.29        0.00        0.00        0.00        0.00        0.00   
+         4        0.00        0.00        0.00        0.00        0.00        0.00   
+         
+            2018-01-14  2018-01-21  2018-01-28  
+         0        0.00        0.00        0.00  
+         1        0.00        0.00        0.00  
+         2        0.00        0.00        0.00  
+         3        0.00        0.00        0.00  
+         4        0.00        0.00        0.00  
+         
+         [5 rows x 108 columns]
+\end{Verbatim}
+            
+    \section{Cleaning Series}\label{cleaning-series}
+
+A series of cleaning functions is applied to raw data in order to get
+rid of irrelevant and "dirty" data with patterns that could disrupt the
+model.
+
+Each function has a threashold parameter in order to adapt the filtering
+
+\subsubsection{Trimming Zeros from
+series}\label{trimming-zeros-from-series}
+
+Remove empty data on the two sides
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{product\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The last 8 values (complete zeros) of each series have been dropped 
+The first 0 values (complete zeros) of each series have been dropped 
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:}    2016-01-10  2016-01-17  2016-01-24  2016-01-31  2016-02-07  2016-02-14  \textbackslash{}
+         0        1.00        1.14        1.29        1.00        0.71        1.43   
+         1        0.86        1.43        1.57        1.57        1.71        1.29   
+         2        0.00        0.00        0.00        0.00        0.00        0.00   
+         3        0.00        0.00        0.00        0.00        0.00        0.00   
+         4        0.00        0.00        0.00        0.00        0.00        0.00   
+         
+            2016-02-21  2016-02-28  2016-03-06  2016-03-13     {\ldots}      2017-10-01  \textbackslash{}
+         0        1.86        1.57        1.00        1.57     {\ldots}            0.00   
+         1        1.71        1.29        1.00        0.57     {\ldots}            0.00   
+         2        0.00        0.00        0.00        0.00     {\ldots}            1.14   
+         3        0.00        0.00        0.00        0.00     {\ldots}            1.57   
+         4        0.00        0.00        0.00        0.00     {\ldots}            0.00   
+         
+            2017-10-08  2017-10-15  2017-10-22  2017-10-29  2017-11-05  2017-11-12  \textbackslash{}
+         0        0.00        0.00        0.00        0.00        0.00        0.00   
+         1        0.00        0.00        0.00        0.00        0.00        0.00   
+         2        1.57        1.14        0.86        1.29        1.14        0.29   
+         3        2.29        2.00        2.14        2.00        2.43        2.86   
+         4        0.00        0.00        0.00        0.00        0.00        0.00   
+         
+            2017-11-19  2017-11-26  2017-12-03  
+         0        0.00        0.00        0.00  
+         1        0.00        0.00        0.00  
+         2        0.00        0.00        0.00  
+         3        1.14        2.29        1.29  
+         4        0.00        0.00        0.00  
+         
+         [5 rows x 100 columns]
+\end{Verbatim}
+            
+    \subsubsection{Tailing Zeros: No longer
+sold}\label{tailing-zeros-no-longer-sold}
+
+Remove the products that werent sold in the \textbf{last 15 weeks}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{t} \PY{o}{=} \PY{l+m+mi}{15}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_8_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Series With 15 trailing zeros are removed
+Removed: 4327 , Remaining: 4319
+
+    \end{Verbatim}
+
+    \subsubsection{Leading Zeros: Recently
+launched}\label{leading-zeros-recently-launched}
+
+Remove the products which werent sold in the \textbf{15 first weeks}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{t} \PY{o}{=} \PY{l+m+mi}{15}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Series With more than 15 zeros are removed
+Removed: 1472 , Remaining: 2847
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{product\PYZus{}df\PYZus{}clean} \PY{o}{=} \PY{n}{product\PYZus{}df}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{product\PYZus{}df}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n}{product\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(2847, 100)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:}     2016-01-10  2016-01-17  2016-01-24  2016-01-31  2016-02-07  2016-02-14  \textbackslash{}
+         37        4.71        4.29        4.71        5.14        4.14        4.57   
+         39        8.57       13.71       11.86        6.29        6.29        6.14   
+         40        3.71        0.86        0.43        0.14        0.29        0.29   
+         44        1.14        1.29        0.86        1.43        2.86        1.29   
+         45        1.14        0.71        0.86        1.14        1.14        1.14   
+         
+             2016-02-21  2016-02-28  2016-03-06  2016-03-13     {\ldots}      2017-10-01  \textbackslash{}
+         37        4.71        5.00        4.00        4.57     {\ldots}            2.29   
+         39        6.29        5.14        5.29        6.14     {\ldots}            7.86   
+         40        1.00        0.43        2.00        4.14     {\ldots}            1.29   
+         44        1.57        1.86        1.86        1.71     {\ldots}            0.29   
+         45        1.43        0.86        1.14        0.86     {\ldots}            0.86   
+         
+             2017-10-08  2017-10-15  2017-10-22  2017-10-29  2017-11-05  2017-11-12  \textbackslash{}
+         37        1.71        2.14        1.86        2.29        2.14        1.71   
+         39        9.71       19.29       17.29        9.00        8.00        7.14   
+         40        1.29        1.29        1.29        1.00        1.29        1.00   
+         44        0.14        0.29        0.43        0.71        0.29        0.71   
+         45        1.29        1.29        1.29        1.00        1.00        0.57   
+         
+             2017-11-19  2017-11-26  2017-12-03  
+         37        3.00        2.57        0.00  
+         39        0.00        0.00        0.00  
+         40        0.00        0.00        0.00  
+         44        0.00        0.00        0.00  
+         45        0.00        0.00        0.00  
+         
+         [5 rows x 100 columns]
+\end{Verbatim}
+            
+    \subsubsection{Rolling Average}\label{rolling-average}
+
+Apply a rolling average filter using a window of size = 4 , then remove
+rare sales
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{window} \PY{o}{=} \PY{l+m+mi}{4}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+(2847, 97)
+
+    \end{Verbatim}
+
+    \subsubsection{Remove Outliers -
+Winsorizing}\label{remove-outliers---winsorizing}
+
+Winsorizing is to set all outliers to a specified percentile of the
+data; for example, a 90\% winsorization would see all data below the 5th
+percentile set to the 5th percentile, and data above the 95th percentile
+set to the 95th percentile
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{t} \PY{o}{=} \PY{l+m+mi}{4}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}rahmim00\textbackslash{}AppData\textbackslash{}Local\textbackslash{}Continuum\textbackslash{}anaconda3\textbackslash{}envs\textbackslash{}dev\_py34\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}scipy\textbackslash{}stats\textbackslash{}stats.py:2245: RuntimeWarning: invalid value encountered in true\_divide
+  np.expand\_dims(sstd, axis=axis))
+C:\textbackslash{}Users\textbackslash{}rahmim00\textbackslash{}AppData\textbackslash{}Local\textbackslash{}Continuum\textbackslash{}anaconda3\textbackslash{}envs\textbackslash{}dev\_py34\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}ipykernel\_launcher.py:6: RuntimeWarning: invalid value encountered in greater
+  
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Mainly Zeros: Rare sales}\label{mainly-zeros-rare-sales}
+
+Remove the products that werent sold for \textbf{at least 5 weeks}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{t} \PY{o}{=} \PY{l+m+mi}{5}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Series With less than 5 values are removed
+Removed: 1 , Remaining: 2846
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{product\PYZus{}df\PYZus{}keep} \PY{o}{=} \PY{n}{product\PYZus{}df}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{product\PYZus{}df}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n}{product\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(2846, 97)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:}     2016-01-24  2016-01-31  2016-02-07  2016-02-14  2016-02-21  2016-02-28  \textbackslash{}
+         37        4.46        4.46        4.46        4.46        4.46        4.46   
+         39       10.11        9.54        7.64        6.25        5.96        5.71   
+         40        1.29        0.43        0.43        0.43        0.50        0.93   
+         44        1.18        1.61        1.61        1.79        1.89        1.64   
+         45        0.96        0.96        1.07        1.21        1.14        1.14   
+         
+             2016-03-06  2016-03-13  2016-03-20  2016-03-27     {\ldots}      2017-09-24  \textbackslash{}
+         37        4.46        4.46        4.25        4.32     {\ldots}            2.25   
+         39        5.71        7.21       10.75       13.36     {\ldots}           11.68   
+         40        1.89        3.04        3.07        2.79     {\ldots}            1.00   
+         44        1.75        1.82        1.75        1.82     {\ldots}            0.46   
+         45        1.07        0.96        0.93        0.93     {\ldots}            1.11   
+         
+             2017-10-01  2017-10-08  2017-10-15  2017-10-22  2017-10-29  2017-11-05  \textbackslash{}
+         37        2.04        2.04        2.04        2.04        2.11        2.04   
+         39        8.89       11.43       13.54       13.64       13.39       10.36   
+         40        1.11        1.21        1.29        1.21        1.21        1.14   
+         44        0.43        0.43        0.43        0.43        0.43        0.54   
+         45        1.21        1.14        1.18        1.21        1.14        0.96   
+         
+             2017-11-12  2017-11-19  2017-11-26  
+         37        2.29        2.36        2.04  
+         39        6.04        5.29        5.29  
+         40        0.82        0.57        0.43  
+         44        0.43        0.43        0.43  
+         45        0.71        0.71        0.71  
+         
+         [5 rows x 97 columns]
+\end{Verbatim}
+            
+    \subsubsection{Normalize Data}\label{normalize-data}
+
+We end up with 2846 product/client . Apply a Z-normalization (subtract
+the mean and divide by the standard deviation) in order to get a
+\textbf{scale-independent} data
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{product\PYZus{}df\PYZus{}full}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:}            Product  Client  2016-01-24 00:00:00  2016-01-31 00:00:00  \textbackslash{}
+         37  GBA001BND060SS  68A139                 1.61                 1.61   
+         39  GBA001BND060SS  68C120                 0.51                 0.30   
+         40  GBA001BND060SS  68C122                -0.15                -1.04   
+         44  GBA001BND060SS  68C126                -0.11                 0.65   
+         45  GBA001BND060SS  68C129                -0.35                -0.35   
+         
+             2016-02-07 00:00:00  2016-02-14 00:00:00  2016-02-21 00:00:00  \textbackslash{}
+         37                 1.61                 1.61                 1.61   
+         39                -0.40                -0.91                -1.01   
+         40                -1.04                -1.04                -0.96   
+         44                 0.65                 0.97                 1.16   
+         45                 0.33                 1.25                 0.79   
+         
+             2016-02-28 00:00:00  2016-03-06 00:00:00  2016-03-13 00:00:00  \textbackslash{}
+         37                 1.61                 1.61                 1.61   
+         39                -1.10                -1.10                -0.55   
+         40                -0.52                 0.48                 1.66   
+         44                 0.71                 0.90                 1.03   
+         45                 0.79                 0.33                -0.35   
+         
+                    {\ldots}           2017-09-24 00:00:00  2017-10-01 00:00:00  \textbackslash{}
+         37         {\ldots}                         -1.00                -1.26   
+         39         {\ldots}                          1.08                 0.06   
+         40         {\ldots}                         -0.45                -0.33   
+         44         {\ldots}                         -1.37                -1.43   
+         45         {\ldots}                          0.56                 1.25   
+         
+             2017-10-08 00:00:00  2017-10-15 00:00:00  2017-10-22 00:00:00  \textbackslash{}
+         37                -1.26                -1.26                -1.26   
+         39                 0.99                 1.76                 1.80   
+         40                -0.22                -0.15                -0.22   
+         44                -1.43                -1.43                -1.43   
+         45                 0.79                 1.02                 1.25   
+         
+             2017-10-29 00:00:00  2017-11-05 00:00:00  2017-11-12 00:00:00  \textbackslash{}
+         37                -1.17                -1.26                -0.96   
+         39                 1.71                 0.60                -0.98   
+         40                -0.22                -0.30                -0.63   
+         44                -1.43                -1.24                -1.43   
+         45                 0.79                -0.35                -1.95   
+         
+             2017-11-19 00:00:00  2017-11-26 00:00:00  
+         37                -0.88                -1.26  
+         39                -1.26                -1.26  
+         40                -0.89                -1.04  
+         44                -1.43                -1.43  
+         45                -1.95                -1.95  
+         
+         [5 rows x 99 columns]
+\end{Verbatim}
+            
+    
+
+    
+
+    
+
+    
+
+    \section{2. Principal Components
+Analysis}\label{principal-components-analysis}
+
+L'Analyse en Composantes Principales est une méthode de projection qui
+permet de projeter les observations dans un espace de dimensions
+réduites tel qu'un maximum d'information soit conservée.
+
+Si l'information associée aux 2 ou 3 premiers axes représente un
+pourcentage suffisant de la variabilité totale du nuage de points, on
+pourra représenter les observations sur un graphique à 2 ou 3
+dimensions, facilitant ainsi grandement l'interprétation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{hlp}\PY{o}{.}\PY{n}{Clusters\PYZus{}plot}\PY{p}{(}\PY{n}{X}\PY{o}{=} \PY{n}{X\PYZus{}pca}\PY{p}{,} \PY{n}{labels} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X\PYZus{}pca}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ 0.192122    0.13360553  0.0868289   0.07429497  0.04438952]
+
+    \end{Verbatim}
+
+    \subsection{PCA 01}\label{pca-01}
+
+Affiche une tendance croissante dans le temps.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n}{nb\PYZus{}col}\PY{p}{)}\PY{p}{,} \PY{n}{princ\PYZus{}axis} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{PCA 02}\label{pca-02}
+
+Oppose les ventes en terme de saisonnalité. Les produits corrélés avec
+cet axe ont tendance à être vendu durant les périodes d'Automne ou début
+d'été.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n}{nb\PYZus{}col}\PY{p}{)}\PY{p}{,} \PY{n}{princ\PYZus{}axis} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{corrSamples} \PY{o}{=} \PY{n}{hlp}\PY{o}{.}\PY{n}{GetMostCorrelatedTo}\PY{p}{(}\PY{n}{X\PYZus{}pca}\PY{p}{,}\PY{n}{component}\PY{p}{,}\PY{n}{index}\PY{o}{=}\PY{n}{product\PYZus{}df}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Produit 1744
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    
+
+    
+
+    
+
+    \section{3. Modeling - Clustering
+Algorithms}\label{modeling---clustering-algorithms}
+
+Try out Hierarchical clustering, kMeans and kMedodis on raw (cleaned)
+data. Then, do a \textbf{PCA plot} to visualize the result of the
+clustering on the principal components
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{n}{product\PYZus{}df\PYZus{}full}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}61}]:}           Product  Client  2016-01-24 00:00:00  2016-01-31 00:00:00  \textbackslash{}
+         0  GBA001BND060SS  68A139                 1.61                 1.61   
+         1  GBA001BND060SS  68C120                 0.51                 0.30   
+         2  GBA001BND060SS  68C122                -0.15                -1.04   
+         3  GBA001BND060SS  68C126                -0.11                 0.65   
+         4  GBA001BND060SS  68C129                -0.35                -0.35   
+         
+            2016-02-07 00:00:00  2016-02-14 00:00:00  2016-02-21 00:00:00  \textbackslash{}
+         0                 1.61                 1.61                 1.61   
+         1                -0.40                -0.91                -1.01   
+         2                -1.04                -1.04                -0.96   
+         3                 0.65                 0.97                 1.16   
+         4                 0.33                 1.25                 0.79   
+         
+            2016-02-28 00:00:00  2016-03-06 00:00:00  2016-03-13 00:00:00  \textbackslash{}
+         0                 1.61                 1.61                 1.61   
+         1                -1.10                -1.10                -0.55   
+         2                -0.52                 0.48                 1.66   
+         3                 0.71                 0.90                 1.03   
+         4                 0.79                 0.33                -0.35   
+         
+                   {\ldots}           2017-09-24 00:00:00  2017-10-01 00:00:00  \textbackslash{}
+         0         {\ldots}                         -1.00                -1.26   
+         1         {\ldots}                          1.08                 0.06   
+         2         {\ldots}                         -0.45                -0.33   
+         3         {\ldots}                         -1.37                -1.43   
+         4         {\ldots}                          0.56                 1.25   
+         
+            2017-10-08 00:00:00  2017-10-15 00:00:00  2017-10-22 00:00:00  \textbackslash{}
+         0                -1.26                -1.26                -1.26   
+         1                 0.99                 1.76                 1.80   
+         2                -0.22                -0.15                -0.22   
+         3                -1.43                -1.43                -1.43   
+         4                 0.79                 1.02                 1.25   
+         
+            2017-10-29 00:00:00  2017-11-05 00:00:00  2017-11-12 00:00:00  \textbackslash{}
+         0                -1.17                -1.26                -0.96   
+         1                 1.71                 0.60                -0.98   
+         2                -0.22                -0.30                -0.63   
+         3                -1.43                -1.24                -1.43   
+         4                 0.79                -0.35                -1.95   
+         
+            2017-11-19 00:00:00  2017-11-26 00:00:00  
+         0                -0.88                -1.26  
+         1                -1.26                -1.26  
+         2                -0.89                -1.04  
+         3                -1.43                -1.43  
+         4                -1.95                -1.95  
+         
+         [5 rows x 99 columns]
+\end{Verbatim}
+            
+    \subsubsection{Métriques
+d'évaluation}\label{muxe9triques-duxe9valuation}
+
+\textbf{SSE:} La somme des carrés est une mesure de variation ou d'écart
+par rapport à la moyenne. Elle représente la somme des carrés des
+différences par rapport au centre du cluster.
+
+\textbf{Silhouette Score}: Permet d'évaluer si chaque point appartient
+au « bon » cluster : est-il proche des points du cluster auquel il
+appartient ? Est-il loin des autres points ?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k}{def} \PY{n+nf}{getSSE}\PY{p}{(}\PY{n}{samples}\PY{p}{,}\PY{n}{labels}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(} \PY{p}{(}\PY{n}{samples}\PY{o}{\PYZhy{}}\PY{n}{labels}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{getSilouhaite}\PY{p}{(}\PY{n}{samples}\PY{p}{,}\PY{n}{labels}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{metrics}\PY{o}{.}\PY{n}{silhouette\PYZus{}score}\PY{p}{(}\PY{n}{samples}\PY{p}{,}\PY{n}{labels}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Agglomerative - (CAH)}\label{agglomerative---cah}
+
+Le principe est de rassembler les individus qui affichent des courbes
+similaires (en distance euclidienne ou en corrélation). Les distances
+sont calculées entre les produits deux à deux. Plus deux observations
+seront dissemblables, plus la distance sera importante. La CAH va
+ensuite rassembler les individus de manière itérative afin de produire
+un dendrogramme ou arbre de classification
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{hierarchy}\PY{o}{.}\PY{n}{linkage}\PY{p}{(}\PY{n}{X\PYZus{}z}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{complete}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{metric}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{euclidean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{hierarchy}\PY{o}{.}\PY{n}{dendrogram}\PY{p}{(}\PY{n}{Z}\PY{p}{,} \PY{n}{truncate\PYZus{}mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lastp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{p}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{leaf\PYZus{}rotation}\PY{o}{=}\PY{l+m+mf}{90.}\PY{p}{,} \PY{n}{leaf\PYZus{}font\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{7.}\PY{p}{,} \PY{n}{show\PYZus{}contracted}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_40_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Critère de Ward}\label{crituxe8re-de-ward}
+
+La méthode de Ward consiste à regrouper les classes de façon que
+l'augmentation de l'inertie interclasse soit maximum.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{n}{n\PYZus{}cluster} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{ward} \PY{o}{=} \PY{n}{AgglomerativeClustering}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{n}{n\PYZus{}cluster}\PY{p}{,} \PY{n}{linkage}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ward}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}z}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{BIRCH Algorithm}\label{birch-algorithm}
+
+Used to perform hierarchical clustering over particularly large
+data-sets.The advantage of using BIRCH algorithm is its ability to
+incrementally \& dynamically cluster incoming.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} \PY{n}{labels\PYZus{}birch} \PY{o}{=} \PY{n}{Birch}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{o}{=} \PY{n}{n\PYZus{}cluster}\PY{p}{,} \PY{n}{threshold}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{compute\PYZus{}labels}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{o}{.}\PY{n}{fit\PYZus{}predict}\PY{p}{(}\PY{n}{X\PYZus{}z}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Partitionning Algorithms}\label{partitionning-algorithms}
+
+    \subsubsection{SOM (Cartes topologiques
+auto-organisatrices)}\label{som-cartes-topologiques-auto-organisatrices}
+
+Les cartes auto-organisatrices sont constituées d'une grille. Dans
+chaque nœud de la grille se trouve un « neurone ». Chaque neurone est
+lié à un vecteur référent, responsable d'une zone dans l'espace des
+données (Un certain nombre de courbes similaires).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{n}{som} \PY{o}{=} \PY{n}{sompy}\PY{o}{.}\PY{n}{SOMFactory}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{build}\PY{p}{(}\PY{n}{X\PYZus{}z}\PY{p}{,} \PY{n}{mapsize}\PY{p}{,} \PY{n}{mask}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{mapshape}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rectangular}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{lattice}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rect}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{normalization}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{var}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{initialization}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pca}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{neighborhood}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gaussian}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{training}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{batch}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sompy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+maxtrainlen \%d inf
+maxtrainlen \%d inf
+Topographic error = 0.153900210822; Quantization error = 6.2435798326
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_47_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{K-Means Algorithm}\label{k-means-algorithm}
+
+    The main idea is to define k centers, one for each cluster. then take
+each point belonging to a given data set and associate it to the nearest
+center. When no point is pending, re-calculate k new centroids as
+barycenter of the clusters. A new binding has to be done between the
+same data set points and the nearest new center. repeat until no more
+changes are done ie centers do not move any more.
+
+    \subsubsection{K-means: Validate the number of
+clusters}\label{k-means-validate-the-number-of-clusters}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}81}]:} \PY{n}{plot\PYZus{}inertia}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plot\PYZus{}silhouaite}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_51_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Apply K-means model}\label{apply-k-means-model}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}101}]:} \PY{n}{kmeans} \PY{o}{=} \PY{n}{KMeans}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{l+m+mi}{81}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}z}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_53_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{K-medoids (PAM Algorithm)}\label{k-medoids-pam-algorithm}
+
+The k-medoids algorithm is a clustering algorithm related to the k-means
+algorithm. K-means attempts to minimize the total squared error, while
+k-medoids minimizes the sum of dissimilarities between points labeled to
+be in a cluster and a point designated as the center of that cluster. In
+contrast to the k-means algorithm, k-medoids chooses datapoints as
+centers ( medoids or exemplars).
+
+    \subsubsection{K-medoids Validate the number of
+clusters}\label{k-medoids-validate-the-number-of-clusters}
+
+    \paragraph{Custom distances
+calculation}\label{custom-distances-calculation}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}103}]:} \PY{n}{corr\PYZus{}distance} \PY{o}{=} \PY{n}{squareform}\PY{p}{(}\PY{n}{pdist}\PY{p}{(}\PY{n}{X\PYZus{}z}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{correlation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}Pearsons}
+          \PY{n}{euclid\PYZus{}distance} \PY{o}{=} \PY{n}{squareform}\PY{p}{(}\PY{n}{pdist}\PY{p}{(}\PY{n}{X\PYZus{}z}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{euclidean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}139}]:} \PY{c+c1}{\PYZsh{} plot\PYZus{}inertia()}
+          \PY{c+c1}{\PYZsh{} plot\PYZus{}silhouaite()}
+          
+          \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+          \PY{n}{clusters}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{91}\PY{p}{,}\PY{l+m+mi}{120}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}
+          \PY{n}{silouhaite} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{inertia} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{cluster} \PY{o+ow}{in} \PY{n}{clusters}\PY{p}{:}
+              \PY{n}{labels}\PY{p}{,} \PY{n}{medoids} \PY{o}{=} \PY{n}{kMedoids}\PY{o}{.}\PY{n}{cluster}\PY{p}{(}\PY{n}{euclid\PYZus{}distance}\PY{p}{,}\PY{n}{k}\PY{o}{=} \PY{n}{cluster}\PY{p}{)}
+              \PY{n}{silouhaite}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{hlp}\PY{o}{.}\PY{n}{getSilouhaite}\PY{p}{(}\PY{n}{X\PYZus{}z}\PY{p}{,}\PY{n}{labels}\PY{p}{)}\PY{p}{)}
+              \PY{n}{sse} \PY{o}{=} \PY{n}{hlp}\PY{o}{.}\PY{n}{getSSE}\PY{p}{(}\PY{n}{X\PYZus{}z}\PY{p}{,}\PY{n}{X\PYZus{}z}\PY{p}{[}\PY{n}{labels}\PY{p}{]}\PY{p}{)}
+              \PY{n}{inertia}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{sse}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{labels}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+              
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+              
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{inertia} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{inertia}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total inertia according to clusters}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}    
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{clusters}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{inertia}\PY{p}{)}\PY{c+c1}{\PYZsh{}scale it to acc2}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{clusters}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{clusters}\PY{p}{)}
+          
+          
+          \PY{n}{acc} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{n}{inertia}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}  \PY{c+c1}{\PYZsh{} 2nd derivative of the inertia curve}
+          \PY{c+c1}{\PYZsh{}plt.plot(np.arange(2,len(clusters)), acc)}
+          \PY{n}{best\PYZus{}ks} \PY{o}{=} \PY{n}{acc}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+          \PY{n}{k} \PY{o}{=}  \PY{n}{best\PYZus{}ks}\PY{o}{+} \PY{l+m+mi}{2}  \PY{c+c1}{\PYZsh{} if idx 0 is the max of this we want 2 clusters}
+          \PY{c+c1}{\PYZsh{} print (\PYZdq{}clusters:\PYZdq{},clusters[k])}
+          
+          
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{silouhaite} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{silouhaite}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Silouhaite score according to clusters}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}    
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{clusters}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{silouhaite}\PY{p}{)}\PY{c+c1}{\PYZsh{}scale it to acc2}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{clusters}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{clusters}\PY{p}{)}
+          \PY{n}{best\PYZus{}ks} \PY{o}{=} \PY{n}{silouhaite}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+          \PY{c+c1}{\PYZsh{} print(\PYZdq{}clusters:\PYZdq{},clusters[best\PYZus{}ks])}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_58_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}144}]:} \PY{n}{n\PYZus{}cluster} \PY{o}{=} \PY{l+m+mi}{113}
+          \PY{n}{label}\PY{p}{,} \PY{n}{medoids\PYZus{}euc} \PY{o}{=} \PY{n}{kMedoids}\PY{o}{.}\PY{n}{cluster}\PY{p}{(}\PY{n}{euclid\PYZus{}distance}\PY{p}{,}\PY{n}{k}\PY{o}{=} \PY{n}{n\PYZus{}cluster}\PY{p}{)}
+          \PY{n}{labels\PYZus{}kmedoids} \PY{o}{=} \PY{n}{label}
+          
+          \PY{n}{labels\PYZus{}kmedoids\PYZus{}corr}\PY{p}{,}\PY{n}{medoids\PYZus{}corr} \PY{o}{=} \PY{n}{kMedoids}\PY{o}{.}\PY{n}{cluster}\PY{p}{(}\PY{n}{corr\PYZus{}distance}\PY{p}{,}\PY{n}{k}\PY{o}{=} \PY{n}{n\PYZus{}cluster}\PY{p}{)}
+          \PY{n}{labels\PYZus{}kmedoids\PYZus{}spear}\PY{p}{,}\PY{n}{medoids\PYZus{}spear} \PY{o}{=} \PY{n}{kMedoids}\PY{o}{.}\PY{n}{cluster}\PY{p}{(}\PY{n}{corr\PYZus{}distance}\PY{p}{,}\PY{n}{k}\PY{o}{=} \PY{n}{n\PYZus{}cluster}\PY{p}{)}
+          
+          
+          \PY{n}{SSE}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kMedoids}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{hlp}\PY{o}{.}\PY{n}{getSSE}\PY{p}{(}\PY{n}{X\PYZus{}z}\PY{p}{,}\PY{n}{X\PYZus{}z}\PY{p}{[}\PY{n}{labels\PYZus{}kmedoids}\PY{p}{]}\PY{p}{)}
+          \PY{n}{SSE}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kMedoids\PYZus{}corr}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{hlp}\PY{o}{.}\PY{n}{getSSE}\PY{p}{(}\PY{n}{X\PYZus{}z}\PY{p}{,}\PY{n}{X\PYZus{}z}\PY{p}{[}\PY{n}{labels\PYZus{}kmedoids\PYZus{}corr}\PY{p}{]}\PY{p}{)}
+          \PY{n}{SSE}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kMedoids\PYZus{}spear}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{hlp}\PY{o}{.}\PY{n}{getSSE}\PY{p}{(}\PY{n}{X\PYZus{}z}\PY{p}{,}\PY{n}{X\PYZus{}z}\PY{p}{[}\PY{n}{labels\PYZus{}kmedoids\PYZus{}spear}\PY{p}{]}\PY{p}{)}
+          
+          
+          \PY{n}{SILOUHAITE}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kMedoids}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{hlp}\PY{o}{.}\PY{n}{getSilouhaite}\PY{p}{(}\PY{n}{X\PYZus{}z}\PY{p}{,}\PY{n}{labels\PYZus{}kmedoids}\PY{p}{)}
+          \PY{n}{SILOUHAITE}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kMedoids\PYZus{}corr}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{hlp}\PY{o}{.}\PY{n}{getSilouhaite}\PY{p}{(}\PY{n}{X\PYZus{}z}\PY{p}{,}\PY{n}{labels\PYZus{}kmedoids\PYZus{}corr}\PY{p}{)}
+          \PY{n}{SILOUHAITE}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kMedoids\PYZus{}spear}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{hlp}\PY{o}{.}\PY{n}{getSilouhaite}\PY{p}{(}\PY{n}{X\PYZus{}z}\PY{p}{,}\PY{n}{labels\PYZus{}kmedoids\PYZus{}spear}\PY{p}{)}
+          
+          
+          \PY{n}{hlp}\PY{o}{.}\PY{n}{Clusters\PYZus{}plot}\PY{p}{(}\PY{n}{X}\PY{o}{=} \PY{n}{X\PYZus{}pca}\PY{p}{,} \PY{n}{labels} \PY{o}{=} \PY{n}{label}
+                            \PY{p}{,}\PY{n}{info}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PCA K\PYZhy{}Medoids}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Euclidienne}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ clusters :inertia }\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{label}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{SSE}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kMedoids}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_59_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}120}]:} \PY{n}{df}\PY{o}{.}\PY{n}{nlargest}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SSE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}120}]:}                     SSE
+          Agg\_complete 521,110.11
+          Ward         510,172.34
+          Birch        504,761.40
+          kMeans       500,011.45
+          kMedoids     169,842.52
+\end{Verbatim}
+            
+    \section{Display Clustering results}\label{display-clustering-results}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}125}]:} \PY{n}{disp} \PY{o}{=} \PY{n}{hlp}\PY{o}{.}\PY{n}{Cluster\PYZus{}series\PYZus{}plot}\PY{p}{(}\PY{n}{data\PYZus{}df} \PY{o}{=} \PY{n}{product\PYZus{}df\PYZus{}full}\PY{p}{,} \PY{n}{cluster\PYZus{}df} \PY{o}{=} \PY{n}{eucl\PYZus{}df}\PY{p}{,}\PY{n}{headers} \PY{o}{=} \PY{n}{row\PYZus{}headers}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    
+
+    
+
+    
+
+    \section{Forecast quality on
+clusters}\label{forecast-quality-on-clusters}
+
+In this section we'll build forecasts on a \textbf{cluster level} using
+classical Holt-Winter's models. Our goal is to evaluate the quality of
+the prediction on individual series composing the each cluster after
+performing a \textbf{weighted split}.
+
+The evaluation metric used is the \textbf{MASE (mean absolute scaled
+error)} which is a scale-independant metric calculated wrt the MAE
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}133}]:} \PY{n}{group\PYZus{}series}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}133}]:}          2016-01-10 00:00:00  2016-01-17 00:00:00  2016-01-24 00:00:00  \textbackslash{}
+          Cluster                                                                  
+          1                        401                  467                  422   
+          2                         97                  103                   66   
+          3                        371                  276                  119   
+          4                       1076                 1185                  491   
+          5                        281                  286                  256   
+          
+                   2016-01-31 00:00:00  2016-02-07 00:00:00  2016-02-14 00:00:00  \textbackslash{}
+          Cluster                                                                  
+          1                        520                  466                  219   
+          2                         36                   37                   36   
+          3                        507                  515                  148   
+          4                        278                  251                 1624   
+          5                        298                  298                  338   
+          
+                   2016-02-21 00:00:00  2016-02-28 00:00:00  2016-03-06 00:00:00  \textbackslash{}
+          Cluster                                                                  
+          1                        253                  286                  283   
+          2                         46                  296                  379   
+          3                        128                  128                  101   
+          4                       1366                  451                 1354   
+          5                        290                  322                  324   
+          
+                   2016-03-13 00:00:00         {\ldots}           2017-10-01 00:00:00  \textbackslash{}
+          Cluster                              {\ldots}                                 
+          1                        506         {\ldots}                           350   
+          2                        109         {\ldots}                            37   
+          3                        523         {\ldots}                           498   
+          4                       1260         {\ldots}                           173   
+          5                        332         {\ldots}                           393   
+          
+                   2017-10-08 00:00:00  2017-10-15 00:00:00  2017-10-22 00:00:00  \textbackslash{}
+          Cluster                                                                  
+          1                        422                  224                  232   
+          2                        130                   94                   27   
+          3                        466                  476                  170   
+          4                        139                  703                  678   
+          5                        311                  328                  429   
+          
+                   2017-10-29 00:00:00  2017-11-05 00:00:00  2017-11-12 00:00:00  \textbackslash{}
+          Cluster                                                                  
+          1                        179                  193                  192   
+          2                         15                   13                   10   
+          3                        122                  116                  743   
+          4                        219                  154                  161   
+          5                        311                  288                  249   
+          
+                   2017-11-19 00:00:00  2017-11-26 00:00:00  2017-12-03 00:00:00  
+          Cluster                                                                 
+          1                        107                  134                   19  
+          2                         10                   11                    2  
+          3                        183                  168                   21  
+          4                        125                  268                   84  
+          5                        143                  211                   34  
+          
+          [5 rows x 100 columns]
+\end{Verbatim}
+            
+    \subsection{Building Holt-Winter's
+Models}\label{building-holt-winters-models}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}141}]:} \PY{n}{forecast} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{forecasts}\PY{p}{,}\PY{n}{columns} \PY{o}{=} \PY{n}{group\PYZus{}series}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{fc}\PY{p}{:}\PY{p}{]}\PY{p}{,}\PY{n}{index} \PY{o}{=} \PY{n}{group\PYZus{}series}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_69_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Forecast Split Forecast}\label{forecast-split-forecast}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}152}]:} \PY{n}{display}\PY{p}{(}\PY{n}{mase\PYZus{}variation}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+         Agg  Split  Forecast  Increase   Bias
+count 113.00 113.00    113.00    113.00 113.00
+mean    1.28   1.24      1.87      7.92 -27.62
+std     0.69   0.73      1.32     52.28  22.98
+min     0.25   0.46      0.71    -61.35 -81.73
+25%     0.88   0.84      1.14    -22.37 -39.27
+50%     1.09   1.05      1.46     -5.56 -28.47
+75%     1.56   1.35      2.06     23.26 -17.14
+max     3.60   4.89      8.66    286.80  54.02
+    \end{verbatim}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_71_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_71_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{More numbers...}\label{more-numbers...}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The percentage of clusters where the forecast quality increases at the
+  split level: We compare the average forecast quality at the
+  \textbf{split level} to the forecast on \textbf{the aggregation level}
+  of the cluster.
+\item
+  The percentage of "good" forecasts where the quality decreases with
+  less than 20\%
+\item
+  The percentage of products where the \textbf{split forecast} is better
+  than a \textbf{specific forecast}
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}167}]:} \PY{n}{display}\PY{p}{(}\PY{n}{mase\PYZus{}variation}\PY{p}{[}\PY{n}{good\PYZus{}splits}\PY{p}{]}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Agg}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Increased Forecast quality: 55.75\%
+Good Forecast quality: 77.88\%
+Better than detail Forecast quality: 90.27\%
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+    Agg  Split  Forecast  Increase   Bias
+18 0.25   0.53      1.00    112.72 -46.38
+91 0.35   0.57      0.91     64.06 -37.26
+99 0.42   0.46      0.71      9.42 -35.83
+7  0.42   0.57      1.52     36.52 -62.34
+68 0.48   0.74      1.11     54.20 -32.78
+    \end{verbatim}
+
+    
+    \subsection{Displaying forecasts}\label{displaying-forecasts}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}163}]:} \PY{n}{cluster} \PY{o}{=} \PY{l+m+mi}{99}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Cluster 99 split:0.46 , agg:0.42 *** Increase 9.42 \%
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_75_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
