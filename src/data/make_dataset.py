@@ -65,10 +65,9 @@ if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     logging.basicConfig(level=logging.INFO, format=log_fmt)
 
-    product_cluster = import_data.load_clustering_result()
 
-    df = import_data.translate_df(product_cluster,columns=["Key_lvl3","Key_lvl4","Key_lvl5","Key_lvl6"])
-    train_columns = ["","","","","","","","","","","","","","","","","","","","","","","","","","","","",]
+    # df = translate_df(product_cluster,columns=["Key_lvl3","Key_lvl4","Key_lvl5","Key_lvl6"])
+    # train_columns = ["","","","","","","","","","","","","","","","","","","","","","","","","","","","",]
 
     # not used in this stub but often useful for finding various files
     project_dir = os.path.join(os.path.dirname(__file__), os.pardir, os.pardir)
@@ -80,33 +79,91 @@ if __name__ == '__main__':
     main()
 
 
-def load_clustering_result(f_cluster,f_products,f_clients=None,cluster_key="Product",produit_key="Key_lvl2",client_key=""):
-    
-    clusters = load_file(f_cluster,type_="M").set_index(cluster_key)
+def load_clustering_result(f_cluster="clusters.csv",f_products=None,f_clients=None,cluster_key="Product",produit_key="Key_lvl2",client_key=""):
 
-    
+    clusters = load_file(f_cluster,type_="M",index = cluster_key)
     products = load_file(f_products, sep='\t',ext="txt", type_="R")
+    df = products.join(clusters,on=produit_key,how='inner').reset_index(drop = True).dropna(axis = 1)
 
-    product_cluster = products.join(clusters,on=produit_key,how='inner').reset_index(drop = True).dropna(axis = 1)
+    return df
 
-    return product_cluster
+def save_file(data,filename,type_="I",version = 1,index=False):
+    """save a dataframe into a .csv file
+    
+    Arguments:
+        data {Dataframe} -- a Pandas dataframe
+        filename {str} -- the file name
+    
+    Keyword Arguments:
+        type_ {str} -- The data folder: (I)nterim, (P)rocessed, (R):Raw or (M)odel (default: {"I"})
+        version {int} -- the file version (default: {1})
+        index {bool} -- either the include the index or not (default: {False})
+    """
+
+    folder  = {
+        "R" : raw_path,
+        "I" : interim_path,
+        "P" : processed_path,
+        "M" : models_path
+    }.get(type_,interim_path)
+
+    fullname = "%s_%s_v%d.csv"%(PREFIX,filename,version)
+    data.to_csv(folder+fullname, sep=";", encoding = "utf-8",index = index)
 
 
+def load_file(filename,type_="I",version=1,sep=";", ext="csv",index =None):
+    """Loads a csv or txt file into a dataframe
+    
+    Arguments:
+        filename {string} -- the filename to load
+    
+    Keyword Arguments:
+        type_ {str} -- The data folder: (I)nterim, (P)rocessed, (R):Raw or (M)odel (default: {"I"})
+        version {int} -- The file version specified when saved (default: {1})
+        sep {str} -- the separator in the file (default: {";"})
+        ext {str} -- the extension of the file (default: {"csv"})
+        Index {list} -- the columns to set as index to the dataframe
+    
+    Returns:
+        Dataframe -- returns a pandas dataframe
+    """
+
+    folder  = {
+        "R" : raw_path,
+        "I" : interim_path,
+        "P" : processed_path,
+        "M" : models_path
+    }.get(type_,interim_path)
+    fullname = "%s_%s_v%d.%s"%(PREFIX,filename,version,ext)
+    df = pd.read_csv(folder+fullname,sep=";",encoding="utf-8")
+    if index is not None: df.set_index(index,inplace=True)
+
+    return df
 
 def load_data(filename):
+
     
     n_row_headers = len(row_headers)
 
-    product_raw_df = pd.read_csv(interim_path + filename , sep = ";", encoding = 'utf-8', header = 0)
+    df = pd.read_csv(interim_path + filename , sep = ";", encoding = 'utf-8', header = 0)
 
-    cols = product_raw_df.columns.values
+    cols = df.columns.values
     cols[:n_row_headers]  = row_headers
-    product_raw_df.columns =cols
+    df.columns =cols
 
-    return product_raw_df
+    return df
 
 
 def trim_series(data):
+    """Trims (removes complete zeros from each side) the series along the dataset 
+    
+    Arguments:
+        data {Pandas Dataframe} -- a dataframe with only the series values
+    
+    Returns:
+        dataframe -- returns a trimmed dataframe 
+    """
+
     tail = 0
     head = 0
     #drop first column if zeros
@@ -121,6 +178,19 @@ def trim_series(data):
 
 
 def range_from_origin(data,range_):
+    """Shifts the timeseries values to origin ie makes the first non zero value as the first one and counts "range_" values ahead
+    
+    Arguments:
+        data {Dataframe} -- Pandas datafrale
+        range_ {int} -- number of values to take into account
+    
+    Raises:
+        error -- prints the index of the timeseries raising the error
+    
+    Returns:
+        Dataframe -- returns a dataframe with the shifted data
+    """
+
     N = data.shape
     centered = np.zeros((N,range_))
     i=0
@@ -136,10 +206,23 @@ def range_from_origin(data,range_):
             raise error
 
     centered_df = pd.DataFrame(centered)
+    print("Data shifted to origin with %d values"%range_)
 
     return centered_df
 
 def remove_tails(data,t = 15):
+    """remove the timeseries having at least "t" zero values 
+    
+    Arguments:
+        data {Dataframe} -- Pandas dataframe
+    
+    Keyword Arguments:
+        t {int} -- the threshold number of zeros to consider to remove a series (default: {15})
+    
+    Returns:
+        Dataframe -- Cleaned timeseries
+    """
+
     mask = (data.iloc[:,-t:]==0).all(axis=1)
     df  =  data[~mask]
     print("Series With %d trailing zeros are removed"%t)
@@ -154,51 +237,90 @@ def remove_heads(data,t = 15):
     return df
 
 
-def save_file(data,filename,type_="I",version = 1,index=False):
-    folder  = {
-        "R" : raw_path,
-        "I" : interim_path,
-        "P" : processed_path
-    }.get(type_,interim_path)
 
-    fullname = "%s_%s_v%d.csv"%(PREFIX,filename,version)
-    data.to_csv(folder+fullname, sep=";", encoding = "utf-8",index = index)
-
-
-def load_file(filename,type_="I",version=1):
-    folder  = {
-        "R" : raw_path,
-        "I" : interim_path,
-        "P" : processed_path,
-        "M" : models_path
-    }.get(type_,interim_path)
-    fullname = "%s_%s_v%d.csv"%(PREFIX,filename,version)
-    pd = pd.read_csv(folder+fullname,sep=";",encoding="utf-8")
-
-    return pd
 
 def moving_average(data,window):
+    """Apply a moving average with window of size "windox"
+    
+    Arguments:
+        data {Dataframe} -- Pandas dataframe
+        window {int} -- size of window to apply
+    
+    Returns:
+        Dataframe -- the new dataframe
+    """
+
     rolled_df = data.rolling(window=window,axis=1,center = True,win_type=None).mean()
     return rolled_df.dropna(axis = 1)
 
 
 def winsore_data(data,top=0.05,bottom=0.05):
+    """Applies a winsorizing on data
+    Winsorizing is to set all outliers to a specified percentile of the data; for example, 
+    a 90% winsorization would see all data below the 5th percentile set to 
+    the 5th percentile, and data above the 95th percentile set to the 95th percentile
+
+    
+    Arguments:
+        data {Dataframe} -- Pandas datagframe
+    
+    Keyword Arguments:
+        top {float} -- upper qunatile to consider (default: {0.05})
+        bottom {float} -- lower quantile to consider (default: {0.05})
+    
+    Returns:
+        Dataframe -- Winsorized dataframe
+    """
+
     df = data.apply(mstats.winsorize,limits = (bottom,top),axis=1)
     return df
 
 
 def remove_rare(data,t = 5):
+    """Remove the series with less than "t" values
+    
+    Arguments:
+        data {Dataframe} -- Pandas dataframe
+    
+    Keyword Arguments:
+        t {int} -- Minimum number of values to consider (default: {5})
+    
+    Returns:
+        Dataframe -- Cleaned dataframe
+    """
+
     mask =(data.where(data==0,other=1.).sum(axis=1)<=t)
     return data[~mask]
 
 
 def get_scaled_series(data):
+    """Returns a standard scaled dataframe
+    
+    Arguments:
+        data {Dataframe} -- Pandas dataframe
+    
+    Returns:
+        Dataframe -- Scaled Dataframe
+        StandardScaler -- the standard scaler used
+    """
+
     d = data.as_matrix().astype(float)
     std_scaler = StandardScaler(with_mean=True, with_std=True).fit(d.T)
     X_z = std_scaler.transform(data.T).T
-    return X_z
+    return X_z,std_scaler
 
-def get_full_data(series,data,raw_df):
+def data_with_headers(series,data,raw_df):
+    """Add headers to data (only timeseries)
+    
+    Arguments:
+        series {Numpy array} -- Numpy 2D array containing only timeseries values
+        data {[type]} -- [description]
+        raw_df {[type]} -- [description]
+    
+    Returns:
+        [type] -- [description]
+    """
+
     headers = raw_df[row_headers[::-1]].loc[data.index]
     product_df_full = pd.DataFrame(series, columns = data.columns,index=data.index)
     for label ,column in headers.iteritems():
@@ -206,16 +328,35 @@ def get_full_data(series,data,raw_df):
     return product_df_full
 
 def display(data,head=5):
+    """Displays shape and dataframe head
+    
+    Arguments:
+        data {Dataframe} -- Pandas dataframe
+    
+    Keyword Arguments:
+        head {int} -- number of rows to display (default: {5})
+    """
+
     print(data.shape)
     if head>0:
         dp(data.head(head))
     else:
         dp(data)
 
-def translate_df(df,columns):
+def translate_df(df,columns,dic_path):
+    """Translates specified columns in dataframe using a numpy dictionnary
+    
+    Arguments:
+        df {Dataframe} -- Pandas dataframe
+        columns {list} -- List of columns to translate
+    
+    Returns:
+        Dataframe -- the dataframe with ONLY translated columns
+    """
+
     try:
         tdf = df.copy()
-        dico = np.load(raw_path+'dictionnary.npy').item()
+        dico = np.load(dic_path).item()
         tans = df[columns].applymap(lambda x:dico[x])
         for index,col in tans.iteritems():
             if index in df.columns: tdf[index] = col

@@ -19,7 +19,7 @@ from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
 from scipy import stats
 from scipy.stats import mstats
-from IPython.display import display as dp
+
 
 
 src_dir = os.path.join(os.getcwd(), os.pardir,os.pardir, 'src')
@@ -129,28 +129,6 @@ def remove_heads(data,t = 15):
     print("Removed: %d , Remaining: %s"%(mask.astype(int).sum(),data.shape[0]))
     return df
 
-
-def save_file(data,filename,type_="I",version = 1,index=False):
-    folder  = {
-        "R" : raw_path,
-        "I" : interim_path,
-        "P" : processed_path
-    }.get(type_,interim_path)
-
-    fullname = "%s_%s_v%d.csv"%(PREFIX,filename,version)
-    data.to_csv(folder+fullname, sep=";", encoding = "utf-8",index = index)
-
-
-def load_file(filename,type_="I",version=1):
-    folder  = {
-        "R" : raw_path,
-        "I" : interim_path,
-        "P" : processed_path,
-        "M" : models_path
-    }.get(type_,interim_path)
-    fullname = "%s_%s_v%d.csv"%(PREFIX,filename,version)
-    return pd.read_csv(folder+fullname,sep=";",encoding="utf-8")
-
 def moving_average(data,window):
     rolled_df = data.rolling(window=window,axis=1,center = True,win_type=None).mean()
     return rolled_df.dropna(axis = 1)
@@ -180,6 +158,7 @@ def get_full_data(series,data,raw_df):
     return product_df_full
 
 def display(data,head=5):
+    from IPython.display import display as dp
     print(data.shape)
     if head>0:
         dp(data.head(head))
@@ -197,3 +176,121 @@ def translate_df(df,columns):
     except Exception as ex:
         print("Error when translating: ",ex)
         return df
+
+
+
+def save_file(data,filename,type_="I",version = None,index=False):
+    """save a dataframe into a .csv file
+    
+    Arguments:
+        data {Dataframe} -- a Pandas dataframe
+        filename {str} -- the file name
+    
+    Keyword Arguments:
+        type_ {str} -- The data folder: (I)nterim, (P)rocessed, (R):Raw or (M)odel (default: {"I"})
+        version {int} -- the file version (default: {1})
+        index {bool} -- either the include the index or not (default: {False})
+    """
+
+    folder  = {
+        "R" : raw_path,
+        "I" : interim_path,
+        "P" : processed_path,
+        "M" : models_path
+    }.get(type_,interim_path)
+
+    fullname = "%s_%s_v%d.csv"%(PREFIX,filename,version) if version else "%s_%s.csv"%(PREFIX,filename)
+    data.to_csv(folder+fullname, sep=";", encoding = "utf-8",index = index)
+
+
+def load_file(filename,type_="I",version=None,sep=";", ext="csv",index =None):
+    """Loads a csv or txt file into a dataframe
+    
+    Arguments:
+        filename {string} -- the filename to load
+    
+    Keyword Arguments:
+        type_ {str} -- The data folder: (I)nterim, (P)rocessed, (R):Raw or (M)odel (default: {"I"})
+        version {int} -- The file version specified when saved (default: {1})
+        sep {str} -- the separator in the file (default: {";"})
+        ext {str} -- the extension of the file (default: {"csv"})
+        Index {list} -- the columns to set as index to the dataframe
+    
+    Returns:
+        Dataframe -- returns a pandas dataframe
+    """
+
+    folder  = {
+        "R" : raw_path,
+        "I" : interim_path,
+        "P" : processed_path,
+        "M" : models_path
+    }.get(type_,interim_path)
+    fullname = "%s_%s_v%d.%s"%(PREFIX,filename,version,ext) if version else "%s_%s.%s"%(PREFIX,filename,ext)
+    df = pd.read_csv(folder+fullname,sep=";",encoding="utf-8")
+    if index is not None: df.set_index(index,inplace=True)
+
+    return df
+
+
+
+from sklearn.preprocessing import OneHotEncoder,LabelBinarizer,LabelEncoder
+import itertools
+
+
+# Features encoding
+
+def label_encoders(df):
+    
+    df = encode(df)
+    le_dict = {}
+    for index,col in df.iteritems():
+        le = LabelEncoder()
+        le_dict[index] = le.fit(col)
+    return le_dict
+    
+    
+def one_hot_encoders(label_encoders):
+    ohe_dict ={}
+    for key, value in label_encoders.items():
+        ohe = OneHotEncoder()
+        ohe_dict[key] = ohe.fit(value)
+    return ohe_dict
+
+def create_encoder(df,categorical_features= None,non_categorical=None):
+    if (categorical_features is None):
+        categorical_features = df.columns
+    le_dict = {}
+    ohe_dict = {}
+    for index,col in df[categorical_features].sort_index(axis=1).iteritems():
+        if (non_categorical is not None) and (index in non_categorical): continue
+        if index not in categorical_features: continue
+        le = LabelEncoder().fit(col)
+        le_dict[index] = le
+        ohe = OneHotEncoder().fit(le.transform(col).reshape((-1,1)))
+        ohe_dict[index] = ohe     
+    
+    labeled_df = df[categorical_features].sort_index(axis=1).apply(lambda x: le_dict[x.name].transform(x))
+    ohe_encoder  = OneHotEncoder().fit(labeled_df)
+    
+    np.save(models_path+'le_encoder', le_dict)
+    np.save(models_path+'ohe_encoder', ohe_encoder)
+    print("encoders saved")
+    return labeled_df,le_dict,ohe_encoder
+
+def encode(df,non_categorical=[],le_encoder = None,ohe_encoder=None):
+    if(le_encoder is None):
+        le_encoder = np.load(models_path+'le_encoder.npy').item()
+        ohe_encoder = np.load(models_path+'ohe_encoder.npy').item()
+    features =[ ["%s_%s"%(f_name,c) for c in f_encoder.classes_] for f_name,f_encoder in le_encoder.items()]
+    columns = list(itertools.chain.from_iterable(features))
+    categorical = list(le_encoder.keys())
+    labeled_df = df[categorical].sort_index(axis = 1).apply(lambda x: le_encoder[x.name].transform(x))
+    encoded_df = pd.DataFrame(ohe_encoder.transform(labeled_df).toarray(), columns = columns,index=df.index)
+
+    #numeric features
+    for f in non_categorical:
+        encoded_df[f] = df[f]
+
+
+    return encoded_df
