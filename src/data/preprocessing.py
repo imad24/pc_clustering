@@ -1,32 +1,23 @@
 # -*- coding: utf-8 -*-
+import sys 
 import os
 import click
-# import logging
-from dotenv import find_dotenv, load_dotenv
-import sys
-
-    
-import math
-import copy as cp
-from datetime import datetime
-
-import numpy as np
-import pandas as pd
-
-
-from sklearn.preprocessing import StandardScaler, MinMaxScaler
-
-
-from scipy import stats
-from scipy.stats import mstats
-
-
-
+# add the 'src' directory as one where we can import modules
+root_dir = os.path.join(os.getcwd(),os.pardir,os.pardir)
 src_dir = os.path.join(os.getcwd(), os.pardir,os.pardir, 'src')
 if src_dir not in sys.path: sys.path.append(src_dir)
 
 
-import helpers as hlp
+from dotenv import find_dotenv, load_dotenv
+ 
+import math
+import numpy as np
+import pandas as pd
+from datetime import datetime
+from scipy import stats
+from scipy.stats import mstats
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+
 from external import kMedoids
 
 load_dotenv(find_dotenv())
@@ -70,6 +61,16 @@ if __name__ == '__main__':
 
 
 def load_data(filename):
+    """lksdjfdkls
+    
+    Arguments:
+        filename {dj} -- kidsjf
+    
+    Returns:
+        sdkjf -- dsklfj
+
+    """
+
     
     n_row_headers = len(row_headers)
 
@@ -83,6 +84,15 @@ def load_data(filename):
 
 
 def trim_series(data):
+    """Trims (removes complete zeros from each side) the series along the dataset 
+    
+    Arguments:
+        data {Pandas Dataframe} -- a dataframe with only the series values
+    
+    Returns:
+        dataframe -- returns a trimmed dataframe 
+    """
+
     tail = 0
     head = 0
     #drop first column if zeros
@@ -96,26 +106,56 @@ def trim_series(data):
     return data
 
 
-def range_from_origin(data,range_):
-    N = data.shape
+def range_from_origin(data,range_,offset=2):
+    """Shifts the timeseries values to origin ie makes the first non zero value as the first one and counts "range_" values ahead
+    
+    Arguments:
+        data {Dataframe} -- Pandas datafrale
+        range_ {int} -- number of values to take into account
+        offset {int} -- offset of zero values in the begining of the series {default:2}
+    
+    Raises:
+        error -- prints the index of the timeseries raising the error
+    
+    Returns:
+        Dataframe -- returns a dataframe with the shifted data
+    """
+
+    N = data.shape[0]
     centered = np.zeros((N,range_))
     i=0
     for index,row in data.iterrows():
         try:
-            values = row[row!=0].index[:range_]
-            r = row[values].values
-            r.resize((1,range_))
+            f = row.nonzero()[0][0]
+            r = np.resize(row[f:f+range_].values,((1,range_)))
             centered[i] = r
             i+=1
         except Exception as error:
             print(index)
             raise error
 
-    centered_df = pd.DataFrame(centered)
+    centered_df = pd.DataFrame(centered,index = data.index,columns=range(offset,range_+offset))
+
+    centered_df = centered_df.loc[~(centered_df==0).all(axis = 1)]
+    for i in range(offset)[::-1]:
+        centered_df.insert(0,i,0.0)
+    print("Data shifted to origin with %d values"%range_)
 
     return centered_df
 
 def remove_tails(data,t = 15):
+    """remove the timeseries having at least "t" zero values 
+    
+    Arguments:
+        data {Dataframe} -- Pandas dataframe
+    
+    Keyword Arguments:
+        t {int} -- the threshold number of zeros to consider to remove a series (default: {15})
+    
+    Returns:
+        Dataframe -- Cleaned timeseries
+    """
+
     mask = (data.iloc[:,-t:]==0).all(axis=1)
     df  =  data[~mask]
     print("Series With %d trailing zeros are removed"%t)
@@ -129,28 +169,98 @@ def remove_heads(data,t = 15):
     print("Removed: %d , Remaining: %s"%(mask.astype(int).sum(),data.shape[0]))
     return df
 
-def moving_average(data,window):
-    rolled_df = data.rolling(window=window,axis=1,center = True,win_type=None).mean()
+
+def smooth_series(data,window,method="average"):
+    """Apply a moving average or mean with window of size "window"
+    
+    Arguments:
+        data {Dataframe} -- Pandas dataframe
+        window {int} -- size of window to apply
+    
+    Keyword Arguments:
+        method {str} -- the method applied to smooth the data (default: {"average"})
+    
+    Returns:
+        Dataframe -- the new dataframe
+    """
+    if method =="average":
+        rolled_df = data.rolling(window=window,axis=1,center = True,win_type=None).mean()
+    elif method == "median":
+        rolled_df = data.rolling(window=window,axis=1,center = True,win_type=None).median()
+    else:
+        raise "Unknow method name"
+
     return rolled_df.dropna(axis = 1)
 
 
 def winsore_data(data,top=0.05,bottom=0.05):
+    """Applies a winsorizing on data
+    Winsorizing is to set all outliers to a specified percentile of the data; for example, 
+    a 90% winsorization would see all data below the 5th percentile set to 
+    the 5th percentile, and data above the 95th percentile set to the 95th percentile
+
+    
+    Arguments:
+        data {Dataframe} -- Pandas datagframe
+    
+    Keyword Arguments:
+        top {float} -- upper qunatile to consider (default: {0.05})
+        bottom {float} -- lower quantile to consider (default: {0.05})
+    
+    Returns:
+        Dataframe -- Winsorized dataframe
+    """
+
     df = data.apply(mstats.winsorize,limits = (bottom,top),axis=1)
     return df
 
 
 def remove_rare(data,t = 5):
+    """Remove the series with less than "t" values
+    
+    Arguments:
+        data {Dataframe} -- Pandas dataframe
+    
+    Keyword Arguments:
+        t {int} -- Minimum number of values to consider (default: {5})
+    
+    Returns:
+        Dataframe -- Cleaned dataframe
+    """
+
     mask =(data.where(data==0,other=1.).sum(axis=1)<=t)
     return data[~mask]
 
 
 def get_scaled_series(data):
+    """Returns a standard scaled dataframe
+    
+    Arguments:
+        data {Dataframe} -- Pandas dataframe
+    
+    Returns:
+        Dataframe -- Scaled Dataframe
+        StandardScaler -- the standard scaler used
+    """
+
     d = data.as_matrix().astype(float)
     std_scaler = StandardScaler(with_mean=True, with_std=True).fit(d.T)
     X_z = std_scaler.transform(data.T).T
-    return X_z
+    return X_z,std_scaler
 
-def get_full_data(series,data,raw_df):
+
+def data_with_headers(series,data,raw_df):
+    """Add headers to data (only timeseries)
+    
+    Arguments:
+        series {Numpy array} -- Numpy 2D array containing only timeseries values
+        data {[type]} -- [description]
+        raw_df {[type]} -- [description]
+    
+    Returns:
+        [type] -- [description]
+    """
+
     headers = raw_df[row_headers[::-1]].loc[data.index]
     product_df_full = pd.DataFrame(series, columns = data.columns,index=data.index)
     for label ,column in headers.iteritems():
@@ -158,24 +268,41 @@ def get_full_data(series,data,raw_df):
     return product_df_full
 
 def display(data,head=5):
-    from IPython.display import display as dp
+    """Displays shape and dataframe head
+    
+    Arguments:
+        data {Dataframe} -- Pandas dataframe
+    
+    Keyword Arguments:
+        head {int} -- number of rows to display (default: {5})
+    """
+    from IPython.display import display as dp 
     print(data.shape)
     if head>0:
         dp(data.head(head))
     else:
         dp(data)
 
-def translate_df(df,columns):
+def translate_df(df,columns,dic_path=raw_path +"dictionnary.npy"):
+    """Translates specified columns in dataframe using a numpy dictionnary
+    
+    Arguments:
+        df {Dataframe} -- Pandas dataframe
+        columns {list} -- List of columns to translate
+    
+    Returns:
+        Dataframe -- the dataframe with ONLY translated columns
+    """
+
     try:
         tdf = df.copy()
-        dico = np.load(raw_path+'dictionnary.npy').item()
+        dico = np.load(dic_path).item()
         tans = df[columns].applymap(lambda x:dico[x])
         for index,col in tans.iteritems():
             if index in df.columns: tdf[index] = col
         return tdf
     except Exception as ex:
         print("Error when translating: ",ex)
-        return df
 
 
 
@@ -238,26 +365,20 @@ from sklearn.preprocessing import OneHotEncoder,LabelBinarizer,LabelEncoder
 import itertools
 
 
-# Features encoding
-
-def label_encoders(df):
-    
-    df = encode(df)
-    le_dict = {}
-    for index,col in df.iteritems():
-        le = LabelEncoder()
-        le_dict[index] = le.fit(col)
-    return le_dict
-    
-    
-def one_hot_encoders(label_encoders):
-    ohe_dict ={}
-    for key, value in label_encoders.items():
-        ohe = OneHotEncoder()
-        ohe_dict[key] = ohe.fit(value)
-    return ohe_dict
-
 def create_encoder(df,categorical_features= None,non_categorical=None):
+    """Creates and stores a categorical encoder of a given dataframe
+    
+    Arguments:
+        df {Dataframe} -- The Pandas Dataframe to encode
+    
+    Keyword Arguments:
+        categorical_features {list} -- The list of categorical features to consider (default: {None})
+        non_categorical {list} -- The list of non categorical features to ignore (default: {None})
+    
+    Returns:
+        tuple(dict,dict,OneHotEncoder) -- Return the encoders used in every columns as a dictionnary
+    """
+
     if (categorical_features is None):
         categorical_features = df.columns
     le_dict = {}
@@ -279,6 +400,20 @@ def create_encoder(df,categorical_features= None,non_categorical=None):
     return labeled_df,le_dict,ohe_encoder
 
 def encode(df,non_categorical=[],le_encoder = None,ohe_encoder=None):
+    """Encodes a given dataframe into a one hot format using a given encoder
+    
+    Arguments:
+        df {Dataframe} -- Pandas dataframe to encode
+    
+    Keyword Arguments:
+        non_categorical {list} -- list of non categorical features (add them at the end of the returned dataframe) (default: {[]})
+        le_encoder {dict} -- a dictionnary of label encoders created previously (default: {None})
+        ohe_encoder {OneHotEncoder} --  a OneHotEncoder created previously to encode the data (default: {None})
+    
+    Returns:
+        [Dataframe] -- Returns a one hot encoded dataframe
+    """
+
     if(le_encoder is None):
         le_encoder = np.load(models_path+'le_encoder.npy').item()
         ohe_encoder = np.load(models_path+'ohe_encoder.npy').item()
@@ -288,7 +423,7 @@ def encode(df,non_categorical=[],le_encoder = None,ohe_encoder=None):
     labeled_df = df[categorical].sort_index(axis = 1).apply(lambda x: le_encoder[x.name].transform(x))
     encoded_df = pd.DataFrame(ohe_encoder.transform(labeled_df).toarray(), columns = columns,index=df.index)
 
-    #numeric features
+    #add numeric features
     for f in non_categorical:
         encoded_df[f] = df[f]
 

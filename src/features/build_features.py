@@ -69,6 +69,7 @@ def main():
 
 
     prp.create_encoder(features_df,categorical_features=["Color","Size","Age Group","Ldate","Person","Pname","Ptype","Currency","Sales Season"])
+
     
 
 
@@ -89,15 +90,44 @@ def extract_features(rdf, non_categorical):
         scaled = MinMaxScaler().fit_transform(prices)
         data_frame["Tprice"] = scaled.astype(np.float64)
 
-    data_frame["Currency"] = data_frame["Price"].map(lambda x: re.findall(r'\D',x)[0])
+    data_frame["Currency"] = data_frame["Price"].map(lambda x: re.findall(r'[^\d\.]',x)[0] if (len(re.findall(r'[^\d\.]',x))>0) else "Y")
     #missing values
     data_frame.Person.fillna("Female")
 
     data_frame.Pname.fillna("One-Piece Pants Inside")
     
     return data_frame
+
+
+def _get_price(s):
+    """Get the price from the key_lvl3 using a regex
+    
+    Arguments:
+        s {Key} -- The Key_lvl3
+
+    Returns:
+        str -- Returns the price tag + the currrency (etiher $ or (Y)uan)
+    """
+
+    try:
+        regex = r"^[^\d\$]*(\$?\s?\d{1,3}\.?\d{0,2}\D{0,5}$)"
+        matches  = re.findall(regex,s)
+        price = matches[0].replace(" ","").upper().replace("RMB","YUAN").replace("YUAN","Y").replace("%","Y").strip()
+        return price
+    except Exception as ex:
+        raise ex
     
 def _first_week_of_season(season,year):
+    """Returns the first week number of a given season
+    
+    Arguments:
+        season {str} -- the season
+        year {int} -- the year to considerate
+    
+    Returns:
+        int -- the week number
+    """
+
     return {
         "Autumn":date(year,9,21).isocalendar()[1],
         "Winter":date(year,12,21).isocalendar()[1],
@@ -138,15 +168,6 @@ def GetInfo(key3,order,sep = " -"):
         return None
 
 
-def _get_price(s,i=0):
-    try:
-        regex = r"^[^\d\$]*(\$?\s?\d{1,3}\.?\d{0,2}\D{0,5}$)"
-        matches  = re.findall(regex,s)
-        price = matches[0].replace(" ","").upper().replace("RMB","YUAN").replace("YUAN","Y").strip()
-        return price
-    except Exception as ex:
-        raise ex
-    
 def _redefine_group(key):
     key = key.title()
     dico = {

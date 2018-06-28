@@ -82,7 +82,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325001400_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.0223463687150838;Y;Autumn
 325001500_2;No Color;No Size;1;29-38;Men;Socks;Tube Socks;0.025139664804469275;Y;Autumn
 325001505_2;No Color;No Size;42;29-38;Female;Boots;Discontinued;0.08100558659217878;$;Winter
-325001600_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.023743016759776536;.;Autumn
+325001600_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.023743016759776536;Y;Autumn
 325001700_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.0223463687150838;Y;Autumn
 325001900_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.025139664804469275;$;Autumn
 325002099_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.002793296089385475;Y;Autumn
@@ -102,13 +102,13 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325003606_2;Other;No Size;39;29-38;Female;Socks;Stockings;0.006983240223463687;$;Autumn
 325003700_2;No Color;No Size;1;29-38;Female;Socks;Wool Socks;0.033519553072625705;$;Winter
 325003800_2;No Color;No Size;1;29-38;Female;Socks;Wool Socks;0.04189944134078213;Y;Winter
-325003900_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.02094972067039106;.;Autumn
+325003900_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.02094972067039106;Y;Autumn
 325004000_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.019553072625698324;Y;Autumn
 325004100_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.01675977653631285;$;Autumn
-325004200_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.02094972067039106;.;Autumn
-325004203_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.012569832402234637;.;Autumn
+325004200_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.02094972067039106;Y;Autumn
+325004203_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.012569832402234637;Y;Autumn
 325004400_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.01675977653631285;$;Autumn
-325004500_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.02094972067039106;.;Autumn
+325004500_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.02094972067039106;Y;Autumn
 325004600_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.01675977653631285;$;Autumn
 325004900_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.0223463687150838;Y;Autumn
 325004903_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.039106145251396655;$;Winter
@@ -134,59 +134,59 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325008100_2;No Color;No Size;1;29-38;Men;Socks;Wool Socks;0.033519553072625705;$;Winter
 325008300_2;No Color;No Size;1;29-38;Men;Socks;Wool Socks;0.039106145251396655;$;Winter
 325008500_2;No Color;No Size;1;29-38;Men;Socks;Wool Socks;0.039106145251396655;$;Winter
-325008599_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.02094972067039106;.;Autumn
+325008599_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.02094972067039106;Y;Autumn
 325008600_2;No Color;No Size;1;29-38;Men;Socks;Wool Socks;0.033519553072625705;$;Winter
 325008800_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.019553072625698324;Y;Autumn
 325008900_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.01675977653631285;$;Autumn
 325009003_2;Other;No Size;1;29-38;Female;Socks;Short Stockings;0.025139664804469275;Y;Spring
 325009099_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.0223463687150838;Y;Autumn
 325009302_2;No Color;No Size;12;29-38;Female;Socks;Stealth Socks;0.0223463687150838;$;Summer
-325009500_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.015363128491620113;.;Autumn
+325009500_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.015363128491620113;Y;Autumn
 325009800_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.01675977653631285;$;Autumn
 325009900_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.0223463687150838;Y;Autumn
-325010004_2;Other;No Size;21;29-38;Female;Socks;Stockings;0.0013966480446927373;.;Spring
+325010004_2;Other;No Size;21;29-38;Female;Socks;Stockings;0.0013966480446927373;Y;Spring
 325010005_2;Other;No Size;23;29-38;Men;Socks;Boat Socks;0.002793296089385475;Y;Summer
 325010099_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.025139664804469275;$;Autumn
 325010203_2;No Color;No Size;9;29-38;Female;Socks;Invisible Socks;0.025139664804469275;Y;Summer
 325010500_2;No Color;No Size;1;29-38;Female;Socks;Wool Socks;0.019553072625698324;Y;Winter
 325010504_2;No Color;No Size;20;29-38;Men;Socks;Tube Socks;0.039106145251396655;$;Spring
-325010600_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.015363128491620113;.;Autumn
+325010600_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.015363128491620113;Y;Autumn
 325010903_2;No Color;No Size;39;29-38;Female;Socks;Stockings;0.0223463687150838;Y;Autumn
 325011105_2;No Color;No Size;32;7-9;Boys;Socks;Stockings;0.0223463687150838;Y;Autumn
 325011403_2;No Color;No Size;2;29-38;Female;Socks;Stockings;0.030726256983240222;Y;Spring
 325012002_2;No Color;No Size;1;7-9;Boys;Socks;Stockings;0.0111731843575419;$;Autumn
 325012099_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.030726256983240222;Y;Autumn
-325012500_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.02094972067039106;.;Autumn
+325012500_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.02094972067039106;Y;Autumn
 325012800_2;No Color;No Size;1;29-38;Female;Socks;Boat Socks;0.013966480446927373;Y;Spring
-325012900_2;No Color;No Size;1;29-38;Female;Socks;Boat Socks;0.012569832402234637;.;Spring
+325012900_2;No Color;No Size;1;29-38;Female;Socks;Boat Socks;0.012569832402234637;Y;Spring
 325012902_2;Other;No Size;3;29-38;Female;Socks;Stockings;0.02793296089385475;Y;Spring
 325013099_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.033519553072625705;$;Autumn
-325013400_2;No Color;No Size;1;29-38;Men;Socks;Boat Socks;0.018156424581005588;.;Spring
-325013503_2;No Color;No Size;36;29-38;Men;Socks;Stockings;0.006983240223463687;.;Autumn
+325013400_2;No Color;No Size;1;29-38;Men;Socks;Boat Socks;0.018156424581005588;Y;Spring
+325013503_2;No Color;No Size;36;29-38;Men;Socks;Stockings;0.006983240223463687;Y;Autumn
 325013600_2;No Color;No Size;1;29-38;Men;Socks;Boat Socks;0.013966480446927373;Y;Spring
-325013603_2;No Color;No Size;36;29-38;Female;Socks;Stockings;0.006983240223463687;.;Autumn
+325013603_2;No Color;No Size;36;29-38;Female;Socks;Stockings;0.006983240223463687;Y;Autumn
 325013805_2;Other;No Size;43;29-38;Men;Socks;Stockings;0.039106145251396655;$;Winter
-325014400_2;No Color;No Size;1;29-38;Female;Socks;Wool Socks;0.02094972067039106;.;Winter
-325014500_2;No Color;No Size;1;29-38;Female;Socks;Wool Socks;0.02094972067039106;.;Winter
+325014400_2;No Color;No Size;1;29-38;Female;Socks;Wool Socks;0.02094972067039106;Y;Winter
+325014500_2;No Color;No Size;1;29-38;Female;Socks;Wool Socks;0.02094972067039106;Y;Winter
 325015099_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.039106145251396655;$;Autumn
 325015204_2;No Color;No Size;32;7-9;Boys;Socks;Stockings;0.0223463687150838;Y;Autumn
-325015300_2;No Color;No Size;1;29-38;Men;Socks;Wool Socks;0.015363128491620113;.;Winter
-325015700_2;No Color;No Size;1;29-38;Female;Socks;Wool Socks;0.015363128491620113;.;Winter
+325015300_2;No Color;No Size;1;29-38;Men;Socks;Wool Socks;0.015363128491620113;Y;Winter
+325015700_2;No Color;No Size;1;29-38;Female;Socks;Wool Socks;0.015363128491620113;Y;Winter
 325015903_2;Other;No Size;13;29-38;Female;Socks;Stockings;0.01675977653631285;Y;Spring
 325016001_2;Other;No Size;14;29-38;Men;Socks;Tube Socks;0.0;Y;Spring
-325016003_2;No Color;No Size;18;29-38;Female;Socks;Stockings;0.006983240223463687;.;Spring
+325016003_2;No Color;No Size;18;29-38;Female;Socks;Stockings;0.006983240223463687;Y;Spring
 325016004_2;No Color;No Size;19;29-38;Female;Socks;Tube Socks;0.0111731843575419;Y;Spring
 325016101_2;No Color;No Size;10;29-38;Female;Socks;Stockings;0.0223463687150838;Y;Spring
 325016102_2;No Color;No Size;32;7-9;Boys;Socks;Stockings;0.0223463687150838;Y;Autumn
 325016200_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.0111731843575419;$;Winter
 325016300_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.0111731843575419;$;Winter
 325016400_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.006983240223463687;$;Winter
-325016600_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.006983240223463687;.;Winter
+325016600_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.006983240223463687;Y;Winter
 325016800_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.006983240223463687;$;Winter
 325016900_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.006983240223463687;$;Winter
 325017100_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.006983240223463687;$;Winter
 325017200_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.006983240223463687;$;Winter
-325017900_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.004189944134078213;.;Autumn
+325017900_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.004189944134078213;Y;Autumn
 325018000_2;No Color;No Size;6;29-38;Female;Socks;Short Stockings;0.0223463687150838;Y;Spring
 325018200_2;No Color;No Size;6;29-38;Female;Socks;Short Stockings;0.0223463687150838;Y;Spring
 325018300_2;No Color;No Size;6;29-38;Female;Socks;Short Stockings;0.0223463687150838;Y;Spring
@@ -209,40 +209,40 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325023002_2;No Color;No Size;1;7-9;Boys;Socks;Stockings;0.018156424581005588;$;Autumn
 325023500_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.013966480446927373;Y;Autumn
 325023900_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.013966480446927373;Y;Autumn
-325024001_2;No Color;No Size;1;29-38;Female;Socks;Boat Socks;0.006983240223463687;.;Spring
+325024001_2;No Color;No Size;1;29-38;Female;Socks;Boat Socks;0.006983240223463687;Y;Spring
 325024200_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.019553072625698324;Y;Autumn
 325024600_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.019553072625698324;Y;Autumn
 325024900_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.013966480446927373;Y;Autumn
-325025000_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.006983240223463687;.;Spring
+325025000_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.006983240223463687;Y;Spring
 325025005_2;Other;No Size;17;29-38;Men;Socks;Tube Socks;0.0111731843575419;Y;Spring
 325025099_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.0670391061452514;$;Autumn
 325025100_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.0111731843575419;$;Winter
-325026003_2;No Color;No Size;1;29-38;Female;Socks;Boat Socks;0.006983240223463687;.;Spring
+325026003_2;No Color;No Size;1;29-38;Female;Socks;Boat Socks;0.006983240223463687;Y;Spring
 325026099_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.06983240223463688;Y;Autumn
-325026100_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Autumn
-325026700_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Autumn
-325026800_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Autumn
-325026900_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Autumn
-325027000_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Autumn
-325027100_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Autumn
+325026100_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Autumn
+325026700_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Autumn
+325026800_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Autumn
+325026900_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Autumn
+325027000_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Autumn
+325027100_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Autumn
 325027200_2;No Color;No Size;1;29-38;Female;Socks;Stealth Socks;0.0111731843575419;$;Autumn
-325027600_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Summer
+325027600_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Summer
 325027700_2;No Color;No Size;1;29-38;Female;Socks;Stealth Socks;0.0111731843575419;$;Autumn
-325027800_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Summer
-325027900_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Autumn
-325028000_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Spring
+325027800_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Summer
+325027900_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Autumn
+325028000_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Spring
 325028001_2;No Color;No Size;1;29-38;Female;Socks;Boat Socks;0.0111731843575419;Y;Spring
 325028003_2;No Color;No Size;17;29-38;Female;Socks;Stealth Socks;0.0111731843575419;$;Summer
 325028004_2;Other;No Size;1;29-38;Female;Socks;Stealth Socks;0.005586592178770949;Y;Summer
 325028005_2;Other;No Size;1;29-38;Female;Socks;Stealth Socks;0.005586592178770949;Y;Summer
 325028100_2;No Color;No Size;1;29-38;Female;Socks;Stealth Socks;0.0111731843575419;$;Autumn
-325028200_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Autumn
-325028400_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Autumn
-325028500_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Summer
+325028200_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Autumn
+325028400_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Autumn
+325028500_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Summer
 325028700_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.030726256983240222;Y;Autumn
 325028800_2;No Color;No Size;1;29-38;Men;Socks;Tube Socks;0.039106145251396655;$;Autumn
 325028900_2;No Color;No Size;1;29-38;Men;Socks;Tube Socks;0.039106145251396655;$;Autumn
-325029001_2;Other;No Size;1;29-38;Female;Socks;Stockings;0.006983240223463687;.;Spring
+325029001_2;Other;No Size;1;29-38;Female;Socks;Stockings;0.006983240223463687;Y;Spring
 325029100_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.025139664804469275;$;Autumn
 325029200_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.025139664804469275;$;Autumn
 325029300_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.025139664804469275;$;Autumn
@@ -255,9 +255,9 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325030002_2;No Color;No Size;35;7-9;Boys;Socks;Stockings;0.008379888268156424;Y;Autumn
 325030004_2;No Color;No Size;11;29-38;Female;Socks;Stockings;0.0223463687150838;Y;Spring
 325030007_2;No Color;No Size;12;29-38;Female;Socks;Stockings;0.0223463687150838;Y;Spring
-325030008_2;Other;No Size;1;29-38;Female;Socks;Invisible Socks;0.004189944134078213;.;Summer
+325030008_2;Other;No Size;1;29-38;Female;Socks;Invisible Socks;0.004189944134078213;Y;Summer
 325030010_2;Other;No Size;17;29-38;Female;Socks;Boat Socks;0.0111731843575419;Y;Summer
-325030011_2;Other;No Size;1;7-9;Boys;Socks;Stockings;0.004189944134078213;.;Spring
+325030011_2;Other;No Size;1;7-9;Boys;Socks;Stockings;0.004189944134078213;Y;Spring
 325030100_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.039106145251396655;$;Autumn
 325030200_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.025139664804469275;$;Autumn
 325030600_2;No Color;No Size;1;29-38;Female;Socks;Tube Socks;0.025139664804469275;Y;Autumn
@@ -275,8 +275,8 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325033302_2;No Color;No Size;16;29-38;Female;Socks;Boat Socks;0.0111731843575419;Y;Summer
 325033500_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.039106145251396655;$;Autumn
 325033700_2;No Color;No Size;1;29-38;Men;Socks;Tube Socks;0.025139664804469275;Y;Autumn
-325034003_2;Other;No Size;1;29-38;Female;Socks;Stockings;0.006983240223463687;.;Spring
-325034004_2;Other;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Summer
+325034003_2;Other;No Size;1;29-38;Female;Socks;Stockings;0.006983240223463687;Y;Spring
+325034004_2;Other;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Summer
 325034200_2;No Color;No Size;1;29-38;Men;Socks;Tube Socks;0.025139664804469275;Y;Autumn
 325034300_2;No Color;No Size;1;29-38;Female;Socks;Tube Socks;0.025139664804469275;Y;Autumn
 325034400_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.019553072625698324;Y;Autumn
@@ -290,13 +290,13 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325036000_2;No Color;No Size;1;29-38;Men;Socks;Tube Socks;0.0111731843575419;Y;Spring
 325036006_2;No Color;No Size;16;29-38;Female;Socks;Boat Socks;0.0111731843575419;Y;Summer
 325036007_2;Other;No Size;17;29-38;Female;Socks;Boat Socks;0.013966480446927373;Y;Spring
-325036008_2;Other;No Size;46;29-38;Female;Socks;Wool Socks;0.006983240223463687;.;Winter
+325036008_2;Other;No Size;46;29-38;Female;Socks;Wool Socks;0.006983240223463687;Y;Winter
 325036100_2;No Color;No Size;1;29-38;Men;Socks;Tube Socks;0.025139664804469275;Y;Autumn
 325036600_2;No Color;No Size;1;29-38;Men;Socks;Tube Socks;0.0111731843575419;Y;Spring
 325036606_2;No Color;No Size;20;29-38;Female;Socks;Boat Socks;0.0111731843575419;Y;Summer
 325036700_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.006983240223463687;$;Autumn
 325036900_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.006983240223463687;$;Autumn
-325037002_2;No Color;No Size;46;29-38;Men;Socks;Wool Socks;0.006983240223463687;.;Winter
+325037002_2;No Color;No Size;46;29-38;Men;Socks;Wool Socks;0.006983240223463687;Y;Winter
 325037100_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.006983240223463687;$;Autumn
 325037200_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.006983240223463687;$;Autumn
 325037201_2;No Color;No Size;1;7-9;Boys;Socks;Stockings;0.019553072625698324;Y;Autumn
@@ -306,7 +306,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325038001_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.0111731843575419;$;Autumn
 325038004_2;No Color;No Size;50;29-38;Men;Socks;Stockings;0.0111731843575419;$;Winter
 325038005_2;No Color;No Size;8;29-38;Female;Socks;Tube Socks;0.0111731843575419;Y;Spring
-325038006_2;Other;No Size;1;29-38;Female;Socks;Boat Socks;0.006983240223463687;.;Summer
+325038006_2;Other;No Size;1;29-38;Female;Socks;Boat Socks;0.006983240223463687;Y;Summer
 325038900_2;No Color;No Size;1;29-38;Men;Socks;Boat Socks;0.030726256983240222;Y;Spring
 325039201_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.039106145251396655;$;Autumn
 325039300_2;No Color;No Size;1;29-38;Men;Socks;Boat Socks;0.030726256983240222;Y;Spring
@@ -315,7 +315,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325040000_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.0223463687150838;Y;Spring
 325040001_2;No Color;No Size;1;29-38;Female;Socks;Boat Socks;0.0111731843575419;Y;Spring
 325040007_2;No Color;No Size;10;29-38;Female;Socks;Tube Socks;0.0111731843575419;Y;Spring
-325040009_2;Other;No Size;1;29-38;Men;Socks;Boat Socks;0.006983240223463687;.;Summer
+325040009_2;Other;No Size;1;29-38;Men;Socks;Boat Socks;0.006983240223463687;Y;Summer
 325040011_2;No Color;No Size;16;29-38;Female;Socks;Boat Socks;0.0111731843575419;Y;Summer
 325040015_2;Other;No Size;36;29-38;Female;Socks;Stockings;0.019553072625698324;Y;Autumn
 325040016_2;No Color;No Size;42;29-38;Female;Boots;Discontinued;0.0111731843575419;$;Autumn
@@ -356,7 +356,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325047602_2;Black;No Size;14;29-38;Female;Socks;Invisible Socks;0.04748603351955308;$;Summer
 325047700_2;No Color;No Size;39;29-38;Men;Socks;Wool Socks;0.019553072625698324;Y;Winter
 325048004_2;No Color;No Size;10;29-38;Men;Socks;Stockings;0.0223463687150838;Y;Spring
-325048006_2;No Color;No Size;36;29-38;Men;Socks;Stockings;0.010614525139664804;.;Autumn
+325048006_2;No Color;No Size;36;29-38;Men;Socks;Stockings;0.010614525139664804;Y;Autumn
 325048007_2;No Color;No Size;39;7-9;Boys;Socks;Stockings;0.0111731843575419;$;Autumn
 325048100_2;No Color;No Size;40;29-38;Female;Socks;Wool Socks;0.01675977653631285;Y;Winter
 325048300_2;No Color;No Size;42;29-38;Female;Socks;Wool Socks;0.01675977653631285;Y;Winter
@@ -380,7 +380,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325050009_2;No Color;No Size;9;29-38;Men;Socks;Stockings;0.0223463687150838;Y;Spring
 325050011_2;No Color;No Size;14;29-38;Female;Socks;Stealth Socks;0.0111731843575419;$;Summer
 325050012_2;Other;No Size;17;29-38;Female;Socks;Boat Socks;0.019553072625698324;Y;Spring
-325050013_2;Other;No Size;1;7-9;Boys;Socks;Stockings;0.009776536312849162;.;Spring
+325050013_2;Other;No Size;1;7-9;Boys;Socks;Stockings;0.009776536312849162;Y;Spring
 325050200_2;No Color;No Size;36;29-38;Female;Socks;Stockings;0.006983240223463687;$;Autumn
 325050302_2;No Color;No Size;7;29-38;Female;Socks;Stockings;0.0223463687150838;Y;Spring
 325050400_2;No Color;No Size;39;29-38;Female;Socks;Stockings;0.0111731843575419;$;Autumn
@@ -402,7 +402,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325052007_2;Other;No Size;24;29-38;Female;Socks;Stealth Socks;0.0111731843575419;$;Summer
 325052101_2;No Color;No Size;16;7-9;Boys;Socks;Stockings;0.01675977653631285;Y;Spring
 325053501_2;No Color;No Size;16;7-9;Boys;Socks;Stockings;0.019553072625698324;Y;Spring
-325054001_2;No Color;No Size;1;7-9;Boys;Socks;Stockings;0.01229050279329609;.;Winter
+325054001_2;No Color;No Size;1;7-9;Boys;Socks;Stockings;0.01229050279329609;Y;Winter
 325054004_2;Other;No Size;11;29-38;Female;Socks;Tube Socks;0.0111731843575419;Y;Spring
 325054005_2;Other;No Size;1;29-38;Female;Socks;Stealth Socks;0.0111731843575419;$;Summer
 325054100_2;No Color;No Size;41;29-38;Men;Socks;Wool Socks;0.030726256983240222;Y;Winter
@@ -412,14 +412,14 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325055200_2;No Color;No Size;35;29-38;Men;Socks;Stockings;0.0223463687150838;Y;Winter
 325055500_2;No Color;No Size;35;29-38;Men;Socks;Stockings;0.0223463687150838;Y;Autumn
 325056002_2;No Color;No Size;45;29-38;Female;Socks;Wool Socks;0.0223463687150838;Y;Winter
-325056004_2;No Color;No Size;1;7-9;Boys;Socks;Stockings;0.012849162011173185;.;Winter
+325056004_2;No Color;No Size;1;7-9;Boys;Socks;Stockings;0.012849162011173185;Y;Winter
 325056500_2;No Color;No Size;41;29-38;Female;Socks;Stockings;0.006983240223463687;$;Autumn
 325056600_2;No Color;No Size;41;29-38;Female;Socks;Stockings;0.006983240223463687;$;Autumn
-325057500_2;No Color;No Size;43;29-38;Men;Socks;Stockings;0.006983240223463687;.;Winter
-325057800_2;No Color;No Size;43;29-38;Men;Socks;Stockings;0.006983240223463687;.;Winter
-325058002_2;No Color;No Size;1;7-9;Boys;Socks;Stockings;0.013407821229050279;.;Winter
+325057500_2;No Color;No Size;43;29-38;Men;Socks;Stockings;0.006983240223463687;Y;Winter
+325057800_2;No Color;No Size;43;29-38;Men;Socks;Stockings;0.006983240223463687;Y;Winter
+325058002_2;No Color;No Size;1;7-9;Boys;Socks;Stockings;0.013407821229050279;Y;Winter
 325058003_2;Other;No Size;1;29-38;Men;Socks;Tube Socks;0.0111731843575419;Y;Spring
-325058600_2;No Color;No Size;43;29-38;Men;Socks;Stockings;0.006983240223463687;.;Winter
+325058600_2;No Color;No Size;43;29-38;Men;Socks;Stockings;0.006983240223463687;Y;Winter
 325059400_2;No Color;No Size;3;29-38;Female;Socks;Boat Socks;0.025139664804469275;Y;Summer
 325059500_2;No Color;No Size;4;29-38;Female;Socks;Boat Socks;0.013966480446927373;Y;Summer
 325060000_2;No Color;No Size;1;29-38;Men;Socks;Tube Socks;0.039106145251396655;$;Spring
@@ -580,17 +580,17 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325076400_2;No Color;No Size;2;29-38;Female;Socks;Boat Socks;0.013966480446927373;Y;Summer
 325076500_2;No Color;No Size;4;29-38;Female;Socks;Boat Socks;0.0111731843575419;Y;Summer
 325076900_2;No Color;No Size;4;29-38;Female;Socks;Stealth Socks;0.0111731843575419;$;Summer
-325077300_2;No Color;No Size;4;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Summer
-325077400_2;No Color;No Size;4;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Summer
-325077500_2;No Color;No Size;4;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Summer
-325077600_2;No Color;No Size;4;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Summer
-325077700_2;No Color;No Size;4;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Summer
-325077800_2;No Color;No Size;4;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Summer
-325077900_2;No Color;No Size;4;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Summer
-325078000_2;No Color;No Size;4;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Summer
+325077300_2;No Color;No Size;4;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Summer
+325077400_2;No Color;No Size;4;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Summer
+325077500_2;No Color;No Size;4;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Summer
+325077600_2;No Color;No Size;4;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Summer
+325077700_2;No Color;No Size;4;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Summer
+325077800_2;No Color;No Size;4;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Summer
+325077900_2;No Color;No Size;4;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Summer
+325078000_2;No Color;No Size;4;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Summer
 325078001_2;No Color;No Size;11;29-38;Female;Socks;Stockings;0.0223463687150838;Y;Spring
-325078200_2;No Color;No Size;4;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Summer
-325078400_2;No Color;No Size;4;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Summer
+325078200_2;No Color;No Size;4;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Summer
+325078400_2;No Color;No Size;4;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Summer
 325078500_2;No Color;No Size;4;29-38;Female;Socks;Invisible Socks;0.025139664804469275;Y;Summer
 325078600_2;No Color;No Size;11;29-38;Men;Socks;Stockings;0.01675977653631285;Y;Spring
 325078700_2;No Color;No Size;4;29-38;Female;Socks;Tube Socks;0.0111731843575419;Y;Spring
@@ -716,16 +716,16 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325095900_2;No Color;No Size;4;29-38;Men;Socks;Stockings;0.01675977653631285;Y;Spring
 325096001_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.025139664804469275;$;Autumn
 325096004_2;No Color;No Size;11;29-38;Men;Socks;Boat Socks;0.030726256983240222;Y;Summer
-325096005_2;Other;No Size;1;29-38;Female;Socks;Stockings;0.019273743016759777;.;Spring
+325096005_2;Other;No Size;1;29-38;Female;Socks;Stockings;0.019273743016759777;Y;Spring
 325097400_2;No Color;No Size;1;7-9;Boys;Socks;Stockings;0.030726256983240222;Y;Autumn
 325097600_2;No Color;No Size;1;7-9;Boys;Socks;Stockings;0.030726256983240222;Y;Autumn
 325098300_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.039106145251396655;$;Autumn
 325098400_2;No Color;No Size;4;29-38;Female;Socks;Boat Socks;0.0111731843575419;Y;Summer
 325099300_2;Black;No Size;10;39-48;Female;Short Socks;Short Stockings;0.0111731843575419;$;Spring
-325099400_2;No Color;No Size;12;29-38;Female;Socks;Boat Socks;0.006983240223463687;.;Summer
-325099500_2;No Color;No Size;12;29-38;Female;Socks;Boat Socks;0.006983240223463687;.;Summer
-325099600_2;No Color;No Size;12;29-38;Men;Socks;Boat Socks;0.006983240223463687;.;Summer
-325099800_2;No Color;No Size;12;29-38;Men;Socks;Boat Socks;0.006983240223463687;.;Summer
+325099400_2;No Color;No Size;12;29-38;Female;Socks;Boat Socks;0.006983240223463687;Y;Summer
+325099500_2;No Color;No Size;12;29-38;Female;Socks;Boat Socks;0.006983240223463687;Y;Summer
+325099600_2;No Color;No Size;12;29-38;Men;Socks;Boat Socks;0.006983240223463687;Y;Summer
+325099800_2;No Color;No Size;12;29-38;Men;Socks;Boat Socks;0.006983240223463687;Y;Summer
 325100001_2;No Color;No Size;1;29-38;Female;Socks;Tube Socks;0.05027932960893855;Y;Spring
 325100007_2;No Color;No Size;1;29-38;Female;Socks;Tube Socks;0.025139664804469275;Y;Spring
 325100015_2;No Color;No Size;4;29-38;Female;Socks;Stockings;0.030726256983240222;Y;Spring
@@ -758,7 +758,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325113900_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.030726256983240222;Y;Autumn
 325114104_2;No Color;No Size;37;29-38;Female;Socks;Stockings;0.039106145251396655;$;Autumn
 325114400_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.025139664804469275;$;Autumn
-325115003_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.029329608938547486;.;Autumn
+325115003_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.029329608938547486;Y;Autumn
 325115401_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.039106145251396655;$;Autumn
 325115701_2;No Color;No Size;29;29-38;Men;Socks;Tube Socks;0.04189944134078213;Y;Spring
 325116000_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.039106145251396655;$;Autumn
@@ -794,7 +794,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325122201_2;Other;No Size;1;29-38;Female;Socks;Stockings;0.039106145251396655;$;Winter
 325122400_2;Other;No Size;2;29-38;Female;Socks;Stockings;0.030726256983240222;Y;Winter
 325122502_2;No Color;No Size;2;29-38;Female;Socks;Stockings;0.030726256983240222;Y;Spring
-325122802_2;No Color;No Size;1;18-28;Men;Socks;Stockings;0.015363128491620113;.;Winter
+325122802_2;No Color;No Size;1;18-28;Men;Socks;Stockings;0.015363128491620113;Y;Winter
 325122905_2;Other;No Size;36;29-38;Men;Socks;Stockings;0.030726256983240222;Y;Autumn
 325123300_2;No Color;No Size;1;29-38;Men;Socks;Tube Socks;0.039106145251396655;$;Spring
 325123402_2;Other;No Size;4;7-9;Boys;Socks;Stockings;0.019553072625698324;Y;Spring
@@ -806,24 +806,24 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325125800_2;No Color;No Size;15;29-38;Female;Socks;Boat Socks;0.01675977653631285;$;Summer
 325125900_2;No Color;No Size;16;29-38;Men;Socks;Boat Socks;0.008379888268156424;Y;Summer
 325126502_2;Other;No Size;4;7-9;Boys;Socks;Stockings;0.0223463687150838;Y;Spring
-325126800_2;No Color;No Size;17;29-38;Men;Socks;Boat Socks;0.006983240223463687;.;Summer
+325126800_2;No Color;No Size;17;29-38;Men;Socks;Boat Socks;0.006983240223463687;Y;Summer
 325127100_2;No Color;No Size;50;29-38;Men;Socks;Wool Socks;0.05027932960893855;Y;Winter
-325127800_2;No Color;No Size;17;29-38;Female;Socks;Boat Socks;0.006983240223463687;.;Summer
+325127800_2;No Color;No Size;17;29-38;Female;Socks;Boat Socks;0.006983240223463687;Y;Summer
 325127900_2;No Color;No Size;18;29-38;Men;Socks;Boat Socks;0.013966480446927373;Y;Summer
 325128000_2;No Color;No Size;1;18-28;Men;Socks;Boat Socks;0.0111731843575419;Y;Summer
 325128200_2;No Color;No Size;18;29-38;Men;Socks;Boat Socks;0.013966480446927373;Y;Summer
-325128300_2;No Color;No Size;19;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Summer
+325128300_2;No Color;No Size;19;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Summer
 325128400_2;No Color;No Size;7;7-9;Boys;Socks;Stockings;0.0223463687150838;Y;Spring
-325128800_2;No Color;No Size;19;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Summer
-325128900_2;No Color;No Size;19;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Summer
-325129000_2;No Color;No Size;19;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Summer
-325129300_2;No Color;No Size;19;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Summer
+325128800_2;No Color;No Size;19;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Summer
+325128900_2;No Color;No Size;19;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Summer
+325129000_2;No Color;No Size;19;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Summer
+325129300_2;No Color;No Size;19;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Summer
 325129400_2;Other;No Size;4;4-6;Boys;Socks;Stockings;0.019553072625698324;Y;Spring
 325129500_2;No Color;No Size;3;7-9;Boys;Socks;Stockings;0.0223463687150838;Y;Spring
 325129600_2;Other;No Size;4;7-9;Boys;Socks;Stockings;0.019553072625698324;Y;Spring
-325129700_2;No Color;No Size;19;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Summer
-325129800_2;No Color;No Size;19;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Summer
-325129900_2;No Color;No Size;19;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Summer
+325129700_2;No Color;No Size;19;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Summer
+325129800_2;No Color;No Size;19;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Summer
+325129900_2;No Color;No Size;19;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Summer
 325130000_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.0782122905027933;Y;Spring
 325130005_2;No Color;No Size;7;29-38;Men;Socks;Tube Socks;0.039106145251396655;$;Spring
 325130201_2;No Color;No Size;49;29-38;Men;Socks;Stockings;0.05027932960893855;Y;Autumn
@@ -1146,7 +1146,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325209403_2;No Color;No Size;30;29-38;Men;Socks;Wool Socks;0.09776536312849163;Y;Winter
 325209500_2;No Color;No Size;50;29-38;Men;Socks;Wool Socks;0.10614525139664806;$;Winter
 325209900_2;No Color;No Size;34;29-38;Men;Socks;Stockings;0.025139664804469275;$;Autumn
-325210200_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Spring
+325210200_2;No Color;No Size;1;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Spring
 325210700_2;No Color;No Size;38;29-38;Men;Socks;Stockings;0.025139664804469275;$;Autumn
 325211800_2;No Color;No Size;38;29-38;Men;Socks;Stockings;0.025139664804469275;$;Autumn
 325211900_2;No Color;No Size;1;7-9;Boys;Socks;Stockings;0.019553072625698324;Y;Autumn
@@ -1199,8 +1199,8 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325229002_2;No Color;No Size;17;29-38;Men;Socks;Boat Socks;0.04748603351955308;$;Summer
 325230700_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.039106145251396655;$;Autumn
 325232103_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.039106145251396655;$;Autumn
-325233600_2;No Color;No Size;38;18-28;Female;Socks;Stockings;0.006983240223463687;.;Autumn
-325233800_2;Black;No Size;35;29-38;Female;Socks;Short Stockings;0.008100558659217877;.;Spring
+325233600_2;No Color;No Size;38;18-28;Female;Socks;Stockings;0.006983240223463687;Y;Autumn
+325233800_2;Black;No Size;35;29-38;Female;Socks;Short Stockings;0.008100558659217877;Y;Spring
 325234401_2;No Color;No Size;39;7-9;Boys;Socks;Stockings;0.0223463687150838;Y;Autumn
 325234800_2;No Color;No Size;39;29-38;Female;Socks;Stockings;0.019553072625698324;Y;Autumn
 325236203_2;No Color;No Size;48;29-38;Female;Socks;Stockings;0.039106145251396655;$;Winter
@@ -1269,11 +1269,11 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325263701_2;No Color;No Size;37;29-38;Men;Socks;Stockings;0.039106145251396655;$;Autumn
 325264001_2;No Color;No Size;37;29-38;Men;Socks;Stockings;0.04748603351955308;$;Autumn
 325264104_2;No Color;No Size;37;29-38;Men;Socks;Stockings;0.039106145251396655;$;Autumn
-325264200_2;No Color;No Size;39;29-38;Female;Socks;Stockings;0.006983240223463687;.;Autumn
-325264400_2;No Color;No Size;39;29-38;Female;Socks;Stockings;0.006983240223463687;.;Autumn
-325264600_2;No Color;No Size;39;29-38;Female;Socks;Stockings;0.006983240223463687;.;Autumn
+325264200_2;No Color;No Size;39;29-38;Female;Socks;Stockings;0.006983240223463687;Y;Autumn
+325264400_2;No Color;No Size;39;29-38;Female;Socks;Stockings;0.006983240223463687;Y;Autumn
+325264600_2;No Color;No Size;39;29-38;Female;Socks;Stockings;0.006983240223463687;Y;Autumn
 325264700_2;No Color;No Size;35;29-38;Men;Socks;Tube Socks;0.039106145251396655;$;Autumn
-325264800_2;Other;No Size;42;29-38;Female;Socks;Stockings;0.006983240223463687;.;Autumn
+325264800_2;Other;No Size;42;29-38;Female;Socks;Stockings;0.006983240223463687;Y;Autumn
 325264901_2;Other;No Size;2;29-38;Female;Socks;Stockings;0.030726256983240222;Y;Spring
 325265003_2;Other;No Size;2;29-38;Female;Socks;Stockings;0.030726256983240222;Y;Spring
 325265004_2;No Color;No Size;39;29-38;Men;Socks;Stockings;0.039106145251396655;$;Autumn
@@ -1294,8 +1294,8 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325267801_2;No Color;No Size;8;29-38;Men;Socks;Stockings;0.0223463687150838;Y;Spring
 325268100_2;No Color;No Size;12;29-38;Female;Socks;Boat Socks;0.030726256983240222;Y;Summer
 325268300_2;No Color;No Size;7;29-38;Female;Socks;Stockings;0.030726256983240222;Y;Spring
-325268700_2;Other;No Size;42;29-38;Female;Socks;Stockings;0.006983240223463687;.;Autumn
-325269000_2;Other;No Size;40;29-38;Female;Socks;Stockings;0.006983240223463687;.;Autumn
+325268700_2;Other;No Size;42;29-38;Female;Socks;Stockings;0.006983240223463687;Y;Autumn
+325269000_2;Other;No Size;40;29-38;Female;Socks;Stockings;0.006983240223463687;Y;Autumn
 325269200_2;Other;No Size;2;29-38;Female;Socks;Stockings;0.030726256983240222;Y;Spring
 325269400_2;No Color;No Size;12;29-38;Female;Socks;Boat Socks;0.030726256983240222;Y;Summer
 325269600_2;No Color;No Size;8;29-38;Female;Socks;Stockings;0.0223463687150838;Y;Spring
@@ -1305,7 +1305,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325271001_2;Other;No Size;43;29-38;Men;Socks;Stockings;0.025139664804469275;$;Winter
 325271101_2;No Color;No Size;35;29-38;Men;Socks;Tube Socks;0.039106145251396655;$;Autumn
 325271102_2;Other;No Size;43;29-38;Men;Socks;Stockings;0.025139664804469275;$;Winter
-325271200_2;Other;No Size;41;29-38;Female;Socks;Stockings;0.006983240223463687;.;Autumn
+325271200_2;Other;No Size;41;29-38;Female;Socks;Stockings;0.006983240223463687;Y;Autumn
 325271500_2;No Color;No Size;36;29-38;Men;Socks;Stockings;0.008379888268156424;Y;Autumn
 325272201_2;No Color;No Size;29;29-38;Female;Socks;Boat Socks;0.0223463687150838;Y;Spring
 325272304_2;Other;No Size;38;29-38;Female;Socks;Stockings;0.030726256983240222;Y;Autumn
@@ -1335,13 +1335,13 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325277100_2;Other;No Size;44;4-6;Boys;Socks;Wool Socks;0.013966480446927373;Y;Winter
 325277200_2;Other;No Size;44;4-6;Boys;Socks;Wool Socks;0.013966480446927373;Y;Winter
 325277801_2;Other;No Size;43;29-38;Men;Socks;Stockings;0.025139664804469275;$;Winter
-325277900_2;No Color;No Size;42;29-38;Men;Socks;Stockings;0.006983240223463687;.;Autumn
+325277900_2;No Color;No Size;42;29-38;Men;Socks;Stockings;0.006983240223463687;Y;Autumn
 325277901_2;Other;No Size;43;29-38;Female;Socks;Stockings;0.025139664804469275;$;Winter
-325278000_2;No Color;No Size;42;29-38;Men;Socks;Stockings;0.006983240223463687;.;Autumn
+325278000_2;No Color;No Size;42;29-38;Men;Socks;Stockings;0.006983240223463687;Y;Autumn
 325278100_2;No Color;No Size;37;29-38;Female;Socks;Stockings;0.0223463687150838;Y;Autumn
-325278200_2;No Color;No Size;42;29-38;Men;Socks;Stockings;0.006983240223463687;.;Autumn
-325278400_2;No Color;No Size;42;29-38;Men;Socks;Stockings;0.006983240223463687;.;Autumn
-325278700_2;No Color;No Size;42;29-38;Men;Socks;Stockings;0.006983240223463687;.;Autumn
+325278200_2;No Color;No Size;42;29-38;Men;Socks;Stockings;0.006983240223463687;Y;Autumn
+325278400_2;No Color;No Size;42;29-38;Men;Socks;Stockings;0.006983240223463687;Y;Autumn
+325278700_2;No Color;No Size;42;29-38;Men;Socks;Stockings;0.006983240223463687;Y;Autumn
 325278800_2;No Color;No Size;42;29-38;Female;Socks;Stockings;0.006983240223463687;$;Autumn
 325278900_2;No Color;No Size;42;29-38;Female;Socks;Stockings;0.006983240223463687;$;Autumn
 325279000_2;No Color;No Size;42;29-38;Female;Socks;Stockings;0.006983240223463687;$;Autumn
@@ -1358,7 +1358,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325283600_2;No Color;No Size;45;29-38;Men;Socks;Wool Socks;0.030726256983240222;Y;Winter
 325283800_2;No Color;No Size;45;29-38;Men;Socks;Wool Socks;0.030726256983240222;Y;Winter
 325284200_2;Other;No Size;39;29-38;Female;Socks;Stockings;0.006983240223463687;$;Autumn
-325284300_2;Other;No Size;39;29-38;Men;Socks;Stockings;0.006983240223463687;.;Autumn
+325284300_2;Other;No Size;39;29-38;Men;Socks;Stockings;0.006983240223463687;Y;Autumn
 325284400_2;No Color;No Size;41;29-38;Female;Socks;Stockings;0.0223463687150838;Y;Winter
 325284700_2;No Color;No Size;39;7-9;Boys;Socks;Stockings;0.0111731843575419;$;Autumn
 325284800_2;No Color;No Size;39;7-9;Boys;Socks;Stockings;0.025139664804469275;$;Autumn
@@ -1453,14 +1453,14 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325322100_2;No Color;No Size;30;29-38;Men;Socks;Stockings;0.04189944134078213;Y;Autumn
 325322500_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.013966480446927373;Y;Autumn
 325322601_2;No Color;No Size;30;29-38;Men;Socks;Stockings;0.05027932960893855;Y;Autumn
-325322801_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.015363128491620113;.;Winter
+325322801_2;No Color;No Size;1;29-38;Female;Socks;Stockings;0.015363128491620113;Y;Winter
 325323200_2;No Color;No Size;1;7-9;Boys;Socks;Stockings;0.030726256983240222;Y;Autumn
 325323500_2;No Color;No Size;44;7-9;Boys;Socks;Stockings;0.0223463687150838;Y;Autumn
 325323900_2;No Color;No Size;44;7-9;Boys;Socks;Stockings;0.0223463687150838;Y;Autumn
-325324500_2;No Color;No Size;44;29-38;Men;Socks;Stockings;0.006983240223463687;.;Autumn
+325324500_2;No Color;No Size;44;29-38;Men;Socks;Stockings;0.006983240223463687;Y;Autumn
 325324800_2;Other;No Size;44;29-38;Men;Socks;Stockings;0.005586592178770949;Y;Winter
-325324900_2;No Color;No Size;45;29-38;Men;Socks;Stockings;0.006983240223463687;.;Autumn
-325325000_2;No Color;No Size;45;29-38;Female;Socks;Stockings;0.006983240223463687;.;Autumn
+325324900_2;No Color;No Size;45;29-38;Men;Socks;Stockings;0.006983240223463687;Y;Autumn
+325325000_2;No Color;No Size;45;29-38;Female;Socks;Stockings;0.006983240223463687;Y;Autumn
 325325300_2;Other;No Size;10;18-28;Female;Socks;Stockings;0.0223463687150838;Y;Spring
 325325500_2;Other;No Size;4;18-28;Female;Socks;Stockings;0.0223463687150838;Y;Spring
 325325600_2;Other;No Size;4;29-38;Female;Socks;Stockings;0.0223463687150838;Y;Spring
@@ -1638,7 +1638,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325373500_2;Other;No Size;6;18-28;Men;Socks;Boat Socks;0.0223463687150838;Y;Summer
 325374300_2;Other;No Size;13;18-28;Men;Socks;Stealth Socks;0.0223463687150838;Y;Summer
 325374400_2;Other;No Size;10;18-28;Men;Socks;Stealth Socks;0.0223463687150838;Y;Summer
-325374501_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.015363128491620113;.;Autumn
+325374501_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.015363128491620113;Y;Autumn
 325374700_2;Other;No Size;13;18-28;Men;Socks;Stealth Socks;0.0223463687150838;Y;Summer
 325374800_2;Other;No Size;13;18-28;Men;Socks;Stealth Socks;0.0223463687150838;Y;Summer
 325375000_2;Other;No Size;10;18-28;Men;Socks;Boat Socks;0.0223463687150838;Y;Summer
@@ -1714,7 +1714,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325385700_2;Other;No Size;10;18-28;Female;Socks;Stockings;0.0223463687150838;Y;Spring
 325385800_2;Other;No Size;10;18-28;Female;Socks;Stockings;0.0223463687150838;Y;Spring
 325385900_2;Other;No Size;10;18-28;Female;Socks;Stockings;0.0223463687150838;Y;Spring
-325386000_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.015363128491620113;.;Autumn
+325386000_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.015363128491620113;Y;Autumn
 325386100_2;Other;No Size;10;18-28;Female;Socks;Stockings;0.0223463687150838;Y;Spring
 325386200_2;Other;No Size;4;18-28;Female;Socks;Stockings;0.0223463687150838;Y;Spring
 325386300_2;Other;No Size;10;18-28;Female;Socks;Stockings;0.0223463687150838;Y;Spring
@@ -1760,10 +1760,10 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325391700_2;No Color;No Size;10;18-28;Female;Socks;Boat Socks;0.0223463687150838;Y;Summer
 325391800_2;No Color;No Size;1;18-28;Female;Socks;Boat Socks;0.0223463687150838;Y;Summer
 325391900_2;No Color;No Size;10;18-28;Female;Socks;Stealth Socks;0.0223463687150838;$;Summer
-325392000_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.015363128491620113;.;Autumn
+325392000_2;No Color;No Size;1;29-38;Men;Socks;Stockings;0.015363128491620113;Y;Autumn
 325392100_2;No Color;No Size;10;18-28;Female;Socks;Stealth Socks;0.0223463687150838;$;Summer
 325392200_2;No Color;No Size;10;18-28;Female;Socks;Stealth Socks;0.0223463687150838;$;Summer
-325392600_2;No Color;No Size;46;29-38;Female;Socks;Wool Socks;0.006983240223463687;.;Winter
+325392600_2;No Color;No Size;46;29-38;Female;Socks;Wool Socks;0.006983240223463687;Y;Winter
 325392700_2;No Color;No Size;10;18-28;Men;Socks;Stockings;0.0223463687150838;Y;Spring
 325392800_2;No Color;No Size;4;18-28;Men;Socks;Stockings;0.0223463687150838;Y;Spring
 325392900_2;No Color;No Size;4;18-28;Men;Socks;Stockings;0.0223463687150838;Y;Spring
@@ -1908,7 +1908,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 325610204_2;No Color;No Size;27;29-38;Female;Socks;Stealth Socks;0.0111731843575419;$;Summer
 325611002_2;No Color;No Size;9;29-38;Female;Socks;Invisible Socks;0.039106145251396655;Y;Summer
 325611701_2;No Color;No Size;1;29-38;Men;Socks;Tube Socks;0.04748603351955308;$;Autumn
-325612003_2;No Color;No Size;1;7-9;Boys;Socks;Stockings;0.009776536312849162;.;Autumn
+325612003_2;No Color;No Size;1;7-9;Boys;Socks;Stockings;0.009776536312849162;Y;Autumn
 325612402_2;No Color;No Size;41;29-38;Men;Socks;Stockings;0.039106145251396655;$;Autumn
 325612502_2;No Color;No Size;1;29-38;Men;Socks;Tube Socks;0.039106145251396655;$;Autumn
 325612601_2;No Color;No Size;1;29-38;Men;Socks;Tube Socks;0.039106145251396655;$;Autumn
@@ -2229,7 +2229,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 326007800_2;Purplish Red;Thick;39;29-38;Female;Pantyhose;Velvet;0.0782122905027933;Y;Autumn
 326007900_2;Black;Thick;36;29-38;Female;Pantyhose;Velvet;0.0782122905027933;Y;Autumn
 326008000_2;Black;Thick;36;29-38;Female;Pantyhose;Velvet;0.05027932960893855;Y;Autumn
-326008099_2;No Color;No Size;1;29-38;Female;Pantyhose;Core Wrap;0.019553072625698324;%;Spring
+326008099_2;No Color;No Size;1;29-38;Female;Pantyhose;Core Wrap;0.019553072625698324;Y;Spring
 326008100_2;Black;Thick;39;29-38;Female;Pantyhose;Velvet;0.0782122905027933;Y;Autumn
 326008300_2;Black;Thick;36;29-38;Female;Pantyhose;Velvet;0.0782122905027933;Y;Autumn
 326008400_2;Black;Sheer;29;29-38;Female;Pantyhose;Core Wrap;0.0223463687150838;Y;Autumn
@@ -2259,7 +2259,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 326012700_2;Black;Sheer;6;18-28;Female;Pantyhose;Core Material;0.05027932960893855;Y;Spring
 326012800_2;Black;12D;6;18-28;Female;Pantyhose;Core Wrap;0.0670391061452514;Y;Spring
 326013099_2;No Color;No Size;1;29-38;Female;Pantyhose;Core Wrap;0.033519553072625705;Y;Spring
-326013100_2;Black;15D;13;18-28;Female;Pantyhose;Core Wire;0.013687150837988826;.;Spring
+326013100_2;Black;15D;13;18-28;Female;Pantyhose;Core Wire;0.013687150837988826;Y;Spring
 326013200_2;Black;12D;6;18-28;Female;Pantyhose;Core Material;0.05027932960893855;Y;Spring
 326013300_2;Other;Sheer;33;29-38;Female;Pantyhose;Velvet;0.10614525139664806;$;Autumn
 326013400_2;Black;Sheer;6;18-28;Female;Pantyhose;Core Material;0.05027932960893855;Y;Spring
@@ -2320,7 +2320,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 326063000_2;Other;No Size;39;29-38;Female;Pantyhose;Velvet;0.1340782122905028;$;Autumn
 326066800_2;No Color;No Size;1;29-38;Female;Pantyhose;Velvet;0.05865921787709498;Y;Spring
 326070101_2;Other;280D;39;29-38;Female;Pantyhose;Velvet;0.10614525139664806;$;Autumn
-326080002_2;Other;Ultra Sheer;33;29-38;Female;Pantyhose;Core Wrap;0.019553072625698324;%;Autumn
+326080002_2;Other;Ultra Sheer;33;29-38;Female;Pantyhose;Core Wrap;0.019553072625698324;Y;Autumn
 326080700_2;Black;Ultra Sheer;1;29-38;Female;Pantyhose;Core Material;0.05027932960893855;Y;Spring
 326081600_2;Other;Sheer;10;29-38;Female;Pantyhose;Velvet;0.05027932960893855;Y;Spring
 326081900_2;Other;Sheer;9;29-38;Female;Pantyhose;Velvet;0.0782122905027933;Y;Spring
@@ -2450,7 +2450,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 326149604_2;Natural;Sheer;2;29-38;Female;Pantyhose;Core Wrap;0.10614525139664806;$;Spring
 326149605_2;Coffee;Sheer;2;29-38;Female;Pantyhose;Core Wrap;0.0782122905027933;Y;Spring
 326150000_2;Other;No Size;1;29-38;Female;Pantyhose;Core Material;0.05027932960893855;Y;Autumn
-326150001_2;No Color;Ultra Sheer;1;29-38;Female;Pantyhose;Core Wrap;0.02653631284916201;.;Autumn
+326150001_2;No Color;Ultra Sheer;1;29-38;Female;Pantyhose;Core Wrap;0.02653631284916201;Y;Autumn
 326150300_2;Other;Ultra Sheer;34;29-38;Female;Pantyhose;Core Wrap;0.033519553072625705;Y;Autumn
 326154403_2;Gray;Ultra Sheer;1;18-28;Female;Pantyhose;Core Wrap;0.0782122905027933;Y;Spring
 326155200_2;Gray;Ultra Sheer;38;29-38;Female;Pantyhose;Core Wrap;0.0670391061452514;Y;Spring
@@ -3032,8 +3032,8 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 327033800_2;Purplish Red;Sheer;34;29-38;Female;One-Piece Pants Inside;Thin;0.10614525139664806;$;Autumn
 327033900_2;Blue;Sheer;39;29-38;Female;One-Piece Pants Inside;Thin;0.05027932960893855;Y;Autumn
 327034100_2;Blue;Sheer;40;29-38;Female;One-Piece Pants Inside;Thin;0.05027932960893855;Y;Autumn
-327034300_2;Other;Sheer;30;29-38;Female;One-Piece Pants Inside;Thin;0.024860335195530728;.;Autumn
-327034400_2;Other;Sheer;30;29-38;Female;One-Piece Pants Inside;Thin;0.024860335195530728;.;Autumn
+327034300_2;Other;Sheer;30;29-38;Female;One-Piece Pants Inside;Thin;0.024860335195530728;Y;Autumn
+327034400_2;Other;Sheer;30;29-38;Female;One-Piece Pants Inside;Thin;0.024860335195530728;Y;Autumn
 327034500_2;Purplish Red;Sheer;36;29-38;Female;One-Piece Pants Inside;Thin;0.0782122905027933;$;Autumn
 327034600_2;Black;Sheer;36;29-38;Female;One-Piece Pants Inside;Thin;0.1340782122905028;Y;Autumn
 327034900_2;Rose;Thick;38;29-38;Female;One Internal Pants;Thick;0.1340782122905028;$;Winter
@@ -3076,9 +3076,9 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 327040800_2;Other;Thick;38;29-38;Female;One In One Pants;Thick;0.4134078212290503;$;Winter
 327041100_2;Blue;Thick;40;29-38;Female;One Pants;Thick;0.10614525139664806;$;Winter
 327041200_2;Blue;Thick;40;29-38;Female;One Pants;Thick;0.10614525139664806;$;Winter
-327041300_2;Other;Sheer;39;29-38;Female;One-Piece Pants Inside;Thin;0.024860335195530728;.;Autumn
+327041300_2;Other;Sheer;39;29-38;Female;One-Piece Pants Inside;Thin;0.024860335195530728;Y;Autumn
 327041500_2;Black;Sheer;39;29-38;Female;One-Piece Pants Inside;Thin;0.1340782122905028;Y;Autumn
-327041700_2;Other;Sheer;39;29-38;Female;One-Piece Pants Inside;Thin;0.019273743016759777;.;Autumn
+327041700_2;Other;Sheer;39;29-38;Female;One-Piece Pants Inside;Thin;0.019273743016759777;Y;Autumn
 327041900_2;Other;Thick;39;29-38;Female;One Pants;Thick;0.2737430167597765;$;Winter
 327042600_2;Other;Thick;43;29-38;Female;One-Piece Pants Inside;Thick;0.05027932960893855;Y;Winter
 327043600_2;Other;Thick;44;18-28;Female;One-Piece Pants Inside;Thick;0.05027932960893855;Y;Winter
@@ -3473,9 +3473,9 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 328006900_2;No Color;No Size;13;18-28;Men;Socks;Boat Socks;0.030726256983240222;Y;Summer
 328007000_2;No Color;No Size;13;18-28;Men;Socks;Boat Socks;0.030726256983240222;Y;Summer
 328007100_2;No Color;No Size;13;18-28;Men;Socks;Boat Socks;0.030726256983240222;Y;Summer
-328007200_2;No Color;No Size;13;18-28;Men;Socks;Boat Socks;0.006983240223463687;.;Summer
+328007200_2;No Color;No Size;13;18-28;Men;Socks;Boat Socks;0.006983240223463687;Y;Summer
 328007300_2;No Color;No Size;23;18-28;Men;Socks;Boat Socks;0.05027932960893855;Y;Summer
-328007400_2;No Color;No Size;13;18-28;Men;Socks;Boat Socks;0.006983240223463687;.;Spring
+328007400_2;No Color;No Size;13;18-28;Men;Socks;Boat Socks;0.006983240223463687;Y;Spring
 328008000_2;No Color;No Size;15;18-28;Men;Socks;Boat Socks;0.030726256983240222;Y;Summer
 328008100_2;No Color;No Size;15;18-28;Men;Socks;Boat Socks;0.030726256983240222;Y;Summer
 328008200_2;No Color;No Size;15;18-28;Men;Socks;Boat Socks;0.030726256983240222;Y;Summer
@@ -3607,7 +3607,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 328089800_2;Other;No Size;21;18-28;Men;Socks;Boat Socks;0.0223463687150838;Y;Summer
 328141900_2;Other;No Size;5;29-38;Men;Socks;Boat Socks;0.05027932960893855;Y;Summer
 328186400_2;Other;No Size;21;18-28;Men;Socks;Boat Socks;0.0223463687150838;Y;Summer
-328330000_2;No Color;No Size;14;18-28;Men;Socks;Boat Socks;0.006983240223463687;.;Summer
+328330000_2;No Color;No Size;14;18-28;Men;Socks;Boat Socks;0.006983240223463687;Y;Summer
 328356001_2;Other;No Size;21;18-28;Men;Socks;Boat Socks;0.0223463687150838;Y;Summer
 328612000_2;No Color;No Size;6;29-38;Men;Socks;Boat Socks;0.030726256983240222;Y;Spring
 328612400_2;No Color;No Size;6;29-38;Men;Socks;Boat Socks;0.039106145251396655;$;Summer
@@ -3910,7 +3910,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 32D003717_2;Other;20cm-22cm;9;10-15;Girls;Socks;Boat Socks;0.025139664804469275;$;Summer
 32D003718_2;Other;18cm-20cm;9;7-9;Girls;Socks;Boat Socks;0.025139664804469275;$;Summer
 330000900_2;Other;No Size;47;29-38;Men;Socks;Stockings;0.030726256983240222;Y;Autumn
-330003400_2;No Color;No Size;48;29-38;Men;Socks;Wool Socks;0.006983240223463687;.;Winter
+330003400_2;No Color;No Size;48;29-38;Men;Socks;Wool Socks;0.006983240223463687;Y;Winter
 330003401_2;No Color;26cm-28cm;41;29-38;Men;Socks;Stockings;0.039106145251396655;$;Winter
 330004200_2;No Color;No Size;51;29-38;Men;Socks;Wool Socks;0.039106145251396655;$;Winter
 330005600_2;Other;No Size;4;18-28;Men;Socks;Stockings;0.05027932960893855;Y;Autumn
@@ -4080,10 +4080,10 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 331002500_2;Other;No Size;10;18-28;Men;Socks;Stockings;0.0223463687150838;Y;Spring
 331002601_2;No Color;26cm-28cm;52;18-28;Men;Socks;Stockings;0.0223463687150838;Y;Winter
 331003400_2;Other;No Size;10;29-38;Men;Socks;Stockings;0.0223463687150838;Y;Spring
-331003401_2;Other;No Size;14;18-28;Men;Socks;Stockings;0.006983240223463687;.;Spring
+331003401_2;Other;No Size;14;18-28;Men;Socks;Stockings;0.006983240223463687;Y;Spring
 331003700_2;No Color;No Size;1;18-28;Men;Socks;Tube Socks;0.025139664804469275;Y;Spring
 331003800_2;Other;No Size;1;18-28;Men;Socks;Tube Socks;0.025139664804469275;Y;Autumn
-331003900_2;No Color;No Size;51;29-38;Men;Socks;Wool Socks;0.006983240223463687;.;Winter
+331003900_2;No Color;No Size;51;29-38;Men;Socks;Wool Socks;0.006983240223463687;Y;Winter
 331003901_2;Black;24cm-26cm;38;29-38;Men;Socks;Stockings;0.0223463687150838;Y;Winter
 331004100_2;No Color;No Size;2;18-28;Men;Socks;Tube Socks;0.0111731843575419;Y;Autumn
 331004500_2;Other;No Size;10;18-28;Men;Socks;Stockings;0.05027932960893855;Y;Spring
@@ -4118,16 +4118,16 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 331015700_2;Navy;No Size;35;29-38;Men;Socks;Stockings;0.05027932960893855;Y;Autumn
 331015800_2;Navy;24cm-26cm;35;29-38;Men;Socks;Stockings;0.05027932960893855;Y;Autumn
 331015900_2;Navy;24cm-26cm;35;18-28;Men;Socks;Stockings;0.05027932960893855;Y;Autumn
-331016400_2;No Color;No Size;32;18-28;Men;Socks;Stockings;0.004189944134078213;.;Autumn
-331016500_2;No Color;No Size;41;29-38;Men;Socks;Wool Socks;0.006983240223463687;.;Winter
+331016400_2;No Color;No Size;32;18-28;Men;Socks;Stockings;0.004189944134078213;Y;Autumn
+331016500_2;No Color;No Size;41;29-38;Men;Socks;Wool Socks;0.006983240223463687;Y;Winter
 331016501_2;Navy;24cm-26cm;38;29-38;Men;Socks;Stockings;0.0223463687150838;Y;Winter
-331016800_2;No Color;No Size;33;18-28;Men;Socks;Stockings;0.006983240223463687;.;Autumn
-331016900_2;No Color;No Size;41;29-38;Men;Socks;Wool Socks;0.006983240223463687;.;Winter
+331016800_2;No Color;No Size;33;18-28;Men;Socks;Stockings;0.006983240223463687;Y;Autumn
+331016900_2;No Color;No Size;41;29-38;Men;Socks;Wool Socks;0.006983240223463687;Y;Winter
 331016901_2;Navy;24cm-26cm;38;29-38;Men;Socks;Stockings;0.0223463687150838;Y;Winter
-331017000_2;No Color;No Size;33;39-48;Men;Socks;Stockings;0.006983240223463687;.;Autumn
-331017100_2;No Color;No Size;41;29-38;Men;Socks;Wool Socks;0.006983240223463687;.;Winter
+331017000_2;No Color;No Size;33;39-48;Men;Socks;Stockings;0.006983240223463687;Y;Autumn
+331017100_2;No Color;No Size;41;29-38;Men;Socks;Wool Socks;0.006983240223463687;Y;Winter
 331017101_2;Navy;24cm-26cm;38;29-38;Men;Socks;Stockings;0.0223463687150838;Y;Winter
-331017200_2;No Color;No Size;35;18-28;Men;Socks;Stockings;0.006983240223463687;.;Autumn
+331017200_2;No Color;No Size;35;18-28;Men;Socks;Stockings;0.006983240223463687;Y;Autumn
 331017400_2;No Color;No Size;35;18-28;Men;Socks;Tube Socks;0.0111731843575419;Y;Autumn
 331017500_2;No Color;No Size;35;18-28;Men;Socks;Tube Socks;0.0111731843575419;Y;Autumn
 331017600_2;No Color;No Size;40;18-28;Men;Socks;Wool Socks;0.0111731843575419;$;Winter
@@ -4251,8 +4251,8 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 331032900_2;No Color;26cm-28cm;42;29-38;Men;Socks;Stockings;0.05027932960893855;Y;Winter
 331033100_2;No Color;26cm-28cm;42;29-38;Men;Socks;Wool Socks;0.05027932960893855;Y;Winter
 331033200_2;No Color;26cm-28cm;42;29-38;Men;Socks;Wool Socks;0.05027932960893855;Y;Winter
-331033300_2;Other;No Size;37;18-28;Men;Socks;Stockings;0.006983240223463687;.;Autumn
-331033400_2;No Color;24cm-26cm;40;29-38;Men;Socks;Stockings;0.006983240223463687;.;Autumn
+331033300_2;Other;No Size;37;18-28;Men;Socks;Stockings;0.006983240223463687;Y;Autumn
+331033400_2;No Color;24cm-26cm;40;29-38;Men;Socks;Stockings;0.006983240223463687;Y;Autumn
 331033500_2;No Color;24cm-26cm;40;29-38;Men;Socks;Tube Socks;0.0;Y;Autumn
 331033600_2;Red;24cm-26cm;45;29-38;Men;Socks;Tube Socks;0.025139664804469275;Y;Autumn
 331034100_2;Navy;24cm-26cm;3;29-38;Men;Socks;Tube Socks;0.039106145251396655;$;Spring
@@ -4267,7 +4267,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 331035900_2;Black;24cm-26cm;3;29-38;Men;Socks;Tube Socks;0.039106145251396655;$;Spring
 331036400_2;Black;24cm-26cm;3;29-38;Men;Socks;Tube Socks;0.039106145251396655;$;Spring
 331036700_2;Navy;24cm-26cm;3;29-38;Men;Socks;Tube Socks;0.039106145251396655;$;Spring
-331036900_2;No Color;24cm-26cm;43;18-28;Men;Socks;Wool Socks;0.004189944134078213;.;Winter
+331036900_2;No Color;24cm-26cm;43;18-28;Men;Socks;Wool Socks;0.004189944134078213;Y;Winter
 331036901_2;Other;25cm-27cm;11;29-38;Men;Socks;Tube Socks;0.025139664804469275;Y;Spring
 331037000_2;No Color;No Size;21;29-38;Men;Socks;Tube Socks;0.0111731843575419;Y;Spring
 331037200_2;Navy;24cm-26cm;3;29-38;Men;Socks;Tube Socks;0.025139664804469275;Y;Spring
@@ -4469,8 +4469,8 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 331277700_2;No Color;No Size;6;29-38;Men;Socks;Tube Socks;0.039106145251396655;$;Spring
 331278100_2;No Color;No Size;6;29-38;Men;Socks;Tube Socks;0.039106145251396655;$;Spring
 331284600_2;No Color;No Size;4;29-38;Men;Socks;Tube Socks;0.025139664804469275;Y;Spring
-331296800_2;No Color;20cm-22cm;50;29-38;Men;Socks;Stockings;0.024860335195530728;.;Winter
-331297900_2;No Color;20cm-22cm;50;29-38;Men;Socks;Stockings;0.024860335195530728;.;Winter
+331296800_2;No Color;20cm-22cm;50;29-38;Men;Socks;Stockings;0.024860335195530728;Y;Winter
+331297900_2;No Color;20cm-22cm;50;29-38;Men;Socks;Stockings;0.024860335195530728;Y;Winter
 331317701_2;No Color;No Size;6;29-38;Men;Socks;Tube Socks;0.039106145251396655;$;Spring
 331439400_2;No Color;No Size;46;29-38;Men;Socks;Wool Socks;0.0782122905027933;Y;Winter
 331439600_2;No Color;No Size;46;29-38;Men;Socks;Wool Socks;0.0782122905027933;Y;Winter
@@ -4690,12 +4690,12 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 332007600_2;No Color;No Size;13;18-28;Female;Socks;Boat Socks;0.030726256983240222;Y;Summer
 332007800_2;No Color;No Size;13;18-28;Female;Socks;Boat Socks;0.030726256983240222;Y;Summer
 332007900_2;No Color;No Size;14;18-28;Female;Socks;Boat Socks;0.0223463687150838;Y;Spring
-332008100_2;No Color;No Size;13;18-28;Female;Socks;Boat Socks;0.006983240223463687;.;Summer
+332008100_2;No Color;No Size;13;18-28;Female;Socks;Boat Socks;0.006983240223463687;Y;Summer
 332008200_2;No Color;No Size;23;18-28;Female;Socks;Boat Socks;0.05027932960893855;Y;Summer
-332008500_2;No Color;No Size;13;18-28;Female;Socks;Boat Socks;0.006983240223463687;.;Spring
+332008500_2;No Color;No Size;13;18-28;Female;Socks;Boat Socks;0.006983240223463687;Y;Spring
 332009000_2;No Color;No Size;15;18-28;Female;Socks;Boat Socks;0.030726256983240222;Y;Summer
 332009200_2;No Color;No Size;15;18-28;Female;Socks;Boat Socks;0.030726256983240222;Y;Summer
-332009300_2;No Color;No Size;15;18-28;Female;Socks;Boat Socks;0.006983240223463687;.;Summer
+332009300_2;No Color;No Size;15;18-28;Female;Socks;Boat Socks;0.006983240223463687;Y;Summer
 332009400_2;No Color;No Size;17;18-28;Female;Socks;Boat Socks;0.0223463687150838;Y;Summer
 332009500_2;No Color;No Size;17;18-28;Female;Socks;Boat Socks;0.0223463687150838;Y;Summer
 332009600_2;No Color;No Size;17;18-28;Female;Socks;Boat Socks;0.0223463687150838;Y;Summer
@@ -4710,7 +4710,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 332016000_2;No Color;No Size;22;18-28;Female;Socks;Boat Socks;0.0223463687150838;Y;Summer
 332016200_2;No Color;No Size;22;18-28;Female;Socks;Boat Socks;0.0223463687150838;Y;Summer
 332016300_2;No Color;No Size;22;18-28;Female;Socks;Boat Socks;0.0223463687150838;Y;Summer
-332018100_2;No Color;No Size;35;18-28;Female;Socks;Boat Socks;0.006983240223463687;.;Autumn
+332018100_2;No Color;No Size;35;18-28;Female;Socks;Boat Socks;0.006983240223463687;Y;Autumn
 332018200_2;No Color;No Size;35;18-28;Female;Socks;Boat Socks;0.025139664804469275;Y;Autumn
 332018300_2;No Color;No Size;35;18-28;Female;Socks;Boat Socks;0.025139664804469275;Y;Autumn
 332018400_2;No Color;No Size;35;18-28;Female;Socks;Boat Socks;0.025139664804469275;Y;Autumn
@@ -4802,9 +4802,9 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 332300201_2;Other;No Size;9;18-28;Female;Socks;Boat Socks;0.025139664804469275;Y;Spring
 332300202_2;Other;No Size;10;18-28;Female;Socks;Boat Socks;0.025139664804469275;Y;Spring
 332300203_2;Other;20cm-22cm;10;29-38;Female;Socks;Boat Socks;0.025139664804469275;Y;Spring
-332330000_2;No Color;No Size;14;18-28;Female;Socks;Boat Socks;0.006983240223463687;.;Summer
+332330000_2;No Color;No Size;14;18-28;Female;Socks;Boat Socks;0.006983240223463687;Y;Summer
 332600402_2;Other;No Size;9;18-28;Female;Socks;Boat Socks;0.025139664804469275;Y;Spring
-332886600_2;Other;No Size;10;18-28;Female;Socks;Boat Socks;0.006983240223463687;.;Spring
+332886600_2;Other;No Size;10;18-28;Female;Socks;Boat Socks;0.006983240223463687;Y;Spring
 332979703_2;Hot Pink;22cm-24cm;51;29-38;Female;Socks;Boat Socks;0.01675977653631285;$;Spring
 332979704_2;Hot Pink;22cm-24cm;51;29-38;Female;Socks;Boat Socks;0.01675977653631285;$;Spring
 332979705_2;Other;22cm-24cm;7;29-38;Female;Socks;Boat Socks;0.0111731843575419;Y;Spring
@@ -4898,10 +4898,10 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 333003700_2;No Color;No Size;18;18-28;Female;Socks;Stealth Socks;0.0223463687150838;$;Summer
 333003900_2;No Color;No Size;18;18-28;Female;Socks;Stealth Socks;0.0223463687150838;$;Summer
 333004000_2;No Color;No Size;18;18-28;Female;Socks;Stealth Socks;0.0223463687150838;$;Summer
-333004100_2;No Color;No Size;16;18-28;Female;Socks;Invisible Socks;0.006983240223463687;.;Summer
+333004100_2;No Color;No Size;16;18-28;Female;Socks;Invisible Socks;0.006983240223463687;Y;Summer
 333004200_2;No Color;No Size;16;18-28;Female;Socks;Stealth Socks;0.0111731843575419;$;Summer
 333004300_2;No Color;No Size;16;18-28;Female;Socks;Stealth Socks;0.0111731843575419;$;Summer
-333004400_2;No Color;No Size;16;18-28;Female;Socks;Invisible Socks;0.006983240223463687;.;Summer
+333004400_2;No Color;No Size;16;18-28;Female;Socks;Invisible Socks;0.006983240223463687;Y;Summer
 333005400_2;No Color;No Size;19;18-28;Female;Socks;Invisible Socks;0.008379888268156424;Y;Summer
 333005800_2;No Color;No Size;19;29-38;Female;Socks;Stealth Socks;0.0111731843575419;$;Summer
 333005900_2;No Color;No Size;19;29-38;Female;Socks;Invisible Socks;0.008379888268156424;Y;Summer
@@ -4969,7 +4969,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 333050600_2;No Color;20cm-22cm;17;29-38;Female;Socks;Invisible Socks;0.025139664804469275;Y;Summer
 333201200_2;Other;No Size;22;18-28;Female;Socks;Invisible Socks;0.025139664804469275;Y;Summer
 333238100_2;Other;No Size;20;18-28;Female;Socks;Invisible Socks;0.025139664804469275;Y;Summer
-333886600_2;Other;20cm-22cm;10;29-38;Female;Socks;Invisible Socks;0.006983240223463687;.;Summer
+333886600_2;Other;20cm-22cm;10;29-38;Female;Socks;Invisible Socks;0.006983240223463687;Y;Summer
 333931502_2;Other;22cm-24cm;7;18-28;Female;Socks;Invisible Socks;0.025139664804469275;Y;Summer
 333931503_2;Other;22cm-24cm;7;18-28;Female;Socks;Invisible Socks;0.025139664804469275;Y;Summer
 333931504_2;Other;22cm-24cm;7;18-28;Female;Socks;Invisible Socks;0.025139664804469275;Y;Summer
@@ -5023,7 +5023,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 333931564_2;Hot Pink;22cm-24cm;12;29-38;Female;Socks;Invisible Socks;0.025139664804469275;Y;Summer
 333931565_2;Hot Pink;22cm-24cm;12;29-38;Female;Socks;Invisible Socks;0.025139664804469275;Y;Summer
 334000701_2;No Color;18cm-20cm;37;18-28;Female;Socks;Stockings;0.0223463687150838;Y;Spring
-334000800_2;No Color;No Size;48;29-38;Female;Socks;Wool Socks;0.006983240223463687;.;Winter
+334000800_2;No Color;No Size;48;29-38;Female;Socks;Wool Socks;0.006983240223463687;Y;Winter
 334000840_2;Dark Blue;22cm-24cm;41;29-38;Female;Socks;Stockings;0.039106145251396655;$;Winter
 334000900_2;No Color;No Size;51;29-38;Female;Socks;Wool Socks;0.0223463687150838;Y;Winter
 334001342_2;Dark Floral Gray;22cm-24cm;41;29-38;Female;Socks;Stockings;0.039106145251396655;$;Winter
@@ -5088,21 +5088,21 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 335001700_2;Other;No Size;6;18-28;Female;Socks;Stockings;0.0223463687150838;Y;Spring
 335002300_2;No Color;No Size;2;18-28;Female;Socks;Tube Socks;0.0111731843575419;Y;Autumn
 335002505_2;No Color;24cm-26cm;52;18-28;Female;Socks;Stockings;0.0223463687150838;Y;Winter
-335002600_2;Black;No Size;10;29-38;Female;Socks;Short Stockings;0.008100558659217877;.;Spring
+335002600_2;Black;No Size;10;29-38;Female;Socks;Short Stockings;0.008100558659217877;Y;Spring
 335002601_2;Watermelon Red;22cm-24cm;38;29-38;Female;Socks;Stockings;0.0223463687150838;Y;Winter
-335002801_2;Other;No Size;14;18-28;Female;Socks;Stockings;0.006983240223463687;.;Spring
+335002801_2;Other;No Size;14;18-28;Female;Socks;Stockings;0.006983240223463687;Y;Spring
 335002900_2;Hot Pink;No Size;10;29-38;Female;Socks;Stockings;0.030726256983240222;Y;Spring
 335003000_2;Hot Pink;No Size;10;29-38;Female;Socks;Stockings;0.030726256983240222;Y;Spring
 335003100_2;Hot Pink;No Size;10;29-38;Female;Socks;Stockings;0.030726256983240222;Y;Spring
 335003200_2;Peach;No Size;10;29-38;Female;Socks;Stockings;0.030726256983240222;Y;Spring
 335003400_2;Other;No Size;6;18-28;Female;Socks;Tube Socks;0.05027932960893855;Y;Spring
-335004400_2;No Color;No Size;13;29-38;Female;Short Socks;Short Stockings;0.019273743016759777;.;Spring
+335004400_2;No Color;No Size;13;29-38;Female;Short Socks;Short Stockings;0.019273743016759777;Y;Spring
 335004401_2;Hot Pink;22cm-24cm;38;29-38;Female;Socks;Tube Socks;0.039106145251396655;Y;Autumn
 335004500_2;No Color;No Size;13;18-28;Female;Short Socks;Short Stockings;0.0111731843575419;$;Spring
 335004501_2;No Color;18cm-20cm;51;18-28;Female;Socks;Stockings;0.0223463687150838;Y;Winter
 335004600_2;No Color;No Size;13;18-28;Female;Socks;Tube Socks;0.0111731843575419;Y;Spring
 335004901_2;No Color;20cm-22cm;35;18-28;Female;Socks;Stockings;0.052793296089385475;$;Autumn
-335005001_2;No Color;20cm-22cm;35;18-28;Female;Socks;Stockings;0.10865921787709497;.;Autumn
+335005001_2;No Color;20cm-22cm;35;18-28;Female;Socks;Stockings;0.10865921787709497;Y;Autumn
 335006800_2;No Color;No Size;20;18-28;Female;Socks;Stockings;0.030726256983240222;Y;Spring
 335007200_2;No Color;22cm-24cm;35;29-38;Female;Socks;Tube Socks;0.039106145251396655;Y;Autumn
 335007300_2;No Color;No Size;35;29-38;Female;Socks;Tube Socks;0.039106145251396655;Y;Autumn
@@ -5116,19 +5116,19 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 335008400_2;Other;22cm-24cm;35;29-38;Female;Socks;Tube Socks;0.039106145251396655;Y;Autumn
 335008500_2;No Color;22cm-24cm;35;29-38;Female;Socks;Tube Socks;0.039106145251396655;Y;Autumn
 335008900_2;Other;22cm-24cm;35;29-38;Female;Socks;Tube Socks;0.039106145251396655;Y;Autumn
-335009300_2;No Color;No Size;33;29-38;Female;Socks;Stockings;0.004189944134078213;.;Autumn
-335009400_2;No Color;No Size;41;29-38;Female;Socks;Wool Socks;0.006983240223463687;.;Winter
+335009300_2;No Color;No Size;33;29-38;Female;Socks;Stockings;0.004189944134078213;Y;Autumn
+335009400_2;No Color;No Size;41;29-38;Female;Socks;Wool Socks;0.006983240223463687;Y;Winter
 335009500_2;No Color;No Size;24;18-28;Female;Socks;Stockings;0.005586592178770949;Y;Spring
-335009600_2;No Color;No Size;37;18-28;Female;Socks;Stockings;0.024860335195530728;.;Winter
-335009700_2;No Color;No Size;33;18-28;Female;Socks;Stockings;0.004189944134078213;.;Autumn
-335009900_2;No Color;No Size;41;29-38;Female;Socks;Wool Socks;0.006983240223463687;.;Winter
-335010300_2;No Color;No Size;41;29-38;Female;Socks;Wool Socks;0.006983240223463687;.;Winter
-335010400_2;No Color;No Size;33;29-38;Female;Socks;Stockings;0.006983240223463687;.;Autumn
-335010500_2;No Color;No Size;35;18-28;Men;Socks;Wool Socks;0.006983240223463687;.;Winter
+335009600_2;No Color;No Size;37;18-28;Female;Socks;Stockings;0.024860335195530728;Y;Winter
+335009700_2;No Color;No Size;33;18-28;Female;Socks;Stockings;0.004189944134078213;Y;Autumn
+335009900_2;No Color;No Size;41;29-38;Female;Socks;Wool Socks;0.006983240223463687;Y;Winter
+335010300_2;No Color;No Size;41;29-38;Female;Socks;Wool Socks;0.006983240223463687;Y;Winter
+335010400_2;No Color;No Size;33;29-38;Female;Socks;Stockings;0.006983240223463687;Y;Autumn
+335010500_2;No Color;No Size;35;18-28;Men;Socks;Wool Socks;0.006983240223463687;Y;Winter
 335010600_2;Other;No Size;12;29-38;Female;Socks;Tube Socks;0.0111731843575419;Y;Spring
 335010601_2;Other;No Size;14;18-28;Female;Socks;Stockings;0.030726256983240222;Y;Spring
-335010700_2;No Color;No Size;35;18-28;Female;Socks;Stockings;0.006983240223463687;.;Autumn
-335010800_2;No Color;No Size;40;18-28;Female;Socks;Wool Socks;0.006983240223463687;.;Winter
+335010700_2;No Color;No Size;35;18-28;Female;Socks;Stockings;0.006983240223463687;Y;Autumn
+335010800_2;No Color;No Size;40;18-28;Female;Socks;Wool Socks;0.006983240223463687;Y;Winter
 335010900_2;No Color;No Size;35;18-28;Female;Socks;Tube Socks;0.0111731843575419;Y;Autumn
 335011100_2;No Color;No Size;40;18-28;Female;Socks;Wool Socks;0.0111731843575419;$;Winter
 335011700_2;No Color;No Size;35;18-28;Female;Socks;Tube Socks;0.0111731843575419;Y;Autumn
@@ -5175,12 +5175,12 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 335017900_2;No Color;No Size;35;29-38;Female;Socks;Tube Socks;0.025139664804469275;Y;Spring
 335018100_2;No Color;No Size;35;29-38;Female;Socks;Tube Socks;0.025139664804469275;Y;Autumn
 335018500_2;No Color;No Size;35;29-38;Female;Socks;Tube Socks;0.025139664804469275;Y;Autumn
-335019000_2;No Color;No Size;39;18-28;Female;Socks;Stockings;0.006983240223463687;.;Winter
-335019100_2;No Color;No Size;39;18-28;Female;Socks;Stockings;0.006983240223463687;.;Winter
-335019200_2;No Color;No Size;39;18-28;Female;Socks;Stockings;0.006983240223463687;.;Winter
-335019300_2;No Color;No Size;39;18-28;Female;Socks;Stockings;0.006983240223463687;.;Winter
-335019400_2;No Color;No Size;39;18-28;Female;Socks;Stockings;0.006983240223463687;.;Winter
-335019500_2;No Color;No Size;39;18-28;Female;Socks;Stockings;0.006983240223463687;.;Winter
+335019000_2;No Color;No Size;39;18-28;Female;Socks;Stockings;0.006983240223463687;Y;Winter
+335019100_2;No Color;No Size;39;18-28;Female;Socks;Stockings;0.006983240223463687;Y;Winter
+335019200_2;No Color;No Size;39;18-28;Female;Socks;Stockings;0.006983240223463687;Y;Winter
+335019300_2;No Color;No Size;39;18-28;Female;Socks;Stockings;0.006983240223463687;Y;Winter
+335019400_2;No Color;No Size;39;18-28;Female;Socks;Stockings;0.006983240223463687;Y;Winter
+335019500_2;No Color;No Size;39;18-28;Female;Socks;Stockings;0.006983240223463687;Y;Winter
 335019600_2;No Color;22cm-24cm;35;29-38;Female;Socks;Tube Socks;0.025139664804469275;Y;Autumn
 335019700_2;No Color;22cm-24cm;35;18-28;Female;Socks;Tube Socks;0.025139664804469275;Y;Spring
 335019800_2;No Color;22cm-24cm;35;18-28;Female;Socks;Tube Socks;0.025139664804469275;Y;Spring
@@ -5251,7 +5251,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 335026200_2;No Color;22cm-24cm;35;18-28;Female;Socks;Tube Socks;0.025139664804469275;Y;Autumn
 335026300_2;No Color;22cm-24cm;39;18-28;Female;Socks;Wool Socks;0.025139664804469275;$;Winter
 335026310_2;Other;22cm-24cm;41;18-28;Female;Socks;Stockings;0.0223463687150838;Y;Winter
-335026500_2;Black;22cm-24cm;32;29-38;Female;Socks;Short Stockings;0.008100558659217877;.;Spring
+335026500_2;Black;22cm-24cm;32;29-38;Female;Socks;Short Stockings;0.008100558659217877;Y;Spring
 335026511_2;Other;22cm-24cm;41;18-28;Female;Socks;Stockings;0.0223463687150838;Y;Winter
 335026600_2;Black;22cm-24cm;35;29-38;Female;Socks;Short Stockings;0.0223463687150838;Y;Spring
 335026619_2;Other;22cm-24cm;41;29-38;Female;Socks;Tube Socks;0.039106145251396655;Y;Winter
@@ -5315,7 +5315,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 335031701_2;Other;22cm-24cm;43;29-38;Female;Socks;Stockings;0.01675977653631285;Y;Spring
 335031800_2;No Color;22cm-24cm;42;29-38;Female;Socks;Wool Socks;0.05027932960893855;$;Winter
 335031801_2;No Color;26cm-28cm;41;29-38;Female;Socks;Tube Socks;0.039106145251396655;Y;Winter
-335031900_2;Other;No Size;37;18-28;Female;Socks;Stockings;0.006983240223463687;.;Autumn
+335031900_2;Other;No Size;37;18-28;Female;Socks;Stockings;0.006983240223463687;Y;Autumn
 335032100_2;Red;22cm-24cm;45;29-38;Female;Socks;Tube Socks;0.025139664804469275;Y;Autumn
 335032200_2;No Color;22cm-24cm;43;18-28;Female;Socks;Stockings;0.0;Y;Spring
 335032300_2;No Color;22cm-24cm;47;29-38;Female;Socks;Tube Socks;0.039106145251396655;Y;Winter
@@ -5703,7 +5703,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 335970880_2;Red;22cm-24cm;42;29-38;Female;Socks;Stockings;0.0223463687150838;Y;Winter
 335970881_2;Red;22cm-24cm;42;29-38;Female;Socks;Stockings;0.0223463687150838;Y;Winter
 336000300_2;Natural;15D;10;29-38;Female;Pantyhose;Core Material;0.05027932960893855;Y;Spring
-336000500_2;Natural;15D;10;18-28;Female;Pantyhose;Core Wire;0.013687150837988826;.;Spring
+336000500_2;Natural;15D;10;18-28;Female;Pantyhose;Core Wire;0.013687150837988826;Y;Spring
 336000600_2;Natural;15D;10;18-28;Female;Pantyhose;Core Wrap;0.0782122905027933;Y;Spring
 336001300_2;Natural;15D;10;18-28;Female;Pantyhose;Core Wrap;0.030726256983240222;Y;Spring
 336001400_2;Natural;15D;10;18-28;Female;Pantyhose;Core Wrap;0.030726256983240222;Y;Spring
@@ -5728,7 +5728,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 336005600_2;Black;Ultra Sheer;13;18-28;Female;Pantyhose;Core Wrap;0.0670391061452514;Y;Spring
 336005700_2;Gray;Ultra Sheer;13;18-28;Female;Pantyhose;Core Wrap;0.0670391061452514;Y;Spring
 336005800_2;Black;Ultra Sheer;13;18-28;Female;Pantyhose;Core Wrap;0.0670391061452514;Y;Spring
-336006300_2;No Color;Ultra Sheer;28;29-38;Female;Pantyhose;Core Wrap;0.024860335195530728;.;Autumn
+336006300_2;No Color;Ultra Sheer;28;29-38;Female;Pantyhose;Core Wrap;0.024860335195530728;Y;Autumn
 336006400_2;Natural;Ultra Sheer;31;18-28;Female;Pantyhose;Core Material;0.05027932960893855;Y;Autumn
 336006500_2;Natural;Ultra Sheer;31;18-28;Female;Pantyhose;Core Material;0.05027932960893855;Y;Autumn
 336006600_2;Black;Ultra Sheer;31;18-28;Female;Pantyhose;Core Wrap;0.0670391061452514;Y;Autumn
@@ -5758,8 +5758,8 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 336012900_2;Black;Ultra Sheer;35;29-38;Female;Pantyhose;Core Material;0.05027932960893855;Y;Autumn
 336013300_2;Black;Ultra Sheer;35;29-38;Female;Pantyhose;Core Material;0.05027932960893855;Y;Autumn
 336013800_2;Black;Ultra Sheer;35;29-38;Female;Pantyhose;Core Material;0.05027932960893855;Y;Autumn
-336014100_2;No Color;Sheer;35;18-28;Female;Pantyhose;Core Wire;0.052793296089385475;.;Autumn
-336014300_2;No Color;Sheer;35;18-28;Female;Pantyhose;Core Wire;0.052793296089385475;.;Autumn
+336014100_2;No Color;Sheer;35;18-28;Female;Pantyhose;Core Wire;0.052793296089385475;Y;Autumn
+336014300_2;No Color;Sheer;35;18-28;Female;Pantyhose;Core Wire;0.052793296089385475;Y;Autumn
 336015200_2;Other;Medium Thick;36;29-38;Female;Pantyhose;Core Wrap;0.1340782122905028;$;Autumn
 336015300_2;Other;Sheer;36;29-38;Female;Pantyhose;Core Wrap;0.0223463687150838;Y;Autumn
 336015400_2;No Color;Ultra Sheer;21;29-38;Female;Pantyhose;Core Wrap;0.0111731843575419;$;Spring
@@ -5994,7 +5994,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 337852600_2;No Color;Extra Thick;42;29-38;Female;Pantyhose;Velvet;0.329608938547486;$;Autumn
 337852700_2;Other;No Size;47;18-28;Female;Pantyhose;Velvet;0.1340782122905028;$;Autumn
 337861802_2;Other;Sheer;14;29-38;Female;Pantyhose;Velvet;0.030726256983240222;Y;Spring
-337861803_2;Black;No Size;39;18-28;Female;Pantyhose;Velvet;0.019273743016759777;.;Autumn
+337861803_2;Black;No Size;39;18-28;Female;Pantyhose;Velvet;0.019273743016759777;Y;Autumn
 337861804_2;Black;Sheer;37;18-28;Female;Pantyhose;Velvet;0.039106145251396655;Y;Autumn
 337869600_2;Other;No Size;48;29-38;Female;Pantyhose;Velvet;0.30167597765363124;$;Autumn
 337880101_2;No Color;Medium Thick;38;18-28;Female;Pantyhose;Velvet;0.1899441340782123;$;Autumn
@@ -6034,7 +6034,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 337994911_2;Black;Medium Thick;5;29-38;Female;Pantyhose;Velvet;0.05027932960893855;Y;Spring
 337994912_2;Black;Sheer;32;29-38;Female;Pantyhose;Velvet;0.10614525139664806;$;Autumn
 337994913_2;Black;Sheer;32;29-38;Female;Pantyhose;Velvet;0.05027932960893855;Y;Autumn
-338000102_2;Other;Sheer;5;29-38;Female;One Internal Pants;Thin;0.023743016759776536;.;Spring
+338000102_2;Other;Sheer;5;29-38;Female;One Internal Pants;Thin;0.023743016759776536;Y;Spring
 338000700_2;Other;Thick;47;29-38;Female;One-Piece Pants Inside;Thick;0.05027932960893855;Y;Winter
 338000800_2;Black;Ultra Thick;47;29-38;Female;One-Piece Pants;Thicker;0.21787709497206706;$;Winter
 338001100_2;No Color;No Size;47;29-38;Female;One-Piece Pants Inside;Thick;0.05027932960893855;Y;Winter
@@ -6093,7 +6093,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 338010400_2;Natural;Sheer;33;18-28;Female;One-Piece Pants Inside;Thin;0.1899441340782123;$;Autumn
 338010600_2;Black;Thick;39;18-28;Female;One Pants;Thick;0.16201117318435754;$;Winter
 338010800_2;Black;Medium Thick;39;18-28;Female;One-Piece Pants Inside;Medium Thick;0.05027932960893855;Y;Winter
-338010900_2;Black;Medium Thick;33;18-28;Female;One-Piece Pants Inside;Medium-Weight;0.024860335195530728;.;Winter
+338010900_2;Black;Medium Thick;33;18-28;Female;One-Piece Pants Inside;Medium-Weight;0.024860335195530728;Y;Winter
 338011200_2;No Color;Sheer;35;18-28;Female;One-Piece Pants Inside;Thin;0.05027932960893855;Y;Autumn
 338011901_2;No Color;Extra Thick;1;29-38;Female;One Pants;Thicker;0.329608938547486;Y;Winter
 338013200_2;Wine Red;Sheer;31;18-28;Female;One Internal Pants;Thin;0.1229050279329609;$;Autumn
@@ -6296,7 +6296,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 338990100_2;No Color;No Size;49;29-38;Female;One In One Pants;Thick;0.21787709497206706;$;Winter
 338991102_2;No Color;Extra Thick;1;29-38;Female;One Pants;Thicker;0.329608938547486;Y;Winter
 339002601_2;Other;No Size;46;29-38;Female;One Internal Pants;Thick;0.1340782122905028;$;Winter
-339007600_2;No Color;Sheer;48;18-28;Female;One-Piece Pants Inside;Thin;0.024860335195530728;.;Autumn
+339007600_2;No Color;Sheer;48;18-28;Female;One-Piece Pants Inside;Thin;0.024860335195530728;Y;Autumn
 339012200_2;No Color;Thick;51;29-38;Female;One-Piece Pants Inside;Thick;0.05027932960893855;Y;Winter
 339012400_2;Other;Thick;51;29-38;Female;One-Piece Pants Inside;Thick;0.06424581005586592;$;Winter
 339014900_2;Black;Medium Thick;39;29-38;Female;One-Piece Pants;Medium Thick;0.2737430167597765;$;Winter
@@ -6449,8 +6449,8 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 345005100_2;No Color;18cm-20cm;10;7-9;Boys;Socks;Stockings;0.03324022346368716;$;Spring
 345005500_2;No Color;20cm-22cm;10;10-15;Boys;Socks;Stockings;0.03324022346368716;$;Spring
 345007600_2;No Color;No Size;33;7-9;Boys;Socks;Tube Socks;0.05027932960893855;Y;Autumn
-345008400_2;No Color;No Size;24;7-9;Boys;Socks;Stockings;0.004189944134078213;.;Autumn
-345008500_2;No Color;No Size;37;7-9;Boys;Socks;Wool Socks;0.006983240223463687;.;Winter
+345008400_2;No Color;No Size;24;7-9;Boys;Socks;Stockings;0.004189944134078213;Y;Autumn
+345008500_2;No Color;No Size;37;7-9;Boys;Socks;Wool Socks;0.006983240223463687;Y;Winter
 345008800_2;No Color;16cm-18cm;41;10-15;Boys;Socks;Wool Socks;0.019553072625698324;Y;Winter
 345008900_2;No Color;16cm-18cm;41;10-15;Boys;Socks;Wool Socks;0.019553072625698324;Y;Winter
 345009100_2;No Color;16cm-18cm;41;10-15;Boys;Socks;Wool Socks;0.019553072625698324;Y;Winter
@@ -6582,8 +6582,8 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 345607400_2;No Color;No Size;3;7-9;Boys;Socks;Stockings;0.0223463687150838;Y;Spring
 345607500_2;No Color;No Size;3;7-9;Boys;Socks;Stockings;0.0223463687150838;Y;Spring
 345607600_2;No Color;No Size;3;7-9;Boys;Socks;Stockings;0.0223463687150838;Y;Spring
-345650300_2;Other;No Size;21;4-6;Boys;Socks;Stockings;0.015363128491620113;.;Spring
-345650301_2;Other;No Size;21;7-9;Boys;Socks;Stockings;0.012569832402234637;.;Spring
+345650300_2;Other;No Size;21;4-6;Boys;Socks;Stockings;0.015363128491620113;Y;Spring
+345650301_2;Other;No Size;21;7-9;Boys;Socks;Stockings;0.012569832402234637;Y;Spring
 345750700_2;Other;18cm-20cm;31;7-9;Boys;Socks;Tube Socks;0.0111731843575419;Y;Spring
 345750800_2;No Color;16cm-18cm;13;4-6;Boys;Socks;Tube Socks;0.0111731843575419;Y;Spring
 345750801_2;No Color;18cm-20cm;13;7-9;Boys;Socks;Tube Socks;0.0111731843575419;Y;Spring
@@ -6593,7 +6593,7 @@ Product;Color;Size;Ldate;Age Group;Person;Pname;Ptype;Tprice;Currency;Sales Seas
 346000000_2;White;Ultra Sheer;19;7-9;Girls;Pantyhose;Core Wrap;0.05027932960893855;$;Spring
 346606100_2;Other;No Size;21;7-9;Girls;Pantyhose;Core Wrap;0.039106145251396655;Y;Spring
 347000000_2;White;Ultra Sheer;19;7-9;Girls;Pantyhose;Velvet;0.05027932960893855;Y;Spring
-347000200_2;No Color;Sheer;32;7-9;Girls;Pantyhose;Velvet;0.024860335195530728;.;Spring
+347000200_2;No Color;Sheer;32;7-9;Girls;Pantyhose;Velvet;0.024860335195530728;Y;Spring
 347000400_2;White;30D;31;7-9;Girls;Pantyhose;Velvet;0.05027932960893855;Y;Autumn
 347000500_2;White;30D;31;7-9;Girls;Pantyhose;Velvet;0.05027932960893855;Y;Autumn
 347000600_2;Black;30D;31;7-9;Girls;Pantyhose;Velvet;0.05027932960893855;Y;Autumn
@@ -6895,12 +6895,12 @@ C1348888_2;No Color;JM;1;29-38;Men;Socks;Stockings;0.030726256983240222;Y;Autumn
 C1348889_2;No Color;JM;1;29-38;Men;Socks;Stockings;0.0223463687150838;Y;Autumn
 C1400075_2;No Color;JM;1;29-38;Men;Socks;Tube Socks;0.039106145251396655;$;Spring
 C1413006_2;No Color;JM;1;29-38;Men;Socks;Stockings;0.030726256983240222;Y;Autumn
-C1436683_2;No Color;JM;1;7-9;Boys;Socks;Stockings;0.009776536312849162;.;Autumn
+C1436683_2;No Color;JM;1;7-9;Boys;Socks;Stockings;0.009776536312849162;Y;Autumn
 C1438109_2;No Color;JM;1;7-9;Boys;Socks;Stockings;0.030726256983240222;Y;Winter
 C1438182_2;No Color;JM;1;7-9;Boys;Socks;Stockings;0.030726256983240222;Y;Winter
 C1438432_2;No Color;JM;1;29-38;Men;Socks;Stockings;0.018156424581005588;$;Autumn
 C1439253_2;No Color;JM;1;29-38;Female;Socks;Stockings;0.019553072625698324;Y;Winter
-C1460091_2;No Color;JM;1;29-38;Female;Socks;Stockings;0.006983240223463687;.;Spring
+C1460091_2;No Color;JM;1;29-38;Female;Socks;Stockings;0.006983240223463687;Y;Spring
 C1461348_2;No Color;JM;1;29-38;Men;Socks;Stockings;0.030726256983240222;Y;Autumn
 C1461383_2;No Color;JM;1;29-38;Men;Socks;Stockings;0.0782122905027933;Y;Autumn
 C1461502_2;No Color;JM;1;29-38;Female;Socks;Tube Socks;0.039106145251396655;Y;Winter
@@ -6915,11 +6915,11 @@ C1547110_2;No Color;JM;1;29-38;Female;Socks;Tube Socks;0.039106145251396655;Y;Sp
 C1548071_2;No Color;JM;1;29-38;Female;Socks;Stockings;0.03240223463687151;$;Autumn
 C1550006_2;No Color;JM;1;7-9;Boys;Socks;Stockings;0.008379888268156424;Y;Autumn
 C1550220_2;No Color;JM;1;29-38;Men;Socks;Stockings;0.01675977653631285;$;Winter
-C1690060_2;No Color;JM;1;29-38;Female;Socks;Stockings;0.006983240223463687;.;Spring
-C8436291_2;No Color;JM;1;7-9;Boys;Socks;Stockings;0.012569832402234637;.;Autumn
+C1690060_2;No Color;JM;1;29-38;Female;Socks;Stockings;0.006983240223463687;Y;Spring
+C8436291_2;No Color;JM;1;7-9;Boys;Socks;Stockings;0.012569832402234637;Y;Autumn
 C9991010_2;No Color;JM;1;29-38;Female;Socks;Stockings;0.039106145251396655;$;Autumn
 CA010926_2;Black;JM;1;29-38;Female;Socks;Stockings;0.002793296089385475;Y;Spring
-CA014237_2;Black;JM;1;29-38;Female;Socks;Stockings;0.006983240223463687;.;Spring
+CA014237_2;Black;JM;1;29-38;Female;Socks;Stockings;0.006983240223463687;Y;Spring
 CA241009_2;Black;JM;1;29-38;Female;Socks;Boat Socks;0.0111731843575419;Y;Summer
 CA243001_2;Black;JM;1;29-38;Female;Boots;Discontinued;0.013966480446927373;Y;Autumn
 CA321002_2;No Color;JM;1;29-38;Female;Socks;Stockings;0.006983240223463687;$;Winter
@@ -6935,7 +6935,7 @@ CA966008_2;No Color;JM;1;29-38;Men;Socks;Stockings;0.05027932960893855;Y;Spring
 CA966032_2;No Color;JM;1;29-38;Men;Socks;Boat Socks;0.0111731843575419;Y;Spring
 CA966037_2;No Color;JM;1;29-38;Female;Socks;Stockings;0.019553072625698324;Y;Spring
 CA966055_2;No Color;JM;1;29-38;Female;Socks;Boat Socks;0.0223463687150838;Y;Spring
-CA966073_2;No Color;JM;1;29-38;Female;Socks;Boat Socks;0.006983240223463687;.;Spring
+CA966073_2;No Color;JM;1;29-38;Female;Socks;Boat Socks;0.006983240223463687;Y;Spring
 CA966076_2;No Color;JM;1;29-38;Female;Socks;Boat Socks;0.0223463687150838;Y;Spring
 CA966077_2;No Color;JM;1;29-38;Female;Socks;Boat Socks;0.0223463687150838;Y;Spring
 CA966081_2;No Color;JM;1;29-38;Female;Socks;Stockings;0.0223463687150838;Y;Spring
@@ -6943,7 +6943,7 @@ CA966088_2;No Color;JM;1;29-38;Female;Socks;Stockings;0.039106145251396655;$;Aut
 CA966089_2;No Color;JM;1;29-38;Female;Socks;Stockings;0.039106145251396655;$;Autumn
 CA966090_2;No Color;JM;1;29-38;Female;Socks;Stockings;0.039106145251396655;$;Autumn
 CB016002_2;No Color;JM;1;29-38;Female;Socks;Stockings;0.013966480446927373;Y;Spring
-CB016014_2;No Color;JM;1;29-38;Female;Socks;Stockings;0.006983240223463687;.;Spring
+CB016014_2;No Color;JM;1;29-38;Female;Socks;Stockings;0.006983240223463687;Y;Spring
 CB016016_2;No Color;JM;1;29-38;Female;Socks;Boat Socks;0.0111731843575419;Y;Spring
 CB016017_2;No Color;JM;1;29-38;Female;Socks;Boat Socks;0.0111731843575419;Y;Spring
 CB016018_2;No Color;JM;1;29-38;Female;Socks;Boat Socks;0.0111731843575419;Y;Spring
@@ -6958,7 +6958,7 @@ D0068011_2;No Color;JM;1;29-38;Female;Pantyhose;Core Material;0.0502793296089385
 D0118827_2;No Color;JM;1;29-38;Female;One-Piece Pants Inside;Thin;0.0782122905027933;$;Spring
 D0200056_2;No Color;JM;1;29-38;Female;One-Piece Pants Inside;Thick;0.05027932960893855;Y;Winter
 D0200107_2;No Color;JM;1;29-38;Female;Pantyhose;Core Wrap;0.0782122905027933;Y;Spring
-D0201214_2;No Color;JM;1;29-38;Female;Pantyhose;Core Wrap;0.006983240223463687;.;Spring
+D0201214_2;No Color;JM;1;29-38;Female;Pantyhose;Core Wrap;0.006983240223463687;Y;Spring
 D0201402_2;No Color;JM;1;29-38;Female;Pantyhose;Velvet;0.0782122905027933;Y;Autumn
 D0201751_2;No Color;JM;1;29-38;Female;Pantyhose;Velvet;0.0782122905027933;Y;Autumn
 D0206000_2;No Color;JM;1;29-38;Female;Pantyhose;Core Material;0.05027932960893855;Y;Spring
