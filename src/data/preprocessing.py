@@ -18,11 +18,10 @@ from scipy import stats
 from scipy.stats import mstats
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
-from external import kMedoids
 
 load_dotenv(find_dotenv())
 
-root_dir = os.path.join(os.getcwd(), os.pardir,os.pardir)
+
 # add the 'src' directory as one where we can import modules
 
 # logger = logging.getLogger(__name__)
@@ -232,6 +231,23 @@ def remove_rare(data,t = 5):
     return data[~mask]
 
 
+# def get_scaled_series(data):
+#     """Returns a standard scaled dataframe
+    
+#     Arguments:
+#         data {Dataframe} -- Pandas dataframe
+    
+#     Returns:
+#         Dataframe -- Scaled Dataframe
+#         StandardScaler -- the standard scaler used
+#     """
+
+#     d = data.as_matrix().astype(float)
+#     std_scaler = StandardScaler(with_mean=True, with_std=True).fit(d.T)
+#     X_z = std_scaler.transform(data.T).T
+#     return X_z,std_scaler
+
+
 def get_scaled_series(data):
     """Returns a standard scaled dataframe
     
@@ -242,12 +258,9 @@ def get_scaled_series(data):
         Dataframe -- Scaled Dataframe
         StandardScaler -- the standard scaler used
     """
-
-    d = data.as_matrix().astype(float)
-    std_scaler = StandardScaler(with_mean=True, with_std=True).fit(d.T)
-    X_z = std_scaler.transform(data.T).T
-    return X_z,std_scaler
-
+    std_scaler = StandardScaler(with_mean=True, with_std=True)
+    df = pd.DataFrame(std_scaler.fit_transform(data),index = data.index,columns=data.columns)
+    return df,std_scaler
 
 def data_with_headers(series,data,raw_df):
     """Add headers to data (only timeseries)

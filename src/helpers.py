@@ -2,9 +2,6 @@ import pandas as pd
 import math
 import numpy as np
 
-import pandas as pd
-import numpy as np
-
 from sklearn import metrics
 
 import matplotlib.pyplot as plt

@@ -56,15 +56,26 @@ def main():
     keep_features = ["Key_lvl3","Color","Size","Launch Date","Age Group","Sales Season","Tag Price"]
     dataframe  = en_sales_desc[keep_features].copy()
 
-    features_list = ["Color","Size","Ldate","Age Group","Person","Pname","Ptype","Tprice","Currency","Sales Season"]
+    prp.save_file(dataframe,"temp",index=True)
+    # add number of clients
+    p2c = prp.load_file("p2c1_count",index="Product")
+    # store_counts = prp.load_file("store_counts",index="Product")
+
+    dataframe = dataframe.join(p2c,how="left").fillna(0)
+    dataframe["Missing"] = 0
 
 
+    features_list = ["Color","Size","Ldate","Age Group","Person","Pname","Ptype","Tprice","Currency","Sales Season","Nstore"]#+list(store_counts.columns)
+    
+
+    
     raw_df = dataframe.copy()
 
-    features = extract_features(raw_df, non_categorical =["Tprice","Ldate"] )
+    features = extract_features(raw_df, non_categorical =["Tprice","Nstore"])
     features_df = features[features_list]
 
     prp.save_file(features_df,"clf_features",type_="P",index = True)
+
     print("Data set succefully made !")
 
 
@@ -79,25 +90,71 @@ def extract_features(rdf, non_categorical):
     data_frame["Pname"] = data_frame["Key_lvl3"].map(lambda x: GetInfo(x,1))
     data_frame["Ptype"] = data_frame["Key_lvl3"].map(lambda x: GetInfo(x,2))
     data_frame["Price"] = data_frame["Key_lvl3"].map(lambda x: GetInfo(x,3))
+
+    data_frame["Nstore"] = data_frame["Client"]
+
     # season = rdf["Sales Season"].min()
     # data_frame["Launch Date"] = data_frame["Launch Date"].map(lambda x: date_to_week(x,season)).astype(str)
     data_frame["Ldate"] = data_frame["Launch Date"].map(lambda x: get_week_number(x)).astype(str)
     data_frame.drop(["Key_lvl3"],axis=1,inplace  = True)
 
     data_frame["Tprice"] = data_frame["Tag Price"] 
-    if "Tprice" in non_categorical:
-        prices = data_frame.Tprice.values.reshape((-1,1))
-        scaled = MinMaxScaler().fit_transform(prices)
-        data_frame["Tprice"] = scaled.astype(np.float64)
+
+
+    for num_fearture in non_categorical:
+        values = data_frame[num_fearture].values.astype(np.float64).reshape((-1,1))
+        scaled = MinMaxScaler().fit_transform(values)
+        data_frame[num_fearture] = scaled.astype(np.float64)
 
     data_frame["Currency"] = data_frame["Price"].map(lambda x: re.findall(r'[^\d\.]',x)[0] if (len(re.findall(r'[^\d\.]',x))>0) else "Y")
     #missing values
     data_frame.Person.fillna("Female")
 
     data_frame.Pname.fillna("One-Piece Pants Inside")
+
+    #reduce colors:
+    data_frame.pipe(_reduce_colors)
     
     return data_frame
 
+
+def _reduce_colors(df):
+    df.loc[df.Color.str.contains("Grey"),"Color"]="Grey"
+    df.loc[df.Color.str.contains("Gray"),"Color"]="Grey"
+
+    df.loc[df.Color.str.contains("Blue"),"Color"]="Blue"
+    df.loc[df.Color.str.contains("Cyan"),"Color"]="Blue"
+    df.loc[df.Color.str.contains("Navy"),"Color"]="Blue"
+
+    df.loc[df.Color.str.contains("Red"),"Color"]="Red"
+
+    df.loc[df.Color.str.contains("No Color"),"Color"]="Other"
+
+    df.loc[df.Color.str.contains("Green"),"Color"]="Green"
+
+    df.loc[df.Color.str.contains("Pink"),"Color"]="Pink"
+    df.loc[df.Color.str.contains("Purple"),"Color"]="Pink"
+    df.loc[df.Color.str.contains("Rose"),"Color"]="Pink"
+    df.loc[df.Color.str.contains("Pink"),"Color"]="Pink"
+
+    df.loc[df.Color.str.contains("Brown"),"Color"]="Brown"
+    df.loc[df.Color.str.contains("Cameo"),"Color"]="Brown"
+    df.loc[df.Color.str.contains("Coffee"),"Color"]="Brown"
+    df.loc[df.Color.str.contains("Sheer Beige"),"Color"]="Brown"
+
+
+    df.loc[df.Color.str.contains("Black"),"Color"]="Black"
+    return df
+
+
+def _discretize_client(nb_client):
+    if nb_client>1000: return 7
+    if nb_client>500: return 6
+    if nb_client>150: return 5
+    if nb_client>50: return 4
+    if nb_client>10: return 3
+    if nb_client>5: return 2
+    return 1
 
 def _get_price(s):
     """Get the price from the key_lvl3 using a regex

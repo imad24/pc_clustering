@@ -1,0 +1,2172 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{0.4-imad-cluster-analysis}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Exploring Clustering
+Results}\label{exploring-clustering-results}
+
+The file containing the clustering results is stored in the processed
+data folder with the suffix clean. The index is set to the first
+\textbf{Product group key}.
+
+As a reminder the file is organized in three columns: \emph{Product
+Group Key}, \emph{Cluster Number} and the corresponding \emph{Centroid}
+of the cluster.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{o}{\PYZpc{}}\PY{k}{load\PYZus{}ext} autoreload
+         \PY{c+c1}{\PYZsh{} always reload modules marked with \PYZdq{}\PYZpc{}aimport\PYZdq{}}
+         \PY{o}{\PYZpc{}}\PY{k}{autoreload} 1
+         
+         
+         \PY{k+kn}{import} \PY{n+nn}{os}
+         \PY{k+kn}{import} \PY{n+nn}{sys}
+         \PY{c+c1}{\PYZsh{} add the \PYZsq{}src\PYZsq{} directory as one where we can import modules}
+         \PY{n}{root\PYZus{}dir} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{getcwd}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{os}\PY{o}{.}\PY{n}{pardir}\PY{p}{,}\PY{n}{os}\PY{o}{.}\PY{n}{pardir}\PY{p}{)}
+         \PY{n}{src\PYZus{}dir} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{getcwd}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{os}\PY{o}{.}\PY{n}{pardir}\PY{p}{,}\PY{n}{os}\PY{o}{.}\PY{n}{pardir}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{src}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{if} \PY{n}{src\PYZus{}dir} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{sys}\PY{o}{.}\PY{n}{path}\PY{p}{:} \PY{n}{sys}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{src\PYZus{}dir}\PY{p}{)}
+         
+         
+         \PY{k+kn}{from} \PY{n+nn}{data} \PY{k}{import} \PY{n}{preprocessing} \PY{k}{as} \PY{n}{prp}
+         \PY{o}{\PYZpc{}}\PY{k}{aimport} data.preprocessing
+         
+         
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{math}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{import} \PY{n+nn}{copy} \PY{k}{as} \PY{n+nn}{cp}
+         
+         \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+         
+         \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{sm}
+         \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{chisquare}
+         
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{classification\PYZus{}report}\PY{p}{,} \PY{n}{confusion\PYZus{}matrix}\PY{p}{,}\PY{n}{mean\PYZus{}squared\PYZus{}error} \PY{k}{as} \PY{n}{MSE}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{precision\PYZus{}recall\PYZus{}fscore\PYZus{}support} \PY{k}{as} \PY{n}{report}
+         
+         \PY{k+kn}{import} \PY{n+nn}{helpers} \PY{k}{as} \PY{n+nn}{hlp}
+         \PY{o}{\PYZpc{}}\PY{k}{aimport} helpers
+         \PY{k+kn}{from} \PY{n+nn}{data} \PY{k}{import} \PY{n}{preprocessing} \PY{k}{as} \PY{n}{prp}
+         \PY{o}{\PYZpc{}}\PY{k}{aimport} data.preprocessing
+         
+         \PY{n}{pd}\PY{o}{.}\PY{n}{options}\PY{o}{.}\PY{n}{display}\PY{o}{.}\PY{n}{max\PYZus{}rows} \PY{o}{=} \PY{l+m+mi}{10}
+         
+         \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{display}
+         
+         \PY{k+kn}{from} \PY{n+nn}{dotenv} \PY{k}{import} \PY{n}{find\PYZus{}dotenv}\PY{p}{,} \PY{n}{load\PYZus{}dotenv}
+         \PY{c+c1}{\PYZsh{}Load env vars}
+         \PY{n}{load\PYZus{}dotenv}\PY{p}{(}\PY{n}{find\PYZus{}dotenv}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{subfolder} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{getenv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SUBFOLDER}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{PREFIX} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{getenv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PREFIX}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{raw\PYZus{}path} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{root\PYZus{}dir}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{raw}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{subfolder}\PY{p}{)}
+         \PY{n}{interim\PYZus{}path} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{root\PYZus{}dir}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{interim}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{subfolder}\PY{p}{)} 
+         \PY{n}{processed\PYZus{}path} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{root\PYZus{}dir}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{processed}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{subfolder}\PY{p}{)} 
+         
+         \PY{n}{reports\PYZus{}path} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{root\PYZus{}dir}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{reports}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{subfolder}\PY{p}{)}
+         \PY{n}{models\PYZus{}path} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{root\PYZus{}dir}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{models}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{subfolder}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The autoreload extension is already loaded. To reload it, use:
+  \%reload\_ext autoreload
+
+    \end{Verbatim}
+
+    \subsection{Feature Engineering}\label{feature-engineering}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}908}]:} \PY{o}{!} python c:/Users/rahmim00/Documents/Notebooks/Clustering/pc\PYZus{}clustering/src/features/build\PYZus{}features.py
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Data set succefully made !
+encoders saved
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}509}]:} \PY{n}{s} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Autumn}\PY{l+s+s2}{\PYZdq{}}
+          \PY{n}{v} \PY{o}{=} \PY{l+m+mi}{1}
+          \PY{n}{file\PYZus{}name} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{7C\PYZus{}euc\PYZus{}p2\PYZus{}clustering\PYZus{}clean\PYZus{}week\PYZus{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{\PYZus{}v}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{.csv}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{s}\PY{p}{,}\PY{n}{v}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}Series files}
+          \PY{n}{raw\PYZus{}df} \PY{o}{=} \PY{n}{prp}\PY{o}{.}\PY{n}{load\PYZus{}file}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{product\PYZus{}sales\PYZus{}raw}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{type\PYZus{}}\PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{version}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Product}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{float64}\PY{p}{)}
+          \PY{n}{raw\PYZus{}df}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{raw\PYZus{}df}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)} 
+          
+          \PY{n}{clean\PYZus{}df} \PY{o}{=} \PY{n}{prp}\PY{o}{.}\PY{n}{load\PYZus{}file}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p2\PYZus{}clean\PYZus{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}}\PY{k}{s}, type\PYZus{}= \PYZdq{}I\PYZdq{},version=1).set\PYZus{}index(\PYZdq{}Product\PYZdq{}).astype(np.float64)
+          \PY{n}{zclean\PYZus{}df} \PY{o}{=} \PY{n}{prp}\PY{o}{.}\PY{n}{load\PYZus{}file}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p2\PYZus{}z\PYZus{}clean\PYZus{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}}\PY{k}{s}, type\PYZus{}= \PYZdq{}P\PYZdq{},version=1).set\PYZus{}index(\PYZdq{}Product\PYZdq{}).astype(np.float64)
+          
+          \PY{c+c1}{\PYZsh{}clustering result}
+          \PY{n}{prd\PYZus{}cluster\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{models\PYZus{}path}\PY{o}{+}\PY{n}{file\PYZus{}name}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unnamed: 0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Product}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}cleaned features}
+          \PY{n}{features\PYZus{}df} \PY{o}{=} \PY{n}{prp}\PY{o}{.}\PY{n}{load\PYZus{}file}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{clf\PYZus{}features}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{type\PYZus{}}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{P}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{index} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Product}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{features\PYZus{}df}\PY{o}{.}\PY{n}{Ldate} \PY{o}{=} \PY{n}{features\PYZus{}df}\PY{o}{.}\PY{n}{Ldate}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{numeric} \PY{o}{=} \PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{features\PYZus{}df}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{to\PYZus{}series}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{features\PYZus{}df}\PY{o}{.}\PY{n}{dtypes}\PY{p}{)}\PY{o}{.}\PY{n}{groups}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{dtype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{features\PYZus{}list} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{features\PYZus{}df}\PY{o}{.}\PY{n}{columns}\PY{p}{)} \PY{o}{+} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cluster}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          
+          \PY{n}{df} \PY{o}{=} \PY{n}{features\PYZus{}df}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{prd\PYZus{}cluster\PYZus{}df}\PY{p}{,}\PY{n}{how}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inner}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{[}\PY{n}{features\PYZus{}list}\PY{p}{]}
+          
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+          \PY{n}{clean\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(1046, 12)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}509}]:}                  1       2       3       4       5      6      7      8  \textbackslash{}
+          Product                                                                   
+          3.6E+101\_2     1.0     8.0    18.0    18.0    12.0    8.0    9.0    6.0   
+          31C000963\_2  205.0  1379.0  1743.0  1178.0  1023.0  640.0  450.0  351.0   
+          
+                           9     10    11    12    13     14     15    16  
+          Product                                                          
+          3.6E+101\_2     0.0    0.0   0.0   0.0   1.0    1.0    0.0   0.0  
+          31C000963\_2  186.0  106.0  96.0  96.0  94.0  122.0  102.0  87.0  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}336}]:} \PY{n}{df}\PY{o}{.}\PY{n}{Cluster}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}336}]:} 10    140
+          11    138
+          9     129
+          6     115
+          7      95
+               {\ldots} 
+          4      68
+          8      55
+          2      48
+          3      44
+          12     43
+          Name: Cluster, dtype: int64
+\end{Verbatim}
+            
+    \subsection{Classification Models}\label{classification-models}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}510}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{base} \PY{k}{import} \PY{n}{BaseEstimator}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{RandomForestClassifier}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neighbors} \PY{k}{import} \PY{n}{KNeighborsClassifier}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{tree} \PY{k}{import} \PY{n}{DecisionTreeClassifier}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neural\PYZus{}network} \PY{k}{import} \PY{n}{MLPClassifier}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{SVC}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{naive\PYZus{}bayes} \PY{k}{import} \PY{n}{GaussianNB}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{dummy} \PY{k}{import} \PY{n}{DummyClassifier}
+          
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}  
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{OneHotEncoder}\PY{p}{,}\PY{n}{LabelBinarizer}\PY{p}{,}\PY{n}{LabelEncoder}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{tree} \PY{k}{import}  \PY{n}{export\PYZus{}graphviz}
+          \PY{k+kn}{import} \PY{n+nn}{subprocess}
+          
+          
+          \PY{k}{def} \PY{n+nf}{visualize\PYZus{}tree}\PY{p}{(}\PY{n}{tree}\PY{p}{,} \PY{n}{feature\PYZus{}names}\PY{p}{,}\PY{n}{class\PYZus{}names}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+              
+              \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{reports\PYZus{}path}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dt.dot}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+                  
+                  \PY{n}{export\PYZus{}graphviz}\PY{p}{(}\PY{n}{tree}\PY{p}{,} \PY{n}{out\PYZus{}file}\PY{o}{=}\PY{n}{f}\PY{p}{,} \PY{n}{feature\PYZus{}names}\PY{o}{=}\PY{n}{feature\PYZus{}names}\PY{p}{,}  \PY{n}{filled}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{rounded}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{class\PYZus{}names}\PY{o}{=}\PY{k+kc}{True} \PY{p}{)}
+          
+              \PY{n}{command} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C:}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{Program Files (x86)}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{Graphviz2.38}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{bin}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s2}{dot.exe}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}Tpng}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{reports\PYZus{}path}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dt.dot}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}o}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dt.png}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+              
+              \PY{k}{try}\PY{p}{:}
+                  \PY{n}{subprocess}\PY{o}{.}\PY{n}{check\PYZus{}call}\PY{p}{(}\PY{n}{command}\PY{p}{)}
+              \PY{k}{except}\PY{p}{:}
+                  \PY{n}{exit}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Could not run dot, ie graphviz, to }\PY{l+s+s2}{\PYZdq{}}
+                       \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{produce visualization}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          
+          \PY{n}{features\PYZus{}df} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{features\PYZus{}list}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+          \PY{n}{data} \PY{o}{=} \PY{n}{features\PYZus{}df}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+          \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Sales Season}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Summer}\PY{l+s+s2}{\PYZdq{}}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+          \PY{n}{display}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(1046, 12)
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+             Color     Size Ldate Age Group    Person                   Pname  \
+Product                                                                         
+3.6E+101_2   Other    Thick    36     29-38  Pregnant         One-Piece Pants   
+31C000963_2  Black    Sheer    40     29-38    Female  One-Piece Pants Inside   
+31C002201_2   Grey  No Size    36     18-28    Female  One-Piece Pants Inside   
+31C002300_2  Black    Sheer    43     29-38    Female  One-Piece Pants Inside   
+31C002400_2  Black    Sheer    37     29-38    Female  One-Piece Pants Inside   
+
+            Ptype    Tprice Currency Sales Season    Nstore  Cluster  
+Product                                                               
+3.6E+101_2   Thin  0.134078        Y       Summer  0.001551        8  
+31C000963_2  Thin  0.078212        $       Summer  0.104218        4  
+31C002201_2  Thin  0.078212        $       Summer  0.008065       11  
+31C002300_2  Thin  0.078212        $       Summer  0.105149        3  
+31C002400_2  Thin  0.106145        $       Summer  0.106390       10  
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}511}]:} \PY{c+c1}{\PYZsh{} X  = pd.get\PYZus{}dummies(data.drop([\PYZdq{}Cluster\PYZdq{}],axis=1).iloc[:,:])}
+          \PY{n}{X} \PY{o}{=} \PY{n}{prp}\PY{o}{.}\PY{n}{encode}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cluster}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{n}{non\PYZus{}categorical} \PY{o}{=} \PY{n}{numeric}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} X.drop([\PYZdq{}Nstore\PYZdq{}], axis= 1,inplace = True)}
+          \PY{n}{feature\PYZus{}labels} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{columns}
+          \PY{n}{y} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cluster}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+          
+          \PY{n}{series} \PY{o}{=} \PY{n}{clean\PYZus{}df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+          \PY{n}{series} \PY{o}{=} \PY{n}{series}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{x} \PY{o}{/} \PY{n}{x}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          
+          
+          \PY{n}{X\PYZus{}s} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{series}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} classifier = DecisionTreeClassifier(criterion = \PYZdq{}gini\PYZdq{}, max\PYZus{}depth=3, min\PYZus{}samples\PYZus{}leaf=4)  }
+          \PY{c+c1}{\PYZsh{} classifier = SVC(C=0.1, class\PYZus{}weight=\PYZsq{}balanced\PYZsq{})}
+          \PY{n}{classifier} \PY{o}{=} \PY{n}{RandomForestClassifier}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,}\PY{n}{max\PYZus{}depth}\PY{o}{=}\PY{l+m+mi}{12}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} classifier = KNeighborsClassifier(n\PYZus{}neighbors=15,weights=\PYZsq{}uniform\PYZsq{}, algorithm=\PYZsq{}auto\PYZsq{});}
+          \PY{c+c1}{\PYZsh{} classifier = MLPClassifier(hidden\PYZus{}layer\PYZus{}sizes=(16,8),solver=\PYZsq{}lbfgs\PYZsq{},max\PYZus{}iter=2000,verbose = True)\PYZsh{}8,5}
+          \PY{c+c1}{\PYZsh{} classifier = GaussianNB()}
+          \PY{n}{X}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} classifier = DummyClassifier()}
+          \PY{c+c1}{\PYZsh{} y = y.sample(frac=1)}
+          \PY{c+c1}{\PYZsh{} y.head()}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(1046, 160)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}511}]:}              Currency\_\$  Currency\_Y  Sales Season\_Autumn  Sales Season\_Spring  \textbackslash{}
+          Product                                                                         
+          3.6E+101\_2          0.0         0.0                  1.0                  0.0   
+          31C000963\_2         0.0         0.0                  1.0                  0.0   
+          31C002201\_2         0.0         1.0                  0.0                  0.0   
+          
+                       Sales Season\_Summer  Sales Season\_Winter  Color\_Black  \textbackslash{}
+          Product                                                              
+          3.6E+101\_2                   0.0                  0.0          0.0   
+          31C000963\_2                  0.0                  0.0          1.0   
+          31C002201\_2                  0.0                  0.0          0.0   
+          
+                       Color\_Blue  Color\_Brown  Color\_Green    {\ldots}     Size\_Thick  \textbackslash{}
+          Product                                              {\ldots}                  
+          3.6E+101\_2          0.0          0.0          0.0    {\ldots}            0.0   
+          31C000963\_2         0.0          0.0          0.0    {\ldots}            0.0   
+          31C002201\_2         0.0          0.0          0.0    {\ldots}            0.0   
+          
+                       Size\_Ultra Sheer  Size\_Ultra Thick  Person\_Boys  Person\_Female  \textbackslash{}
+          Product                                                                       
+          3.6E+101\_2                0.0               0.0          0.0            0.0   
+          31C000963\_2               0.0               0.0          0.0            1.0   
+          31C002201\_2               0.0               0.0          1.0            0.0   
+          
+                       Person\_Girls  Person\_Men  Person\_Pregnant    Tprice    Nstore  
+          Product                                                                     
+          3.6E+101\_2            1.0         0.0              0.0  0.134078  0.001551  
+          31C000963\_2           0.0         0.0              0.0  0.078212  0.104218  
+          31C002201\_2           0.0         0.0              0.0  0.078212  0.008065  
+          
+          [3 rows x 160 columns]
+\end{Verbatim}
+            
+    \subsection{Standard evaluation metrics of the
+algorithm}\label{standard-evaluation-metrics-of-the-algorithm}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}544}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{accuracy\PYZus{}score}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{cross\PYZus{}val\PYZus{}score}
+          
+          \PY{n}{classifier} \PY{o}{=} \PY{n}{RandomForestClassifier}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{80}\PY{p}{,}\PY{n}{max\PYZus{}depth}\PY{o}{=}\PY{l+m+mi}{18}\PY{p}{,}\PY{n}{min\PYZus{}samples\PYZus{}split}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{min\PYZus{}samples\PYZus{}leaf}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{criterion}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gini}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{bootstrap}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          
+          \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.15}\PY{p}{)}  
+          
+          
+          \PY{c+c1}{\PYZsh{} scores = cross\PYZus{}val\PYZus{}score(classifier, X, y, cv=5, scoring=\PYZsq{}f1\PYZus{}macro\PYZsq{})}
+          \PY{c+c1}{\PYZsh{} print(scores,scores.mean())}
+          
+          
+          \PY{n}{classifier}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+          \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{classifier}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+          \PY{n}{y\PYZus{}pred\PYZus{}proba} \PY{o}{=} \PY{n}{classifier}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+          \PY{n}{yt\PYZus{}pred} \PY{o}{=} \PY{n}{classifier}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} print(confusion\PYZus{}matrix(y\PYZus{}test, y\PYZus{}pred) }
+          \PY{c+c1}{\PYZsh{} precision,recall,fscore,support = report(y\PYZus{}test, y\PYZus{}pred,warn\PYZus{}for=(),labels=np.unique(y\PYZus{}pred))}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Train}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{,}\PY{n}{yt\PYZus{}pred}\PY{p}{,}\PY{n}{labels}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{)} \PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{54}\PY{o}{*}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}pred}\PY{p}{,}\PY{n}{labels}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{)} \PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{54}\PY{o}{*}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Train
+
+avg / total       0.98      0.98      0.98       889
+
+Test
+
+avg / total       0.44      0.38      0.39       157
+
+
+    \end{Verbatim}
+
+    \subsubsection{Random Search}\label{random-search}
+from time import time
+from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import RandomizedSearchCV
+from scipy.stats import randint as sp_randint
+
+
+clf = RandomForestClassifier(n_estimators=200)
+
+
+# Utility function to report best scores
+def report(results, n_top=3):
+    for i in range(1, n_top + 1):
+        candidates = np.flatnonzero(results['rank_test_score'] == i)
+        for candidate in candidates:
+            print("Model with rank: {0}".format(i))
+            print("Mean validation score: {0:.3f} (std: {1:.3f})".format(
+                  results['mean_test_score'][candidate],
+                  results['std_test_score'][candidate]))
+            print("Parameters: {0}".format(results['params'][candidate]))
+            print("")
+
+
+# specify parameters and distributions to sample from
+param_dist = {
+              "max_depth": [10, None],
+              "max_features": [None],
+              "min_samples_split": sp_randint(2, 11),
+              "min_samples_leaf": sp_randint(1, 11),
+              "bootstrap": [True, False],
+              "criterion": ["gini", "entropy"]}
+
+# run randomized search
+n_iter_search = 20
+random_search = RandomizedSearchCV(clf, param_distributions=param_dist,
+                                   n_iter=n_iter_search)
+
+start = time()
+random_search.fit(X, y)
+print("RandomizedSearchCV took %.2f seconds for %d candidates"
+      " parameter settings." % ((time() - start), n_iter_search))
+report(random_search.cv_results_)
+    \subsubsection{Grid Search}\label{grid-search}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}546}]:} \PY{k+kn}{from} \PY{n+nn}{time} \PY{k}{import} \PY{n}{time}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{GridSearchCV}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{RandomizedSearchCV}
+          \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{randint} \PY{k}{as} \PY{n}{sp\PYZus{}randint}
+          
+          
+          \PY{n}{clf} \PY{o}{=} \PY{n}{RandomForestClassifier}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{param\PYZus{}grid} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{n\PYZus{}estimators}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{p}{[}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{80}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{150}\PY{p}{,}\PY{l+m+mi}{200}\PY{p}{]}\PY{p}{,}
+                        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{max\PYZus{}depth}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{]}\PY{p}{,}
+                        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{max\PYZus{}features}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{k+kc}{None}\PY{p}{]}\PY{p}{,}
+                        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{min\PYZus{}samples\PYZus{}split}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{]}\PY{p}{,}
+                        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{min\PYZus{}samples\PYZus{}leaf}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{]}\PY{p}{,}
+                        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bootstrap}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{k+kc}{True}\PY{p}{,} \PY{k+kc}{False}\PY{p}{]}\PY{p}{,}
+                        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{criterion}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gini}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{entropy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{\PYZcb{}}
+          
+          \PY{c+c1}{\PYZsh{} run grid search}
+          \PY{n}{grid\PYZus{}search} \PY{o}{=} \PY{n}{GridSearchCV}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{n}{param\PYZus{}grid}\PY{o}{=}\PY{n}{param\PYZus{}grid}\PY{p}{)}
+          \PY{n}{start} \PY{o}{=} \PY{n}{time}\PY{p}{(}\PY{p}{)}
+          \PY{n}{grid\PYZus{}search}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{GridSearchCV took }\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s2}{ seconds for }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ candidate parameter settings.}\PY{l+s+s2}{\PYZdq{}}
+                \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{grid\PYZus{}search}\PY{o}{.}\PY{n}{cv\PYZus{}results\PYZus{}}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{params}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n}{report}\PY{p}{(}\PY{n}{random\PYZus{}search}\PY{o}{.}\PY{n}{cv\PYZus{}results\PYZus{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+GridSearchCV took 2211.84 seconds for 1600 candidate parameter settings.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        NameError                                 Traceback (most recent call last)
+
+        <ipython-input-546-4fa29dc187db> in <module>()
+         22 print("GridSearchCV took \%.2f seconds for \%d candidate parameter settings."
+         23       \% (time() - start, len(grid\_search.cv\_results\_['params'])))
+    ---> 24 report(random\_search.cv\_results\_)
+    
+
+        NameError: name 'random\_search' is not defined
+
+    \end{Verbatim}
+
+    \subsection{RMSE to the center of the predicted
+cluster}\label{rmse-to-the-center-of-the-predicted-cluster}
+
+    \paragraph{Joining the series with the predicted clusters of the test
+set}\label{joining-the-series-with-the-predicted-clusters-of-the-test-set}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}518}]:} \PY{n}{argsorted} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{fliplr}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{y\PYZus{}pred\PYZus{}proba}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+          \PY{n}{nguess} \PY{o}{=} \PY{n}{argsorted}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]}\PY{o}{+}\PY{l+m+mi}{1}
+          
+          \PY{n}{series\PYZus{}df} \PY{o}{=} \PY{n}{raw\PYZus{}df}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+          \PY{n}{predictions} \PY{o}{=} \PY{n}{nguess}
+          \PY{n}{n\PYZus{}pred} \PY{o}{=} \PY{n}{predictions}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+          \PY{n}{pred\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{predictions}\PY{p}{,}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PC}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}}\PY{k}{g} for g in np.arange(n\PYZus{}pred)+1 ],index=X\PYZus{}test.index)
+          
+          \PY{n}{cluster\PYZus{}centroid} \PY{o}{=} \PY{n}{prd\PYZus{}cluster\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cluster}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Centroid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{drop\PYZus{}duplicates}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cluster}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{to\PYZus{}dict}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Centroid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{n}{centroid\PYZus{}cluster} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{v}\PY{p}{:} \PY{n}{k} \PY{k}{for} \PY{n}{k}\PY{p}{,} \PY{n}{v} \PY{o+ow}{in} \PY{n}{cluster\PYZus{}centroid}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZcb{}}
+          
+          
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{n\PYZus{}pred}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{:}
+              \PY{n}{pred\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PR}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}}\PY{k}{i}] = pred\PYZus{}df[\PYZdq{}PC\PYZpc{}d\PYZdq{}\PYZpc{}i].apply(lambda x: cluster\PYZus{}centroid[x])
+              
+          \PY{n}{product\PYZus{}centroid} \PY{o}{=} \PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{prd\PYZus{}cluster\PYZus{}df}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cluster}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Centroid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{full\PYZus{}series} \PY{o}{=} \PY{n}{pred\PYZus{}df}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{product\PYZus{}centroid}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{float64}\PY{p}{)}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inner}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,}\PY{n}{how}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inner}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{full\PYZus{}series}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+          \PY{n}{display}\PY{p}{(}\PY{n}{full\PYZus{}series}\PY{o}{.}\PY{n}{sort\PYZus{}index}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(157, 26)
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+             PC1  PC2  PC3  PC4          PR1          PR2          PR3  \
+Product                                                                  
+3.6E+101_2    10    4   12   11  337015200_2  335036700_2  327032700_2   
+31C002400_2   10    6    7    8  337015200_2  31C999906_2  335055200_2   
+31C003002_2   11    3    5   10  331023400_2  31C999901_2  335023300_2   
+31C999906_2    6   10    7   11  31C999906_2  337015200_2  335055200_2   
+31C999914_2   10    7    6    8  337015200_2  335055200_2  31C999906_2   
+
+                     PR4  Cluster     Centroid   ...         7       8  \
+Product                                          ...                     
+3.6E+101_2   331023400_2        8  332979754_2   ...      12.0     0.0   
+31C002400_2  332979754_2       10  337015200_2   ...     552.0  1310.0   
+31C003002_2  337015200_2       11  331023400_2   ...     142.0    82.0   
+31C999906_2  331023400_2        6  31C999906_2   ...    1080.0  1730.0   
+31C999914_2  332979754_2        7  335055200_2   ...     740.0   770.0   
+
+                  9      10      11      12      13      14      15      16  
+Product                                                                      
+3.6E+101_2      0.0     0.0     0.0     0.0     2.0     0.0     0.0     0.0  
+31C002400_2   618.0   384.0   302.0   176.0   152.0   140.0   210.0    30.0  
+31C003002_2    48.0    38.0    24.0     6.0     6.0     6.0     0.0     2.0  
+31C999906_2  2866.0  2336.0  1862.0  1586.0  1350.0  1282.0   738.0   738.0  
+31C999914_2   824.0  1070.0   642.0   740.0  1542.0  1076.0  1128.0  1092.0  
+
+[5 rows x 26 columns]
+    \end{verbatim}
+
+    
+    \subsubsection{Top-4 Error rate and
+correlation}\label{top-4-error-rate-and-correlation}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}519}]:} \PY{n}{p\PYZus{}series} \PY{o}{=} \PY{n}{full\PYZus{}series}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+          \PY{n}{N} \PY{o}{=} \PY{n}{p\PYZus{}series}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+          \PY{n}{notin} \PY{o}{=} \PY{n}{p\PYZus{}series}\PY{p}{[} \PY{p}{(}\PY{n}{p\PYZus{}series}\PY{o}{.}\PY{n}{Cluster}\PY{o}{!=}\PY{n}{p\PYZus{}series}\PY{o}{.}\PY{n}{PC1}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{p\PYZus{}series}\PY{o}{.}\PY{n}{Cluster}\PY{o}{!=}\PY{n}{p\PYZus{}series}\PY{o}{.}\PY{n}{PC2}\PY{p}{)} \PY{o}{\PYZam{}}\PY{p}{(}\PY{n}{p\PYZus{}series}\PY{o}{.}\PY{n}{Cluster}\PY{o}{!=}\PY{n}{p\PYZus{}series}\PY{o}{.}\PY{n}{PC3}\PY{p}{)}  \PY{o}{\PYZam{}}\PY{p}{(}\PY{n}{p\PYZus{}series}\PY{o}{.}\PY{n}{Cluster}\PY{o}{!=}\PY{n}{p\PYZus{}series}\PY{o}{.}\PY{n}{PC4}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s2}{ Not in Top 4 guesses}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{notin}\PY{o}{/}\PY{n}{N}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+          
+          
+          
+          \PY{n}{offset} \PY{o}{=} \PY{p}{(}\PY{n}{n\PYZus{}pred} \PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{2}
+          \PY{n}{guess} \PY{o}{=} \PY{l+m+mi}{2}
+          
+          \PY{n}{s\PYZus{}true} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+          \PY{n}{s\PYZus{}pred} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+          \PY{n}{RMSE} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{PRMSE} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{CORR} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{SP}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+          \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+          \PY{k}{for} \PY{n}{index}\PY{p}{,}\PY{n}{values} \PY{o+ow}{in} \PY{n}{p\PYZus{}series}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+              \PY{n}{centroid} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PR}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}}\PY{k}{guess}]
+              \PY{n}{cluster} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Centroid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+              
+              \PY{c+c1}{\PYZsh{}Getting the series raw, centroid of actual cluster, centroid of predicted cluster}
+              \PY{n}{series} \PY{o}{=} \PY{p}{(}\PY{n}{values}\PY{p}{[}\PY{n}{offset}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{float64}\PY{p}{)}\PY{c+c1}{\PYZsh{}/values[offset:].std()).astype(np.float64)}
+              \PY{n}{c\PYZus{}series} \PY{o}{=} \PY{p}{(}\PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{cluster}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{float64}\PY{p}{)}\PY{c+c1}{\PYZsh{}/series\PYZus{}df.loc[cluster].std()).astype(np.float64)}
+              \PY{n}{predicted\PYZus{}series} \PY{o}{=} \PY{p}{(}\PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{centroid}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{float64}\PY{p}{)}\PY{c+c1}{\PYZsh{}/series\PYZus{}df.loc[centroid].std()).astype(np.float64)}
+              
+              \PY{n}{s\PYZus{}true}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{series}
+              \PY{n}{s\PYZus{}pred}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{c\PYZus{}series}
+              
+              \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{series}\PY{p}{)}
+              \PY{n}{rmse} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{MSE}\PY{p}{(}\PY{n}{series}\PY{p}{,}\PY{n}{c\PYZus{}series}\PY{p}{)}\PY{o}{/}\PY{n}{n}\PY{p}{)}
+              \PY{n}{prmse} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{MSE}\PY{p}{(}\PY{n}{series}\PY{p}{,}\PY{n}{predicted\PYZus{}series}\PY{p}{)}\PY{o}{/}\PY{n}{n}\PY{p}{)}
+              \PY{n}{corr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{corrcoef}\PY{p}{(}\PY{n}{series}\PY{p}{,}\PY{n}{predicted\PYZus{}series}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+              
+              \PY{n}{RMSE}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{rmse}\PY{p}{)}
+              \PY{n}{PRMSE}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{prmse}\PY{p}{)}
+              \PY{n}{CORR}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{corr}\PY{p}{)}
+              \PY{n}{i}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+              
+            
+          \PY{n}{sales} \PY{o}{=} \PY{n}{p\PYZus{}series}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{offset}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{float64}\PY{p}{)}
+          \PY{n}{p\PYZus{}series}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PRMSE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{PRMSE}
+          \PY{n}{p\PYZus{}series}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{RMSE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{RMSE}
+          \PY{n}{p\PYZus{}series}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{CORR}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{CORR}
+          \PY{n}{results} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{index} \PY{o}{=} \PY{n}{p\PYZus{}series}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+          
+          \PY{n}{results}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mean}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{sales}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{results}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Std}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}  \PY{o}{=} \PY{n}{sales}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{results}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Range}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{sales}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{sales}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{results}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{RMSE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{RMSE}
+          \PY{n}{results}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PRMSE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{PRMSE}
+          \PY{n}{results}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{CORR}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{CORR}
+          
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}.2f}\PY{l+s+s2}{ have less than 70}\PY{l+s+si}{\PYZpc{}\PYZpc{}}\PY{l+s+s2}{ correlation between predicted and actual series}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{results}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{CORR}\PY{o}{\PYZlt{}}\PY{l+m+mf}{0.7}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{/}\PY{n}{N}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+          
+          
+          \PY{n}{results}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{PRMSE} \PY{o}{!=} \PY{n}{results}\PY{o}{.}\PY{n}{RMSE}\PY{p}{]}\PY{o}{.}\PY{n}{nlargest}\PY{p}{(}\PY{l+m+mi}{210}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PRMSE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+21.02 Not in Top 4 guesses
+62.42 have less than 70\% correlation between predicted and actual series
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}519}]:}                 Mean          Std    Range         RMSE        PRMSE      CORR
+          Product                                                                       
+          331995287\_2  5128.75  2723.934184  11032.0  1088.664944  1416.517826  0.075301
+          331900500\_2    81.75    48.728200    152.0    61.777322   743.008917  0.453704
+          337017000\_2   125.25   178.211777    466.0    90.499655   721.456231  0.636085
+          335970850\_2  1887.75  1707.059442   7184.0   331.134579   621.072573  0.239079
+          337015200\_2   750.75   577.446913   2078.0     0.000000   619.607033  0.176545
+\end{Verbatim}
+            
+    \subsubsection{Raw VS Smoothed
+Centroids}\label{raw-vs-smoothed-centroids}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}520}]:} \PY{n}{centroids} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{p\PYZus{}series}\PY{o}{.}\PY{n}{Centroid}\PY{p}{)}\PY{p}{)}
+          \PY{n}{centroids\PYZus{}raw} \PY{o}{=} \PY{n}{raw\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{centroids}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{x}\PY{o}{/}\PY{n}{x}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{centroids\PYZus{}clean} \PY{o}{=} \PY{n}{clean\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{centroids}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{x}\PY{o}{/}\PY{n}{x}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          
+          \PY{n}{n\PYZus{}rows} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{centroids}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}
+          
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{18}\PY{p}{,}\PY{n}{n\PYZus{}rows}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+          \PY{n}{i}\PY{o}{=}\PY{l+m+mi}{1}
+          \PY{k}{for} \PY{n}{index}\PY{p}{,}\PY{n}{value} \PY{o+ow}{in} \PY{n}{centroids\PYZus{}raw}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{n}{n\PYZus{}rows}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{i}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cluster: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{centroid\PYZus{}cluster}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{value}\PY{p}{,}\PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Raw}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{centroids\PYZus{}clean}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Smoothed}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+              \PY{n}{i}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Predictions Plots}\label{predictions-plots}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}521}]:} \PY{n}{bad} \PY{o}{=} \PY{n}{p\PYZus{}series}\PY{p}{[}\PY{n}{p\PYZus{}series}\PY{o}{.}\PY{n}{PRMSE} \PY{o}{!=} \PY{n}{p\PYZus{}series}\PY{o}{.}\PY{n}{RMSE}\PY{p}{]}\PY{o}{.}\PY{n}{nlargest}\PY{p}{(}\PY{l+m+mi}{210}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PRMSE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{good} \PY{o}{=} \PY{n}{p\PYZus{}series}\PY{p}{[}\PY{n}{p\PYZus{}series}\PY{o}{.}\PY{n}{CORR}\PY{o}{\PYZgt{}}\PY{l+m+mf}{0.8}\PY{p}{]}
+          
+          
+          \PY{n}{disp} \PY{o}{=} \PY{n}{p\PYZus{}series}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{]}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{bad}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{12}\PY{p}{]}\PY{p}{]}
+          \PY{n}{display}\PY{p}{(}\PY{n}{disp}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          
+          
+          
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{18}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+          \PY{n}{i}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{;}
+          \PY{k}{for} \PY{n}{index}\PY{p}{,}\PY{n}{values} \PY{o+ow}{in} \PY{n}{disp}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+              \PY{n}{guess1} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PR1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+              \PY{n}{guess2} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PR2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+              \PY{n}{guess3} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PR3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+              \PY{n}{guess4} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PR4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+              \PY{n}{cluster} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Centroid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+              
+              \PY{n}{series} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{n}{offset}\PY{p}{:}\PY{p}{]}\PY{o}{/}\PY{n}{values}\PY{p}{[}\PY{n}{offset}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+              \PY{n}{c\PYZus{}series} \PY{o}{=} \PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{cluster}\PY{p}{]}\PY{o}{/}\PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{cluster}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+              \PY{n}{predicted\PYZus{}series} \PY{o}{=} \PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess1}\PY{p}{]}\PY{o}{/}\PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess1}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+              
+              \PY{n}{p2} \PY{o}{=} \PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess2}\PY{p}{]}\PY{o}{/}\PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess2}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+              \PY{n}{p3} \PY{o}{=} \PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess3}\PY{p}{]}\PY{o}{/}\PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess3}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+              \PY{n}{p4} \PY{o}{=} \PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess4}\PY{p}{]}\PY{o}{/}\PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess4}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+              
+              \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{i}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{series}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Series}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{c\PYZus{}series}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cebtroid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dimgrey}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{predicted\PYZus{}series}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{P1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{ls}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}     plt.plot(p2,label=\PYZdq{}P2\PYZdq{},ls=\PYZsq{}\PYZhy{}\PYZhy{}\PYZsq{})}
+          \PY{c+c1}{\PYZsh{}     plt.plot(p3,label=\PYZdq{}P3\PYZdq{},ls=\PYZsq{}\PYZhy{}\PYZhy{}\PYZsq{})}
+              \PY{c+c1}{\PYZsh{}plt.plot(p4,label=\PYZdq{}P4\PYZdq{},ls=\PYZsq{}\PYZhy{}\PYZhy{}\PYZsq{})}
+              
+              \PY{c+c1}{\PYZsh{}show the centroid as well}
+              
+              
+              \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+              
+              \PY{n}{i}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+              
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+             PC1  PC2  PC3  PC4          PR1          PR2          PR3  \
+Product                                                                  
+331995287_2    9    5    8    1  331031900_2  335023300_2  332979754_2   
+331900500_2    4    8    3    5  335036700_2  332979754_2  31C999901_2   
+337017000_2    5    8    3   10  335023300_2  332979754_2  31C999901_2   
+335970850_2    1    2    7    6  331050500_2  347000500_2  335055200_2   
+337015200_2   10    8    6   11  337015200_2  332979754_2  31C999906_2   
+
+                     PR4  Cluster     Centroid   ...         7       8  \
+Product                                          ...                     
+331995287_2  331050500_2        1  331050500_2   ...    5200.0  7020.0   
+331900500_2  335023300_2        4  335036700_2   ...     100.0   126.0   
+337017000_2  337015200_2        3  31C999901_2   ...      36.0    40.0   
+335970850_2  31C999906_2        6  31C999906_2   ...    1706.0  2092.0   
+337015200_2  331023400_2       10  337015200_2   ...    1234.0  2092.0   
+
+                  9      10      11      12      13      14      15      16  
+Product                                                                      
+331995287_2  4740.0  5954.0  3150.0  3858.0  2374.0  5896.0  7034.0  6928.0  
+331900500_2   154.0    70.0    72.0    36.0    20.0    12.0    26.0    28.0  
+337017000_2    42.0     2.0     2.0     0.0     0.0     0.0     0.0     0.0  
+335970850_2  7192.0  4368.0  1354.0  2032.0  2668.0  1712.0  1684.0  1340.0  
+337015200_2  1386.0  1430.0   704.0   534.0   366.0   226.0   128.0   154.0  
+
+[5 rows x 26 columns]
+    \end{verbatim}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Predict Quantities}\label{predict-quantities}
+
+    \subsubsection{Load features and
+predictor}\label{load-features-and-predictor}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}522}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{explained\PYZus{}variance\PYZus{}score}\PY{p}{,}\PY{n}{mean\PYZus{}squared\PYZus{}error}\PY{p}{,}\PY{n}{r2\PYZus{}score}
+          
+          \PY{n}{features\PYZus{}df} \PY{o}{=} \PY{n}{prp}\PY{o}{.}\PY{n}{load\PYZus{}file}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{clf\PYZus{}features}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{type\PYZus{}}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{P}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{index} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Product}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{features\PYZus{}df}\PY{o}{.}\PY{n}{Ldate} \PY{o}{=} \PY{n}{features\PYZus{}df}\PY{o}{.}\PY{n}{Ldate}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+          
+          
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{externals} \PY{k}{import} \PY{n}{joblib}
+          
+          
+          \PY{n}{features\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+          \PY{n}{encoded\PYZus{}df} \PY{o}{=} \PY{n}{prp}\PY{o}{.}\PY{n}{encode}\PY{p}{(}\PY{n}{features\PYZus{}df}\PY{p}{,}\PY{n}{non\PYZus{}categorical} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Tprice}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Nstore}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{encoded\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}522}]:}              Currency\_\$  Currency\_Y  Sales Season\_Autumn  Sales Season\_Spring  \textbackslash{}
+          Product                                                                         
+          3.6E+101\_2          0.0         0.0                  1.0                  0.0   
+          30E000400\_2         0.0         0.0                  0.0                  0.0   
+          30E823101\_2         0.0         0.0                  0.0                  0.0   
+          30E823102\_2         0.0         0.0                  0.0                  0.0   
+          30E823103\_2         1.0         0.0                  0.0                  0.0   
+          
+                       Sales Season\_Summer  Sales Season\_Winter  Color\_Black  \textbackslash{}
+          Product                                                              
+          3.6E+101\_2                   0.0                  0.0          0.0   
+          30E000400\_2                  1.0                  0.0          1.0   
+          30E823101\_2                  1.0                  0.0          0.0   
+          30E823102\_2                  0.0                  1.0          0.0   
+          30E823103\_2                  0.0                  0.0          0.0   
+          
+                       Color\_Blue  Color\_Brown  Color\_Green    {\ldots}     Size\_Thick  \textbackslash{}
+          Product                                              {\ldots}                  
+          3.6E+101\_2          0.0          0.0          0.0    {\ldots}            0.0   
+          30E000400\_2         0.0          0.0          0.0    {\ldots}            0.0   
+          30E823101\_2         0.0          0.0          0.0    {\ldots}            0.0   
+          30E823102\_2         0.0          0.0          0.0    {\ldots}            0.0   
+          30E823103\_2         0.0          0.0          0.0    {\ldots}            0.0   
+          
+                       Size\_Ultra Sheer  Size\_Ultra Thick  Person\_Boys  Person\_Female  \textbackslash{}
+          Product                                                                       
+          3.6E+101\_2                0.0               0.0          0.0            0.0   
+          30E000400\_2               0.0               0.0          0.0            0.0   
+          30E823101\_2               0.0               0.0          1.0            0.0   
+          30E823102\_2               0.0               0.0          1.0            0.0   
+          30E823103\_2               0.0               0.0          1.0            0.0   
+          
+                       Person\_Girls  Person\_Men  Person\_Pregnant    Tprice    Nstore  
+          Product                                                                     
+          3.6E+101\_2            1.0         0.0              0.0  0.134078  0.001551  
+          30E000400\_2           1.0         0.0              0.0  0.106145  0.194789  
+          30E823101\_2           0.0         0.0              0.0  0.106145  0.021092  
+          30E823102\_2           0.0         0.0              0.0  0.106145  0.021402  
+          30E823103\_2           0.0         0.0              0.0  0.106145  0.021092  
+          
+          [5 rows x 160 columns]
+\end{Verbatim}
+            
+    \subsubsection{Estimations}\label{estimations}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}523}]:} \PY{n}{predictor} \PY{o}{=} \PY{n}{joblib}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{models\PYZus{}path}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{estimator.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{disp} \PY{o}{=} \PY{n}{p\PYZus{}series}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{]}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{results}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{12}\PY{p}{]}\PY{p}{]}
+          \PY{n}{disp} \PY{o}{=} \PY{n}{p\PYZus{}series}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{]}
+          
+          \PY{n}{R2} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{RMSE} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{BEST} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{index}\PY{p}{,}\PY{n}{values} \PY{o+ow}{in} \PY{n}{disp}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+              
+              \PY{c+c1}{\PYZsh{}Get the curves}
+              \PY{n}{guess1} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PR1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+              \PY{n}{guess2} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PR2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+              \PY{n}{guess3} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PR3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+              \PY{n}{guess4} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PR4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+              \PY{n}{cluster} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Centroid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+              
+              \PY{c+c1}{\PYZsh{}Get the std from the built predictor}
+              \PY{n}{encoded} \PY{o}{=} \PY{n}{encoded\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{p}{]}
+              \PY{n}{prediction} \PY{o}{=} \PY{n}{predictor}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{encoded}\PY{p}{)}
+              \PY{n}{pstd} \PY{o}{=} \PY{n}{prediction}
+              
+              \PY{c+c1}{\PYZsh{}actual series}
+              \PY{n}{series} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{n}{offset}\PY{p}{:}\PY{p}{]}
+              \PY{n}{c\PYZus{}series} \PY{o}{=} \PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{cluster}\PY{p}{]}\PY{o}{/}\PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{cluster}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{}curve of each prediction}
+              \PY{n}{p1} \PY{o}{=} \PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess1}\PY{p}{]}\PY{o}{/}\PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess1}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+              \PY{n}{p2} \PY{o}{=} \PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess2}\PY{p}{]}\PY{o}{/}\PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess2}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+              \PY{n}{p3} \PY{o}{=} \PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess3}\PY{p}{]}\PY{o}{/}\PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess3}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+              \PY{n}{p4} \PY{o}{=} \PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess4}\PY{p}{]}\PY{o}{/}\PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess4}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{}multiply by the std}
+              \PY{n}{p1} \PY{o}{*}\PY{o}{=} \PY{n}{pstd} 
+              \PY{n}{p2} \PY{o}{*}\PY{o}{=} \PY{n}{pstd} 
+              \PY{n}{p3} \PY{o}{*}\PY{o}{=} \PY{n}{pstd}
+              \PY{n}{p4} \PY{o}{*}\PY{o}{=} \PY{n}{pstd}
+              \PY{n}{c\PYZus{}series} \PY{o}{*}\PY{o}{=} \PY{n}{pstd}
+              
+              \PY{n}{rmse1} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{MSE}\PY{p}{(}\PY{n}{p1}\PY{p}{,}\PY{n}{series}\PY{p}{)}\PY{o}{/}\PY{n}{n}\PY{p}{)}
+              \PY{n}{rmse2} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{MSE}\PY{p}{(}\PY{n}{p2}\PY{p}{,}\PY{n}{series}\PY{p}{)}\PY{o}{/}\PY{n}{n}\PY{p}{)}
+              \PY{n}{rmse3} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{MSE}\PY{p}{(}\PY{n}{p3}\PY{p}{,}\PY{n}{series}\PY{p}{)}\PY{o}{/}\PY{n}{n}\PY{p}{)}
+              \PY{n}{rmse4} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{MSE}\PY{p}{(}\PY{n}{p4}\PY{p}{,}\PY{n}{series}\PY{p}{)}\PY{o}{/}\PY{n}{n}\PY{p}{)}
+              
+              \PY{n}{r2\PYZus{}1} \PY{o}{=} \PY{n}{r2\PYZus{}score}\PY{p}{(}\PY{n}{p1}\PY{p}{,}\PY{n}{series}\PY{p}{,}\PY{n}{multioutput}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{uniform\PYZus{}average}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              \PY{n}{r2\PYZus{}2} \PY{o}{=} \PY{n}{r2\PYZus{}score}\PY{p}{(}\PY{n}{p2}\PY{p}{,}\PY{n}{series}\PY{p}{,}\PY{n}{multioutput}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{uniform\PYZus{}average}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              \PY{n}{r2\PYZus{}3} \PY{o}{=} \PY{n}{r2\PYZus{}score}\PY{p}{(}\PY{n}{p3}\PY{p}{,}\PY{n}{series}\PY{p}{,}\PY{n}{multioutput}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{uniform\PYZus{}average}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              \PY{n}{r2\PYZus{}4} \PY{o}{=} \PY{n}{r2\PYZus{}score}\PY{p}{(}\PY{n}{p4}\PY{p}{,}\PY{n}{series}\PY{p}{,}\PY{n}{multioutput}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{uniform\PYZus{}average}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              
+              \PY{n}{r2} \PY{o}{=} \PY{p}{[}\PY{n}{r2\PYZus{}1}\PY{p}{,}\PY{n}{r2\PYZus{}2}\PY{p}{,}\PY{n}{r2\PYZus{}3}\PY{p}{,}\PY{n}{r2\PYZus{}4}\PY{p}{]}
+              \PY{n}{rmse} \PY{o}{=} \PY{p}{[}\PY{n}{rmse1}\PY{p}{,}\PY{n}{rmse2}\PY{p}{,}\PY{n}{rmse3}\PY{p}{,}\PY{n}{rmse4}\PY{p}{]}
+              \PY{n}{best} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmin}\PY{p}{(}\PY{n}{rmse}\PY{p}{)}
+              
+              \PY{n}{BEST}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{best}\PY{p}{)}
+              \PY{n}{R2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{r2}\PY{p}{[}\PY{n}{best}\PY{p}{]}\PY{p}{)}
+              \PY{n}{RMSE}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{rmse}\PY{p}{[}\PY{n}{best}\PY{p}{]}\PY{p}{)}
+              
+          \PY{n}{disp}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{R2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{R2}
+          \PY{n}{disp}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{RMSE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{RMSE}
+          \PY{n}{disp}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Best}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{BEST}
+          \PY{n}{display}\PY{p}{(}\PY{n}{disp}\PY{p}{[}\PY{n}{disp}\PY{o}{.}\PY{n}{R2}\PY{o}{\PYZgt{}}\PY{l+m+mf}{0.2}\PY{p}{]}\PY{o}{.}\PY{n}{R2}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{disp}\PY{p}{[}\PY{n}{disp}\PY{o}{.}\PY{n}{R2}\PY{o}{\PYZgt{}}\PY{l+m+mf}{0.2}\PY{p}{]}\PY{o}{.}\PY{n}{R2}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{box}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{disp}\PY{p}{[}\PY{n}{disp}\PY{o}{.}\PY{n}{R2}\PY{o}{\PYZgt{}}\PY{l+m+mf}{0.2}\PY{p}{]}\PY{o}{.}\PY{n}{R2}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{n}{disp}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+count    69.000000
+mean      0.531971
+std       0.201207
+min       0.208565
+25%       0.401132
+50%       0.509944
+75%       0.677682
+max       0.994288
+Name: R2, dtype: float64
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.43949044586
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Display First Prediction}\label{display-first-prediction}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}524}]:} \PY{n}{display\PYZus{}result} \PY{o}{=} \PY{n}{disp}\PY{p}{[}\PY{n}{disp}\PY{o}{.}\PY{n}{R2}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{nlargest}\PY{p}{(}\PY{n}{disp}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{R2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{12}\PY{p}{,}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{]}
+          
+          \PY{n}{display}\PY{p}{(}\PY{n}{disp}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{display\PYZus{}result}\PY{o}{.}\PY{n}{index}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{18}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+          
+          
+          \PY{n}{i}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{;}
+          \PY{k}{for} \PY{n}{index}\PY{p}{,}\PY{n}{values} \PY{o+ow}{in} \PY{n}{display\PYZus{}result}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+              
+              \PY{c+c1}{\PYZsh{}Get the curves}
+              \PY{n}{guess1} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PR1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+              \PY{n}{guess2} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PR2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+              \PY{n}{guess3} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PR3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+              \PY{n}{guess4} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PR4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+              \PY{n}{cluster} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Centroid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+              
+              \PY{c+c1}{\PYZsh{}Get the std from the built predictor}
+              \PY{n}{encoded} \PY{o}{=} \PY{n}{encoded\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{p}{]}
+              \PY{n}{prediction} \PY{o}{=} \PY{n}{predictor}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{encoded}\PY{p}{)}
+              \PY{n}{pstd} \PY{o}{=} \PY{n}{prediction}
+              
+              \PY{c+c1}{\PYZsh{}actual series}
+              \PY{n}{series} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{n}{offset}\PY{p}{:}\PY{p}{]}
+              \PY{n}{c\PYZus{}series} \PY{o}{=} \PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{cluster}\PY{p}{]}\PY{o}{/}\PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{cluster}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{}curve of each prediction}
+              \PY{n}{p1} \PY{o}{=} \PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess1}\PY{p}{]}\PY{o}{/}\PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess1}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+              \PY{n}{p2} \PY{o}{=} \PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess2}\PY{p}{]}\PY{o}{/}\PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess2}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+              \PY{n}{p3} \PY{o}{=} \PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess3}\PY{p}{]}\PY{o}{/}\PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess3}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+              \PY{n}{p4} \PY{o}{=} \PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess4}\PY{p}{]}\PY{o}{/}\PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess4}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{}multiply by the std}
+              \PY{n}{p1} \PY{o}{*}\PY{o}{=} \PY{n}{pstd} 
+              \PY{n}{p2} \PY{o}{*}\PY{o}{=} \PY{n}{pstd} 
+              \PY{n}{p3} \PY{o}{*}\PY{o}{=} \PY{n}{pstd}
+              \PY{n}{p4} \PY{o}{*}\PY{o}{=} \PY{n}{pstd}
+              \PY{n}{c\PYZus{}series} \PY{o}{*}\PY{o}{=} \PY{n}{pstd}
+              
+              \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{i}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{series}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Series}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{c\PYZus{}series}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Centroid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{grey}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{ls}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              
+              \PY{n}{best} \PY{o}{=} \PY{n}{disp}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{o}{.}\PY{n}{Best}
+              \PY{n}{p\PYZus{}array} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{[}\PY{n}{p1}\PY{p}{,}\PY{n}{p2}\PY{p}{,}\PY{n}{p3}\PY{p}{,}\PY{n}{p4}\PY{p}{]}\PY{p}{,}\PY{n}{columns} \PY{o}{=} \PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+              
+              \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{p1}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{P1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{ls}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}     plt.plot(p2,label=\PYZdq{}P2\PYZdq{},ls=\PYZsq{}\PYZhy{}\PYZhy{}\PYZsq{})}
+          \PY{c+c1}{\PYZsh{}     plt.plot(p3,label=\PYZdq{}P3\PYZdq{},ls=\PYZsq{}\PYZhy{}\PYZhy{}\PYZsq{})}
+          \PY{c+c1}{\PYZsh{}     plt.plot(p4,label=\PYZdq{}P4\PYZdq{},ls=\PYZsq{}\PYZhy{}\PYZhy{}\PYZsq{})}
+          
+          
+          
+              \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+              \PY{n}{i}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+             PC1  PC2  PC3  PC4          PR1          PR2          PR3  \
+Product                                                                  
+31C999906_2    6   10    7   11  31C999906_2  337015200_2  335055200_2   
+335023000_2   11    9    5    4  331023400_2  331031900_2  335023300_2   
+335016800_2    4    9    5   11  335036700_2  331031900_2  335023300_2   
+330018200_2    5    9    4   11  335023300_2  331031900_2  335036700_2   
+335025600_2   10   11    9    5  337015200_2  331023400_2  331031900_2   
+
+                     PR4  Cluster     Centroid  ...       10      11      12  \
+Product                                         ...                            
+31C999906_2  331023400_2        6  31C999906_2  ...   2336.0  1862.0  1586.0   
+335023000_2  335036700_2        9  331031900_2  ...     74.0    88.0    52.0   
+335016800_2  331023400_2        5  335023300_2  ...     16.0     2.0     6.0   
+330018200_2  331023400_2        5  335023300_2  ...      6.0     6.0    12.0   
+335025600_2  335023300_2       11  331023400_2  ...    310.0   222.0   262.0   
+
+                 13      14     15     16        R2       RMSE  Best  
+Product                                                               
+31C999906_2  1350.0  1282.0  738.0  738.0  0.994288  13.075187     0  
+335023000_2    36.0    22.0    2.0   18.0  0.954949   8.316454     1  
+335016800_2     0.0     0.0    0.0    0.0  0.919258   2.118111     2  
+330018200_2     4.0     4.0    4.0    0.0  0.854065   2.240885     0  
+335025600_2   156.0    60.0   28.0   28.0  0.836833  24.625670     1  
+
+[5 rows x 29 columns]
+    \end{verbatim}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Adjusted Prediction}\label{adjusted-prediction}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}525}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neighbors} \PY{k}{import} \PY{n}{KNeighborsClassifier}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neighbors} \PY{k}{import} \PY{n}{NearestNeighbors}
+          
+          \PY{n}{display\PYZus{}result} \PY{o}{=} \PY{n}{disp}\PY{p}{[}\PY{n}{disp}\PY{o}{.}\PY{n}{R2}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{nlargest}\PY{p}{(}\PY{n}{disp}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{R2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{12}\PY{p}{,}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{]}
+          
+          \PY{n}{display}\PY{p}{(}\PY{n}{disp}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{display\PYZus{}result}\PY{o}{.}\PY{n}{index}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{18}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{n\PYZus{}points} \PY{o}{=} \PY{l+m+mi}{3}
+          \PY{n}{i}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{;}
+          \PY{k}{for} \PY{n}{index}\PY{p}{,}\PY{n}{values} \PY{o+ow}{in} \PY{n}{display\PYZus{}result}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+              
+              \PY{c+c1}{\PYZsh{}Get the curves}
+              \PY{n}{guess1} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PR1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+              \PY{n}{guess2} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PR2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+              \PY{n}{guess3} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PR3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+              \PY{n}{guess4} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{PR4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+              \PY{n}{cluster} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Centroid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+              
+              \PY{c+c1}{\PYZsh{}Get the std from the built predictor}
+              \PY{n}{encoded} \PY{o}{=} \PY{n}{encoded\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{p}{]}
+              \PY{n}{prediction} \PY{o}{=} \PY{n}{predictor}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{encoded}\PY{p}{)}
+              \PY{n}{pstd} \PY{o}{=} \PY{n}{prediction}
+              
+              \PY{c+c1}{\PYZsh{}actual series}
+              \PY{n}{series} \PY{o}{=} \PY{n}{values}\PY{p}{[}\PY{n}{offset}\PY{p}{:}\PY{p}{]}
+              \PY{n}{c\PYZus{}series} \PY{o}{=} \PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{cluster}\PY{p}{]}\PY{o}{/}\PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{cluster}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{}curve of each prediction}
+              \PY{n}{p1} \PY{o}{=} \PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess1}\PY{p}{]}\PY{o}{/}\PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess1}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+              \PY{n}{p2} \PY{o}{=} \PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess2}\PY{p}{]}\PY{o}{/}\PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess2}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+              \PY{n}{p3} \PY{o}{=} \PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess3}\PY{p}{]}\PY{o}{/}\PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess3}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+              \PY{n}{p4} \PY{o}{=} \PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess4}\PY{p}{]}\PY{o}{/}\PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{guess4}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+              
+              
+              \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{i}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{series}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Series}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              
+              \PY{n}{first\PYZus{}points} \PY{o}{=} \PY{n}{series}\PY{p}{[}\PY{p}{:}\PY{n}{n\PYZus{}points}\PY{p}{]}\PY{o}{/}\PY{n}{series}\PY{p}{[}\PY{p}{:}\PY{n}{n\PYZus{}points}\PY{p}{]}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+              
+              \PY{n}{p\PYZus{}array} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{[}\PY{n}{p1}\PY{p}{,}\PY{n}{p2}\PY{p}{,}\PY{n}{p3}\PY{p}{,}\PY{n}{p4}\PY{p}{]}\PY{p}{,}\PY{n}{columns} \PY{o}{=} \PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+                  
+              \PY{c+c1}{\PYZsh{}Adjusted}
+              \PY{n}{knn} \PY{o}{=} \PY{n}{NearestNeighbors}\PY{p}{(}\PY{n}{n\PYZus{}neighbors}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{metric}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{euclidean}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              \PY{n}{knn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{p\PYZus{}array}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{n}{n\PYZus{}points}\PY{p}{]}\PY{p}{)}  
+              \PY{n}{closest} \PY{o}{=} \PY{n}{knn}\PY{o}{.}\PY{n}{kneighbors}\PY{p}{(}\PY{p}{[}\PY{n}{first\PYZus{}points}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{return\PYZus{}distance}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+              
+              \PY{n}{cstd} \PY{o}{=} \PY{p}{(}\PY{n}{series}\PY{p}{[}\PY{p}{:}\PY{n}{n\PYZus{}points}\PY{p}{]}\PY{o}{/}\PY{n}{p\PYZus{}array}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{closest}\PY{p}{,}\PY{p}{:}\PY{n}{n\PYZus{}points}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{}multiply by the caluclated std}
+              \PY{n}{p1c} \PY{o}{=} \PY{n}{p1} \PY{o}{*} \PY{n}{cstd} 
+              \PY{n}{p1p} \PY{o}{=} \PY{n}{p1} \PY{o}{*} \PY{n}{pstd}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+              \PY{n}{c\PYZus{}series} \PY{o}{*}\PY{o}{=} \PY{n}{cstd}
+              
+              \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{c\PYZus{}series}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Centroid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{grey}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{ls}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{p1c}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{P1\PYZus{}cstd}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{ls}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{p1p}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{P1\PYZus{}pstd}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{ls}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{p\PYZus{}array}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{closest}\PY{p}{]}\PY{o}{*}\PY{n}{cstd}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Closest}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{ls}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+              \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+              \PY{n}{i}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+             PC1  PC2  PC3  PC4          PR1          PR2          PR3  \
+Product                                                                  
+31C999906_2    6   10    7   11  31C999906_2  337015200_2  335055200_2   
+335023000_2   11    9    5    4  331023400_2  331031900_2  335023300_2   
+335016800_2    4    9    5   11  335036700_2  331031900_2  335023300_2   
+330018200_2    5    9    4   11  335023300_2  331031900_2  335036700_2   
+335025600_2   10   11    9    5  337015200_2  331023400_2  331031900_2   
+
+                     PR4  Cluster     Centroid  ...       10      11      12  \
+Product                                         ...                            
+31C999906_2  331023400_2        6  31C999906_2  ...   2336.0  1862.0  1586.0   
+335023000_2  335036700_2        9  331031900_2  ...     74.0    88.0    52.0   
+335016800_2  331023400_2        5  335023300_2  ...     16.0     2.0     6.0   
+330018200_2  331023400_2        5  335023300_2  ...      6.0     6.0    12.0   
+335025600_2  335023300_2       11  331023400_2  ...    310.0   222.0   262.0   
+
+                 13      14     15     16        R2       RMSE  Best  
+Product                                                               
+31C999906_2  1350.0  1282.0  738.0  738.0  0.994288  13.075187     0  
+335023000_2    36.0    22.0    2.0   18.0  0.954949   8.316454     1  
+335016800_2     0.0     0.0    0.0    0.0  0.919258   2.118111     2  
+330018200_2     4.0     4.0    4.0    0.0  0.854065   2.240885     0  
+335025600_2   156.0    60.0   28.0   28.0  0.836833  24.625670     1  
+
+[5 rows x 29 columns]
+    \end{verbatim}
+
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{p} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{325141400\PYZus{}2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+        \PY{n}{features\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{p}\PY{p}{]}
+        \PY{n}{series\PYZus{}df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{p}\PY{p}{]}
+        \PY{n}{p\PYZus{}series}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{p}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1156}]:} \PY{n}{fi} \PY{o}{=} \PY{n}{classifier}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}
+           \PY{n}{sorted\PYZus{}indices} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{fi}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+           
+           \PY{n}{imp} \PY{o}{=} \PY{n}{sorted\PYZus{}indices}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{30}\PY{p}{]}
+           
+           \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{imp}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{fi}\PY{p}{[}\PY{n}{imp}\PY{p}{]}\PY{p}{)}
+           \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{imp}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{feature\PYZus{}labels}\PY{p}{[}\PY{n}{imp}\PY{p}{]}\PY{p}{,}\PY{n}{rotation} \PY{o}{=} \PY{l+m+mi}{90}\PY{p}{)}
+           \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Homogeneity Test}\label{homogeneity-test}
+
+In order to detect specific caraterstics for each resulted cluster we
+perform a statistic test based on Pearsons chi-square score with the
+hypothesis of a uniform distribution.
+
+Features with the pvalues lower than 0.1 are displayed for analysis
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}499}]:} \PY{k+kn}{import} \PY{n+nn}{importlib}
+          \PY{o}{\PYZpc{}}\PY{k}{aimport} visualization.cluster\PYZus{}analysis
+          \PY{o}{\PYZpc{}}\PY{k}{aimport} features.tools
+          \PY{k+kn}{from} \PY{n+nn}{visualization} \PY{k}{import} \PY{n}{cluster\PYZus{}analysis} \PY{k}{as} \PY{n}{va}
+          \PY{n}{importlib}\PY{o}{.}\PY{n}{reload}\PY{p}{(}\PY{n}{visualization}\PY{o}{.}\PY{n}{cluster\PYZus{}analysis}\PY{p}{)}
+          \PY{n}{importlib}\PY{o}{.}\PY{n}{reload}\PY{p}{(}\PY{n}{features}\PY{o}{.}\PY{n}{tools}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}499}]:} <module 'features.tools' from 'C:\textbackslash{}\textbackslash{}Users\textbackslash{}\textbackslash{}rahmim00\textbackslash{}\textbackslash{}Documents\textbackslash{}\textbackslash{}Notebooks\textbackslash{}\textbackslash{}Clustering\textbackslash{}\textbackslash{}pc\_clustering\textbackslash{}\textbackslash{}notebooks\textbackslash{}\textbackslash{}Cerf7\textbackslash{}\textbackslash{}..\textbackslash{}\textbackslash{}..\textbackslash{}\textbackslash{}src\textbackslash{}\textbackslash{}features\textbackslash{}\textbackslash{}tools.py'>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{va}\PY{o}{.}\PY{n}{plot\PYZus{}features\PYZus{}distribution}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{va}\PY{o}{.}\PY{n}{plot\PYZus{}cluster\PYZus{}features}\PY{p}{(}\PY{n}{df}\PY{p}{,}\PY{n}{clusters}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{12}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{va}\PY{o}{.}\PY{n}{plot\PYZus{}feature\PYZus{}clusters}\PY{p}{(}\PY{n}{df}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Color}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{va}\PY{o}{.}\PY{n}{plot\PYZus{}modalities}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \subsubsection{Calculate modalities frequency through
+clusters}\label{calculate-modalities-frequency-through-clusters}
+
+As a first step, all the distrubtions of modalities across features and
+clusters are calculated and stored in one array structered as follows:
+
+One array for each cluster which contains a dictionnary of features.
+Each feature is again a dictionary of modalities and their occurence in
+that cluster
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}get the features}
+        \PY{n}{all\PYZus{}features} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+        
+        
+        \PY{n}{features} \PY{o}{=} \PY{n}{all\PYZus{}features}
+        
+        \PY{c+c1}{\PYZsh{}get the clusters (actually its a range(1,nb\PYZus{}cluster))}
+        \PY{n}{clusters} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cluster}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}array to store each cluster and freq for all the features}
+        \PY{n}{clusters\PYZus{}feature\PYZus{}dist} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{c+c1}{\PYZsh{}to shift the indices to clusters}
+        
+        \PY{c+c1}{\PYZsh{}loop trhough features}
+        \PY{n}{display}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{Color}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n}{display}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{crosstab}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{Cluster}\PY{p}{,}\PY{n}{df}\PY{o}{.}\PY{n}{Color}\PY{p}{)}\PY{p}{)}
+        \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n}{clusters}\PY{p}{:}
+            \PY{n}{feature\PYZus{}dist} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{)}
+            \PY{k}{for} \PY{n}{feature} \PY{o+ow}{in} \PY{n}{features}\PY{p}{:}
+                \PY{n}{freq} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cluster}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{c}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{feature}\PY{p}{)}\PY{p}{[}\PY{n}{feature}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+                \PY{n}{feature\PYZus{}dist}\PY{p}{[}\PY{n}{feature}\PY{p}{]}\PY{o}{=}\PY{n}{freq}\PY{o}{.}\PY{n}{to\PYZus{}dict}\PY{p}{(}\PY{p}{)}
+            \PY{n}{clusters\PYZus{}feature\PYZus{}dist}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{feature\PYZus{}dist}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Chi-square test over
+clusters}\label{chi-square-test-over-clusters}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{pthreashold} \PY{o}{=} \PY{l+m+mf}{0.2}
+        
+        \PY{c+c1}{\PYZsh{}get the features}
+        \PY{n}{features} \PY{o}{=} \PY{n}{all\PYZus{}features}
+        
+        \PY{n}{clusters} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}
+        
+        
+        \PY{n}{res\PYZus{}features\PYZus{}over\PYZus{}cluster} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n}{clusters}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}align each feature with its distrubtion in this cluster c}
+            \PY{n}{cluster\PYZus{}feature\PYZus{}dist} \PY{o}{=} \PY{n}{clusters\PYZus{}feature\PYZus{}dist}\PY{p}{[}\PY{n}{c}\PY{p}{]}
+            \PY{n}{dist} \PY{o}{=} \PY{p}{[}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{list}\PY{p}{(}\PY{n}{cluster\PYZus{}feature\PYZus{}dist}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+            \PY{n}{keys} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{cluster\PYZus{}feature\PYZus{}dist}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{)}    
+        
+            \PY{c+c1}{\PYZsh{}plot the dist of number of elements by feature in this clust}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Feature distribution in the cluster }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}}\PY{k}{c})
+            \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{keys}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{dist}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{keys}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{keys}\PY{p}{,}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{70}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{}for each feature display its distribution over modalities}
+            \PY{k}{for} \PY{n}{feature} \PY{o+ow}{in} \PY{n}{features}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{}get information from the previous array}
+                \PY{n}{cluster\PYZus{}feature\PYZus{}dist} \PY{o}{=} \PY{n}{clusters\PYZus{}feature\PYZus{}dist}\PY{p}{[}\PY{n}{c}\PY{p}{]}
+                \PY{n}{feature\PYZus{}distribution} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{cluster\PYZus{}feature\PYZus{}dist}\PY{p}{[}\PY{n}{feature}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                \PY{n}{feature\PYZus{}keys} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{cluster\PYZus{}feature\PYZus{}dist}\PY{p}{[}\PY{n}{feature}\PY{p}{]}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                \PY{n}{nftrs} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{feature\PYZus{}keys}\PY{p}{)}
+                \PY{n}{chisq}\PY{p}{,} \PY{n}{p} \PY{o}{=} \PY{n}{chisquare}\PY{p}{(}\PY{n}{feature\PYZus{}distribution}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{n}{feature}\PY{p}{,}\PY{n}{feature\PYZus{}distribution}\PY{p}{)}
+                \PY{k}{if} \PY{n}{p}\PY{o}{\PYZlt{}}\PY{n}{pthreashold}\PY{p}{:}
+                    \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+                    \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{ modalities distribution \PYZhy{} pvalue = }\PY{l+s+si}{\PYZpc{}.9f}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{feature}\PY{p}{,}\PY{n}{p}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nftrs}\PY{p}{)}\PY{p}{,}\PY{n}{feature\PYZus{}distribution}\PY{p}{)}
+                    \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nftrs}\PY{p}{)}\PY{o}{+}\PY{p}{(}\PY{l+m+mf}{0.5}\PY{o}{/}\PY{n}{nftrs}\PY{p}{)}\PY{p}{,}\PY{n}{feature\PYZus{}keys}\PY{p}{,}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{70} \PY{k}{if} \PY{n}{nftrs}\PY{o}{\PYZgt{}}\PY{l+m+mi}{4} \PY{k}{else} \PY{l+m+mi}{0}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{n}{block} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+            
+\end{Verbatim}
+
+
+    \subsubsection{Calculate modalities frequency through
+features}\label{calculate-modalities-frequency-through-features}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}378}]:} \PY{c+c1}{\PYZsh{}get the features}
+          \PY{n}{features} \PY{o}{=} \PY{n}{all\PYZus{}features}
+          
+          \PY{c+c1}{\PYZsh{}get the clusters (actually its a range(1,nb\PYZus{}cluster))}
+          \PY{n}{clusters} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cluster}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}dict to store each feater and freq for all the clusters}
+          \PY{n}{features\PYZus{}clust\PYZus{}dist} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}invert the dict and get it by feature }
+          \PY{k}{for} \PY{n}{f} \PY{o+ow}{in} \PY{n}{features}\PY{p}{:}
+              \PY{n}{freq} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{)}
+              \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n}{clusters}\PY{p}{:} 
+                  \PY{n}{freq}\PY{p}{[}\PY{n}{c}\PY{p}{]} \PY{o}{=}  \PY{n}{clusters\PYZus{}feature\PYZus{}dist}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{p}{[}\PY{n}{f}\PY{p}{]}
+              \PY{n}{features\PYZus{}clust\PYZus{}dist}\PY{p}{[}\PY{n}{f}\PY{p}{]} \PY{o}{=} \PY{n}{freq}
+\end{Verbatim}
+
+
+    \subsubsection{Chi-square test over
+features}\label{chi-square-test-over-features}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{pthreashold} \PY{o}{=} \PY{l+m+mf}{0.2}
+        \PY{n}{clusters} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cluster}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+        
+        \PY{n}{features} \PY{o}{=} \PY{n}{all\PYZus{}features}
+        \PY{n}{features} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ldate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+        
+        \PY{k}{for} \PY{n}{f} \PY{o+ow}{in} \PY{n}{features}\PY{p}{:}
+            \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n}{clusters}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{}get information from the previous array}
+                \PY{n}{feature\PYZus{}clust\PYZus{}dist} \PY{o}{=} \PY{n}{features\PYZus{}clust\PYZus{}dist}\PY{p}{[}\PY{n}{f}\PY{p}{]}
+                \PY{n}{feature\PYZus{}distribution} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{feature\PYZus{}clust\PYZus{}dist}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                \PY{n}{feature\PYZus{}keys} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{feature\PYZus{}clust\PYZus{}dist}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                \PY{n}{nftrs} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{feature\PYZus{}keys}\PY{p}{)}
+                \PY{n}{chisq}\PY{p}{,} \PY{n}{p} \PY{o}{=} \PY{n}{chisquare}\PY{p}{(}\PY{n}{feature\PYZus{}distribution}\PY{p}{)}
+                \PY{k}{if} \PY{n}{p}\PY{o}{\PYZlt{}}\PY{n}{pthreashold}\PY{p}{:}
+                    \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+                    \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{: Cluster }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ distribution \PYZhy{} pvalue = }\PY{l+s+si}{\PYZpc{}.9f}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{f}\PY{p}{,}\PY{n}{c}\PY{p}{,}\PY{n}{p}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nftrs}\PY{p}{)}\PY{p}{,}\PY{n}{feature\PYZus{}distribution}\PY{p}{)}
+                    \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nftrs}\PY{p}{)}\PY{o}{+}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{o}{/}\PY{n}{nftrs}\PY{p}{)}\PY{p}{,}\PY{n}{feature\PYZus{}keys}\PY{p}{,}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{70} \PY{k}{if} \PY{n}{nftrs}\PY{o}{\PYZgt{}}\PY{l+m+mi}{5} \PY{k}{else} \PY{l+m+mi}{0}\PY{p}{)}
+                    
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{n}{block} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}     
+\end{Verbatim}
+
+
+    \subsubsection{Modalities distribution}\label{modalities-distribution}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}379}]:} \PY{n}{clusters} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cluster}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+          \PY{n}{nclusters} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{clusters}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}get the features}
+          \PY{n}{features} \PY{o}{=} \PY{n}{all\PYZus{}features}
+          
+          
+          \PY{n}{modalities\PYZus{}clust\PYZus{}dist} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{)}
+          
+          \PY{k}{for} \PY{n}{f} \PY{o+ow}{in} \PY{n}{features}\PY{p}{:}
+              \PY{n}{feature\PYZus{}sum}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+              \PY{n}{modalities} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{f}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+              \PY{n}{modalities\PYZus{}distribution}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{p}{)}
+              \PY{k}{for} \PY{n}{m} \PY{o+ow}{in} \PY{n}{modalities}\PY{p}{:}
+                  \PY{n}{modality\PYZus{}distribution} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{nclusters}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                  \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n}{clusters}\PY{p}{:}
+                      \PY{c+c1}{\PYZsh{}get information from the previous array}
+                      \PY{n}{feature\PYZus{}clust\PYZus{}dist} \PY{o}{=} \PY{n}{features\PYZus{}clust\PYZus{}dist}\PY{p}{[}\PY{n}{f}\PY{p}{]}
+                      \PY{n}{modality\PYZus{}distribution}\PY{p}{[}\PY{n}{c}\PY{p}{]} \PY{o}{+}\PY{o}{=}\PY{p}{(}\PY{n}{feature\PYZus{}clust\PYZus{}dist}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{p}{[}\PY{n}{m}\PY{p}{]} \PY{k}{if} \PY{n}{m} \PY{o+ow}{in} \PY{n}{feature\PYZus{}clust\PYZus{}dist}\PY{p}{[}\PY{n}{c}\PY{p}{]} \PY{k}{else} \PY{l+m+mi}{0}\PY{p}{)}
+                  \PY{n}{modalities\PYZus{}distribution}\PY{p}{[}\PY{n}{m}\PY{p}{]} \PY{o}{=} \PY{n}{modality\PYZus{}distribution}    
+              \PY{n}{modalities\PYZus{}clust\PYZus{}dist}\PY{p}{[}\PY{n}{f}\PY{p}{]} \PY{o}{=} \PY{n}{modalities\PYZus{}distribution} 
+\end{Verbatim}
+
+
+    \subsubsection{Chi-square test for modalities over
+clusters}\label{chi-square-test-for-modalities-over-clusters}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{n}{clusters} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cluster}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+        \PY{n}{nclusters} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{clusters}\PY{p}{)}
+        
+        
+        \PY{n}{pthreashold} \PY{o}{=} \PY{l+m+mf}{0.3}
+        
+        \PY{n}{n\PYZus{}min\PYZus{}dist} \PY{o}{=} \PY{l+m+mi}{3}
+        \PY{n}{min\PYZus{}members} \PY{o}{=} \PY{l+m+mi}{4}
+        
+        
+        \PY{n}{min\PYZus{}dust}  \PY{o}{=} \PY{k+kc}{True}
+        \PY{k}{for} \PY{n}{f} \PY{o+ow}{in} \PY{n}{features}\PY{p}{:}
+            \PY{n}{modalities} \PY{o}{=} \PY{n+nb}{set}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{f}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+            \PY{n}{r} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{modalities}\PY{p}{)}
+            \PY{k}{for} \PY{n}{m} \PY{o+ow}{in} \PY{n}{modalities}\PY{p}{:}
+                \PY{n}{modality\PYZus{}dist} \PY{o}{=} \PY{n}{modalities\PYZus{}clust\PYZus{}dist}\PY{p}{[}\PY{n}{f}\PY{p}{]}\PY{p}{[}\PY{n}{m}\PY{p}{]}
+                \PY{n}{md} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{count\PYZus{}nonzero}\PY{p}{(}\PY{n}{modality\PYZus{}dist}\PY{p}{)}\PY{o}{\PYZlt{}}\PY{o}{=}\PY{n}{n\PYZus{}min\PYZus{}dist} \PY{o+ow}{and} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{modality\PYZus{}dist}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{n}{min\PYZus{}members}
+                \PY{n}{chisq}\PY{p}{,} \PY{n}{p} \PY{o}{=} \PY{n}{chisquare}\PY{p}{(}\PY{n}{modality\PYZus{}dist}\PY{p}{)}
+                \PY{k}{if} \PY{n}{p}\PY{o}{\PYZlt{}}\PY{n}{pthreashold} \PY{o+ow}{and} \PY{p}{(}\PY{n}{md} \PY{o+ow}{and} \PY{n}{min\PYZus{}dust}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+                    \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{: }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{  Distribution \PYZhy{} pvalue = }\PY{l+s+si}{\PYZpc{}.9f}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{f}\PY{p}{,}\PY{n}{m}\PY{p}{,}\PY{n}{p}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nclusters}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{modality\PYZus{}dist}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nclusters}\PY{p}{)}\PY{o}{+}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{o}{/}\PY{n}{nclusters}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{nclusters}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{)}
+                    \PY{k}{if} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{modality\PYZus{}dist}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZlt{}}\PY{l+m+mi}{10}\PY{p}{:} \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{n}{block} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}  
+\end{Verbatim}
+
+
+    \subsection{MCA Analysis}\label{mca-analysis}
+
+    \subsubsection{Remove unbalanced
+columns}\label{remove-unbalanced-columns}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}398}]:} \PY{n}{features\PYZus{}df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Na}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cluster}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{original\PYZus{}distribution}\PY{o}{=}\PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+          
+          \PY{c+c1}{\PYZsh{} features\PYZus{}df.info()}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{)}
+          \PY{n}{features} \PY{o}{=} \PY{n}{features\PYZus{}df}\PY{o}{.}\PY{n}{columns}
+          \PY{k}{for} \PY{n}{i}\PY{p}{,}\PY{n}{f} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{features}\PY{p}{)}\PY{p}{:}
+              \PY{n}{counts} \PY{o}{=} \PY{n}{features\PYZus{}df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{n}{f}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{n}{f}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{to\PYZus{}dict}\PY{p}{(}\PY{p}{)}
+              \PY{n}{dist} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{counts}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+              \PY{n}{original\PYZus{}distribution}\PY{p}{[}\PY{n}{f}\PY{p}{]} \PY{o}{=} \PY{n}{dist}
+              \PY{n}{keys} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{counts}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+              \PY{n}{chisq}\PY{p}{,} \PY{n}{p} \PY{o}{=} \PY{n}{chisquare}\PY{p}{(}\PY{n}{dist}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{f}\PY{p}{)}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{keys}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{dist}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{keys}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{keys}\PY{p}{,}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{70}\PY{p}{)}
+              \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{keys}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{l+m+mi}{20}\PY{p}{:} \PY{n}{plt}\PY{o}{.}\PY{n}{tick\PYZus{}params}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{which}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{both}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{bottom}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{top}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{labelbottom}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{wspace}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{hspace}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}      
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_55_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Apply MCA on Products}\label{apply-mca-on-products}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}765}]:} \PY{k+kn}{import} \PY{n+nn}{prince}
+          
+          \PY{n}{mca} \PY{o}{=} \PY{n}{prince}\PY{o}{.}\PY{n}{MCA}\PY{p}{(}\PY{n}{features\PYZus{}df}\PY{p}{)}
+          \PY{n}{mca}\PY{o}{.}\PY{n}{plot\PYZus{}relationship\PYZus{}square}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_57_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Apply MCA on Clients}\label{apply-mca-on-clients}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}144}]:} \PY{k+kn}{import} \PY{n+nn}{prince}
+          \PY{n}{features\PYZus{}df} \PY{o}{=} \PY{n}{client\PYZus{}df}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{mca} \PY{o}{=} \PY{n}{prince}\PY{o}{.}\PY{n}{MCA}\PY{p}{(}\PY{n}{features\PYZus{}df}\PY{p}{)}
+          \PY{n}{mca}\PY{o}{.}\PY{n}{plot\PYZus{}relationship\PYZus{}square}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_59_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+test_df = prp.load_file("test",type_="P").set_index('Product')
+test_series = test_df.values
+
+
+
+unbalanced = ["Description","Key_lvl7","Product Status"]#,"Sales Season"
+#Join with clusters
+test_product = df_produit.join(test_df,on='Key_lvl2',how='inner').reset_index(drop = True).dropna(axis = 1)
+test_product.drop(unbalanced, axis = 1 , inplace=True)
+
+
+
+X_test = prp.translate_df(test_product_cluster,columns=["Key_lvl3","Key_lvl4","Key_lvl5","Key_lvl6"])
+
+
+tdf = X_test[["Color","Size","Launch Date","Age Group"]].copy()
+
+tdf["Person"] = X_test["Key_lvl3"].map(lambda x: GetInfo(x,0))
+tdf["Product"] = X_test["Key_lvl3"].map(lambda x: GetInfo(x,1))
+tdf["Ptype"] = X_test["Key_lvl3"].map(lambda x: GetInfo(x,2))
+tdf["Price"] = X_test["Key_lvl3"].map(lambda x: GetInfo(x,3))
+tdf["Cluster"] = 0.
+X_test = tdf.copy()
+
+display(X_test)
+
+X,y = encode_data(X_test)
+
+y_pred = classifier.predict(X)
+
+
+test_series.shapefrom graphviz import Graph,Source
+from IPython.display import SVG
+
+graph = Source(export_graphviz(classifier, out_file=None
+   , feature_names=features, class_names=True
+   , filled = True))
+
+display(SVG(graph.pipe(format='svg')))
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{grid\PYZus{}search} \PY{k}{import} \PY{n}{GridSearchCV}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Fitting the classifier to the training set}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{param\PYZus{}grid} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mf}{0.01}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kernel}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rbf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{\PYZcb{}}
+        \PY{n}{clf} \PY{o}{=} \PY{n}{GridSearchCV}\PY{p}{(}\PY{n}{SVC}\PY{p}{(}\PY{n}{class\PYZus{}weight}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{balanced}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{param\PYZus{}grid}\PY{p}{)}
+        \PY{n}{clf} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Best estimator found by grid search:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{clf}\PY{o}{.}\PY{n}{best\PYZus{}estimator\PYZus{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Get clients description}\label{get-clients-description}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{file\PYZus{}name} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{client\PYZus{}7cerf.txt}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{non\PYZus{}unique\PYZus{}features} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{unique\PYZus{}features} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{n}{client\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{raw\PYZus{}path}\PY{o}{+}\PY{n}{file\PYZus{}name}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                             \PY{c+c1}{\PYZsh{}.drop\PYZus{}duplicates()}
+         
+         \PY{c+c1}{\PYZsh{}client\PYZus{}df.to\PYZus{}csv(raw\PYZus{}path+\PYZdq{}client\PYZus{}7cerf.csv\PYZdq{},sep=\PYZsq{};\PYZsq{},encoding=\PYZsq{}utf\PYZhy{}8\PYZsq{})}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{client\PYZus{}df}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n}{client\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(433, 14)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}43}]:}   Key\_lvl1 Description Key\_lvl2 Key\_lvl3 Key\_lvl4 Opening Date City Level  \textbackslash{}
+         0    01257          NA     大英区域    四川分公司    Total   2012-04-16    Level 4   
+         1    01258          NA     广巴区域    四川分公司    Total   2012-05-12    Level 2   
+         2    01259          NA     什绵区域    四川分公司    Total   2012-05-06    Level 3   
+         3    01262          NA     广汉区域    四川分公司    Total   2012-06-05    Level 4   
+         4    01264          NA     独立二区    四川分公司    Total   2012-06-01    Level 1   
+         
+                        Port Type    Operation State          Store Type Store Level  \textbackslash{}
+         0  Residential Community  Opening as normal  Single-layer Store     Level E   
+         1  Residential Community  Opening as normal  Single-layer Store     Level C   
+         2  Residential Community  Opening as normal  Single-layer Store     Level E   
+         3  Residential Community  Opening as normal  Single-layer Store     Level D   
+         4  Residential Community  Opening as normal  Single-layer Store     Level B   
+         
+           Business Area        Store Style  Status  
+         0           150   First-generation  Active  
+         1         95.94   First-generation  Active  
+         2           140   First-generation  Active  
+         3           240  Second-generation  Active  
+         4           180  Second-generation  Active  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}545}]:} \PY{n}{client\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Store Level}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}545}]:} Level C       120
+          Level D        90
+          N              73
+          Level E        70
+          Level B        42
+          Level A        24
+          Standard       11
+          Duty-free       2
+          Large-size      1
+          Name: Store Level, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{o}{\PYZpc{}}\PY{k}{aimport} external.df\PYZus{}translator
+         \PY{k+kn}{from} \PY{n+nn}{external} \PY{k}{import} \PY{n}{df\PYZus{}translator}
+         
+         \PY{n}{translator} \PY{o}{=} \PY{n}{df\PYZus{}translator}\PY{o}{.}\PY{n}{DFTranslator}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} translator.create\PYZus{}dictionnary(client\PYZus{}df,columns = [\PYZdq{}Key\PYZus{}lvl2\PYZdq{},\PYZdq{}Key\PYZus{}lvl3\PYZdq{}])}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}547}]:} \PY{n}{dic} \PY{o}{=} \PY{n}{translator}\PY{o}{.}\PY{n}{load\PYZus{}dictionnary}\PY{p}{(}\PY{n}{raw\PYZus{}path}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cl\PYZus{}dictionnary}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{dic}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}547}]:} \{'MALL分公司': 'MALL Branch',
+           'MALL成都一区': 'MALL Chengdu Area',
+           'MALL重庆一区': 'MALL Chongqing District',
+           '乐山区域': 'Leshan area',
+           '什绵区域': 'The area',
+           '仁寿区域': 'Renshou District',
+           '内江区域': 'Neijiang area',
+           '加盟云南区域': 'Join the Yunnan region',
+           '加盟分公司': 'Affiliate branch',
+           '加盟川东区域': 'Join East Sichuan area',
+           '加盟川北区域': 'Affiliated to the northern Sichuan region',
+           '加盟川南区域': 'Join the South Sichuan region',
+           '加盟川西区域': 'Join Western Sichuan area',
+           '加盟成都区域': 'Join Chengdu area',
+           '南充区域': 'Nanchong area',
+           '双流区域': 'Dual-stream area',
+           '商品分公司': 'Commodity branch',
+           '商品区域': 'Commodity area',
+           '四川分公司': 'Sichuan Branch',
+           '大英区域': 'British area',
+           '安徽分公司': 'Anhui Branch',
+           '安徽区域': 'Anhui area',
+           '宜宾区域': 'Yibin area',
+           '峨眉区域': 'Emei area',
+           '广安区域': "Guang'an area",
+           '广巴区域': 'Guangba area',
+           '广汉区域': 'Guanghan area',
+           '彭州区域': 'Pengzhou area',
+           '德阳区域': 'Deyang area',
+           '成都一区': 'Chengdu area',
+           '成都二区': 'Chengdu Second District',
+           '泸州区域': 'Zhangzhou area',
+           '温江区域': 'Wenjiang area',
+           '湖北分公司': 'Hubei Branch',
+           '湖北区域': 'Hubei area',
+           '独立一区': 'A separate area',
+           '独立二区': 'Independent Second District',
+           '眉山区域': 'Meishan District',
+           '管理店分公司': 'Management shop branch',
+           '管理店区域': 'Manage shop area',
+           '绵阳区域': 'Mianyang area',
+           '资阳区域': 'Ziyang District',
+           '遂宁区域': 'Funing area',
+           '都江堰区域': 'Dujiangyan area',
+           '重庆区域': 'Chongqing area'\}
+\end{Verbatim}
+            
+    \subsection{Get Products description}\label{get-products-description}
+
+In order to get the product features description, an inner join on the
+product group key is operated on the cluster result with the products
+description file.
+
+Since the clustering was calculated on the second level group, some
+columns of the description file must be dropped in order to avoid
+duplicates of the first level products (mainly Promo and Standard
+version of the products)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1397}]:} \PY{n}{file\PYZus{}name} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{product\PYZus{}7cerf.txt}\PY{l+s+s2}{\PYZdq{}}
+           
+           \PY{n}{non\PYZus{}unique\PYZus{}features}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+           
+           \PY{n}{code\PYZus{}features} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+           
+           
+           
+           \PY{n}{df\PYZus{}produit} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{raw\PYZus{}path}\PY{o}{+}\PY{n}{file\PYZus{}name}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{encoding}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{utf8}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+           
+           
+                           
+           \PY{c+c1}{\PYZsh{} df\PYZus{}produit = df\PYZus{}produit.drop(code\PYZus{}features,axis=1)}
+           \PY{c+c1}{\PYZsh{} df\PYZus{}produit = df\PYZus{}produit.drop\PYZus{}duplicates()}
+           \PY{c+c1}{\PYZsh{} df\PYZus{}produit = df\PYZus{}produit.dropna(how=\PYZdq{}all\PYZdq{})}
+           \PY{c+c1}{\PYZsh{} df\PYZus{}produit = df\PYZus{}produit.reset\PYZus{}index(drop=True)}
+           \PY{c+c1}{\PYZsh{} df\PYZus{}produit = df\PYZus{}produit.apply(lambda x:x.astype(str).str.upper())}
+           
+           
+           \PY{n}{df\PYZus{}produit} \PY{o}{=} \PY{n}{df\PYZus{}produit}\PY{o}{.}\PY{n}{drop\PYZus{}duplicates}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Key\PYZus{}lvl2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Description}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+           
+           
+           \PY{n+nb}{print}\PY{p}{(}\PY{n}{df\PYZus{}produit}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+           \PY{n}{df\PYZus{}produit}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(51349, 22)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}1397}]:}       Key\_lvl1      Description     Key\_lvl2        Key\_lvl3  Key\_lvl4  \textbackslash{}
+           0  20300138600  RQC-老人头棉袜BL0017  203001386\_2  男-短袜-长筒袜-8.25元  男-短袜-长筒袜   
+           1  20300329000   RQC-国奥棉袜BL4038  203003290\_2  男-短袜-长筒袜-4.38元  男-短袜-长筒袜   
+           2  20300355500   RQC-爱国者棉袜BL010  203003555\_2  男-短袜-长筒袜-4.76元  男-短袜-长筒袜   
+           3  20300418700  RQC-老人头棉袜BL0020  203004187\_2  男-短袜-长筒袜-8.25元  男-短袜-长筒袜   
+           4  20300419000  RQC-老人头棉袜BL0021  203004190\_2   男-短袜-长筒袜-7.5元  男-短袜-长筒袜   
+           
+             Key\_lvl5 Key\_lvl6 Key\_lvl7  Continuation of  Base Price 1 Target Value  \textbackslash{}
+           0     男-短袜        男       袜子              NaN                        8.0   
+           1     男-短袜        男       袜子              NaN                        4.0   
+           2     男-短袜        男       袜子              NaN                        5.0   
+           3     男-短袜        男       袜子              NaN                        8.0   
+           4     男-短袜        男       袜子              NaN                        8.0   
+           
+                        {\ldots}              Size     Gender Year of Commodity Launch Date  \textbackslash{}
+           0            {\ldots}                JM  No Gender              2011  01/01/1900   
+           1            {\ldots}                JM  No Gender              2011  01/01/1900   
+           2            {\ldots}                JM  No Gender              2011  01/01/1900   
+           3            {\ldots}                JM  No Gender              2011  01/01/1900   
+           4            {\ldots}                JM  No Gender              2011  01/01/1900   
+           
+              Tag Price Product Status  Sales Season Continuation Age Group  \textbackslash{}
+           0       8.25              D        Autumn           NO     29-38   
+           1       4.38              D        Autumn           NO     29-38   
+           2       4.76              D        Autumn           NO     29-38   
+           3       8.25              D        Autumn           NO     29-38   
+           4       7.50              D        Autumn           NO     29-38   
+           
+             Product ABC Classification  
+           0                        NaN  
+           1                        NaN  
+           2                        NaN  
+           3                        NaN  
+           4                        NaN  
+           
+           [5 rows x 22 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2136}]:} \PY{n}{df\PYZus{}produit}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2136}]:}   Key\_lvl5 Key\_lvl6 Key\_lvl7  Continuation of  Base Price 1 Target Value  \textbackslash{}
+           0     男-短袜        男       袜子              NaN                        8.0   
+           1     男-短袜        男       袜子              NaN                        4.0   
+           2     男-短袜        男       袜子              NaN                        5.0   
+           3     男-短袜        男       袜子              NaN                        8.0   
+           4     男-短袜        男       袜子              NaN                        8.0   
+           
+              Base Price 1 Coefficient Table     Color Size     Gender  \textbackslash{}
+           0                             NaN  No Color   JM  No Gender   
+           1                             NaN  No Color   JM  No Gender   
+           2                             NaN  No Color   JM  No Gender   
+           3                             NaN  No Color   JM  No Gender   
+           4                             NaN  No Color   JM  No Gender   
+           
+              Year of Commodity Launch Date  Tag Price  
+           0               2011  01/01/1900       8.25  
+           1               2011  01/01/1900       4.38  
+           2               2011  01/01/1900       4.76  
+           3               2011  01/01/1900       8.25  
+           4               2011  01/01/1900       7.50  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2137}]:} \PY{n}{df\PYZus{}produit}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Tag Price}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2137}]:} 9.00      4221
+           10.00     3606
+           12.00     3425
+           15.00     2932
+           7.00      2437
+                     {\ldots} 
+           27.75        1
+           61.74        1
+           216.00       1
+           9.31         1
+           15.90        1
+           Name: Tag Price, dtype: int64
+\end{Verbatim}
+            
+    \subsection{Table of products and
+clusters}\label{table-of-products-and-clusters}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1398}]:} \PY{n}{unbalanced} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Description}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Key\PYZus{}lvl7}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Product Status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{c+c1}{\PYZsh{},\PYZdq{}Sales Season\PYZdq{}}
+           
+           \PY{c+c1}{\PYZsh{}Join with clusters}
+           \PY{n}{product\PYZus{}cluster} \PY{o}{=} \PY{n}{df\PYZus{}produit}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{df\PYZus{}prd\PYZus{}cluster}\PY{p}{,}\PY{n}{on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Key\PYZus{}lvl2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inner}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+           \PY{n}{product\PYZus{}cluster}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{unbalanced}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1} \PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+           \PY{n}{rw} \PY{o}{=} \PY{n}{product\PYZus{}cluster}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+           
+           \PY{n}{prp}\PY{o}{.}\PY{n}{display}\PY{p}{(}\PY{n}{product\PYZus{}cluster}\PY{p}{)}
+           
+           \PY{c+c1}{\PYZsh{}product\PYZus{}cluster.to\PYZus{}csv(interim\PYZus{}path+\PYZdq{}product\PYZus{}cluster.csv\PYZdq{},sep=\PYZdq{};\PYZdq{},encoding=\PYZdq{}utf\PYZhy{}8\PYZdq{})}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(1046, 17)
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+        Key_lvl1     Key_lvl2        Key_lvl3    Key_lvl4 Key_lvl5 Key_lvl6  \
+0  31C0009635602  31C000963_2  女-内穿一体裤-薄型-29元  女-内穿一体裤-薄型  女-内穿一体裤        女   
+1  31C0022017000  31C002201_2  女-内穿一体裤-薄型-29元  女-内穿一体裤-薄型  女-内穿一体裤        女   
+2  31C0023005602  31C002300_2  女-内穿一体裤-薄型-29元  女-内穿一体裤-薄型  女-内穿一体裤        女   
+3  31C0024005602  31C002400_2  女-内穿一体裤-薄型-39元  女-内穿一体裤-薄型  女-内穿一体裤        女   
+4  31C0025005602  31C002500_2  女-内穿一体裤-薄型-29元  女-内穿一体裤-薄型  女-内穿一体裤        女   
+
+   Base Price 1 Target Value  Color     Size     Gender  Year of Commodity  \
+0                       29.0  Black    Sheer  No Gender               2016   
+1                       29.0   Gray  No Size  No Gender               2016   
+2                       29.0  Black    Sheer  No Gender               2016   
+3                       39.0  Black    Sheer  No Gender               2017   
+4                       29.0  Black    Sheer  No Gender               2017   
+
+  Launch Date  Tag Price Sales Season Age Group  Cluster     Centroid  
+0  05/10/2016       29.0       Autumn     29-38        8  335030700_2  
+1  08/09/2016       29.0       Autumn     18-28        4  345010900_2  
+2  25/10/2016       29.0       Autumn     29-38        8  335030700_2  
+3  15/09/2017       39.0       Autumn     29-38        2  338013800_2  
+4  11/09/2017       29.0       Autumn     18-28        6  34B000000_2  
+    \end{verbatim}
+
+    
+    \subsection{Translate Features}\label{translate-features}
+
+    \paragraph{Load chinese features and translate
+them}\label{load-chinese-features-and-translate-them}
+from googletrans import Translator as Translator
+
+dictionnary = {}
+values = df_produit[["Key_lvl3","Key_lvl4","Key_lvl5","Key_lvl6","Key_lvl7"]].drop_duplicates().values.ravel()
+words = list(np.unique(values))
+
+translator = Translator()
+t = translator.translate(words,dest="en")
+translated =[]
+for u in t:
+    translated.append(u.text)
+    \paragraph{Create a CH==\textgreater{}EN dictionnary for all the
+features and save it to a
+file}\label{create-a-chen-dictionnary-for-all-the-features-and-save-it-to-a-file}
+for i,ts in enumerate(translated):
+    dictionnary[words[i]] = ts 
+np.save(raw_path+'dictionnary.npy', dictionnary) 
+    \paragraph{Load the dictionnary file}\label{load-the-dictionnary-file}
+# Load dictionnary
+dico = np.load(raw_path+'dictionnary.npy').item()
+    \subsubsection{Translate the products
+dataframe}\label{translate-the-products-dataframe}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1399}]:} \PY{n}{product\PYZus{}cluster} \PY{o}{=} \PY{n}{prp}\PY{o}{.}\PY{n}{translate\PYZus{}df}\PY{p}{(}\PY{n}{product\PYZus{}cluster}\PY{p}{,}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Key\PYZus{}lvl3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Key\PYZus{}lvl4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Key\PYZus{}lvl5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Key\PYZus{}lvl6}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+           \PY{n}{prp}\PY{o}{.}\PY{n}{display}\PY{p}{(}\PY{n}{product\PYZus{}cluster}\PY{p}{)}   
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(1046, 17)
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+        Key_lvl1     Key_lvl2                                      Key_lvl3  \
+0  31C0009635602  31C000963_2  Female - One-piece pants inside - Thin - $29   
+1  31C0022017000  31C002201_2  Female - One-piece pants inside - Thin - $29   
+2  31C0023005602  31C002300_2  Female - One-piece pants inside - Thin - $29   
+3  31C0024005602  31C002400_2  Female - One-piece pants inside - Thin - $39   
+4  31C0025005602  31C002500_2  Female - One-piece pants inside - Thin - $29   
+
+                             Key_lvl4                  Key_lvl5 Key_lvl6  \
+0  Female - One Internal Pants - Thin  Female - One-piece pants   Female   
+1  Female - One Internal Pants - Thin  Female - One-piece pants   Female   
+2  Female - One Internal Pants - Thin  Female - One-piece pants   Female   
+3  Female - One Internal Pants - Thin  Female - One-piece pants   Female   
+4  Female - One Internal Pants - Thin  Female - One-piece pants   Female   
+
+   Base Price 1 Target Value  Color     Size     Gender  Year of Commodity  \
+0                       29.0  Black    Sheer  No Gender               2016   
+1                       29.0   Gray  No Size  No Gender               2016   
+2                       29.0  Black    Sheer  No Gender               2016   
+3                       39.0  Black    Sheer  No Gender               2017   
+4                       29.0  Black    Sheer  No Gender               2017   
+
+  Launch Date  Tag Price Sales Season Age Group  Cluster     Centroid  
+0  05/10/2016       29.0       Autumn     29-38        8  335030700_2  
+1  08/09/2016       29.0       Autumn     18-28        4  345010900_2  
+2  25/10/2016       29.0       Autumn     29-38        8  335030700_2  
+3  15/09/2017       39.0       Autumn     29-38        2  338013800_2  
+4  11/09/2017       29.0       Autumn     18-28        6  34B000000_2  
+    \end{verbatim}
+
+    
+    \subsection{Merge Products and Clients
+tables}\label{merge-products-and-clients-tables}
+produit_client_cluster = pd.merge(product_cluster,client_df,how='inner', left_on=["Client"],right_on =["Key_lvl4"] )#.drop(["Key_lvl4"],axis=1)
+
+clusters = produit_client_cluster["Cluster"]
+centroids = produit_client_cluster["Centroid"]
+produit_client_cluster = produit_client_cluster.drop(["Cluster","Centroid"],axis=1)
+
+pos = len(produit_client_cluster.columns)
+produit_client_cluster.insert(pos,"Cluster",clusters)
+produit_client_cluster.insert(pos+1,"Centroid",centroids)
+
+all_features = produit_client_cluster.columns[:-2].drop(unbalanced)
+all_features = product_cluster.columns[:-2]
+
+print(produit_client_cluster.shape)
+produit_client_cluster.tail()
+
+# absent = produit_client_cluster[produit_client_cluster["Key_lvl5"].isnull()]["Client"].drop_duplicates()
+# absent.tail()
+    Save the final result into a csv file for further exploration
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1400}]:} \PY{n}{filename} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p2\PYZus{}clustering\PYZus{}clean\PYZus{}week\PYZus{}3.csv}\PY{l+s+s2}{\PYZdq{}}
+           \PY{n}{product\PYZus{}cluster}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{n}{processed\PYZus{}path}\PY{o}{+}\PY{n}{filename}\PY{p}{,}\PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Exploratory Data Analysis}\label{exploratory-data-analysis}
+df = product_cluster
+
+pd.crosstab(df["Sales Season"],df["Key_lvl5"])
+peu = list((df["Key_lvl3"].value_counts()==1).index)
+print(len(peu))
+df.loc[df["Key_lvl3"].isin(peu)]
+
+
+df["Key_lvl3"].value_counts()==1
+
+df.tail()%matplotlib inline
+# prp.display(product_cluster)
+desc = df.astype(str).describe(include="all")
+prp.display(desc)
+
+# cross=pd.crosstab(product_cluster["Key_lvl3"],product_cluster["Tag Price"])
+df["Tag Price"].plot(kind="hist");
+print(df["Tag Price"].skew())
+#product_cluster["Tag Price"].plot(kind="kde");pd.crosstab(df.Gender,df["Age Group"])
+pd.crosstab(df.Key_lvl6,df.Gender).plot(kind='bar')
+pd.crosstab(df.Key_lvl6,df.Key_lvl5)df.pivot_table(index='Key_lvl6',columns='Key_lvl5',values='Cluster',aggfunc='count')df.groupby(["Color"]).Cluster.transform('median')
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

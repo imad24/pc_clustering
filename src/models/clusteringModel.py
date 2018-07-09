@@ -18,7 +18,7 @@ class ClusteringModel:
         self.X = []
         self.distances = []
 
-    def fit(self,X,k,weights = None):
+    def fit(self,X,k=None,weights = None):
         if (k is None): k = self.k
         self.X = X
         # TODO: Add weights to distances
@@ -27,7 +27,7 @@ class ClusteringModel:
             self.labels, self.centroids = kMedoids.cluster(self.distances,k=k)
 
     def getSSE(self):
-        return np.sum( (self.X[self.labels]-self.X[self.centroids])**2)
+        return np.sum( (self.X-self.X[self.labels])**2)
 
     def getInertia(self):
         return np.sqrt(self.getSSE()/len(self.labels))
@@ -39,6 +39,25 @@ class ClusteringModel:
         return squareform(pdist(X, distance))
 
 
-    def fit_select(self,X,weights = None,k_values = []):
-        for k in k_values:
+    def grid_search(self,X,weights = None,k_values = [],order=0):
+        inertia = []
+        silhouette = []
+
+        K_values = np.array(k_values)
+
+        for k in K_values:
             self.fit(X=X,k = k,weights = weights)
+            silhouette.append(self.getSilhouette())
+            sse = self.getSSE()
+            inertia.append(np.sqrt(sse/len(self.labels)))
+
+        acc = np.diff(inertia, 2)
+        best_ks = acc.argsort()[::-1]
+        i =  best_ks+ 2
+        inertia_grid = np.array(K_values[i])
+
+        sil = np.array(silhouette)
+        best_ks = sil.argsort()[::-1]
+        silhouette_grid = np.array(K_values[best_ks])
+
+        return inertia_grid, np.array(silhouette_grid)
