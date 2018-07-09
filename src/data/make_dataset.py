@@ -33,7 +33,7 @@ n_row_headers = len(row_headers)
 import logging
 
 @click.command()
-#@click.argument('version', type=int)
+@click.argument('version',type=int)
 # @click.argument('input_filepath', type=click.Path(exists=True))
 # @click.argument('output_filepath', type=click.Path())
 def main(version = 99):#input_filepath, output_filepath

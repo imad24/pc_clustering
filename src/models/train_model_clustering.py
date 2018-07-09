@@ -87,13 +87,16 @@ n_row_headers = len(row_headers)
 
 
 @click.command()
-def main(version = 99):
+@click.argument('season',type=str)
+@click.option('--version',type=int)
+@click.option('--k',type=int)
+def main(season,version = 99, k = None):
     """ Contains all the functions of data preprocessing
     """
 
     #Set up file names
-    season = "Autumn"
-    z_file_name ="p2_z_clean_%s"%season
+    s = season
+    z_file_name ="p2_z_clean_%s"%s
 
 
     #Load files
@@ -106,24 +109,35 @@ def main(version = 99):
     X_train = product_df.copy()
     X_z = X_train.values[:,n_row_headers:].astype(np.float64)
 
-    model = ClusteringModel("kMedoids",9)
+    model = ClusteringModel("kMedoids",k)
 
-    sse, silhouette = model.grid_search(X_z,k_values=np.linspace(5,15,10).astype(int))
-    print(sse,silhouette)
-
-    #select best k:
-    k = ClusteringModel.select_best_k(sse,silhouette)
-    print(k)
-    model.fit(X_z,k=k)
-    labels, _ = model.labels, model.centroids
-    cluster_df = labels_to_df(labels,product_df,row_headers)
-    save_model(cluster_df,"p2_clusters_%s"%season,v=version)
-    print("Model successfully saved")
+    if k is None:
+        sse, silhouette = model.grid_search(X_z,k_values=np.linspace(5,15,10).astype(int))
+        print(sse,silhouette)
+        k = ClusteringModel.select_best_k(sse,silhouette)
+        #select best k:
+        print(k)
+    else:
+        model.fit(X_z,k=k)
+        labels, _ = model.labels, model.centroids
+        cluster_df = labels_to_df(labels,product_df,row_headers)
+        save_model(cluster_df,"p2_clusters_%s"%s,v=version)
+        print("Model successfully saved")
 
 
 
 
 def save_model(df,filename,v=1):
+    """Saves the clustering model
+    
+    Arguments:
+        df {Dataframe} -- Pandas dataframe containing item key, cluster and centroid columns
+        filename {str} -- the file name
+    
+    Keyword Arguments:
+        v {int} -- version of the file (default: {1})
+    """
+
     prp.save_file(df,filename,type_="M",version = v )
 
 
@@ -159,4 +173,5 @@ if __name__ == '__main__':
     # load up the .env entries as environment variables
     load_dotenv(find_dotenv())
 
+    # pylint: disable=no-value-for-parameter
     main()
