@@ -8,6 +8,13 @@ class ClusteringModel:
 
     models = ["kMedoids"]
 
+
+    @staticmethod
+    def select_best_k(inertia_grid,silhouette_grid):
+        for k in inertia_grid:
+            if list(silhouette_grid).index(k)<5:
+                return k
+
     def __init__(self, name, k):
         if (name not in ClusteringModel.models): 
             raise "Model name not recognized"

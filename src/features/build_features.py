@@ -118,6 +118,13 @@ def extract_features(rdf, non_categorical):
     return data_frame
 
 
+def _reduce_size(s):
+    return {
+        "":""
+
+    }[s]
+
+
 def _reduce_colors(df):
     df.loc[df.Color.str.contains("Grey"),"Color"]="Grey"
     df.loc[df.Color.str.contains("Gray"),"Color"]="Grey"

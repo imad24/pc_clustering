@@ -36,11 +36,17 @@ def cluster_plot(df,centroid_only= False,tick_frequency = 3,top = None, Normaliz
             plt.subplot(nc,1,i+1)
             cdf = df[df.Cluster==c]
             medoid = cdf.Centroid.iloc[0]
-            plt.title("Cluster %d (%s)): %d product"%(c,medoid,cdf.shape[0]))
-            for _ , row in cdf.iterrows():
+            plt.title("Cluster %d (%s): %d items"%(c,medoid,cdf.shape[0]))
+            if (centroid_only):
+                row = cdf.loc[medoid]
                 values = row.values[:-2]
                 if (Normalized): values = values/values.std()
                 plt.plot(values)
+            else:    
+                for _ , row in cdf.iterrows():
+                    values = row.values[:-2]
+                    if (Normalized): values = values/values.std()
+                    plt.plot(values)
     except ValueError as ex:
         print(ex)
 
@@ -86,13 +92,13 @@ def plot_cluster_over_features(df,clusters = [], pthreshold=0.05):
             dist = c_df[feature].value_counts(dropna = False).reindex(original_dist.index,fill_value = 1).sort_index()
 
             _, p, v_cramer = tools.get_significance(list(dist.values),list(original_dist.values))
-            print(v_cramer)
+
             if p<pthreshold:
                 # plt.subplot(n_rows,3,i+1)
                 _,ax = plt.subplots()
                 ax2 = ax.twinx()
-                dist.plot(kind="Bar",ax=ax, alpha =0.5 ,title ="Cluster: %d - %s pvalue = %.2f"%(c,feature,v_cramer))
-                original_dist.plot(kind="Bar",ax=ax2,color='green',alpha = 0.5)
+                dist.plot(kind="Bar",ax=ax, alpha =0.5 ,title ="Cluster: %d - %s pvalue = %.2f"%(c,feature,v_cramer),width=0.5)
+                original_dist.plot(kind="Bar",ax=ax2,color='green',alpha = 0.5,width = 0.4,align="edge")
                 plt.grid(False)
                 i+=1
             
@@ -129,6 +135,6 @@ def plot_modalities(df,pthreashold = 0.3,min_dust  = True, n_min_dist = 3, min_m
                 ctab.loc[index].plot(kind="Bar",title="%s: %s  Distribution - pvalue = %.9f"%(feature,index,v_cramer))
 
 
-def plot_MCA(df):
+def mca_plot(df):
     mca = prince.MCA(df)
     mca.plot_relationship_square()

@@ -78,6 +78,9 @@ target/
 # exclude data from source control by default
 /data/raw/
 /data/interim/
+/data/**/raw
+/data/**/interim/
+
 
 #exclude notebook images
 /notebooks/*.png

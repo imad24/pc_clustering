@@ -138,7 +138,6 @@ def range_from_origin(data,range_,offset=2):
     centered_df = centered_df.loc[~(centered_df==0).all(axis = 1)]
     for i in range(offset)[::-1]:
         centered_df.insert(0,i,0.0)
-    print("Data shifted to origin with %d values"%range_)
 
     return centered_df
 
