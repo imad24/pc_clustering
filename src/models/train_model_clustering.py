@@ -1,12 +1,4 @@
-import os
-import sys
-# add the 'src' directory as one where we can import modules
-root_dir = os.path.join(os.getcwd(),os.pardir,os.pardir)
-src_dir = os.path.join(os.getcwd(), os.pardir,os.pardir, 'src')
-if src_dir not in sys.path: sys.path.append(src_dir)
-
 import click
-
 import pandas as pd
 import math
 import numpy as np
@@ -19,71 +11,11 @@ from sklearn.model_selection import train_test_split
 from external import kMedoids
 from scipy.spatial.distance import pdist,squareform
 
-
 from data import preprocessing as prp
-from dotenv import find_dotenv, load_dotenv
-#Load env vars
-load_dotenv(find_dotenv())
-
-
-subfolder = os.getenv("SUBFOLDER")
-PREFIX = os.getenv("PREFIX")
-raw_path = os.path.join(root_dir,"data\\raw\\",subfolder)
-interim_path = os.path.join(root_dir,"data\\interim\\",subfolder) 
-processed_path = os.path.join(root_dir,"data\\processed\\",subfolder) 
-
-reports_path = os.path.join(root_dir,"reports\\",subfolder)
-models_path = os.path.join(root_dir,"models\\",subfolder)
-
-row_headers = ["Product"]
-n_row_headers = len(row_headers)
+import settings
+import logging
 
 from clusteringModel import ClusteringModel
-
-
-import os
-import sys
-# add the 'src' directory as one where we can import modules
-root_dir = os.path.join(os.getcwd(),os.pardir,os.pardir)
-src_dir = os.path.join(os.getcwd(), os.pardir,os.pardir, 'src')
-if src_dir not in sys.path: sys.path.append(src_dir)
-
-import click
-
-import pandas as pd
-import math
-import numpy as np
-import re
-import itertools
-from datetime import datetime,date
-
-from sklearn.model_selection import train_test_split  
-
-from external import kMedoids
-from scipy.spatial.distance import pdist,squareform
-
-
-from data import preprocessing as prp
-from dotenv import find_dotenv, load_dotenv
-#Load env vars
-load_dotenv(find_dotenv())
-
-
-from clusteringModel import ClusteringModel
-#Load env vars
-
-
-subfolder = os.getenv("SUBFOLDER")
-PREFIX = os.getenv("PREFIX")
-raw_path = os.path.join(root_dir,"data\\raw\\",subfolder)
-interim_path = os.path.join(root_dir,"data\\interim\\",subfolder) 
-processed_path = os.path.join(root_dir,"data\\processed\\",subfolder) 
-
-reports_path = os.path.join(root_dir,"reports\\",subfolder)
-models_path = os.path.join(root_dir,"models\\",subfolder)
-
-row_headers = ["Product"]
-n_row_headers = len(row_headers)
 
 
 @click.command()
@@ -107,7 +39,7 @@ def main(season,version = 99, k = None):
     # X_train, X_test = train_test_split(product_df, test_size=0.25)
     # prp.save_file(X_test,"test",type_="P")
     X_train = product_df.copy()
-    X_z = X_train.values[:,n_row_headers:].astype(np.float64)
+    X_z = X_train.values[:,settings.n_row_headers:].astype(np.float64)
 
     model = ClusteringModel("kMedoids",k)
 
@@ -120,7 +52,7 @@ def main(season,version = 99, k = None):
     else:
         model.fit(X_z,k=k)
         labels, _ = model.labels, model.centroids
-        cluster_df = labels_to_df(labels,product_df,row_headers)
+        cluster_df = labels_to_df(labels,product_df,settings.row_headers)
         save_model(cluster_df,"p2_clusters_%s"%s,v=version)
         print("Model successfully saved")
 
@@ -164,14 +96,7 @@ def labels_to_df(labels,data_df,headers):
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    # logging.basicConfig(level=logging.INFO, format=log_fmt)
-
-    # not used in this stub but often useful for finding various files
-    project_dir = os.path.join(os.path.dirname(__file__), os.pardir, os.pardir)
-
-    # find .env automagically by walking up directories until it's found, then
-    # load up the .env entries as environment variables
-    load_dotenv(find_dotenv())
+    logging.basicConfig(level=logging.INFO, format=log_fmt)
 
     # pylint: disable=no-value-for-parameter
     main()

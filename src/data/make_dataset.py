@@ -1,42 +1,21 @@
-# -*- coding: utf-8 -*-
-import sys 
-import os
 import click
-# add the 'src' directory as one where we can import modules
-root_dir = os.path.join(os.getcwd(),os.pardir,os.pardir)
-src_dir = os.path.join(os.getcwd(), os.pardir,os.pardir, 'src')
-if src_dir not in sys.path: sys.path.append(src_dir)
-
-from dotenv import find_dotenv, load_dotenv
- 
 import math
 import numpy as np
 import pandas as pd
+import logging
 
 from data import preprocessing as prp
+import settings
 
 
-load_dotenv(find_dotenv())
-
-subfolder = os.getenv("SUBFOLDER")
-PREFIX = os.getenv("PREFIX")
-raw_path = os.path.join(root_dir,"data\\raw\\",subfolder)
-interim_path = os.path.join(root_dir,"data\\interim\\",subfolder) 
-processed_path = os.path.join(root_dir,"data\\processed\\",subfolder) 
-
-reports_path = os.path.join(root_dir,"reports\\",subfolder)
-models_path = os.path.join(root_dir,"models\\",subfolder)
-
-row_headers = ["Product"]
-n_row_headers = len(row_headers)
-
-import logging
 
 @click.command()
 @click.argument('version',type=int)
 # @click.argument('input_filepath', type=click.Path(exists=True))
 # @click.argument('output_filepath', type=click.Path())
 def main(version = 99):#input_filepath, output_filepath
+
+
     """ Runs data processing scripts to turn raw data from (../raw) into
         cleaned data ready to be analyzed (saved in ../processed).
     """
@@ -153,18 +132,18 @@ def get_seasonsd_df():
     seasons_df.drop(["Key_lvl1"], axis=1, inplace=True)
     seasons_df.drop_duplicates(inplace= True)
     seasons_df.set_index("Key_lvl2",inplace = True)
-    seasons_df.index.names=[row_headers]
+    seasons_df.index.names=[settings.row_headers]
 
     return seasons_df
 
 def load_data(filename):
-    df = pd.read_csv(interim_path + filename , sep = ";", encoding = 'utf-8', header = 0)
+    df = pd.read_csv(settings.interim_path + filename , sep = ";", encoding = 'utf-8', header = 0)
 
     cols = df.columns.values
-    cols[:n_row_headers]  = row_headers
+    cols[:settings.n_row_headers]  = settings.row_headers
     df.columns =cols
 
-    return df.set_index(row_headers)
+    return df.set_index(settings.row_headers)
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'

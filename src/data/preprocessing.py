@@ -1,15 +1,4 @@
-# -*- coding: utf-8 -*-
-import sys 
-import os
 import click
-# add the 'src' directory as one where we can import modules
-root_dir = os.path.join(os.getcwd(),os.pardir,os.pardir)
-src_dir = os.path.join(os.getcwd(), os.pardir,os.pardir, 'src')
-if src_dir not in sys.path: sys.path.append(src_dir)
-
-
-from dotenv import find_dotenv, load_dotenv
- 
 import math
 import numpy as np
 import pandas as pd
@@ -19,24 +8,7 @@ from scipy.stats import mstats
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
 
-load_dotenv(find_dotenv())
-
-
-# add the 'src' directory as one where we can import modules
-
-# logger = logging.getLogger(__name__)
-# logger.info('making final data set from raw data')
-
-subfolder = os.getenv("SUBFOLDER")
-PREFIX = os.getenv("PREFIX")
-raw_path = os.path.join(root_dir,"data\\raw\\",subfolder)
-interim_path = os.path.join(root_dir,"data\\interim\\",subfolder) 
-processed_path = os.path.join(root_dir,"data\\processed\\",subfolder) 
-
-reports_path = os.path.join(root_dir,"reports\\",subfolder)
-models_path = os.path.join(root_dir,"models\\",subfolder)
-row_headers = ["Product"]
-
+import settings
 
 @click.command()
 def main():
@@ -50,11 +22,11 @@ if __name__ == '__main__':
     # logging.basicConfig(level=logging.INFO, format=log_fmt)
 
     # not used in this stub but often useful for finding various files
-    project_dir = os.path.join(os.path.dirname(__file__), os.pardir, os.pardir)
+    # project_dir = os.path.join(os.path.dirname(__file__), os.pardir, os.pardir)
 
     # find .env automagically by walking up directories until it's found, then
     # load up the .env entries as environment variables
-    load_dotenv(find_dotenv())
+    # load_dotenv(find_dotenv())
 
     main()
 
@@ -71,12 +43,12 @@ def load_data(filename):
     """
 
     
-    n_row_headers = len(row_headers)
+    n_row_headers = len(settings.row_headers)
 
-    product_raw_df = pd.read_csv(interim_path + filename , sep = ";", encoding = 'utf-8', header = 0)
+    product_raw_df = pd.read_csv(settings.interim_path + filename , sep = ";", encoding = 'utf-8', header = 0)
 
     cols = product_raw_df.columns.values
-    cols[:n_row_headers]  = row_headers
+    cols[:n_row_headers]  = settings.row_headers
     product_raw_df.columns =cols
 
     return product_raw_df
@@ -273,7 +245,7 @@ def data_with_headers(series,data,raw_df):
         [type] -- [description]
     """
 
-    headers = raw_df[row_headers[::-1]].loc[data.index]
+    headers = raw_df[settings.row_headers[::-1]].loc[data.index]
     product_df_full = pd.DataFrame(series, columns = data.columns,index=data.index)
     for label ,column in headers.iteritems():
         product_df_full.insert(0,label,column)
@@ -295,7 +267,7 @@ def display(data,head=5):
     else:
         dp(data)
 
-def translate_df(df,columns,dic_path=raw_path +"dictionnary.npy"):
+def translate_df(df,columns,dic_path=settings.raw_path +"dictionnary.npy"):
     """Translates specified columns in dataframe using a numpy dictionnary
     
     Arguments:
@@ -332,13 +304,13 @@ def save_file(data,filename,type_="I",version = None,index=False):
     """
 
     folder  = {
-        "R" : raw_path,
-        "I" : interim_path,
-        "P" : processed_path,
-        "M" : models_path
-    }.get(type_,interim_path)
+        "R" : settings.raw_path,
+        "I" : settings.interim_path,
+        "P" : settings.processed_path,
+        "M" : settings.models_path
+    }.get(type_,settings.interim_path)
 
-    fullname = "%s_%s_v%d.csv"%(PREFIX,filename,version) if version else "%s_%s.csv"%(PREFIX,filename)
+    fullname = "%s_%s_v%d.csv"%(settings.PREFIX,filename,version) if version else "%s_%s.csv"%(settings.PREFIX,filename)
     data.to_csv(folder+fullname, sep=";", encoding = "utf-8",index = index)
 
 
@@ -360,12 +332,12 @@ def load_file(filename,type_="I",version=None,sep=";", ext="csv",index =None):
     """
 
     folder  = {
-        "R" : raw_path,
-        "I" : interim_path,
-        "P" : processed_path,
-        "M" : models_path
-    }.get(type_,interim_path)
-    fullname = "%s_%s_v%d.%s"%(PREFIX,filename,version,ext) if version else "%s_%s.%s"%(PREFIX,filename,ext)
+        "R" : settings.raw_path,
+        "I" : settings.interim_path,
+        "P" : settings.processed_path,
+        "M" : settings.models_path
+    }.get(type_,settings.interim_path)
+    fullname = "%s_%s_v%d.%s"%(settings.PREFIX,filename,version,ext) if version else "%s_%s.%s"%(settings.PREFIX,filename,ext)
     df = pd.read_csv(folder+fullname,sep=";",encoding="utf-8")
     if index is not None: df.set_index(index,inplace=True)
 
@@ -406,8 +378,8 @@ def create_encoder(df,categorical_features= None,non_categorical=None):
     labeled_df = df[categorical_features].sort_index(axis=1).apply(lambda x: le_dict[x.name].transform(x))
     ohe_encoder  = OneHotEncoder().fit(labeled_df)
     
-    np.save(models_path+'le_encoder', le_dict)
-    np.save(models_path+'ohe_encoder', ohe_encoder)
+    np.save(settings.models_path+'le_encoder', le_dict)
+    np.save(settings.models_path+'ohe_encoder', ohe_encoder)
     print("encoders saved")
     return labeled_df,le_dict,ohe_encoder
 
@@ -427,8 +399,8 @@ def encode(df,non_categorical=[],le_encoder = None,ohe_encoder=None):
     """
 
     if(le_encoder is None):
-        le_encoder = np.load(models_path+'le_encoder.npy').item()
-        ohe_encoder = np.load(models_path+'ohe_encoder.npy').item()
+        le_encoder = np.load(settings.models_path+'le_encoder.npy').item()
+        ohe_encoder = np.load(settings.models_path+'ohe_encoder.npy').item()
     features =[ ["%s_%s"%(f_name,c) for c in f_encoder.classes_] for f_name,f_encoder in le_encoder.items()]
     columns = list(itertools.chain.from_iterable(features))
     categorical = list(le_encoder.keys())

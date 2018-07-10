@@ -1,34 +1,12 @@
-import os
-import sys
 import click
-# add the 'src' directory as one where we can import modules
-root_dir = os.path.join(os.getcwd(),os.pardir,os.pardir)
-src_dir = os.path.join(os.getcwd(), os.pardir,os.pardir, 'src')
-if src_dir not in sys.path: sys.path.append(src_dir)
-
 import pandas as pd
 import math
 import numpy as np
-
 from datetime import datetime
+import logging
 
 from data import preprocessing as prp
-from dotenv import find_dotenv, load_dotenv
-#Load env vars
-load_dotenv(find_dotenv())
-
-subfolder = os.getenv("SUBFOLDER")
-PREFIX = os.getenv("PREFIX")
-raw_path = os.path.join(root_dir,"data\\raw\\",subfolder)
-interim_path = os.path.join(root_dir,"data\\interim\\",subfolder) 
-processed_path = os.path.join(root_dir,"data\\processed\\",subfolder) 
-
-reports_path = os.path.join(root_dir,"reports\\",subfolder)
-models_path = os.path.join(root_dir,"models\\",subfolder)
-row_headers = ["Product"]
-
-
-
+import settings
 
 @click.command()
 def main():
@@ -36,7 +14,7 @@ def main():
     """
     #load raw file
     p2c4File = "histo_7cerf_p1c1.txt"
-    df_histo_p2c1_jour = pd.read_csv(raw_path + p2c4File, sep = ",", encoding = 'utf-8', header = None,dtype={0:str}).fillna(0)
+    df_histo_p2c1_jour = pd.read_csv(settings.raw_path + p2c4File, sep = ",", encoding = 'utf-8', header = None,dtype={0:str}).fillna(0)
 
     #prepare sales dataframe
     sales_df=  df_histo_p2c1_jour.drop([1,3,4,5,6],axis=1)
@@ -44,8 +22,8 @@ def main():
 
     #set headers
     end_date = "01-14-2019"
-    columns = row_headers.copy()
-    nb_days = len(sales_df.columns) - len(row_headers)
+    columns = settings.row_headers.copy()
+    nb_days = len(sales_df.columns) - len(settings.row_headers)
     date_range = pd.date_range(end = end_date,periods = nb_days, freq='1w').strftime("%d/%m/%Y")
     columns.extend(date_range)
     sales_df.columns = columns
@@ -56,7 +34,7 @@ def main():
 
     #product description
     file_name = "product_7cerf.txt"
-    df_produit = pd.read_csv(raw_path+file_name, sep='\t',encoding="utf8").astype(str)
+    df_produit = pd.read_csv(settings.raw_path+file_name, sep='\t',encoding="utf8").astype(str)
     df_produit = df_produit.drop_duplicates(["Key_lvl1","Description"])[["Key_lvl1","Key_lvl2"]].set_index(["Key_lvl1"]).astype(str)
 
     #keys table
@@ -98,13 +76,13 @@ def save_file(data,filename,type_="I",version = None,index=False):
     print("artifical save")
     return 0
     folder  = {
-        "R" : raw_path,
-        "I" : interim_path,
-        "P" : processed_path,
-        "M" : models_path
-    }.get(type_,interim_path)
+        "R" : settings.raw_path,
+        "I" : settings.interim_path,
+        "P" : settings.processed_path,
+        "M" : settings.models_path
+    }.get(type_,settings.interim_path)
 
-    fullname = "%s_%s_v%d.csv"%(PREFIX,filename,version) if version else "%s_%s.csv"%(PREFIX,filename)
+    fullname = "%s_%s_v%d.csv"%(settings.PREFIX,filename,version) if version else "%s_%s.csv"%(settings.PREFIX,filename)
     data.to_csv(folder+fullname, sep=";", encoding = "utf-8",index = index)
 
 
@@ -126,12 +104,12 @@ def load_file(filename,type_="I",version=None,sep=";", ext="csv",index =None):
     """
 
     folder  = {
-        "R" : raw_path,
-        "I" : interim_path,
-        "P" : processed_path,
-        "M" : models_path
-    }.get(type_,interim_path)
-    fullname = "%s_%s_v%d.%s"%(PREFIX,filename,version,ext) if version else "%s_%s.%s"%(PREFIX,filename,ext)
+        "R" : settings.raw_path,
+        "I" : settings.interim_path,
+        "P" : settings.processed_path,
+        "M" : settings.models_path
+    }.get(type_,settings.interim_path)
+    fullname = "%s_%s_v%d.%s"%(settings.PREFIX,filename,version,ext) if version else "%s_%s.%s"%(settings.PREFIX,filename,ext)
     df = pd.read_csv(folder+fullname,sep=";",encoding="utf-8")
     if index is not None: df.set_index(index,inplace=True)
 
@@ -142,13 +120,5 @@ def load_file(filename,type_="I",version=None,sep=";", ext="csv",index =None):
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    # logging.basicConfig(level=logging.INFO, format=log_fmt)
-
-    # not used in this stub but often useful for finding various files
-    project_dir = os.path.join(os.path.dirname(__file__), os.pardir, os.pardir)
-
-    # find .env automagically by walking up directories until it's found, then
-    # load up the .env entries as environment variables
-    load_dotenv(find_dotenv())
-
+    logging.basicConfig(level=logging.INFO, format=log_fmt)
     main()
