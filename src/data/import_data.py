@@ -1,59 +1,126 @@
-import click
-import pandas as pd
-import math
-import numpy as np
-from datetime import datetime
 import logging
+import math
+from datetime import datetime
+
+import click
+import numpy as np
+import pandas as pd
 
 import settings
-from data import preprocessing as prp
+from data.preprocessing import save_file,load_file
 
 
 @click.command()
 def main():
     """ Contains all the functions of data importing
     """
-    #load raw file
-    p2c4File = "histo_7cerf_p1c1.txt"
-    df_histo_p2c1_jour = pd.read_csv(settings.raw_path + p2c4File, sep = ",", encoding = 'utf-8', header = None,dtype={0:str}).fillna(0)
+    try:
+        logger = logging.getLogger(__name__)
+        #load raw file
 
-    #prepare sales dataframe
-    sales_df=  df_histo_p2c1_jour.drop([1,3,4,5,6],axis=1)
-    N,M = sales_df.shape
+        logger.info("Load raw data file...")
+        p1c1File = "histo_7cerf_p1c1.txt"
+        df_histo_p2c1_jour = pd.read_csv(settings.raw_path + p1c1File, sep = ",", encoding = 'utf-8', header = None,dtype={0:str,2:str,3:str}).fillna(0)
 
-    #set headers
-    end_date = "01-14-2019"
-    columns = settings.row_headers.copy()
-    nb_days = len(sales_df.columns) - len(settings.row_headers)
-    date_range = pd.date_range(end = end_date,periods = nb_days, freq='1w').strftime("%d/%m/%Y")
-    columns.extend(date_range)
-    sales_df.columns = columns
+        #prepare sales dataframe
+        logger.info("Droping uneccessary columns...")
+        sales_df=  df_histo_p2c1_jour.drop([1,3,4,5,6],axis=1)
 
-    #drop duplicates
-    p1c1 = sales_df[["Product","Client"]].drop_duplicates().astype(str).copy()
+        #set headers
+        logger.info("Setting headers info...")
+        end_date = "01-14-2019"
+        columns = ["Product","Client"]
+        nb_days = len(sales_df.columns) - len(columns)
+        date_range = pd.date_range(end = end_date,periods = nb_days, freq='1w').strftime("%d/%m/%Y")
+        columns.extend(date_range)
+        sales_df.columns = columns
+
+        #drop Client 0
+        sales_df = sales_df[sales_df["Client"]!=0]
+
+        #Get p1c1 keys
+        p1c1 = sales_df[["Product","Client"]].dropna().drop_duplicates().astype(str).copy()
+
+        #Product table
+        logger.info("Loading products descriptions...")
+        product_df = get_product_df("product_7cerf.txt")
+        #save product season mapping
+        save_product_season(product_df)
+
+        #Get keys table from previous files
+        p1c1p2 = p1c1.join(product_df[["Key_lvl2"]],on =["Product"]).dropna().set_index(["Product"]).astype(str)
 
 
+        #save sales history
+        save_p2_sales(sales_df,p1c1p2)
+    
+        #Get client talbe
+        logger.info("Loading clients descriptions...")
+        client_df = get_clients_df("client_7cerf.txt",columns =["Store Level","Business Area"] )
+        cli_features = p1c1p2.join(client_df,on="Client",how="left").drop(["Client"],axis=1)
+
+       
+
+        #Calculate store counts
+        logger.info("Saving store counts file...")
+        save_storecounts(cli_features,p1c1p2)
+
+       
+
+        #Client counts by p2
+        logger.info("Saving clients count by product...")
+        save_clients_count(p1c1p2)
+
+    except Exception as err:
+        logger.error(err)
+
+
+
+
+def save_p2_sales(sales,keys):
+    p1_sales = sales.groupby(["Product"]).sum().fillna(0)
+    df = keys[["Key_lvl2"]].join(p1_sales, how="inner").drop_duplicates()
+    HistPerProduct_p2_jour = df.reset_index().drop(["Product"],axis = 1).groupby(["Key_lvl2"]).sum().fillna(0)
+    filename = "HistPerProduct_p2_jour"
+    save_file(HistPerProduct_p2_jour,filename,index=True)
+
+
+def save_storecounts(cli_features,keys):
+    ctab = pd.crosstab(cli_features.index,cli_features["Store Level"])
+    ctab["Missing"] = 0    
+    k1k2 = keys.drop("Client",1).drop_duplicates()
+    store_counts = k1k2.astype(str).join(ctab,how="inner").fillna(0).groupby(["Key_lvl2"]).sum()
+    store_counts.index.names = ['Product']
+    save_file(store_counts,"store_counts",index= True)
+
+
+def save_product_season(product_df):
+    filename = "product_season"
+    df = product_df[["Key_lvl2","Sales Season"]].drop_duplicates()
+    save_file(df,filename,index=True)
+
+
+
+def save_clients_count(keys):
+    try: 
+        logger = logging.getLogger(__name__)
+        client_count = keys.groupby(["Key_lvl2"]).count()[["Client"]]
+        client_count.index.names = ["Product"]
+        save_file(client_count,"p2c1_count",index = True)
+    except Exception as err:
+        logger.error(err)
+
+def get_clients_df(filename,columns):
+    client_df = pd.read_csv(settings.raw_path+filename, sep='\t', encoding='utf-8').set_index("Key_lvl1")
+    return client_df[columns]
+
+def get_product_df(filename):
     #product description
-    file_name = "product_7cerf.txt"
-    df_produit = pd.read_csv(settings.raw_path+file_name, sep='\t',encoding="utf8").astype(str)
-    df_produit = df_produit.drop_duplicates(["Key_lvl1","Description"])[["Key_lvl1","Key_lvl2"]].set_index(["Key_lvl1"]).astype(str)
-
-    #keys table
-    keys = p1c1.join(df_produit.astype(str),on="Product").astype(str)
-
-    #client description
-    # file_name = "client_7cerf.txt"
-    # non_unique_features = []
-    # unique_features = []
-
-    # client_df = pd.read_csv(raw_path+file_name, sep='\t', encoding='utf-8').set_index("Key_lvl1")
-    # features_df = client_df[["Store Level","Business Area"]]#.fillna("None")
-    # cli_features = keys.join(features_df,on="Client",how="left").drop(["Client"],axis=1)
+    df_produit = pd.read_csv(settings.raw_path+filename, sep='\t',encoding="utf8").astype(str)
+    df_produit = df_produit.drop_duplicates(["Key_lvl1","Description"]).set_index(["Key_lvl1"]).astype(str)
+    return df_produit
 
 
-
-    # ctab = pd.crosstab(cli_features.Product,cli_features["Store Level"])
-    # ctab["Missing"] = 0
 
 
 
@@ -62,64 +129,8 @@ def create_product_season_file(product_df, filename="product_season"):
     save_file(df,filename)
 
 
-def save_file(data,filename,type_="I",version = None,index=False):
-    """save a dataframe into a .csv file
-    
-    Arguments:
-        data {Dataframe} -- a Pandas dataframe
-        filename {str} -- the file name
-    
-    Keyword Arguments:
-        type_ {str} -- The data folder: (I)nterim, (P)rocessed, (R):Raw or (M)odel (default: {"I"})
-        version {int} -- the file version (default: {1})
-        index {bool} -- either the include the index or not (default: {False})
-    """
-    print("artifical save")
-    return 0
-    folder  = {
-        "R" : settings.raw_path,
-        "I" : settings.interim_path,
-        "P" : settings.processed_path,
-        "M" : settings.models_path
-    }.get(type_,settings.interim_path)
-
-    fullname = "%s_%s_v%d.csv"%(settings.PREFIX,filename,version) if version else "%s_%s.csv"%(settings.PREFIX,filename)
-    data.to_csv(folder+fullname, sep=";", encoding = "utf-8",index = index)
-
-
-def load_file(filename,type_="I",version=None,sep=";", ext="csv",index =None):
-    """Loads a csv or txt file into a dataframe
-    
-    Arguments:
-        filename {string} -- the filename to load
-    
-    Keyword Arguments:
-        type_ {str} -- The data folder: (I)nterim, (P)rocessed, (R):Raw or (M)odel (default: {"I"})
-        version {int} -- The file version specified when saved (default: {1})
-        sep {str} -- the separator in the file (default: {";"})
-        ext {str} -- the extension of the file (default: {"csv"})
-        Index {list} -- the columns to set as index to the dataframe
-    
-    Returns:
-        Dataframe -- returns a pandas dataframe
-    """
-
-    folder  = {
-        "R" : settings.raw_path,
-        "I" : settings.interim_path,
-        "P" : settings.processed_path,
-        "M" : settings.models_path
-    }.get(type_,settings.interim_path)
-    fullname = "%s_%s_v%d.%s"%(settings.PREFIX,filename,version,ext) if version else "%s_%s.%s"%(settings.PREFIX,filename,ext)
-    df = pd.read_csv(folder+fullname,sep=";",encoding="utf-8")
-    if index is not None: df.set_index(index,inplace=True)
-
-    return df
-
-
-
 
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    logging.basicConfig(level=logging.INFO, format=log_fmt)
+    logging.basicConfig(level=logging.DEBUG, format=log_fmt)
     main()

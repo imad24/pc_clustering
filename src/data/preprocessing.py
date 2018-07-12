@@ -139,7 +139,7 @@ def smooth_series(data,window,method="average"):
     elif method == "median":
         rolled_df = data.rolling(window=window,axis=1,center = True,win_type=None).median()
     else:
-        raise "Unknow method name"
+        raise ValueError("Unknow method name")
 
     return rolled_df.dropna(axis = 1)
 
@@ -352,9 +352,8 @@ def create_encoder(df,categorical_features= None,non_categorical=None):
     labeled_df = df[categorical_features].sort_index(axis=1).apply(lambda x: le_dict[x.name].transform(x))
     ohe_encoder  = OneHotEncoder().fit(labeled_df)
     
-    np.save(settings.models_path+'le_encoder', le_dict)
-    np.save(settings.models_path+'ohe_encoder', ohe_encoder)
-    print("encoders saved")
+    np.save(settings.models_path+'prd_le_encoder', le_dict)
+    np.save(settings.models_path+'prd_ohe_encoder', ohe_encoder)
     return labeled_df,le_dict,ohe_encoder
 
 def encode(df,non_categorical=[],le_encoder = None,ohe_encoder=None):

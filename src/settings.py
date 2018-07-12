@@ -9,6 +9,7 @@ from dotenv import find_dotenv, load_dotenv
 load_dotenv(find_dotenv())
 
 def init():
+    global root_dir
     global subfolder
     global PREFIX
     global raw_path

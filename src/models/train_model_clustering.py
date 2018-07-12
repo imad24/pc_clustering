@@ -29,8 +29,8 @@ def main(season,version = 99, k = None):
         logger.info('Running clustering model for <<%s>> version = %d...'%(season,version))
 
         #Load files
-        clean_df = load_file("p2_clean",type_="P",version = version).set_index(row_headers)
-
+        clean_df = load_file("p2_clean",type_="P",version = 1).set_index(row_headers)
+        assert clean_df is not None
         #Filter and normalize
         sclean_df = filter_by_season(clean_df,season)
         zclean_df,_  = get_scaled_series(sclean_df) 

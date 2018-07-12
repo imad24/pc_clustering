@@ -13,11 +13,12 @@ from data.preprocessing import save_file, trim_series, range_from_origin, remove
 @click.argument('version',type=int)
 # @click.argument('input_filepath', type=click.Path(exists=True))
 # @click.argument('output_filepath', type=click.Path())
-def main(version = 99):#input_filepath, output_filepath
+def main(version=99):#input_filepath, output_filepath
 
     try:
-
-        version=99
+        log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+        logging.basicConfig(level=logging.INFO, format=log_fmt)
+        # version = 99
         """ Runs data processing scripts to turn raw data from (../raw) into
             cleaned data ready to be analyzed (saved in ../processed).
         """
@@ -26,7 +27,7 @@ def main(version = 99):#input_filepath, output_filepath
 
         #load data
         logger.info('loading raw data sales file...')
-        product_raw_df = load_data("HistPerProduct_p2_jour.csv")
+        product_raw_df = load_data("7S_HistPerProduct_p2_jour.csv")
 
         #remove zero series
         logger.info('remove null sales...')
@@ -47,16 +48,16 @@ def main(version = 99):#input_filepath, output_filepath
         product_sales_raw = product_df.iloc[:,offset:].copy()
         fname = "p2_raw"
         logger.info("==> Saving raw state data to %s"%fname)
-        save_file(product_sales_raw,fname,index=True,version = version)
+        save_file(product_sales_raw,fname,index=True)
 
         #remove rare sales
         logger.info("remove rare sales...")
-        product_df  = remove_rare(product_df,t=5)
+        product_df  = remove_rare(product_df,t=6)
 
         #rolling average
         w = 2
         logger.info("Smoothing the series window = %d"%w)
-        product_df = smooth_series(product_df,method="median",window =w)
+        product_df = smooth_series(product_df,method="average",window =w)
 
         #save clean
         clean_filename = "p2_clean"
@@ -70,6 +71,22 @@ def main(version = 99):#input_filepath, output_filepath
 
     except Exception as err:
         logger.error(err)
+
+
+def load_data(filename):
+    df = pd.read_csv(settings.interim_path + filename , sep = ";", encoding = 'utf-8', header = 0)
+
+    cols = df.columns.values
+    cols[:settings.n_row_headers]  = settings.row_headers
+    df.columns =cols
+
+    return df.set_index(settings.row_headers)
+
+if __name__ == '__main__':
+    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    logging.basicConfig(level=logging.INFO, format=log_fmt)
+
+    main()
 
 # def save_processed_data(df,raw_df,seasons_df,version):
 
@@ -126,17 +143,3 @@ def main(version = 99):#input_filepath, output_filepath
 #     except Exception as ex:
 #         logger.error("An error occured while saving files: %s"%ex)
 
-def load_data(filename):
-    df = pd.read_csv(settings.interim_path + filename , sep = ";", encoding = 'utf-8', header = 0)
-
-    cols = df.columns.values
-    cols[:settings.n_row_headers]  = settings.row_headers
-    df.columns =cols
-
-    return df.set_index(settings.row_headers)
-
-if __name__ == '__main__':
-    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    logging.basicConfig(level=logging.INFO, format=log_fmt)
-
-    main()

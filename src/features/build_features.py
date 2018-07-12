@@ -10,7 +10,7 @@ from sklearn.preprocessing import OneHotEncoder,LabelBinarizer,LabelEncoder,MinM
 
 import logging
 
-from data import preprocessing as prp
+from data.preprocessing import load_file,save_file,translate_df,create_encoder
 import settings
 
 @click.command()
@@ -18,29 +18,33 @@ def main():
     """ Build features for classification and predixtion models
     """
 
-    #Clustering reults
-    file_name = "product_sales_raw"
-    sales = prp.load_file(file_name, index='Product')
+    logger = logging.getLogger(__name__)
+
+    logger.info("Load raw sales file...")
+    file_name = "p2_raw"
+    sales = load_file(file_name, index='Product')
 
 
     #product description
+    logger.info("Load product description file...")
     file_name = "product_7cerf.txt"
     products = pd.read_csv(settings.raw_path+file_name, sep='\t',encoding="utf8")
     products = products.drop_duplicates(["Key_lvl2","Description"]).set_index(["Key_lvl2"])
     products.index.names = ["Product"]
 
+
     sales_desc = products.join(sales,how="inner")[products.columns]
     unbalanced = ["Key_lvl1","Description","Key_lvl7","Product Status"]
     sales_desc.drop(unbalanced,axis=1,inplace=True)
 
-    en_sales_desc = prp.translate_df(sales_desc,columns=["Key_lvl3","Key_lvl4","Key_lvl5","Key_lvl6"])
+    en_sales_desc = translate_df(sales_desc,columns=["Key_lvl3","Key_lvl4","Key_lvl5","Key_lvl6"])
 
     keep_features = ["Key_lvl3","Color","Size","Launch Date","Age Group","Sales Season","Tag Price"]
     dataframe  = en_sales_desc[keep_features].copy()
 
-    prp.save_file(dataframe,"temp",index=True)
     # add number of clients
-    p2c = prp.load_file("p2c1_count",index="Product")
+    logger.info("Load clients count  file...")
+    p2c = load_file("p2c1_count",index="Product")
     # store_counts = prp.load_file("store_counts",index="Product")
 
     dataframe = dataframe.join(p2c,how="left").fillna(0)
@@ -52,18 +56,20 @@ def main():
 
     
     raw_df = dataframe.copy()
-
+    logger.info("Feature engineering...")
     features = extract_features(raw_df, non_categorical =["Tprice","Nstore"])
     features_df = features[features_list]
 
-    prp.save_file(features_df,"clf_features",type_="P",index = True)
-
-    print("Data set succefully made !")
-
-
-    prp.create_encoder(features_df,categorical_features=["Color","Size","Age Group","Ldate","Person","Pname","Ptype","Currency","Sales Season"])
+    filename = "clf_features"
+    logger.info("==> Saving features file to %s ..."%filename)
+    save_file(features_df,filename,type_="P",index = True)
 
     
+
+    logger.info("Creating encoders...")
+    create_encoder(features_df,categorical_features=["Color","Size","Age Group","Ldate","Person","Pname","Ptype","Currency","Sales Season"])
+
+    logger.info("Data set succefully made !")
 
 
 def extract_features(rdf, non_categorical):
@@ -224,64 +230,6 @@ def _redefine_group(key):
         "Male" : "Men"
     }
     return dico[key] if key in dico else key
-
-
-
-def save_file(data,filename,type_="I",version = 1,index=False):
-    """save a dataframe into a .csv file
-    
-    Arguments:
-        data {Dataframe} -- a Pandas dataframe
-        filename {str} -- the file name
-    
-    Keyword Arguments:
-        type_ {str} -- The data folder: (I)nterim, (P)rocessed, (R):Raw or (M)odel (default: {"I"})
-        version {int} -- the file version (default: {1})
-        index {bool} -- either to include the index or not (default: {False})
-    """
-
-    folder  = {
-        "R" : settings.raw_path,
-        "I" : settings.interim_path,
-        "P" : settings.processed_path,
-        "M" : settings.models_path
-    }.get(type_,settings.interim_path)
-
-    fullname = "%s_%s_v%d.csv"%(settings.PREFIX,filename,version)
-    data.to_csv(folder+fullname, sep=";", encoding = "utf-8",index = index)
-
-
-def load_file(filename,type_="I",version=1,sep=";", ext="csv",index =None):
-    """Loads a csv or txt file into a dataframe
-    
-    Arguments:
-        filename {string} -- the filename to load
-    
-    Keyword Arguments:
-        type_ {str} -- The data folder: (I)nterim, (P)rocessed, (R):Raw or (M)odel (default: {"I"})
-        version {int} -- The file version specified when saved (default: {1})
-        sep {str} -- the separator in the file (default: {";"})
-        ext {str} -- the extension of the file (default: {"csv"})
-        Index {list} -- the columns to set as index to the dataframe
-    
-    Returns:
-        Dataframe -- returns a pandas dataframe
-    """
-
-    folder  = {
-        "R" : settings.raw_path,
-        "I" : settings.interim_path,
-        "P" : settings.processed_path,
-        "M" : settings.models_path
-    }.get(type_,settings.interim_path)
-    fullname = "%s_%s_v%d.%s"%(settings.PREFIX,filename,version,ext)
-    df = pd.read_csv(folder+fullname,sep=";",encoding="utf-8")
-    if index is not None: df.set_index(index,inplace=True)
-
-    return df
-
-
-
 
 
 
