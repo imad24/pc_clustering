@@ -1,5 +1,6 @@
 import click
 import math
+import logging
 import numpy as np
 import pandas as pd
 from datetime import datetime
@@ -10,48 +11,28 @@ from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
 import settings
 
-@click.command()
-def main():
-    """ Contains all the functions of data preprocessing
-    """
 
-    
-
-if __name__ == '__main__':
-    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    # logging.basicConfig(level=logging.INFO, format=log_fmt)
-
-    # not used in this stub but often useful for finding various files
-    # project_dir = os.path.join(os.path.dirname(__file__), os.pardir, os.pardir)
-
-    # find .env automagically by walking up directories until it's found, then
-    # load up the .env entries as environment variables
-    # load_dotenv(find_dotenv())
-
-    main()
+def filter_by_season(df,season):
+    seasons_df = load_file("product_season")[["Key_lvl2","Sales Season"]].drop_duplicates().set_index("Key_lvl2")
+    sdf = df.join(seasons_df)
+    season_index = sdf[sdf["Sales Season"]==season].index.tolist()
+    return df.loc[season_index]
 
 
-def load_data(filename):
-    """lksdjfdkls
+def get_scaled_series(data):
+    """Returns a standard scaled dataframe
     
     Arguments:
-        filename {dj} -- kidsjf
+        data {Dataframe} -- Pandas dataframe
     
     Returns:
-        sdkjf -- dsklfj
-
+        Dataframe -- Scaled Dataframe
+        StandardScaler -- the standard scaler used
     """
+    std_scaler = StandardScaler(with_mean=True, with_std=True)
+    df = pd.DataFrame(std_scaler.fit_transform(data.T).T,index = data.index,columns=data.columns)
+    return df,std_scaler
 
-    
-    n_row_headers = len(settings.row_headers)
-
-    product_raw_df = pd.read_csv(settings.interim_path + filename , sep = ";", encoding = 'utf-8', header = 0)
-
-    cols = product_raw_df.columns.values
-    cols[:n_row_headers]  = settings.row_headers
-    product_raw_df.columns =cols
-
-    return product_raw_df
 
 
 def trim_series(data):
@@ -219,19 +200,6 @@ def remove_rare(data,t = 5):
 #     return X_z,std_scaler
 
 
-def get_scaled_series(data):
-    """Returns a standard scaled dataframe
-    
-    Arguments:
-        data {Dataframe} -- Pandas dataframe
-    
-    Returns:
-        Dataframe -- Scaled Dataframe
-        StandardScaler -- the standard scaler used
-    """
-    std_scaler = StandardScaler(with_mean=True, with_std=True)
-    df = pd.DataFrame(std_scaler.fit_transform(data),index = data.index,columns=data.columns)
-    return df,std_scaler
 
 def data_with_headers(series,data,raw_df):
     """Add headers to data (only timeseries)
@@ -251,7 +219,7 @@ def data_with_headers(series,data,raw_df):
         product_df_full.insert(0,label,column)
     return product_df_full
 
-def display(data,head=5):
+def display_df(data,head=5):
     """Displays shape and dataframe head
     
     Arguments:
@@ -302,17 +270,20 @@ def save_file(data,filename,type_="I",version = None,index=False):
         version {int} -- the file version (default: {1})
         index {bool} -- either the include the index or not (default: {False})
     """
+    logger = logging.getLogger(__name__)
+    try:
+        folder  = {
+            "R" : settings.raw_path,
+            "I" : settings.interim_path,
+            "P" : settings.processed_path,
+            "M" : settings.models_path,
+            "RP" : settings.reports_path
+        }.get(type_,settings.interim_path)
 
-    folder  = {
-        "R" : settings.raw_path,
-        "I" : settings.interim_path,
-        "P" : settings.processed_path,
-        "M" : settings.models_path
-    }.get(type_,settings.interim_path)
-
-    fullname = "%s_%s_v%d.csv"%(settings.PREFIX,filename,version) if version else "%s_%s.csv"%(settings.PREFIX,filename)
-    data.to_csv(folder+fullname, sep=";", encoding = "utf-8",index = index)
-
+        fullname = "%s_%s_v%d.csv"%(settings.PREFIX,filename,version) if version else "%s_%s.csv"%(settings.PREFIX,filename)
+        data.to_csv(folder+fullname, sep=";", encoding = "utf-8",index = index)
+    except Exception as err:
+        logger.error(err)
 
 def load_file(filename,type_="I",version=None,sep=";", ext="csv",index =None):
     """Loads a csv or txt file into a dataframe
@@ -330,19 +301,22 @@ def load_file(filename,type_="I",version=None,sep=";", ext="csv",index =None):
     Returns:
         Dataframe -- returns a pandas dataframe
     """
+    logger = logging.getLogger(__name__)
+    try:
+        folder  = {
+            "R" : settings.raw_path,
+            "I" : settings.interim_path,
+            "P" : settings.processed_path,
+            "M" : settings.models_path,
+            "RP" : settings.reports_path
+        }.get(type_,settings.interim_path)
+        fullname = "%s_%s_v%d.%s"%(settings.PREFIX,filename,version,ext) if version else "%s_%s.%s"%(settings.PREFIX,filename,ext)
+        df = pd.read_csv(folder+fullname,sep=";",encoding="utf-8")
+        if index is not None: df.set_index(index,inplace=True)
 
-    folder  = {
-        "R" : settings.raw_path,
-        "I" : settings.interim_path,
-        "P" : settings.processed_path,
-        "M" : settings.models_path
-    }.get(type_,settings.interim_path)
-    fullname = "%s_%s_v%d.%s"%(settings.PREFIX,filename,version,ext) if version else "%s_%s.%s"%(settings.PREFIX,filename,ext)
-    df = pd.read_csv(folder+fullname,sep=";",encoding="utf-8")
-    if index is not None: df.set_index(index,inplace=True)
-
-    return df
-
+        return df
+    except Exception as err:
+        logger.error(err)
 
 
 from sklearn.preprocessing import OneHotEncoder,LabelBinarizer,LabelEncoder
@@ -413,3 +387,16 @@ def encode(df,non_categorical=[],le_encoder = None,ohe_encoder=None):
 
 
     return encoded_df
+
+
+
+if __name__ == '__main__':
+    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    # logging.basicConfig(level=logging.INFO, format=log_fmt)
+
+    # not used in this stub but often useful for finding various files
+    # project_dir = os.path.join(os.path.dirname(__file__), os.pardir, os.pardir)
+
+    # find .env automagically by walking up directories until it's found, then
+    # load up the .env entries as environment variables
+    # load_dotenv(find_dotenv())

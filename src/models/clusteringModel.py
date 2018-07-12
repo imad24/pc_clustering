@@ -1,19 +1,36 @@
 from sklearn.metrics import silhouette_score
 from external import kMedoids
 from scipy.spatial.distance import pdist,squareform
+from scipy.cluster import hierarchy
+
 
 import numpy as np
 
 class ClusteringModel:
+    """A class holding a clustering model object, inspired from sklearn structure
+    """
 
+    # The models supported by the class
+    # TODO: to enhance with other models: HCA, kmeans....
     models = ["kMedoids"]
 
 
-    @staticmethod
-    def select_best_k(inertia_grid,silhouette_grid):
+    @classmethod
+    def select_best_k(cls,inertia_grid,silhouette_grid):
         for k in inertia_grid:
             if list(silhouette_grid).index(k)<5:
                 return k
+    
+    @classmethod
+    def agg_cut_off(cls,data,method="complete",metric="euclidean"):
+        Z = hierarchy.linkage(data, method=method,metric=metric)
+        last = Z[-150:, 2]
+
+        acceleration = np.diff(last, 2)  # 2nd derivative of the distances
+        acceleration_rev = acceleration[::-1]
+        best_ks = np.abs(acceleration_rev).argsort()[::-1]
+        k =  best_ks+ 2  # if idx 0 is the max of this we want 2 clusters
+        return int(k[0])
 
     def __init__(self, name, k):
         if (name not in ClusteringModel.models): 
@@ -33,13 +50,13 @@ class ClusteringModel:
         if (self.name) == "kMedoids":
             self.labels, self.centroids = kMedoids.cluster(self.distances,k=k)
 
-    def getSSE(self):
+    def get_SSE(self):
         return np.sum( (self.X-self.X[self.labels])**2)
 
-    def getInertia(self):
-        return np.sqrt(self.getSSE()/len(self.labels))
+    def get_inertia(self):
+        return np.sqrt(self.get_SSE()/len(self.labels))
 
-    def getSilhouette(self):
+    def get_silhouette(self):
         return silhouette_score(self.X,self.labels)
 
     def get_distances(self,X,distance = "euclidean"):
@@ -54,8 +71,8 @@ class ClusteringModel:
 
         for k in K_values:
             self.fit(X=X,k = k,weights = weights)
-            silhouette.append(self.getSilhouette())
-            sse = self.getSSE()
+            silhouette.append(self.get_silhouette())
+            sse = self.get_SSE()
             inertia.append(np.sqrt(sse/len(self.labels)))
 
         acc = np.diff(inertia, 2)

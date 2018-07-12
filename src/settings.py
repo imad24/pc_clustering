@@ -1,12 +1,8 @@
 # -*- coding: utf-8 -*-
-import sys 
+"""This file contains the global settings of the package
+- Make sure to add the installation folder path to PYTHONPATH, this way this file could be included in all script files
+"""
 import os
-
-# add the 'src' directory as one where we can import modules
-root_dir = os.path.join(os.getcwd(),os.pardir,os.pardir)
-src_dir = os.path.join(os.getcwd(), os.pardir,os.pardir, 'src')
-if src_dir not in sys.path: sys.path.append(src_dir)
-
 from dotenv import find_dotenv, load_dotenv
 
 
@@ -19,12 +15,13 @@ def init():
     global interim_path
     global processed_path
 
+
     global reports_path
     global models_path
     global row_headers
     global n_row_headers
 
-
+    root_dir = os.getenv("APPPATH")
     subfolder = os.getenv("SUBFOLDER")
     PREFIX = os.getenv("PREFIX")
     raw_path = os.path.join(root_dir,"data\\raw\\",subfolder)

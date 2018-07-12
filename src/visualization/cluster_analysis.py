@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import copy as cp
 import matplotlib.cm as cm
 import seaborn as sns
-
+sns.set()
 from math import sqrt
 
 
@@ -16,6 +16,30 @@ from features import tools
 import prince
 
 
+
+def centroid_grid_plot(raw_df,clean_df,cluster_df):
+
+    cluster_centroid = cluster_df[["Cluster","Centroid"]].drop_duplicates().set_index(["Cluster"]).to_dict()["Centroid"]
+    centroid_cluster = {v: k for k, v in cluster_centroid.items()}
+
+    centroids = list(set(cluster_centroid.values()))
+    centroids_raw = raw_df.loc[centroids].apply(lambda x:x/x.std(),axis=1)
+    centroids_clean = clean_df.loc[centroids].apply(lambda x:x/x.std(),axis=1)
+
+
+    n_rows = int(len(centroids)/3)+1
+
+
+    plt.figure(figsize=(18,n_rows*2))
+    i=1
+    for index,value in centroids_raw.iterrows():
+        plt.subplot(n_rows,3,i)
+        plt.title("Cluster: %d"%(centroid_cluster[index]))
+        plt.plot(value,label = "Raw")
+        plt.plot(centroids_clean.loc[index], label="Smoothed")
+        plt.legend()
+        i+=1
+    plt.tight_layout()
 
 def cluster_plot(df,centroid_only= False,tick_frequency = 3,top = None, Normalized = True):
     try: 
@@ -97,8 +121,8 @@ def plot_cluster_over_features(df,clusters = [], pthreshold=0.05):
                 # plt.subplot(n_rows,3,i+1)
                 _,ax = plt.subplots()
                 ax2 = ax.twinx()
-                dist.plot(kind="Bar",ax=ax, alpha =0.5 ,title ="Cluster: %d - %s pvalue = %.2f"%(c,feature,v_cramer),width=0.5)
-                original_dist.plot(kind="Bar",ax=ax2,color='green',alpha = 0.5,width = 0.4,align="edge")
+                dist.plot(kind="Bar",ax=ax, alpha =0.5 ,title ="Cluster: %d - %s pvalue = %.2f"%(c,feature,v_cramer),width=0.5,label="C%d"%c)
+                original_dist.plot(kind="Bar",ax=ax2,color='green',alpha = 0.5,width = 0.4,align="edge",label="ORG")
                 plt.grid(False)
                 i+=1
             
@@ -115,9 +139,11 @@ def plot_feature_over_clusters(df,feature, pthreshold=0.05):
         if p<pthreshold:
             _,ax = plt.subplots()   
             ax2 = ax.twinx()
-            dist.plot(kind="Bar",ax=ax, alpha =0.5 ,title ="Cluster: %d - %s pvalue = %.2f"%(c,feature,v_cramer))
-            original_dist.plot(kind="Bar",ax=ax2,color='green',alpha = 0.5,title ="Cluster: %d - %s pvalue = %.2f"%(c,feature,p))
+            dist.plot(kind="Bar",ax=ax, alpha =0.5 ,title ="Cluster: %d - %s pvalue = %.2f"%(c,feature,v_cramer),label="C%d"%c)
+            original_dist.plot(kind="Bar",ax=ax2,color='green',alpha = 0.5,label="ORG")
             plt.grid(False)
+            ax.legend(loc=2)
+            ax2.legend(loc=1)
             i+=1                 
 
 

@@ -5,8 +5,9 @@ import numpy as np
 from datetime import datetime
 import logging
 
-from data import preprocessing as prp
 import settings
+from data import preprocessing as prp
+
 
 @click.command()
 def main():
