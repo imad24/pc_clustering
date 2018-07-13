@@ -372,8 +372,8 @@ def encode(df,non_categorical=[],le_encoder = None,ohe_encoder=None):
     """
 
     if(le_encoder is None):
-        le_encoder = np.load(settings.models_path+'le_encoder.npy').item()
-        ohe_encoder = np.load(settings.models_path+'ohe_encoder.npy').item()
+        le_encoder = np.load(settings.models_path+'prd_le_encoder.npy').item()
+        ohe_encoder = np.load(settings.models_path+'prd_ohe_encoder.npy').item()
     features =[ ["%s_%s"%(f_name,c) for c in f_encoder.classes_] for f_name,f_encoder in le_encoder.items()]
     columns = list(itertools.chain.from_iterable(features))
     categorical = list(le_encoder.keys())

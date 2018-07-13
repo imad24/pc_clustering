@@ -19,13 +19,12 @@ import prince
 
 def centroid_grid_plot(raw_df,clean_df,cluster_df):
 
-    cluster_centroid = cluster_df[["Cluster","Centroid"]].drop_duplicates().set_index(["Cluster"]).to_dict()["Centroid"]
+    cluster_centroid = cluster_df[["Cluster","Centroid"]].drop_duplicates().set_index(["Cluster"]).sort_index().to_dict()["Centroid"]
     centroid_cluster = {v: k for k, v in cluster_centroid.items()}
 
-    centroids = list(set(cluster_centroid.values()))
+    centroids = list(cluster_centroid.values())
     centroids_raw = raw_df.loc[centroids].apply(lambda x:x/x.std(),axis=1)
     centroids_clean = clean_df.loc[centroids].apply(lambda x:x/x.std(),axis=1)
-
 
     n_rows = int(len(centroids)/3)+1
 
@@ -34,7 +33,7 @@ def centroid_grid_plot(raw_df,clean_df,cluster_df):
     i=1
     for index,value in centroids_raw.iterrows():
         plt.subplot(n_rows,3,i)
-        plt.title("Cluster: %d"%(centroid_cluster[index]))
+        plt.title("Cluster: %d,  Centroid: %s"%(centroid_cluster[index],index))
         plt.plot(value,label = "Raw")
         plt.plot(centroids_clean.loc[index], label="Smoothed")
         plt.legend()
