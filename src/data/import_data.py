@@ -15,7 +15,8 @@ def main():
     """ Contains all the functions of data importing
     """
     try:
-        logger = logging.getLogger(__name__)
+        logger = settings.get_logger(__name__)
+        logger.info("*** Import data from raw files ***")
         #load raw file
 
         logger.info("Load raw data file (Huge file, please be patient)...")
@@ -131,6 +132,4 @@ def create_product_season_file(product_df, filename="product_season"):
 
 
 if __name__ == '__main__':
-    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    logging.basicConfig(level=logging.DEBUG, format=log_fmt)
     main()

@@ -104,11 +104,11 @@ def RMSE(params, *args):
 
 	return rmse
 
-def linear(x, fc, alpha = None, beta = None):
+def linear(x, fc, alpha=None, beta=None):
 
 	Y = x[:]
 
-	if (alpha == None or beta == None):
+	if (alpha is None or beta is None):
 
 		initial_values = array([0.3, 0.1])
 		boundaries = [(0, 1), (0, 1)]

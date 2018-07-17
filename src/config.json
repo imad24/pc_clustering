@@ -1,0 +1,8 @@
+{
+	"windows_size": 2,
+	"smoothing_method": "average",
+	"range": 16,
+	"offset": 1,
+	"init_method": "PCA",
+	"best_k": 4
+}

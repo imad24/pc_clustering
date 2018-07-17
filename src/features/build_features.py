@@ -15,10 +15,11 @@ import settings
 
 @click.command()
 def main():
-    """ Build features for classification and predixtion models
+    """ Build features for classification and prediction models
     """
 
-    logger = logging.getLogger(__name__)
+    logger = settings.get_logger(__name__)
+    logger.info("*** Build features for classification and prediction models ***")
 
     logger.info("Load raw sales file...")
     file_name = "p2_raw"
@@ -236,6 +237,4 @@ def _redefine_group(key):
 
     
 if __name__ == '__main__':
-    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    logging.basicConfig(level=logging.INFO, format=log_fmt)
     main()

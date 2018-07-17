@@ -21,7 +21,8 @@ from sklearn.externals import joblib
 def main(season,version):
     """ Train a classifier to predict a cluster
     """
-    logger = logging.getLogger(__name__)
+    logger = settings.get_logger(__name__)
+    logger.info("*** Train the classifier to predict clusters ***")
 
     try:
         version = 99
@@ -72,8 +73,6 @@ def main(season,version):
 
 
 if __name__ == '__main__':
-    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    logging.basicConfig(level=logging.INFO, format=log_fmt)
     row_headers = settings.row_headers
     # pylint: disable=no-value-for-parameter
     main()

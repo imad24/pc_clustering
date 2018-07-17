@@ -13,17 +13,13 @@ from data.preprocessing import save_file, trim_series, range_from_origin, remove
 @click.argument('version',type=int)
 # @click.argument('input_filepath', type=click.Path(exists=True))
 # @click.argument('output_filepath', type=click.Path())
-def main(version=99):#input_filepath, output_filepath
-
+def main(version):
     try:
-        log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-        logging.basicConfig(level=logging.INFO, format=log_fmt)
-        # version = 99
         """ Runs data processing scripts to turn raw data from (../raw) into
             cleaned data ready to be analyzed (saved in ../processed).
         """
-        logger = logging.getLogger(__name__)
-        logger.info('*** Making final data set from raw data ***')
+        logger = settings.get_logger(__name__)
+        logger.info("*** Making the final dataset from raw data ***")
 
         #load data
         logger.info('loading raw data sales file...')
@@ -84,7 +80,4 @@ def load_data(filename):
     return df.set_index(settings.row_headers)
 
 if __name__ == '__main__':
-    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    logging.basicConfig(level=logging.INFO, format=log_fmt)
-
     main()

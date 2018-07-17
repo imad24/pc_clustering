@@ -21,11 +21,11 @@ row_headers = settings.row_headers
 @click.option('--version',type=int)
 @click.option('--k',type=int)
 def main(season,version, k):
-    """ Contains all the functions of data preprocessing
+    """ Train a clustering model
     """
     try:
-        logger = logging.getLogger(__name__)
-        logger.info('Running clustering model for <<%s>> version = %d...'%(season,version))
+        logger = settings.get_logger(__name__)
+        logger.info("*** Train the clustering model ***")
 
         #Load files
         clean_df = load_file("p2_clean",type_="P",version = 1).set_index(row_headers)
@@ -56,8 +56,9 @@ def main(season,version, k):
         labels, _ = model.labels, model.centroids
         cluster_df = labels_to_df(X_train,labels)
 
-        save_model(cluster_df,"p2_clusters_%s"%season,v=version)
-        logger.info("Model with %d clusters successfully saved"%k)
+        filename = "p2_clusters_%s" % season
+        logger.info("Saving model to << %s >> " % filename)
+        save_model(cluster_df,filename,v=version)
     except Exception as err:
         logger.error(err)
 
@@ -109,8 +110,5 @@ def labels_to_df(df,labels):
     return label_df
 
 if __name__ == '__main__':
-    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    logging.basicConfig(level=logging.INFO, format=log_fmt)
-
     # pylint: disable=no-value-for-parameter
     main()
