@@ -46,16 +46,14 @@ def main(season,version = 99, k = None):
         # if not provided get k using grid search
         if k is None:
             logger.info("Running Hierarchical Clustering...")
-            k = model.agg_cut_off(X_z)
+            # k = model.agg_cut_off(X_z)
             logger.info("Automatic distance cut-off...")
+            sse, silhouette = model.grid_search(X_z,k_values=np.linspace(5,15,10).astype(int))
+            k = ClusteringModel.select_best_k(sse,silhouette)
+            #select best k:
             logger.info("the number of %d clusters has been selected"%k)
-            # sse, silhouette = model.grid_search(X_z,k_values=np.linspace(5,15,10).astype(int))
-            # print(sse,silhouette)
-            # k = ClusteringModel.select_best_k(sse,silhouette)
-            # #select best k:
-            # print(k)
         logger.info("Training clustering model with %d clusters"%k)    
-        model.fit(X_z,k=k)
+        model.fit(X_z,k=k,init_method="PCA", weights = None)
         labels, _ = model.labels, model.centroids
         cluster_df = labels_to_df(X_train,labels)
 
@@ -109,7 +107,6 @@ def labels_to_df(df,labels):
         cluster_medoid[i+1] = medoid
         label_cluster[l] = i+1
 
-    
     rows=[]
     for i,label in enumerate(labels):
         cluster = label_cluster[label]

@@ -55,21 +55,22 @@ def main():
     
 
     
-    raw_df = dataframe.copy()
+    raw_df = dataframe[dataframe.Client!=0.].copy()
     logger.info("Feature engineering...")
     features = extract_features(raw_df, non_categorical =["Tprice","Nstore"])
     features_df = features[features_list]
+
 
     filename = "clf_features"
     logger.info("==> Saving features file to %s ..."%filename)
     save_file(features_df,filename,type_="P",index = True)
 
-    
+    logger.info("Data set  %s  succefully made !"%(features_df.shape[0]))
 
     logger.info("Creating encoders...")
     create_encoder(features_df,categorical_features=["Color","Size","Age Group","Ldate","Person","Pname","Ptype","Currency","Sales Season"])
 
-    logger.info("Data set succefully made !")
+    
 
 
 def extract_features(rdf, non_categorical):

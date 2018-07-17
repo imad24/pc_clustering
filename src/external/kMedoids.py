@@ -2,6 +2,7 @@ import numpy as np
 import random
 
 from sklearn.decomposition import PCA
+from external import skmeans_pp
 
 def cluster(distances, k=3,init="random",X=None):
 
@@ -18,10 +19,17 @@ def cluster(distances, k=3,init="random",X=None):
         X_pca = PCA(n_components=k).fit_transform(X)
         #keep as initial medoids the K samples that are the most correlated to the k components
         curr_medoids = np.argmax(X_pca,axis=0)
+    elif init=="kmeans++":
+        skpp = skmeans_pp.KPlusPlus(X,k)
+        curr_medoids = skpp.sk_init_centers()
+    elif init=="ckmeans++":
+        skpp = skmeans_pp.KPlusPlus(X,k)
+        curr_medoids = skpp.init_centers()
     else:
     # Pick k random medoids.
         while not len(np.unique(curr_medoids)) == k:
             curr_medoids = np.array([random.randint(0, m - 1) for _ in range(k)])
+
 
     old_medoids = np.array([-1]*k) # Doesn't matter what we initialize these to.
     new_medoids = np.array([-1]*k)

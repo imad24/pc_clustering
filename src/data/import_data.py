@@ -104,7 +104,7 @@ def save_product_season(product_df):
 def save_clients_count(keys):
     try: 
         logger = logging.getLogger(__name__)
-        client_count = keys.groupby(["Key_lvl2"]).count()[["Client"]]
+        client_count = keys.groupby(["Key_lvl2"]).Client.nunique().to_frame()
         client_count.index.names = ["Product"]
         save_file(client_count,"p2c1_count",index = True)
     except Exception as err:

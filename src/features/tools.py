@@ -5,6 +5,15 @@ import statsmodels.api as sm
 from scipy.stats import chisquare
 
 def get_features_by_type(df):
+    """Returns the the list of features, numeric features and categorical features separately
+    
+    Arguments:
+        df {Dataframe} -- the pandas dataframe used for an estimator
+    
+    Returns:
+        tuple of lists -- the complete features list, numeric features, categorical features
+    """
+
     features_list = list(sorted(df.columns))
     numeric = (list(df.columns.to_series().groupby(df.dtypes).groups[np.dtype('float64')]))
     categorical = [f for f in features_list if f not in numeric]

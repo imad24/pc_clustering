@@ -11,14 +11,14 @@ class ClusteringModel:
     """
 
     # The models supported by the class
-    # TODO: to enhance with other models: HCA, kmeans....
+    # TODO: Enhance with other models: HCA, kmeans....
     models = ["kMedoids"]
 
 
     @classmethod
-    def select_best_k(cls,inertia_grid,silhouette_grid):
+    def select_best_k(cls, inertia_grid, silhouette_grid, best = 4):
         for k in inertia_grid:
-            if list(silhouette_grid).index(k)<5:
+            if list(silhouette_grid).index(k) < best:
                 return k
     
     @classmethod
@@ -42,13 +42,13 @@ class ClusteringModel:
         self.X = []
         self.distances = []
 
-    def fit(self,X,k=None,weights = None):
+    def fit(self,X,k=None,weights = None, init_method="PCA"):
         if (k is None): k = self.k
         self.X = X
         # TODO: Add weights to distances
         self.distances = self.get_distances(X)
         if (self.name) == "kMedoids":
-            self.labels, self.centroids = kMedoids.cluster(self.distances,k=k)
+            self.labels, self.centroids = kMedoids.cluster(self.distances,k=k,init=init_method,X=self.X)
 
     def get_SSE(self):
         return np.sum( (self.X-self.X[self.labels])**2)
@@ -84,4 +84,4 @@ class ClusteringModel:
         best_ks = sil.argsort()[::-1]
         silhouette_grid = np.array(K_values[best_ks])
 
-        return inertia_grid, np.array(silhouette_grid)
+        return inertia_grid, silhouette_grid
