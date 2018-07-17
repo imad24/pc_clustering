@@ -1,9 +1,5 @@
-import itertools
 import logging
-import math
-import re
 import os
-from datetime import date, datetime
 
 import click
 import numpy as np
@@ -11,9 +7,7 @@ import pandas as pd
 
 
 import settings
-from clusteringModel import ClusteringModel
 from data.preprocessing import load_file,save_file,filter_by_season,get_scaled_series,encode
-from external import kMedoids
 from features import tools
 
 from sklearn.ensemble import RandomForestClassifier
@@ -24,15 +18,13 @@ from sklearn.externals import joblib
 @click.command()
 @click.argument('season',type=str)
 @click.option('--version',type=int)
-def main(season,version = 99, k = None):
+def main(season,version):
     """ Train a classifier to predict a cluster
     """
     logger = logging.getLogger(__name__)
 
-
     try:
         version = 99
-
 
         s = season
         clustering_model = "p2_clusters_%s"%(s)
@@ -52,12 +44,10 @@ def main(season,version = 99, k = None):
         features_list = list(features_df.columns) + ["Cluster"]
         df = features_df.join(cluster_df,how="inner")[features_list]
 
-
         #get the list of features
 
         logger.info("Preparing data...")
         _ , numeric, _ = tools.get_features_by_type(df)
-
 
         features_df = df[features_list].copy()
         data = features_df.copy()
@@ -72,16 +62,13 @@ def main(season,version = 99, k = None):
         classifier = RandomForestClassifier(n_estimators=80,max_depth=18,min_samples_split=2, min_samples_leaf=1, criterion='gini', bootstrap=True)
         classifier.fit(X,y)
 
-        filename = "classifier_%s.pkl"%s
+        filename = "classifier_%s_v%d.pkl"%(s,version)
         logger.info("Saving classifier model to << %s >>..."%filename)
         path = os.path.join(settings.models_path,filename)
         joblib.dump(classifier,path)
 
     except Exception as err:
         print(err)
-
-
-
 
 
 if __name__ == '__main__':

@@ -182,25 +182,6 @@ def remove_rare(data,t = 5):
     mask =(data.where(data==0,other=1.).sum(axis=1)<=t)
     return data[~mask]
 
-
-# def get_scaled_series(data):
-#     """Returns a standard scaled dataframe
-    
-#     Arguments:
-#         data {Dataframe} -- Pandas dataframe
-    
-#     Returns:
-#         Dataframe -- Scaled Dataframe
-#         StandardScaler -- the standard scaler used
-#     """
-
-#     d = data.as_matrix().astype(float)
-#     std_scaler = StandardScaler(with_mean=True, with_std=True).fit(d.T)
-#     X_z = std_scaler.transform(data.T).T
-#     return X_z,std_scaler
-
-
-
 def data_with_headers(series,data,raw_df):
     """Add headers to data (only timeseries)
     
@@ -370,7 +351,6 @@ def encode(df,non_categorical=[],le_encoder = None,ohe_encoder=None):
     Returns:
         [Dataframe] -- Returns a one hot encoded dataframe
     """
-
     if(le_encoder is None):
         le_encoder = np.load(settings.models_path+'prd_le_encoder.npy').item()
         ohe_encoder = np.load(settings.models_path+'prd_ohe_encoder.npy').item()
@@ -383,19 +363,4 @@ def encode(df,non_categorical=[],le_encoder = None,ohe_encoder=None):
     #add numeric features
     for f in non_categorical:
         encoded_df[f] = df[f]
-
-
     return encoded_df
-
-
-
-if __name__ == '__main__':
-    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    # logging.basicConfig(level=logging.INFO, format=log_fmt)
-
-    # not used in this stub but often useful for finding various files
-    # project_dir = os.path.join(os.path.dirname(__file__), os.pardir, os.pardir)
-
-    # find .env automagically by walking up directories until it's found, then
-    # load up the .env entries as environment variables
-    # load_dotenv(find_dotenv())

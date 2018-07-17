@@ -18,7 +18,7 @@ def main():
         logger = logging.getLogger(__name__)
         #load raw file
 
-        logger.info("Load raw data file...")
+        logger.info("Load raw data file (Huge file, please be patient)...")
         p1c1File = "histo_7cerf_p1c1.txt"
         df_histo_p2c1_jour = pd.read_csv(settings.raw_path + p1c1File, sep = ",", encoding = 'utf-8', header = None,dtype={0:str,2:str,3:str}).fillna(0)
 

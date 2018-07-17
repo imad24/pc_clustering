@@ -3,7 +3,7 @@ from external import kMedoids
 from scipy.spatial.distance import pdist,squareform
 from scipy.cluster import hierarchy
 
-
+import settings
 import numpy as np
 
 class ClusteringModel:
@@ -16,7 +16,8 @@ class ClusteringModel:
 
 
     @classmethod
-    def select_best_k(cls, inertia_grid, silhouette_grid, best = 4):
+    def select_best_k(cls, inertia_grid, silhouette_grid, best = None):
+        if (best is None): best = settings.options["best_k"]
         for k in inertia_grid:
             if list(silhouette_grid).index(k) < best:
                 return k
@@ -32,7 +33,7 @@ class ClusteringModel:
         k =  best_ks+ 2  # if idx 0 is the max of this we want 2 clusters
         return int(k[0])
 
-    def __init__(self, name, k):
+    def __init__(self, name, k,init_method):
         if (name not in ClusteringModel.models): 
             raise "Model name not recognized"
         self.name = name
@@ -41,8 +42,10 @@ class ClusteringModel:
         self.centroids = []
         self.X = []
         self.distances = []
+        self.init_method = init_method
 
-    def fit(self,X,k=None,weights = None, init_method="PCA"):
+    def fit(self,X,k=None,weights = None, init_method = None):
+        if (init_method is None): init_method = self.init_method
         if (k is None): k = self.k
         self.X = X
         # TODO: Add weights to distances
@@ -70,14 +73,14 @@ class ClusteringModel:
         K_values = np.array(k_values)
 
         for k in K_values:
-            self.fit(X=X,k = k,weights = weights)
+            self.fit(X=X,k = k, weights = weights)
             silhouette.append(self.get_silhouette())
             sse = self.get_SSE()
             inertia.append(np.sqrt(sse/len(self.labels)))
 
         acc = np.diff(inertia, 2)
         best_ks = acc.argsort()[::-1]
-        i =  best_ks+ 2
+        i = best_ks+ 1
         inertia_grid = np.array(K_values[i])
 
         sil = np.array(silhouette)

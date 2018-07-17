@@ -15,12 +15,13 @@ def init():
     global raw_path
     global interim_path
     global processed_path
-
-
     global reports_path
     global models_path
+    
     global row_headers
     global n_row_headers
+
+    global options
 
     root_dir = os.getenv("APPPATH")
     subfolder = os.getenv("SUBFOLDER")
@@ -33,5 +34,14 @@ def init():
     models_path = os.path.join(root_dir,"models\\",subfolder)
     row_headers = ["Product"]
     n_row_headers = len(row_headers)
+
+    options = {
+        "windows_size" : 2,
+        "smoothing_method" : "average",
+        "range" : 16,
+        "offset" : 1,
+        "init_method" : "PCA",
+        "best_k" : 4
+    }
 
 init()

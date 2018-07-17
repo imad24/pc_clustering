@@ -39,8 +39,8 @@ def main(version=99):#input_filepath, output_filepath
         product_df = trim_series(product_df)
 
         #shit to origin
-        offset = 1
-        r = 16
+        offset = settings.options["offset"]
+        r = settings.options["range"]
         logger.info('shit series to origin with %d offset and range of %d ...'%(offset,r))
         product_df = range_from_origin(product_df,range_=r,offset =offset)
         
@@ -55,9 +55,10 @@ def main(version=99):#input_filepath, output_filepath
         product_df  = remove_rare(product_df,t=6)
 
         #rolling average
-        w = 2
+        w = settings.options["windows_size"]
+        smoothing = settings.options["smoothing_method"]
         logger.info("Smoothing the series window = %d"%w)
-        product_df = smooth_series(product_df,method="average",window =w)
+        product_df = smooth_series(product_df,method=smoothing,window =w)
 
         #save clean
         clean_filename = "p2_clean"
@@ -87,59 +88,3 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, format=log_fmt)
 
     main()
-
-# def save_processed_data(df,raw_df,seasons_df,version):
-
-#     try:
-#         logger = logging.getLogger(__name__)
-#         seasons = set(seasons_df["Sales Season"])
-#         with_seasons = df.join(seasons_df,how="left")
-
-#         v = version
-#         s="all"
-#         raw_file_name ="p2_raw_%s"%s
-#         z_file_name ="p2_z_clean_%s"%s
-#         logger.info("\t %s, %s"%(raw_file_name,z_file_name))
-
-#         rdf = raw_df.loc[df.index].loc[:,:]
-#         zdf = df.loc[:,:]
-
-#         save_file(rdf,raw_file_name,version = v)
-#         save_file(zdf,z_file_name,type_="P",version = v,index=True)
-        
-#         for s in seasons:
-#             sdf = (with_seasons["Sales Season"]==s)
-
-#             raw_file_name ="p2_raw_%s"%s
-#             z_file_name ="p2_z_clean_%s"%s
-
-#             logger.info("\t %s, %s"%(raw_file_name,z_file_name))
-
-#             rdf = raw_df.loc[df.index].loc[sdf,:]
-#             zdf = df.loc[sdf,:]
-#             save_file(rdf,raw_file_name,version = v)
-#             save_file(zdf,z_file_name,type_="P",version = v,index=True)
-#     except Exception as ex:
-#         logger.error("An error occured while saving files: %s"%ex)
-
-# def save_cleaned_data(clean_df,seasons_df,filename,version):
-
-#     try:
-#         logger = logging.getLogger(__name__) 
-#         v= version
-        
-#         seasons = set(seasons_df["Sales Season"])
-#         with_seasons = clean_df.join(seasons_df,how="left")
-
-#         filename_all = "%s_all"%filename
-#         save_file(clean_df,filename_all,type_="I",index=True,version=v)
-
-#         for s in seasons:
-#             filename_season = "%s_%s"%(filename,s)
-#             sdf = (with_seasons["Sales Season"]==s)
-#             df = clean_df.loc[sdf,:]
-            
-#             save_file(df,filename_season,type_="I",index=True,version=v)
-#     except Exception as ex:
-#         logger.error("An error occured while saving files: %s"%ex)
-

@@ -5,16 +5,36 @@ from sklearn.decomposition import PCA
 from external import skmeans_pp
 
 def cluster(distances, k=3,init="random",X=None):
+    """Performs a Kmedoids clustering using distances matrix around k cluster
+
+    
+    Arguments:
+        distances {2d numpy array} -- array of distances between each point (square form)
+    
+    Keyword Arguments:
+        k {int} -- number of clusters (default: {3})
+        init {str} -- Method for initialization: kmeans++, PCA or random (default: {"random"})
+        X {2d numpy array} -- the data matrix required when init method is not None (default: {None})
+    
+    Raises:
+        ValueError -- [description]
+        ValueError -- [description]
+        ValueError -- [description]
+    
+    Returns:
+        [type] -- [description]
+    """
 
     m = distances.shape[0] # number of points
 
     #medoids
     curr_medoids = np.array([-1]*k)
+
+    if X is None and init != "random": 
+        raise ValueError("X data must be provided when PCA init is used.")
+    if (X.shape[0] != distances.shape[0]) and (init != "random"):
+        raise ValueError("Distance matrix and X matrix have different number of samples %d and %d "%(distances.shape[0],X.shape[0]))
     if init == "PCA":
-        if X is None: 
-            raise ValueError("X data must be provided when PCA init is used.")
-        if X.shape[0] != distances.shape[0]:
-            raise ValueError("Distance matrix and X matrix have different number of samples %d and %d "%(distances.shape[0],X.shape[0]))
         #Calculate the PCA transformation
         X_pca = PCA(n_components=k).fit_transform(X)
         #keep as initial medoids the K samples that are the most correlated to the k components
@@ -25,11 +45,12 @@ def cluster(distances, k=3,init="random",X=None):
     elif init=="ckmeans++":
         skpp = skmeans_pp.KPlusPlus(X,k)
         curr_medoids = skpp.init_centers()
-    else:
+    elif init == "random":
     # Pick k random medoids.
         while not len(np.unique(curr_medoids)) == k:
             curr_medoids = np.array([random.randint(0, m - 1) for _ in range(k)])
-
+    else:
+        raise ValueError("Please set a valid init method name")
 
     old_medoids = np.array([-1]*k) # Doesn't matter what we initialize these to.
     new_medoids = np.array([-1]*k)
