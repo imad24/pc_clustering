@@ -13,6 +13,7 @@ load_dotenv(find_dotenv())
 
 def init():
     global root_dir
+    global src_dir
     global subfolder
     global PREFIX
     global raw_path
@@ -28,6 +29,7 @@ def init():
 
     # global paths
     root_dir = os.getenv("APPPATH")
+    src_dir = os.path.join(root_dir,'src')
     subfolder = os.getenv("SUBFOLDER")
     PREFIX = os.getenv("PREFIX")
 
@@ -43,16 +45,21 @@ def init():
     n_row_headers = len(row_headers)
 
     # load global settings from config file
-    cfg = open('config.json').read()
-    options = json.loads(cfg)
+    cfg_file = os.path.join(src_dir,'config.json')
+    with open(cfg_file) as cfg:
+        options = json.load(cfg)
+
 
 def get_logger(name):
-
-    output_dir = os.path.join(root_dir,"src")
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     formatter = logging.Formatter(log_fmt)
 
     logger = logging.getLogger(name)
+
+    # clean any set logger
+    if (logger.hasHandlers()):
+        logger.handlers.clear()
+
     logger.setLevel(logging.DEBUG)
      
     # create console handler and set level to info
@@ -63,13 +70,13 @@ def get_logger(name):
     logger.addHandler(handler)
  
     # create error file handler and set level to error
-    handler = logging.FileHandler(os.path.join(output_dir, "error.log"),"a", encoding=None, delay="true")
+    handler = logging.FileHandler(os.path.join(src_dir, "error.log"),"a", encoding=None, delay="true")
     handler.setLevel(logging.ERROR)
     handler.setFormatter(formatter)
     logger.addHandler(handler)
  
     # create debug file handler and set level to debug
-    handler = logging.FileHandler(os.path.join(output_dir, "app.log"),"a")
+    handler = logging.FileHandler(os.path.join(src_dir, "app.log"),"a")
     handler.setLevel(logging.DEBUG)
     handler.setFormatter(formatter)
     logger.addHandler(handler)

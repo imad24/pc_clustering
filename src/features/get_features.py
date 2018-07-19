@@ -15,62 +15,53 @@ import settings
 
 @click.command()
 def main():
-    """ Build features for classification and prediction models
+    """ Build features for new products
     """
+    try:
 
-    logger = settings.get_logger(__name__)
-    logger.info("*** Build features for classification and prediction models ***")
-
-    logger.info("Load raw sales file...")
-    file_name = "p2_raw"
-    sales = load_file(file_name, index='Product')
+        logger = settings.get_logger(__name__)
+        logger.info("*** Build features for New Product Intorduction ***")
 
 
-    #product description
-    logger.info("Load product description file...")
-    file_name = "product_7cerf.txt"
-    products = pd.read_csv(settings.raw_path+file_name, sep='\t',encoding="utf8")
-    products = products.drop_duplicates(["Key_lvl2","Description"]).set_index(["Key_lvl2"])
-    products.index.names = ["Product"]
+        #product description
+        logger.info("Load new products file...")
+        file_name = "new_products.txt"
+        products = pd.read_csv(settings.raw_path+file_name, sep='\t',encoding="utf8")
+        products = products.drop_duplicates(["Key_lvl2","Description"]).set_index(["Key_lvl2"])
+        products.index.names = settings.row_headers
 
 
-    sales_desc = products.join(sales,how="inner")[products.columns]
-    unbalanced = ["Key_lvl1","Description","Key_lvl7","Product Status"]
-    sales_desc.drop(unbalanced,axis=1,inplace=True)
+        en_product = translate_df(products,columns=["Key_lvl3","Key_lvl4","Key_lvl5","Key_lvl6"])
 
-    en_sales_desc = translate_df(sales_desc,columns=["Key_lvl3","Key_lvl4","Key_lvl5","Key_lvl6"])
+        keep_features = ["Key_lvl3","Color","Size","Launch Date","Age Group","Sales Season","Tag Price"]
+        dataframe  = en_product[keep_features].copy()
 
-    keep_features = ["Key_lvl3","Color","Size","Launch Date","Age Group","Sales Season","Tag Price"]
-    dataframe  = en_sales_desc[keep_features].copy()
+        # add number of clients
+        logger.info("Load clients count  file...")
+        p2c = load_file("new_p2c1_count",index=settings.row_headers, type_="R")
 
-    # add number of clients
-    logger.info("Load clients count  file...")
-    p2c = load_file("p2c1_count",index="Product")
-    # store_counts = prp.load_file("store_counts",index="Product")
-
-    dataframe = dataframe.join(p2c,how="left").fillna(0)
-    dataframe["Missing"] = 0
+        dataframe = dataframe.join(p2c,how="left").fillna(0)
+        dataframe["Missing"] = 0
 
 
-    features_list = ["Color","Size","Ldate","Age Group","Person","Pname","Ptype","Tprice","Currency","Sales Season","Nstore"]#+list(store_counts.columns)
-    
+        features_list = ["Color","Size","Ldate","Age Group","Person","Pname","Ptype","Tprice","Currency","Sales Season","Nstore"]#+list(store_counts.columns)
+        
 
-    
-    raw_df = dataframe[dataframe.Client!=0.].copy()
-    logger.info("Feature engineering...")
-    features = extract_features(raw_df, non_categorical =["Tprice","Nstore"])
-    features_df = features[features_list]
+        
+        raw_df = dataframe[dataframe.Client!=0.].copy()
+        logger.info("Feature engineering...")
+        features = extract_features(raw_df, non_categorical =["Tprice","Nstore"])
+        features_df = features[features_list]
 
 
-    filename = "clf_features"
-    logger.info("==> Saving features file to %s ..."%filename)
-    save_file(features_df,filename,type_="P",index = True)
+        filename = "new_clf_features"
+        logger.info("==> Saving features file to %s ..."%filename)
+        save_file(features_df,filename,type_="P",index = True)
 
-    logger.info("Dataset  %s  succefully made !"%(features_df.shape[0]))
+        logger.info("Dataset %s succefully made !"%(features_df.shape[0]))
 
-    logger.info("Creating encoders...")
-    categorical_features = ["Color","Size","Age Group","Ldate","Person","Pname","Ptype","Currency","Sales Season"]
-    create_encoder(features_df,le_name="prd_le", ohe_name="prd_ohe", categorical_features=categorical_features)
+    except Exception as err:
+        logger.error(err)
 
     
 

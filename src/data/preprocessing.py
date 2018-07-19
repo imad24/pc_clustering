@@ -258,7 +258,7 @@ def save_file(data, filename, type_="I", version=None, index=False):
         version {int} -- the file version (default: {1})
         index {bool} -- either the include the index or not (default: {False})
     """
-    logger = settings.get_logger(__name__)
+    # logger = settings.get_logger(__name__)
     try:
         folder = {
             "R": settings.raw_path,
@@ -270,8 +270,9 @@ def save_file(data, filename, type_="I", version=None, index=False):
 
         fullname = "%s_%s_v%d.csv" % (settings.PREFIX, filename, version) if version else "%s_%s.csv" % (settings.PREFIX, filename)
         data.to_csv(folder + fullname, sep=";", encoding="utf-8", index=index)
-    except Exception as err:
-        logger.error(err)
+    except Exception:
+        # logger.error(err)
+        raise
 
 
 def load_file(filename, type_="I", version=None, sep=";", ext="csv", index=None):
@@ -290,7 +291,7 @@ def load_file(filename, type_="I", version=None, sep=";", ext="csv", index=None)
     Returns:
         Dataframe -- returns a pandas dataframe
     """
-    logger = settings.get_logger(__name__)
+    # logger = settings.get_logger(__name__)
     try:
         folder = {
             "R": settings.raw_path,
@@ -306,12 +307,13 @@ def load_file(filename, type_="I", version=None, sep=";", ext="csv", index=None)
             df.set_index(index, inplace=True)
 
         return df
-    except Exception as err:
-        logger.error(err)
+    except Exception:
+        # logger.error(err)
+        raise
 
 
 
-def create_encoder(df, categorical_features=None, non_categorical=None):
+def create_encoder(df, le_name, ohe_name, categorical_features=None, non_categorical=None):
     """Creates and stores a categorical encoder of a given dataframe
     
     Arguments:
@@ -342,8 +344,8 @@ def create_encoder(df, categorical_features=None, non_categorical=None):
     labeled_df = df[categorical_features].sort_index(axis=1).apply(lambda x: le_dict[x.name].transform(x))
     ohe_encoder = OneHotEncoder().fit(labeled_df)
     
-    np.save(settings.models_path + 'prd_le_encoder', le_dict)
-    np.save(settings.models_path + 'prd_ohe_encoder', ohe_encoder)
+    np.save(settings.models_path + le_name + 'npy', le_dict)
+    np.save(settings.models_path + ohe_name + 'npy', ohe_encoder)
     return labeled_df, le_dict, ohe_encoder
 
 
@@ -362,8 +364,8 @@ def encode(df, non_categorical=[], le_encoder=None, ohe_encoder=None):
         [Dataframe] -- Returns a one hot encoded dataframe
     """
     if(le_encoder is None):
-        le_encoder = np.load(settings.models_path + 'prd_le_encoder.npy').item()
-        ohe_encoder = np.load(settings.models_path + 'prd_ohe_encoder.npy').item()
+        le_encoder = np.load(settings.models_path + 'prd_le.npy').item()
+        ohe_encoder = np.load(settings.models_path + 'prd_ohe.npy').item()
 
     features = [["%s_%s" % (f_name, c) for c in f_encoder.classes_] for f_name, f_encoder in le_encoder.items()]
     columns = list(itertools.chain.from_iterable(features))
