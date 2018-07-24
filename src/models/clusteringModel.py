@@ -3,7 +3,6 @@ from external import kMedoids
 from scipy.spatial.distance import pdist,squareform
 from scipy.cluster import hierarchy
 
-import settings
 import numpy as np
 
 class ClusteringModel:
@@ -16,8 +15,7 @@ class ClusteringModel:
 
 
     @classmethod
-    def select_best_k(cls, inertia_grid, silhouette_grid, best = None):
-        if (best is None): best = settings.options["best_k"]
+    def select_best_k(cls, inertia_grid, silhouette_grid, best  = 4):
         for k in inertia_grid:
             if list(silhouette_grid).index(k) < best:
                 return k

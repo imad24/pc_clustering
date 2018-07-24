@@ -14,6 +14,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split  
 from sklearn.externals import joblib
 
+import itertools
 
 @click.command()
 @click.argument('season',type=str)
@@ -69,10 +70,12 @@ def main(season,version):
         joblib.dump(classifier,path)
 
     except Exception as err:
-        print(err)
+        logger(err)
+
 
 
 if __name__ == '__main__':
     row_headers = settings.row_headers
     # pylint: disable=no-value-for-parameter
     main()
+

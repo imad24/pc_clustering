@@ -149,7 +149,7 @@ def predictions_plot(test_df, series_df, standard=True, nearest=False, all=False
             #multiply by the caluclated std
             p1c = p1 * cstd 
             plt.plot(p1c,label="P1_cstd",ls='--',c='b')
-            plt.plot(p_array.iloc[closest]*cstd,label="Closest",c='g',ls=':')
+            plt.plot(p_array.iloc[closest]*cstd,label="Closest",c='y',ls=':')
 
         if not standard:
             p1 = p1 * pstd
@@ -158,7 +158,7 @@ def predictions_plot(test_df, series_df, standard=True, nearest=False, all=False
             p4 = p4 * pstd
             c_series *= pstd
 
-            plt.plot(p1,label="P1_pstd",ls='--',c='y')
+            plt.plot(p1,label="P1_pstd",ls='--',c='g')
         else:
             plt.plot(p1,label="P1",ls='--')
         

@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 
 import settings
-from data.preprocessing import save_file,load_file
+from data.preprocessing import save_file
 
 
 @click.command()

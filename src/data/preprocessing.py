@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 from scipy.stats import mstats
 from sklearn.preprocessing import (LabelBinarizer, LabelEncoder, MinMaxScaler,
-                                   OneHotEncoder, StandardScaler)
+                                   OneHotEncoder, StandardScaler, RobustScaler)
 
 import settings
 
@@ -313,67 +313,5 @@ def load_file(filename, type_="I", version=None, sep=";", ext="csv", index=None)
 
 
 
-def create_encoder(df, le_name, ohe_name, categorical_features=None, non_categorical=None):
-    """Creates and stores a categorical encoder of a given dataframe
-    
-    Arguments:
-        df {Dataframe} -- The Pandas Dataframe to encode
-    
-    Keyword Arguments:
-        categorical_features {list} -- The list of categorical features to consider (default: {None})
-        non_categorical {list} -- The list of non categorical features to ignore (default: {None})
-    
-    Returns:
-        tuple(dict,dict,OneHotEncoder) -- Return the encoders used in every columns as a dictionnary
-    """
 
-    if (categorical_features is None):
-        categorical_features = df.columns
-    le_dict = {}
-    ohe_dict = {}
-    for index, col in df[categorical_features].sort_index(axis=1).iteritems():
-        if (non_categorical is not None) and (index in non_categorical):
-            continue
-        if index not in categorical_features:
-            continue
-        le = LabelEncoder().fit(col)
-        le_dict[index] = le
-        ohe = OneHotEncoder().fit(le.transform(col).reshape((-1, 1)))
-        ohe_dict[index] = ohe
-
-    labeled_df = df[categorical_features].sort_index(axis=1).apply(lambda x: le_dict[x.name].transform(x))
-    ohe_encoder = OneHotEncoder().fit(labeled_df)
-    
-    np.save(settings.models_path + le_name + 'npy', le_dict)
-    np.save(settings.models_path + ohe_name + 'npy', ohe_encoder)
-    return labeled_df, le_dict, ohe_encoder
-
-
-def encode(df, non_categorical=[], le_encoder=None, ohe_encoder=None):
-    """Encodes a given dataframe into a one hot format using a given encoder
-    
-    Arguments:
-        df {Dataframe} -- Pandas dataframe to encode
-    
-    Keyword Arguments:
-        non_categorical {list} -- list of non categorical features (add them at the end of the returned dataframe) (default: {[]})
-        le_encoder {dict} -- a dictionnary of label encoders created previously (default: {None})
-        ohe_encoder {OneHotEncoder} --  a OneHotEncoder created previously to encode the data (default: {None})
-    
-    Returns:
-        [Dataframe] -- Returns a one hot encoded dataframe
-    """
-    if(le_encoder is None):
-        le_encoder = np.load(settings.models_path + 'prd_le.npy').item()
-        ohe_encoder = np.load(settings.models_path + 'prd_ohe.npy').item()
-
-    features = [["%s_%s" % (f_name, c) for c in f_encoder.classes_] for f_name, f_encoder in le_encoder.items()]
-    columns = list(itertools.chain.from_iterable(features))
-    categorical = list(le_encoder.keys())
-    labeled_df = df[categorical].sort_index(axis=1).apply(lambda x: le_encoder[x.name].transform(x))
-    encoded_df = pd.DataFrame(ohe_encoder.transform(labeled_df).toarray(), columns=columns, index=df.index)
-
-    # add numeric features
-    for f in non_categorical:
-        encoded_df[f] = df[f]
-    return encoded_df
+        

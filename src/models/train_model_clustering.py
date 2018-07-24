@@ -48,7 +48,7 @@ def main(season,version, k):
             # k = model.agg_cut_off(X_z)
             logger.info("Running Grid Search to select the best number of clusters (greedy)...")
             sse, silhouette = model.grid_search(X_z,k_values=np.linspace(6,15,9).astype(int))
-            k = ClusteringModel.select_best_k(sse,silhouette,best=3)
+            k = ClusteringModel.select_best_k(sse,silhouette,best=settings.options["best_k"])
             #select best k:
             logger.info("the number of %d clusters has been selected"%k)
         logger.info("Training clustering model with %d clusters"%k)    
