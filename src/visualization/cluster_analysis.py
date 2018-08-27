@@ -1,5 +1,3 @@
-
-
 import pandas as pd
 import math
 import numpy as np
@@ -17,7 +15,7 @@ import prince
 
 
 
-def centroid_grid_plot(raw_df,clean_df,cluster_df):
+def centroid_grid_plot(raw_df,clean_df,cluster_df, plot_raw=True):
 
     cluster_centroid = cluster_df[["Cluster","Centroid"]].drop_duplicates().set_index(["Cluster"]).sort_index().to_dict()["Centroid"]
     centroid_cluster = {v: k for k, v in cluster_centroid.items()}
@@ -34,7 +32,7 @@ def centroid_grid_plot(raw_df,clean_df,cluster_df):
     for index,value in centroids_raw.iterrows():
         plt.subplot(n_rows,3,i)
         plt.title("Cluster: %d,  Centroid: %s"%(centroid_cluster[index],index))
-        plt.plot(value,label = "Raw")
+        if plot_raw: plt.plot(value,label = "Raw")
         plt.plot(centroids_clean.loc[index], label="Smoothed")
         plt.legend()
         i+=1

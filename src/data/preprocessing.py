@@ -275,7 +275,7 @@ def save_file(data, filename, type_="I", version=None, index=False):
         raise
 
 
-def load_file(filename, type_="I", version=None, sep=";", ext="csv", index=None):
+def load_file(filename, type_="I", version=None, sep=";", ext="csv", index=None, **kwargs):
     """Loads a csv or txt file into a dataframe
     
     Arguments:
@@ -302,7 +302,7 @@ def load_file(filename, type_="I", version=None, sep=";", ext="csv", index=None)
         }.get(type_, settings.interim_path)
 
         fullname = "%s_%s_v%d.%s" % (settings.PREFIX, filename, version, ext) if version else "%s_%s.%s" % (settings.PREFIX, filename, ext)
-        df = pd.read_csv(folder + fullname, sep=";", encoding="utf-8")
+        df = pd.read_csv(folder + fullname, sep=";", encoding="utf-8", **kwargs)
         if index is not None:
             df.set_index(index, inplace=True)
 

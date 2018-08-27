@@ -82,21 +82,52 @@ def error_evaluation(df):
         predicted_series = (series_df.loc[centroid]).astype(np.float64)#/series_df.loc[centroid].std()).astype(np.float64)
         
         s_true[i] = series
-        s_pred[i] = c_series
+        s_pred[i] = predicted_series
 
         n = len(series)
         rmse = math.sqrt(MSE(series,c_series)/n)
         prmse = math.sqrt(MSE(series,predicted_series)/n)
         corr = np.corrcoef(series,predicted_series)[0][1]
         
+        
         RMSE.append(rmse)
         PRMSE.append(prmse)
         CORR.append(corr)
+
         i+=1
     return RMSE,PRMSE,CORR
 
-def predictions_plot(test_df, series_df, standard=True, nearest=False, all=False ):
 
+def prediction_plot(test_df, series_df, index =[], standard = True):
+    # cast bool to int 0:False and 1:True
+    scale = 1 if standard else 0
+
+    guess1 = test_df["PR1"]
+    cluster = test_df["Centroid"]
+
+    #Get the std from the built predictor
+    pstd = predict_std(index)[0]
+    
+    #actual series
+    series = series_df.loc[index] /  (series_df.loc[index].std() ** scale)
+    c_series = series_df.loc[cluster] / (series_df.loc[cluster].std())
+
+    #curve of each prediction
+    p1 = series_df.loc[guess1] / (series_df.loc[guess1].std())
+
+    if not standard:
+        p1 = p1 * pstd
+        c_series *= pstd
+        plt.plot(p1,label="P1_pstd",ls='--',c='g')
+    else:
+        plt.plot(p1,label="P1",ls='--')
+        plt.plot(c_series,label="Centroid",c='grey',ls='-.')
+        plt.plot(series,label="Series",c='m')
+        plt.legend(loc=0)
+
+
+
+def predictions_plot(test_df, series_df, standard=True, nearest=False, all=False ):
 
     # if show all predictions then standardize
     if nearest:
@@ -131,7 +162,7 @@ def predictions_plot(test_df, series_df, standard=True, nearest=False, all=False
         p4 = series_df.loc[guess4] / (series_df.loc[guess4].std())
 
         
-        
+
         
         p_array = pd.DataFrame([p1,p2,p3,p4],columns = series_df.columns)
             

@@ -42,6 +42,9 @@ def main(season,version, k):
         logger.info("Init clustering model")
         model = ClusteringModel("kMedoids",k,init_method = settings.options["init_method"])
 
+
+        if k is None: k =  settings.options["n_clusters"]
+
         # if not provided get k using grid search
         if k is None:
             logger.info("Running Hierarchical Clustering...")

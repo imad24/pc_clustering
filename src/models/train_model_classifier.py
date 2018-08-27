@@ -7,7 +7,7 @@ import pandas as pd
 
 
 import settings
-from data.preprocessing import load_file,save_file,filter_by_season,get_scaled_series,encode
+from data.preprocessing import load_file,save_file,filter_by_season,get_scaled_series
 from features import tools
 
 from sklearn.ensemble import RandomForestClassifier
@@ -15,6 +15,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.externals import joblib
 
 import itertools
+
+from models.classifierModel import classifierModel
 
 @click.command()
 @click.argument('season',type=str)
@@ -49,29 +51,33 @@ def main(season,version):
         #get the list of features
 
         logger.info("Preparing data...")
-        _ , numeric, _ = tools.get_features_by_type(df)
+        _ , numeric, categorical = tools.get_features_by_type(features_df)
 
-        features_df = df[features_list].copy()
-        data = features_df.copy()
+
+        data = df[features_list].copy()
         data["Sales Season"] = s
 
         #prepare data
         logger.info("Encoding data...")
-        X = encode(data.drop(["Cluster"],axis=1),non_categorical = numeric)
+        X = tools.encode(data.drop(["Cluster"],axis=1),non_categorical = numeric)
         y = data["Cluster"]
 
         logger.info("Training classifier...")
         classifier = RandomForestClassifier(n_estimators=80,max_depth=18,min_samples_split=2, min_samples_leaf=1, criterion='gini', bootstrap=True)
         classifier.fit(X,y)
 
+
+        le_encoder, ohe_encoder, scaler = tools.get_encoders("prd_le","prd_ohe","prd_scaler")
+        model = classifierModel(le_encoder=le_encoder, ohe_encoder=ohe_encoder, scaler=scaler, model= classifier, non_categorical=numeric, categorical=categorical)
+
         filename = "classifier_%s_v%d.pkl"%(s,version)
         logger.info("Saving classifier model to << %s >>..."%filename)
         path = os.path.join(settings.models_path,filename)
-        joblib.dump(classifier,path)
+        joblib.dump(model,path)
+
 
     except Exception as err:
         logger(err)
-
 
 
 if __name__ == '__main__':

@@ -11,7 +11,17 @@ from sklearn.preprocessing import (LabelBinarizer, LabelEncoder, MinMaxScaler,
                                    OneHotEncoder, StandardScaler, RobustScaler)
 
 
-def create_encoder(df, le_name, ohe_name, categorical_features=None, non_categorical=None):
+
+
+def get_encoders(le_name,ohe_name,scaler_name):
+    le_encoder = np.load(settings.models_path + le_name + '.npy').item()
+    ohe_encoder = np.load(settings.models_path + ohe_name + '.npy').item()
+    scaler = np.load(settings.models_path + scaler_name + '.npy').item()
+
+    return le_encoder,ohe_encoder,scaler
+
+
+def create_encoder(df, le_name = None, ohe_name = None, scaler_name=None, categorical_features=None, non_categorical=None):
     """Creates and stores a categorical encoder of a given dataframe
     
     Arguments:
@@ -25,10 +35,12 @@ def create_encoder(df, le_name, ohe_name, categorical_features=None, non_categor
         tuple(dict,dict,OneHotEncoder) -- Return the encoders used in every columns as a dictionnary
     """
 
+
     if (categorical_features is None):
-        categorical_features = sorted(df.columns)
+        categorical_features = sorted(df.drop(non_categorical,axis=1).columns)
     le_dict = {}
     ohe_dict = {}
+    scalers = {}
     for index, col in df[categorical_features].sort_index(axis=1).iteritems():
         if (non_categorical is not None) and (index in non_categorical):
             continue
@@ -41,12 +53,52 @@ def create_encoder(df, le_name, ohe_name, categorical_features=None, non_categor
 
     labeled_df = df[categorical_features].sort_index(axis=1).apply(lambda x: le_dict[x.name].transform(x))
     ohe_encoder = OneHotEncoder().fit(labeled_df)
-    np.save(settings.models_path + le_name + '.npy', le_dict)
-    np.save(settings.models_path + ohe_name + '.npy', ohe_encoder)
-    return labeled_df, le_dict, ohe_encoder
+
+    # add numeric features
+    if len(non_categorical)==0:
+        non_categorical = (list(df.columns.to_series().groupby(df.dtypes).groups[np.dtype('float64')]))
+    for f in non_categorical:
+        values = df[[f]].values
+        scaler = MinMaxScaler().fit(values)
+        scalers[f] = scaler
 
 
-def encode(df, non_categorical=[], le_encoder=None, ohe_encoder=None):
+    if le_name is not None:
+        np.save(settings.models_path + le_name + '.npy', le_dict)
+    if ohe_name is not None:
+        np.save(settings.models_path + ohe_name + '.npy', ohe_encoder)
+    if scaler_name is not None:
+        np.save(settings.models_path + scaler_name + '.npy', scalers)
+    
+    return labeled_df, le_dict, ohe_encoder, scalers, categorical_features, non_categorical
+
+
+def model_encode(df,model):
+    non_categorical = model.non_categorical
+    le_encoder = model.le_encoder
+    ohe_encoder = model.ohe_encoder
+    scaler = model.scaler
+    categorical = model.categorical
+
+
+    features = [["%s_%s" % (f_name, c) for c in f_encoder.classes_] for f_name, f_encoder in le_encoder.items() if f_name in categorical]
+    columns = list(itertools.chain.from_iterable(features))
+
+    labeled_df = df[categorical].sort_index(axis=1).apply(lambda x: le_encoder[x.name].transform(x))
+    encoded_df = pd.DataFrame(ohe_encoder.transform(labeled_df).toarray(), columns=columns, index=df.index)
+
+    # add numeric features
+    if len(non_categorical)==0:
+        non_categorical = (list(df.columns.to_series().groupby(df.dtypes).groups[np.dtype('float64')]))
+    for f in non_categorical:
+        values = df[[f]].values
+        scaled = scaler[f].fit_transform(values)
+        encoded_df[f] = scaled
+    return encoded_df
+
+
+
+def encode(df, non_categorical=[], le_encoder=None, ohe_encoder=None, scaler=None, features_list = None):
     """Encodes a given dataframe into a one hot format using a given encoder
     
     Arguments:
@@ -60,14 +112,18 @@ def encode(df, non_categorical=[], le_encoder=None, ohe_encoder=None):
     Returns:
         [Dataframe] -- Returns a one hot encoded dataframe
     """
-    scaler = MinMaxScaler()
     if(le_encoder is None):
         le_encoder = np.load(settings.models_path + 'prd_le.npy').item()
         ohe_encoder = np.load(settings.models_path + 'prd_ohe.npy').item()
-
-    features = [["%s_%s" % (f_name, c) for c in f_encoder.classes_] for f_name, f_encoder in le_encoder.items()]
-    columns = list(itertools.chain.from_iterable(features))
-    categorical = list(le_encoder.keys())
+        scaler = np.load(settings.models_path + 'prd_scaler.npy').item()
+    if features_list is None:
+        features = [["%s_%s" % (f_name, c) for c in f_encoder.classes_] for f_name, f_encoder in le_encoder.items()]
+        columns = list(itertools.chain.from_iterable(features))
+        categorical = list(le_encoder.keys())
+    else:
+        features = [["%s_%s" % (f_name, c) for c in f_encoder.classes_] for f_name, f_encoder in le_encoder.items() if f_name in features_list]
+        columns = list(itertools.chain.from_iterable(features))
+        categorical = features_list
     labeled_df = df[categorical].sort_index(axis=1).apply(lambda x: le_encoder[x.name].transform(x))
     encoded_df = pd.DataFrame(ohe_encoder.transform(labeled_df).toarray(), columns=columns, index=df.index)
 
@@ -76,7 +132,7 @@ def encode(df, non_categorical=[], le_encoder=None, ohe_encoder=None):
         non_categorical = (list(df.columns.to_series().groupby(df.dtypes).groups[np.dtype('float64')]))
     for f in non_categorical:
         values = df[[f]].values
-        scaled = scaler.fit_transform(values)
+        scaled = scaler[f].fit_transform(values)
         encoded_df[f] = scaled
     return encoded_df
 

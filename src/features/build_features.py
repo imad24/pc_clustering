@@ -49,11 +49,20 @@ def main():
         p2c = load_file("p2c1_count",index="Product")
         # store_counts = prp.load_file("store_counts",index="Product")
 
+
+
+        #add number of clients by week
+        logger.info("Load number of clients by week...")
+        p2cc = load_file("p1cc",index="Product").iloc[:,:5]
+
+
+        dataframe = dataframe.join(p2cc,how="left").fillna(0)
+
         dataframe = dataframe.join(p2c,how="left").fillna(0)
         dataframe["Missing"] = 0
 
 
-        features_list = ["Color","Size","Ldate","Age Group","Person","Pname","Ptype","Tprice","Currency","Sales Season","Nstore"]#+list(store_counts.columns)
+        features_list = ["Color","Size","Ldate","Age Group","Person","Pname","Ptype","Tprice","Currency","Sales Season","Nstore"]+list(p2cc.columns)
         
         
         raw_df = dataframe[dataframe.Client!=0.].copy()
@@ -70,7 +79,7 @@ def main():
 
         logger.info("Creating encoders...")
         categorical_features = ["Color","Size","Age Group","Ldate","Person","Pname","Ptype","Currency","Sales Season"]
-        create_encoder(features_df,le_name="prd_le", ohe_name="prd_ohe", categorical_features=categorical_features,non_categorical=["Tprice","Nstore"])
+        create_encoder(features_df,le_name="prd_le", ohe_name="prd_ohe", scaler_name="prd_scaler", categorical_features=categorical_features,non_categorical=["Tprice","Nstore"]+list(p2cc.columns))
     except Exception as err:
         logger.error(err)
     

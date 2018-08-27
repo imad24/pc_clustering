@@ -1,24 +1,13 @@
-from sklearn.metrics import silhouette_score
-from external import kMedoids
-from scipy.spatial.distance import pdist,squareform
-from scipy.cluster import hierarchy
-
-import settings
-import numpy as np
-
-
 class classifierModel:
+    
+    def __init__(self, le_encoder=None, ohe_encoder=None, scaler=None, model=None, non_categorical=None, categorical=None ):
+        self.le_encoder = le_encoder
+        self.ohe_encoder = ohe_encoder
+        self.scaler = scaler
+        self.model = model
+        self.non_categorical = non_categorical
+        self.categorical = categorical
 
-    le_encoder = {}
-    ohe_encoder = {}
-    scaler = None
-    model = None
-    non_categorical = []
-    categorical = []
-
-    def __init__(self):
-
-        pass
 
     def fit(self,X):
         self.model.fit(X)

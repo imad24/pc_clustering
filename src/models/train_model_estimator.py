@@ -7,7 +7,7 @@ import pandas as pd
 
 
 import settings
-from data.preprocessing import load_file, save_file, filter_by_season, get_scaled_series, encode
+from data.preprocessing import load_file, save_file, filter_by_season, get_scaled_series
 from features import tools
 
 from sklearn.ensemble import RandomForestRegressor
@@ -48,7 +48,7 @@ def main(version):
         series = data.drop(features, axis=1)
         y_data = np.array(series.std(axis=1)).T
 
-        X = encode(X_data, non_categorical=numeric)
+        X = tools.encode(X_data, non_categorical=numeric)
         y = y_data
 
         logger.info("Training regressor...")

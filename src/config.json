@@ -4,6 +4,7 @@
 	"range": 16,
 	"offset": 1,
 	"init_method": "PCA",
+	"n_clusters" : null,
 	"best_k": 4,
 	"n_pred" : 4,
 	"n_points" : 3

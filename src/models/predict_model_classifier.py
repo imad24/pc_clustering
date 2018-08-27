@@ -1,36 +1,39 @@
-import logging
-import os
-
-import click
-import numpy as np
-import pandas as pd
-
 import settings
-from data.preprocessing import load_file, save_file, filter_by_season, get_scaled_series, encode
 from features import tools
 from sklearn.externals import joblib
+import models.classifierModel
 
-features_df = load_file("clf_features",type_="P",index = "Product")
-features_df.Ldate = features_df.Ldate.apply(lambda x:str(x))
 
-encoded_df = encode(features_df,non_categorical = ["Tprice","Nstore"])
-predictor = joblib.load(settings.models_path+'regressor_std.pkl')
-
-row_headers = settings.row_headers
-
-@click.command()
-@click.option('--version', type=int)
+# @click.command()
+# @click.option('--version', type=int)
 def main():
-    return
+    return classifier
 
 
-def predict_cluster(x_index):
-    x = encoded_df.loc[[x_index]]
-    y_pred = predictor.predict(x)
+def load_model(name):
+    return joblib.load(settings.models_path + name + '.pkl')
 
-    return y_pred
+def predict(X):
+    y_pred = classifier.model.predict(X)
+    y_pred_proba = classifier.model.predict_proba(X)
+
+    return y_pred,y_pred_proba
+
+def preprocess(X_data,y_data):
+    X = tools.model_encode(X_data, model=classifier)
+    y = y_data
+
+    return X,y
+
+
+def train_model(X,y):
+    classifier.model.fit(X,y)
+
+classifier = load_model("classifier_Autumn_v99")
+
 
 if __name__ == '__main__':
     row_headers = settings.row_headers
     # pylint: disable=no-value-for-parameter
     main()
+

@@ -10,11 +10,11 @@ from sklearn.preprocessing import OneHotEncoder,LabelBinarizer,LabelEncoder,MinM
 
 import logging
 
-from data.preprocessing import load_file,save_file,translate_df,create_encoder
+from data.preprocessing import load_file,save_file,translate_df
 import settings
 
-@click.command()
-def main():
+
+def get_feature():
     """ Build features for new products
     """
     try:
@@ -54,11 +54,7 @@ def main():
         features_df = features[features_list]
 
 
-        filename = "new_clf_features"
-        logger.info("==> Saving features file to %s ..."%filename)
-        save_file(features_df,filename,type_="P",index = True)
-
-        logger.info("Dataset %s succefully made !"%(features_df.shape[0]))
+        return features_df
 
     except Exception as err:
         logger.error(err)
@@ -224,9 +220,3 @@ def _redefine_group(key):
         "Male" : "Men"
     }
     return dico[key] if key in dico else key
-
-
-
-    
-if __name__ == '__main__':
-    main()
