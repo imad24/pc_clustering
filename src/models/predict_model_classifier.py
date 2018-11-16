@@ -29,7 +29,7 @@ def preprocess(X_data,y_data):
 def train_model(X,y):
     classifier.model.fit(X,y)
 
-classifier = load_model("classifier_Autumn_v99")
+classifier = load_model("classifier_Autumn_v1")
 
 
 if __name__ == '__main__':

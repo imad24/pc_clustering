@@ -46,7 +46,8 @@ def main():
 
         # add number of clients
         logger.info("Load clients count  file...")
-        p2c = load_file("p2c1_count",index="Product")
+        p2c = load_file("p2c1_count",index="Product").astype(np.float64)
+        p2c.columns = ["Nstore"]
         # store_counts = prp.load_file("store_counts",index="Product")
 
 
@@ -54,32 +55,31 @@ def main():
         #add number of clients by week
         logger.info("Load number of clients by week...")
         p2cc = load_file("p1cc",index="Product").iloc[:,:5]
-
-
         dataframe = dataframe.join(p2cc,how="left").fillna(0)
 
         dataframe = dataframe.join(p2c,how="left").fillna(0)
         dataframe["Missing"] = 0
 
-
-        features_list = ["Color","Size","Ldate","Age Group","Person","Pname","Ptype","Tprice","Currency","Sales Season","Nstore"]+list(p2cc.columns)
+        features_list = ["Color","Size","Ldate","Age Group","Person","Pname","Ptype","Tprice","Currency","Sales Season"]+list(p2cc.columns)
         
         
-        raw_df = dataframe[dataframe.Client!=0.].copy()
+        raw_df = dataframe[dataframe.Nstore!=0.].copy()
         logger.info("Feature engineering...")
-        features = extract_features(raw_df, non_categorical =["Tprice","Nstore"])
+        numeric_features = ["Tprice"] + list(p2cc.columns)#Nstore
+
+        features = extract_features(raw_df, non_categorical =numeric_features)
         features_df = features[features_list]
 
 
         filename = "clf_features"
-        logger.info("==> Saving features file to %s ..."%filename)
+        logger.info("==> Saving features file to <<%s>> ..."%filename)
         save_file(features_df,filename,type_="P",index = True)
 
         logger.info("Dataset  %s  succefully made !"%(features_df.shape[0]))
 
         logger.info("Creating encoders...")
         categorical_features = ["Color","Size","Age Group","Ldate","Person","Pname","Ptype","Currency","Sales Season"]
-        create_encoder(features_df,le_name="prd_le", ohe_name="prd_ohe", scaler_name="prd_scaler", categorical_features=categorical_features,non_categorical=["Tprice","Nstore"]+list(p2cc.columns))
+        create_encoder(features_df,le_name="prd_le", ohe_name="prd_ohe", scaler_name="prd_scaler", categorical_features=categorical_features,non_categorical=numeric_features)
     except Exception as err:
         logger.error(err)
     
@@ -92,15 +92,13 @@ def extract_features(rdf, non_categorical):
     data_frame["Ptype"] = data_frame["Key_lvl3"].map(lambda x: GetInfo(x,2))
     data_frame["Price"] = data_frame["Key_lvl3"].map(lambda x: GetInfo(x,3))
 
-    data_frame["Nstore"] = data_frame["Client"]
-
     # season = rdf["Sales Season"].min()
     # data_frame["Launch Date"] = data_frame["Launch Date"].map(lambda x: date_to_week(x,season)).astype(str)
     data_frame["Ldate"] = data_frame["Launch Date"].map(lambda x: get_week_number(x)).astype(str)
     data_frame.drop(["Key_lvl3"],axis=1,inplace  = True)
 
     data_frame["Tprice"] = data_frame["Tag Price"] 
-
+    # data_frame["Age Group"] = data_frame["Age Group"].map(lambda x: _redefine_age(x))
 
     for num_fearture in non_categorical:
         values = data_frame[num_fearture].values.astype(np.float64).reshape((-1,1))
@@ -115,7 +113,9 @@ def extract_features(rdf, non_categorical):
 
     #reduce colors:
     data_frame.pipe(_reduce_colors)
-    
+
+
+    # data_frame["Currency"] ="bella ciao"
     return data_frame
 
 
@@ -245,7 +245,16 @@ def _redefine_group(key):
     return dico[key] if key in dico else key
 
 
-
+def _redefine_age(age):
+    dico ={
+        "4-6":"Young",
+        "7-9":"Young",
+        "10-15":"Young",
+        "18-28":"Adult",
+        "29-38":"Adult",
+        "39-48":"Senior"
+    }
+    return dico[age]
     
 if __name__ == '__main__':
     main()

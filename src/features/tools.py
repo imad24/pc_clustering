@@ -63,12 +63,12 @@ def create_encoder(df, le_name = None, ohe_name = None, scaler_name=None, catego
         scalers[f] = scaler
 
 
-    if le_name is not None:
-        np.save(settings.models_path + le_name + '.npy', le_dict)
-    if ohe_name is not None:
-        np.save(settings.models_path + ohe_name + '.npy', ohe_encoder)
-    if scaler_name is not None:
-        np.save(settings.models_path + scaler_name + '.npy', scalers)
+    # if le_name is not None:
+    #     np.save(settings.models_path + le_name + '.npy', le_dict)
+    # if ohe_name is not None:
+    #     np.save(settings.models_path + ohe_name + '.npy', ohe_encoder)
+    # if scaler_name is not None:
+    #     np.save(settings.models_path + scaler_name + '.npy', scalers)
     
     return labeled_df, le_dict, ohe_encoder, scalers, categorical_features, non_categorical
 
@@ -94,6 +94,7 @@ def model_encode(df,model):
         values = df[[f]].values
         scaled = scaler[f].fit_transform(values)
         encoded_df[f] = scaled
+
     return encoded_df
 
 
@@ -147,7 +148,7 @@ def get_features_by_type(df):
     """
 
     features_list = list(sorted(df.columns))
-    numeric = (list(df.columns.to_series().groupby(df.dtypes).groups[np.dtype('float64')]))
+    numeric = list(df._get_numeric_data().columns)
     categorical = [f for f in features_list if f not in numeric]
     
     return features_list, numeric, categorical

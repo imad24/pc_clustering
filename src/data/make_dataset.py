@@ -13,7 +13,7 @@ from data.preprocessing import save_file, trim_series, range_from_origin, remove
 @click.argument('version',type=int)
 # @click.argument('input_filepath', type=click.Path(exists=True))
 # @click.argument('output_filepath', type=click.Path())
-def main(version):
+def main():#version
     try:
         """ Runs data processing scripts to turn raw data from (../raw) into
             cleaned data ready to be analyzed (saved in ../processed).

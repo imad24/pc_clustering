@@ -33,7 +33,7 @@ def main(version):
         assert df is not None
 
         df.Ldate = df.Ldate.apply(lambda x: str(x))
-        df = df[df.Nstore != 0]
+        # df = df[df.Nstore != 0]
 
         # get the list of features
         logger.info("Preparing data...")

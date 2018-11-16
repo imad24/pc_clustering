@@ -1,21 +1,40 @@
 import logging
 import math
 from datetime import datetime
-
+import os
 import click
 import numpy as np
 import pandas as pd
-
+import path
 import settings
 from data.preprocessing import save_file
 
 
 @click.command()
 def main():
+    pass
+
+
+def check_for_data():
+    expected_files = ["products.csv","clients.csv","nodes.csv","series.csv","products.yaml","clients.yaml","nodes.yaml","series.yaml"]
+
+    all_good = True
+    for expected_file in expected_files:
+        file_path = os.path.join(settings.raw_path,expected_file)
+        all_good = all_good and os.path.isfile(file_path)
+    return all_good
+
+
+def import_data():   
     """ Contains all the functions of data importing
     """
     try:
+
         logger = settings.get_logger(__name__)
+
+        if not (check_for_data()):
+            raise Exception("The following files were not all found: %s"%("files")) 
+
         logger.info("*** Import data from raw files ***")
         #load raw file
 
@@ -120,10 +139,6 @@ def get_product_df(filename):
     df_produit = pd.read_csv(settings.raw_path+filename, sep='\t',encoding="utf8").astype(str)
     df_produit = df_produit.drop_duplicates(["Key_lvl1","Description"]).set_index(["Key_lvl1"]).astype(str)
     return df_produit
-
-
-
-
 
 def create_product_season_file(product_df, filename="product_season"):
     df = product_df[["Key_lvl1","Key_lvl2","Sales Season"]].drop_duplicates()

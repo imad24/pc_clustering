@@ -28,10 +28,10 @@ def main(season,version):
     logger.info("*** Train the classifier to predict clusters ***")
 
     try:
-        version = 99
 
         s = season
         clustering_model = "p2_clusters_%s"%(s)
+        clustering_model = "p2_clusters_Autumn"
 
         #Load files
         logger.info("Loading data file...")
