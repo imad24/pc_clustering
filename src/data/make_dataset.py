@@ -9,11 +9,13 @@ import settings
 from data.preprocessing import save_file, trim_series, range_from_origin, remove_rare, smooth_series 
 
 
-@click.command()
-@click.argument('version',type=int)
+
+
 # @click.argument('input_filepath', type=click.Path(exists=True))
 # @click.argument('output_filepath', type=click.Path())
-def main():#version
+@click.command()
+@click.argument('version',type=int)
+def main(version):#version
     try:
         """ Runs data processing scripts to turn raw data from (../raw) into
             cleaned data ready to be analyzed (saved in ../processed).

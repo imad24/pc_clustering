@@ -6,7 +6,7 @@ import os
 import logging
 import json
 from dotenv import find_dotenv, load_dotenv
-
+import datetime
 
 load_dotenv(find_dotenv())
 
@@ -76,7 +76,9 @@ def get_logger(name):
     logger.addHandler(handler)
  
     # create debug file handler and set level to debug
-    handler = logging.FileHandler(os.path.join(src_dir, "app.log"),"a")
+    now = datetime.datetime.now()
+    log_file_name = "app_%s.log"%(now.strftime("%d_%m_%Y"))
+    handler = logging.FileHandler(os.path.join(src_dir, log_file_name),"a")
     handler.setLevel(logging.DEBUG)
     handler.setFormatter(formatter)
     logger.addHandler(handler)

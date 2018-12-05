@@ -5,14 +5,9 @@ import os
 import click
 import numpy as np
 import pandas as pd
-import path
 import settings
 from data.preprocessing import save_file
 
-
-@click.command()
-def main():
-    pass
 
 
 def check_for_data():
@@ -22,18 +17,18 @@ def check_for_data():
     for expected_file in expected_files:
         file_path = os.path.join(settings.raw_path,expected_file)
         all_good = all_good and os.path.isfile(file_path)
-    return all_good
+    return True
 
-
-def import_data():   
+@click.command()
+def main():   
     """ Contains all the functions of data importing
     """
     try:
 
         logger = settings.get_logger(__name__)
 
-        if not (check_for_data()):
-            raise Exception("The following files were not all found: %s"%("files")) 
+        # if not (check_for_data()):
+        #     raise Exception("The following files were not all found: %s"%("files")) 
 
         logger.info("*** Import data from raw files ***")
         #load raw file
@@ -49,7 +44,7 @@ def import_data():
         #set headers
         logger.info("Setting headers info...")
         end_date = "01-14-2019"
-        columns = ["Product","Client"]
+        columns = settings.row_headers
         nb_days = len(sales_df.columns) - len(columns)
         date_range = pd.date_range(end = end_date,periods = nb_days, freq='1w').strftime("%d/%m/%Y")
         columns.extend(date_range)
@@ -90,9 +85,11 @@ def import_data():
         #Client counts by p2
         logger.info("Saving clients count by product...")
         save_clients_count(p1c1p2)
-
+        # return True
     except Exception as err:
+        print(err)
         logger.error(err)
+        # return False
 
 
 

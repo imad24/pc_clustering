@@ -26,14 +26,12 @@ def main():
         file_name = "p2_raw"
         sales = load_file(file_name, index='Product')
 
-
         #product description
         logger.info("Load product description file...")
         file_name = "product_7cerf.txt"
         products = pd.read_csv(settings.raw_path+file_name, sep='\t',encoding="utf8")
         products = products.drop_duplicates(["Key_lvl2","Description"]).set_index(["Key_lvl2"])
         products.index.names = ["Product"]
-
 
         sales_desc = products.join(sales,how="inner")[products.columns]
         unbalanced = ["Key_lvl1","Description","Key_lvl7","Product Status"]
@@ -49,8 +47,6 @@ def main():
         p2c = load_file("p2c1_count",index="Product").astype(np.float64)
         p2c.columns = ["Nstore"]
         # store_counts = prp.load_file("store_counts",index="Product")
-
-
 
         #add number of clients by week
         logger.info("Load number of clients by week...")
@@ -79,11 +75,11 @@ def main():
 
         logger.info("Creating encoders...")
         categorical_features = ["Color","Size","Age Group","Ldate","Person","Pname","Ptype","Currency","Sales Season"]
-        create_encoder(features_df,le_name="prd_le", ohe_name="prd_ohe", scaler_name="prd_scaler", categorical_features=categorical_features,non_categorical=numeric_features)
+        create_encoder(features_df,le_name="prd_le", ohe_name="prd_ohe", scaler_name="prd_scaler", categorical_features=categorical_features,numeric_features=numeric_features)
+        logger.info("Encoders created...")
     except Exception as err:
         logger.error(err)
     
-
 
 def extract_features(rdf, non_categorical):
     data_frame = rdf.copy()
@@ -118,13 +114,11 @@ def extract_features(rdf, non_categorical):
     # data_frame["Currency"] ="bella ciao"
     return data_frame
 
-
 def _reduce_size(s):
     return {
         "":""
 
     }[s]
-
 
 def _reduce_colors(df):
     df.loc[df.Color.str.contains("Grey"),"Color"]="Grey"
@@ -153,7 +147,6 @@ def _reduce_colors(df):
 
     df.loc[df.Color.str.contains("Black"),"Color"]="Black"
     return df
-
 
 def _discretize_client(nb_client):
     if nb_client>1000: return 7
@@ -232,7 +225,6 @@ def GetInfo(key3,order,sep = " -"):
         print("An error occured (%d,%s)"%(order,key3))
         return None
 
-
 def _redefine_group(key):
     key = key.title()
     dico = {
@@ -243,7 +235,6 @@ def _redefine_group(key):
         "Male" : "Men"
     }
     return dico[key] if key in dico else key
-
 
 def _redefine_age(age):
     dico ={

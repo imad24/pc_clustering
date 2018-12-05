@@ -40,7 +40,7 @@ def main(season,version, k):
         X_z = X_train.values.astype(np.float64)
 
         logger.info("Init clustering model")
-        model = ClusteringModel("kMedoids",k,init_method = settings.options["init_method"])
+        model = ClusteringModel(settings.options["algorithm"],k,init_method = settings.options["init_method"])
 
 
         if k is None: k =  settings.options["n_clusters"]
@@ -107,7 +107,8 @@ def labels_to_df(df,labels):
         #the cluster id assigned to this label (cluster id given in (1) )
         cluster = label_cluster[label]
         #create the row: cluster and centroid
-        rows.append([cluster,cluster_medoid[cluster]])
+        is_centroid = (cluster == cluster_medoid[cluster])
+        rows.append([cluster,is_centroid])
     #create the final dataframe using the entry index
     label_df = pd.DataFrame(rows,index = df.index,columns =["Cluster","Centroid"])
     return label_df

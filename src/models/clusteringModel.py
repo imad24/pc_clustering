@@ -11,7 +11,7 @@ class ClusteringModel:
 
     # The models supported by the class
     # TODO: Enhance with other models: HCA, kmeans....
-    models = ["kMedoids"]
+    algorithm = ["kMedoids"]
 
 
     @classmethod
@@ -32,8 +32,8 @@ class ClusteringModel:
         return int(k[0])
 
     def __init__(self, name, k,init_method):
-        if (name not in ClusteringModel.models): 
-            raise "Model name not recognized"
+        if (name not in ClusteringModel.algorithm): 
+            raise "Clustring Algorithm name not recognized"
         self.name = name
         self.k = k
         self.labels = []  
@@ -48,7 +48,7 @@ class ClusteringModel:
         self.X = X
         # TODO: Add weights to distances
         self.distances = self.get_distances(X)
-        if (self.name) == "kMedoids":
+        if (self.algorithm) == "kMedoids":
             self.labels, self.centroids = kMedoids.cluster(self.distances,k=k,init=init_method,X=self.X)
 
     def get_SSE(self):
@@ -64,7 +64,21 @@ class ClusteringModel:
         return squareform(pdist(X, distance))
 
 
-    def grid_search(self,X,weights = None,k_values = [],order=0):
+    def grid_search(self,X,weights = None,k_values = [],min=0):
+        """Performs a grid search over k_values and returns the result of inertia and silhouette grids
+        
+        Arguments:
+            X {ndarray} -- two dimensial array of training data
+        
+        Keyword Arguments:
+            weights {ndarray} -- custom wieights to pass to the clustering model(default: {None})
+            k_values {list} -- the k values on which the grid search is performed(default: {[]})
+            min {int} -- the minimum number of  (default: {0})
+        
+        Returns:
+            ndarray -- [description]
+        """
+
         inertia = []
         silhouette = []
 

@@ -3,6 +3,7 @@
 	"smoothing_method": "average",
 	"range": 16,
 	"offset": 1,
+	"algorithm": "kMedoids",
 	"init_method": "PCA",
 	"n_clusters" : null,
 	"best_k": 4,

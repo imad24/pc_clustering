@@ -21,7 +21,7 @@ def get_encoders(le_name,ohe_name,scaler_name):
     return le_encoder,ohe_encoder,scaler
 
 
-def create_encoder(df, le_name = None, ohe_name = None, scaler_name=None, categorical_features=None, non_categorical=None):
+def create_encoder(df, le_name = None, ohe_name = None, scaler_name=None, categorical_features=None, numeric_features=None):
     """Creates and stores a categorical encoder of a given dataframe
     
     Arguments:
@@ -29,7 +29,7 @@ def create_encoder(df, le_name = None, ohe_name = None, scaler_name=None, catego
     
     Keyword Arguments:
         categorical_features {list} -- The list of categorical features to consider (default: {None})
-        non_categorical {list} -- The list of non categorical features to ignore (default: {None})
+        numeric_features {list} -- The list of non categorical features to ignore (default: {None})
     
     Returns:
         tuple(dict,dict,OneHotEncoder) -- Return the encoders used in every columns as a dictionnary
@@ -37,27 +37,28 @@ def create_encoder(df, le_name = None, ohe_name = None, scaler_name=None, catego
 
 
     if (categorical_features is None):
-        categorical_features = sorted(df.drop(non_categorical,axis=1).columns)
+        categorical_features = sorted(df.drop(numeric_features,axis=1).columns)
     le_dict = {}
     ohe_dict = {}
     scalers = {}
     for index, col in df[categorical_features].sort_index(axis=1).iteritems():
-        if (non_categorical is not None) and (index in non_categorical):
+        if (numeric_features is not None) and (index in numeric_features):
             continue
         if index not in categorical_features:
             continue
         le = LabelEncoder().fit(col)
         le_dict[index] = le
-        ohe = OneHotEncoder().fit(le.transform(col).reshape((-1, 1)))
+        #TODO: What the hell is cateogries
+        ohe = OneHotEncoder(categories="auto").fit(le.transform(col).reshape((-1, 1)))
         ohe_dict[index] = ohe
 
     labeled_df = df[categorical_features].sort_index(axis=1).apply(lambda x: le_dict[x.name].transform(x))
-    ohe_encoder = OneHotEncoder().fit(labeled_df)
+    ohe_encoder = OneHotEncoder(categories="auto").fit(labeled_df)
 
     # add numeric features
-    if len(non_categorical)==0:
-        non_categorical = (list(df.columns.to_series().groupby(df.dtypes).groups[np.dtype('float64')]))
-    for f in non_categorical:
+    if len(numeric_features)==0:
+        numeric_features = (list(df.columns.to_series().groupby(df.dtypes).groups[np.dtype('float64')]))
+    for f in numeric_features:
         values = df[[f]].values
         scaler = MinMaxScaler().fit(values)
         scalers[f] = scaler
@@ -70,7 +71,7 @@ def create_encoder(df, le_name = None, ohe_name = None, scaler_name=None, catego
     # if scaler_name is not None:
     #     np.save(settings.models_path + scaler_name + '.npy', scalers)
     
-    return labeled_df, le_dict, ohe_encoder, scalers, categorical_features, non_categorical
+    return labeled_df, le_dict, ohe_encoder, scalers, categorical_features, numeric_features
 
 
 def model_encode(df,model):
